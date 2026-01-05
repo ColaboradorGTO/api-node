@@ -8,6 +8,7 @@ import AdministrativoControllers from './Administrativo/controllers/Administrati
 import FinanceiroControllers from './Financeiro/controllers/Financeiro.js';
 import InformaticaControllers from './Informatica/controllers/Informatica.js';
 import ExpedicaoControllers from './Expedicao/controllers/index.js';
+import DashBoardControllers from './DashBoard/controllers/DashBoard.js';
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -175,6 +176,30 @@ routes.put('/inserirSD', ExpedicaoControllers.storeInserirSD)
 routes.get('/resumo-ordem-transferencia', ExpedicaoControllers.getListaOrdemTransferencia)
 routes.put('/resumo-ordem-transferencia/:id', ExpedicaoControllers.putResumoOrdemTransferencia)
 routes.post('/criar-resumo-ordem-transferencia', ExpedicaoControllers.postResumoOrdemTransferencia)
+
+
+
+// Dashboard
+
+routes.get('/lista-quebra-caixa', DashBoardControllers.getListaQuebraCaixa)
+routes.get('/listaDeQuebraDeCaixaPositiva', DashBoardControllers.getListaQuebraCaixaPositiva)
+routes.get('/listaDeQuebraDeCaixaNegativa', DashBoardControllers.getListaQuebraCaixaNegativa)
+routes.get('/quebra-caixa', DashBoardControllers.getRetornoTableImprimeQuebra)
+routes.get('/resumoVendaConvenioDesc', DashBoardControllers.getRetornoListaVendasConvenioDesconto)
+routes.get('/resumoVendaGerencia', DashBoardControllers.getResumoVendaGerencia)
+// routes.get('/listaCaixaMovimentoGerencia', DashBoardControllers.retornoListaCaixasMovimentoGerencia)
+routes.get('/vendedor', DashBoardControllers.getListaVendasVendedorGerencia)
+// routes.get('/vendasAtivasResumoGerencia', DashBoardControllers.getListaResumoVendasAtivaGerencia)
+routes.get('/vendasCanceladasResumoGerencia', DashBoardControllers.getListaResumoVendasCanceladasGerencia)
+routes.get('/adiantamentoSalarialFuncionarios', DashBoardControllers.getListAdiantamentoLoja)
+routes.get('/adiantamento-salarial-gerencia', DashBoardControllers.getAdiantamentoSalarialFuncionario)
+// routes.get('/vendasResumoLojaGerencia', DashBoardControllers.getListaVendasLojaResumidoGerencia)
+// routes.get('/vendasVendedorPeriodoLojaGerencia', DashBoardControllers.getListaVendasVendedorPeriodoGerencia)
+routes.get('/extrato-loja-periodo', DashBoardControllers.getListaExtratoDaLojaPeriodo)
+routes.get('/relatorioBI', DashBoardControllers.getListaRelatorioBIGerencia)
+// routes.get('/listaVendasGerencia', DashBoardControllers.getListaVendasGerencia)
+// routes.get('/extratoLojaPeriodo', DashBoardControllers.getListaExtratoDaLojaPeriodo)
+routes.get('/adiantamentoSalarialData', DashBoardControllers.getListAdiantamentoSalarialData)
 
 export default routes;
 
