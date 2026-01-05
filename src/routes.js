@@ -28,7 +28,7 @@ import ConferenciaCegaControllers from './ConferenciaCega/controllers/Conferenci
 import ListaPrecoControllers from './controllers/ListaPreco.js';
 import LogsControllers from './LogsUsuario/controllers/log.js';
 import PromocaoControllers from './Promocao/controllers/Promocao.js'
-
+import CaixaControllers from './Informatica/caixas/controllers/controllersCaixas.js'
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -485,6 +485,10 @@ routes.put('/desativar-status-promocao', PromocaoControllers.putStatusPromocao)
 // routes.post('/criar-mecanica', PromocaoControllers.postMecanicaAtivas)
 
 
+routes.post('/criar-caixas', CaixaControllers.postCaixaLojas)
+routes.put('/atualiza-empresa-diario/:id', CaixaControllers.putAtualizaEmpresaDiario)
+routes.put('/atualizar-todos-caixa', CaixaControllers.putAtualizarTodosCaixas)
+routes.put('/lista-caixas/:id', CaixaControllers.putCaixaLoja)
 
 // routes.get('/log-web', LogsControllers.getListaLogsUsuario)
 routes.post('/log-web', LogsControllers.createLogsUsuario)
