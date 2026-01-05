@@ -54,7 +54,7 @@ import ExtratosControllers from './Financeiro/Extrato/controllers/extrato.js'
 import QuebraCaixaControllers from './DashBoard/QuebraCaixa/controllers/quebraCaixaLoja.js'
 import ADMCaixasControllers from './Administrativo/Caixa/controllers/admCaixas.js'
 import AdmVendasControllers from './Administrativo/Vendas/controllers/admVendas.js'
-
+import AdmPagamentosControllers from './Administrativo/Pagamentos/controllers/pagamentos.js'
 
 
 
@@ -609,6 +609,12 @@ routes.put('/alterar-venda-pagamento/:id', AdmVendasControllers.putAlterarVendas
 routes.put('/venda-vendedor/:id', AdmVendasControllers.putVendaVendedor);
 
 // routes.post('/alterar-venda-pagamento', AdmVendasControllers.postAlterarVendasPagamento);
+
+// Forma de Pagamento
+
+routes.get('/forma-pagamentos', AdmPagamentosControllers.getListaFormaPagamento)
+routes.get('/pagamento-tef', AdmPagamentosControllers.getListaPagamentoTef)
+routes.get('/pagamento-pos', AdmPagamentosControllers.getListaPagamentoPos)
 
 // routes.get('/log-web', LogsControllers.getListaLogsUsuario)
 routes.post('/log-web', LogsControllers.createLogsUsuario)
