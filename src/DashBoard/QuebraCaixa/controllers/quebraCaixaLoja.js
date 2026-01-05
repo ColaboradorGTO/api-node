@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import 'dotenv/config';
 const url = process.env.API_URL;
 
@@ -18,8 +17,7 @@ class QuebraCaixaControllers {
         
             const apiUrl = `${url}/api/administrativo/quebra-caixa-loja.xsjs?idEmpresa=${idEmpresa}&dataPesquisa=${dataPesquisa}&page=${page}&pageSize=${pageSize}`;
             const response = await axios.get(apiUrl);
-            // const response = await getQuebraCaixaLoja(idEmpresa, dataPesquisa, page, pageSize)
-           
+
             return res.json(response.data); 
         } catch (error) {
             console.error("Unable to connect to the database:", error);
@@ -88,17 +86,19 @@ class QuebraCaixaControllers {
         }
        
     }
-    // async putQuebraCaixa(req, res) {
-    //     try {
-    //         const quebras = Array.isArray(req.body) ? req.body : [req.body]; 
-    //         const response = await  updateQuebraCaixa(quebras);
-    //         return res.json(response);
-    //     } catch (error) {
-    //         console.error("Unable to connect to the database:", error);
-    //         return res.status(500).json({ error: error.message });
-    //     }
+
+    async putQuebraCaixa(req, res) {
+        try {
+            const quebras = Array.isArray(req.body) ? req.body : [req.body]; 
+            const response = await  axios.post(`${url}/api/dashboard/quebra-caixa/todos.xsjs`, quebras);
+            
+            return res.json(response.data);
+        } catch (error) {
+            console.error("Unable to connect to the database:", error);
+            return res.status(500).json({ error: error.message });
+        }
        
-    // }
+    }
 
     async postQuebraCaixa(req, res) {
 

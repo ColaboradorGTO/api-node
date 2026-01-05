@@ -50,6 +50,14 @@ import FinanceiroVendasControllers from './Financeiro/Vendas/controllers/vendas.
 import VoucherControllers from './Financeiro/Voucher/controllers/voucher.js'
 import ExtratosControllers from './Financeiro/Extrato/controllers/extrato.js'
 
+
+import QuebraCaixaControllers from './DashBoard/QuebraCaixa/controllers/quebraCaixaLoja.js'
+import ADMCaixasControllers from './Administrativo/Caixa/controllers/admCaixas.js'
+import AdmVendasControllers from './Administrativo/Vendas/controllers/admVendas.js'
+
+
+
+
 const routes = new Router();
 // routes.use(authMiddleware)
 
@@ -578,7 +586,29 @@ routes.put('/fechar-caixas-zerados', CaixasControllers.updateFecharCaixaZerado)
 routes.put('/atualizar-deposito-loja/:id', DepositosControllers.updateDepositoLoja)
 routes.get('/deposito-loja', DepositosControllers.getListaDepositosLoja)
 
+// Início Quebra Caixa 
+routes.get('/quebra-caixa-loja-resumo', QuebraCaixaControllers.getListaQuebraCaixaResumoADM)
+routes.get('/quebra-caixa-loja', QuebraCaixaControllers.getListaQuebraCaixa)
+routes.get('/quebra-caixa-loja/:id', QuebraCaixaControllers.getQuebraCaixaID)
+routes.put('/atualizar-status-quebra', QuebraCaixaControllers.putListaStatusQuebraCaixa)
+routes.put('/quebra-caixa-todos/:id', QuebraCaixaControllers.putQuebraCaixa)
+routes.post('/quebra-caixa-todos', QuebraCaixaControllers.postQuebraCaixa)
 
+
+routes.get('/recebimento-resumo', AdministrativoControllers.getRetornoListaPagamentoVenda)
+routes.get('/lista-venda-cliente', AdmVendasControllers.getListaVendaCliente);
+routes.get('/lista-venda', AdmVendasControllers.getListaVendasById)
+// routes.get('/alterar-venda-pagamento', AdmVendasControllers.getListaAlterarVendasPagamento);
+routes.get('/venda-ativa', AdmVendasControllers.getListaVendaAtiva);
+routes.get('/venda-vendedor-adm', AdmVendasControllers.getVendaVendedorAction);
+routes.get('/venda-total-forma-pagamento', AdmVendasControllers.getRecebimentosFormaPagamento)
+routes.get('/venda-total-recebido-periodo-adm', AdmVendasControllers.getListaVendaTotalRecebido)
+
+routes.put('/alterar-venda-pagamento/:id', AdmVendasControllers.putAlterarVendasPagamento);
+// routes.put('/atualiza-recebimento-venda/:id', AdmVendasControllers.putAlterarVendaRecebimento);
+routes.put('/venda-vendedor/:id', AdmVendasControllers.putVendaVendedor);
+
+// routes.post('/alterar-venda-pagamento', AdmVendasControllers.postAlterarVendasPagamento);
 
 // routes.get('/log-web', LogsControllers.getListaLogsUsuario)
 routes.post('/log-web', LogsControllers.createLogsUsuario)
