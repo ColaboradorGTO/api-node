@@ -11,6 +11,7 @@ import ExpedicaoControllers from './Expedicao/controllers/index.js';
 import DashBoardControllers from './DashBoard/controllers/DashBoard.js';
 import VendasControllers from './Vendas/controllers/Vendas.js';
 import ResumoVoucherControllers from './ResumoVoucher/controllers/index.js';
+import ComercialControllers from './Comercial/controllers/Comercial.js';
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -228,6 +229,22 @@ routes.post('/auth-funcionario-status', ResumoVoucherControllers.autorizacaoEdit
 routes.post('/auth-funcionario-create-voucher', ResumoVoucherControllers.postAuthFuncionarioCreateVoucher)
 routes.post('/auth-funcionario-print-voucher', ResumoVoucherControllers.postAuthFuncionarioPrintVoucher)
 routes.post('/auth-funcionario-update-voucher', ResumoVoucherControllers.postAuthFuncionarioUpdateVoucher)
+
+// Comercial
+routes.get('/listaProdutoSap', ComercialControllers.getListaProdutoSap)
+routes.get('/listaEmpresaComercial', ComercialControllers.getListaEmpresaComercial)
+// routes.get('/listaVendasPorProduto', ComercialControllers.getListaVendasEstruturaProdutos)
+routes.get('/vendaMarcaPeriodoFinanceiro', ComercialControllers.getListaVendasMarcaPorPeriodoComercial)
+routes.get('/vendasEstoqueGrupoSubGrupo', ComercialControllers.getListaVendasEstoqueGrupoSubGrupoComercial)
+routes.get('/produtosPrecosEstoquesLojas', ComercialControllers.getListaProdutosEstoquePrecoLoja)
+routes.get('/vendasEstoqueProduto', ComercialControllers.getListaVendasPosicionamentoEstoquePeriodos)
+routes.get('/funcionarioRelatorio', ComercialControllers.getListaColaboradorRelatorio)
+routes.get('/custoPorLoja', ComercialControllers.getListaVendasCustoLojas)
+routes.get('/vendasPosicionamentoEstoque', ComercialControllers.getListaVendasPosicionamentoEstoque)
+routes.get('/colaboradorProdutosVendidos', ComercialControllers.getListaColaboradorProdutosVendidos)
+routes.get('/listaMetaVendas', ComercialControllers.getListaMetasGrupo)
+routes.get('/listaPremiacoes', ComercialControllers.getListaPremiacoesPeriodo)
+
 
 export default routes;
 
