@@ -1,13 +1,15 @@
 import { Router } from 'express';
 import DetalheFaturasControllers from '../controllers/Detalhes.js';
 
-const DespesasFaturasRoutes = new Router();
 
-DespesasFaturasRoutes.get('/detalheFaturaGerencia', DetalheFaturasControllers.getDetalheFatura)
-DespesasFaturasRoutes.get('/detalhe-faturas', DetalheFaturasControllers.getDetalheFaturaFinanceiro)
-DespesasFaturasRoutes.get('/detalhe-Fatura-id', DetalheFaturasControllers.getDetalheFaturaById)
-DespesasFaturasRoutes.put('/atualizar-fatura', DetalheFaturasControllers.putFatura)
-DespesasFaturasRoutes.post('/criar-detalhe-fatura', DetalheFaturasControllers.postDetalheFaturaLoja)
-DespesasFaturasRoutes.put('/atualizar-detalhe-fatura-loja', DetalheFaturasControllers.putDetalheFaturaLoja)
+const routes = new Router();
 
-export default DespesasFaturasRoutes;
+routes.get('/detalheFaturaGerencia', DetalheFaturasControllers.getDetalheFatura)
+
+routes.get('/detalhe-Fatura-id', DetalheFaturasControllers.getDetalheFaturaById)
+routes.put('/atualizar-fatura', DetalheFaturasControllers.updateFatura) 
+
+// routes.put('/atualizar-detalhe-fatura-loja', FaturasControllers.putListaDetalheFaturaLoja) 
+routes.post('/criar-detalhe-fatura', DetalheFaturasControllers.postDetalheFaturaLoja) 
+
+export default routes;

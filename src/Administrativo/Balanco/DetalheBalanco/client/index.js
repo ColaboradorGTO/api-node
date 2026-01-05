@@ -4,12 +4,13 @@ const url = process.env.API_URL;
 
 export class DetalheBalancoClient {
     constructor(baseURL) {
-        this.api = axios.create({
+       this.api = axios.create({
             baseURL: baseURL || url,
             timeout: 80000
-        });
+       }); 
     }
 
+ 
 
     async atualizarDetalheBalancoAvulso(
         IDEMPRESA,
@@ -24,7 +25,7 @@ export class DetalheBalancoClient {
         STCANCELADO,
         INSBALANCO
     ) {
-        const response = await this.api.put(`${url}/api/administrativo/detalhe-balanco-avulso.xsjs`, {
+        const response = await this.api.put(`${url}/api/administrativo/detalhe-balanco-avulso.xsjs`,{
             IDEMPRESA,
             NUMEROCOLETOR,
             DSCOLETOR,

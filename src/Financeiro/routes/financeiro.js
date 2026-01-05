@@ -1,4 +1,4 @@
-/* import { Router } from 'express';
+import { Router } from 'express';
 import FinanceiroControllers from '../controllers/Financeiro.js';
 
 
@@ -39,4 +39,4 @@ routes.post('/motivoDevolucao', FinanceiroControllers.createMotivoDevolucao)
 // routes.put('/atualizacaoAdiantamentoStatus', FinanceiroControllers.updateAdiantamentoStatus)
 routes.put('/atualizarFatura', FinanceiroControllers.updateFaturaFinanceiro)
 
-export default routes; */
+export default routes;

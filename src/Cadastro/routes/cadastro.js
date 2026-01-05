@@ -1,14 +1,19 @@
 import { Router } from 'express';
 import CadastroControllers from '../controllers/Cadastro.js';
 
-const CadastroRoutes = new Router();
 
-CadastroRoutes.get('/listaProdutoCriadoPedidoCompra', CadastroControllers.getListaProdutoCriadoPedidoCompra)
-CadastroRoutes.get('/categoriasProdutos', CadastroControllers.getListaCategoriasProduto)
-CadastroRoutes.get('/produtoAvulso', CadastroControllers.getListaProdutosAvulso)
-CadastroRoutes.get('/tipoProduto', CadastroControllers.getListaTipoProdutos)
-CadastroRoutes.get('/tipoFiscalProduto', CadastroControllers.getListaTipoFiscalProdutos)
-CadastroRoutes.get('/consultaProdutos', CadastroControllers.getConsultaProdutos)
-CadastroRoutes.get('/nfPedido', CadastroControllers.getListaNFPedido)
+const cadastroRoutes = new Router();
 
-export default CadastroRoutes;
+
+cadastroRoutes.get('/listaProdutoCriadoPedidoCompra', CadastroControllers.getListaProdutoCriadoPedidoCompra)
+cadastroRoutes.get('/categoriasProdutos', CadastroControllers.getListaCategoriasProduto)
+cadastroRoutes.get('/cadastrarProdutoAvulso', CadastroControllers.getListaProdutosAvulso)
+cadastroRoutes.get('/tipoProduto', CadastroControllers.getListaTipoProdutos)
+cadastroRoutes.get('/tipoFiscalProduto', CadastroControllers.getListaTipoFiscalProdutos)
+
+
+cadastroRoutes.get('/produtoAvulso', CadastroControllers.getListaProdutosAvulso)
+cadastroRoutes.put('/produtoAvulso/:id', CadastroControllers.getListaTipoFiscalProdutos)
+cadastroRoutes.post('/produtoAvulso', CadastroControllers.postDetalheProdutoPedido)
+
+export default cadastroRoutes;

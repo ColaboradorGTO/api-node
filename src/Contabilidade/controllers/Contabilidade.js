@@ -1,13 +1,9 @@
 import axios from "axios";
 import { dataFormatada } from "../../utils/dataFormatada.js";
-import { getVendasProduto } from "../Vendas/repositories/vendaProduto.js";
-import { getVendasContigencia } from "../Vendas/repositories/vendaContigencia.js";
-import { getVendasDetalhe } from "../Vendas/repositories/vendaDetalhe.js";
-import { getVendasPagamento } from "../Vendas/repositories/vendaPagamento.js";
-//let url = `http://164.152.245.77:8000/quality/concentrador`;
+let url = `http://164.152.245.77:8000/quality/concentrador`;
 
 class ContabilidadeControllers {
-  /* async getListaVendasContigencia(req, res) {
+  async getListaVendasContigencia(req, res) {
     let { idMarca, idEmpresa, idVenda, dataPesquisaInicio, dataPesquisaFim, page, pageSize } = req.query;
     idMarca = idMarca ? idMarca : '';
     idEmpresa = idEmpresa ? idEmpresa : '';
@@ -147,8 +143,8 @@ class ContabilidadeControllers {
       throw error;
     }
         
-  } */
+  }
   
 }
 
-export default new ContabilidadeControllers(); 
+export default new ContabilidadeControllers();

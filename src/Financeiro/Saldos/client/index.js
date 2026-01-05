@@ -1,7 +1,6 @@
 import axios from "axios";
 import 'dotenv/config';
-//const url = process.env.API_URL;
-const url = 'http://164.152.245.77:8000/quality/concentrador_node';
+const url = process.env.API_URL;
 
 export class SaldosClient {
   constructor(baseURL) {
@@ -11,19 +10,33 @@ export class SaldosClient {
     });
   }
 
+  async getExtratoBonificacaoById(idFuncionario, page, pageSize) {
+    const response = await this.api.get(`${url}/api/financeiro/movimento-saldo-bonificacao.xsjs`, {
+      params: { idFuncionario, page, pageSize }
+    });
+    return response.data;
+  }
+
+  async getSaldoExtratoLoja(idGrupoEmpresarial, dataPesquisa, pageSize, page) {
+    const response = await this.api.get(`${url}/api/financeiro/saldo-loja-por-grupo.xsjs`, {
+      params: { idGrupoEmpresarial, dataPesquisa, pageSize, page }
+    });
+    return response.data;
+  }
+
   async criarMovimentoSaldoBonificacao(
     IDFUNCIONARIO,
     TIPOMOVIMENTO,
     VRMOVIMENTO,
     OBSERVACAO,
-    IDFUNCIONARIORESP,
+    IDFUNCIONARIORESP
   ) {
-    const response = await this.api.post(`/api/financeiro/movimento-saldo-bonificacao.xsjs`, {
+    const response = await this.api.post(`${url}/api/financeiro/movimento-saldo-bonificacao.xsjs`, {
       IDFUNCIONARIO,
       TIPOMOVIMENTO,
       VRMOVIMENTO,
       OBSERVACAO,
-      IDFUNCIONARIORESP,
+      IDFUNCIONARIORESP
     });
     return response.data;
   }

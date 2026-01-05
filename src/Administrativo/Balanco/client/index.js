@@ -4,44 +4,10 @@ const url = process.env.API_URL;
 
 export class BalancoClient {
     constructor(baseURL) {
-        this.api = axios.create({
+       this.api = axios.create({
             baseURL: baseURL || url,
             timeout: 80000
-        });
-    }
-
-    async atualizarListaDetalhesBalanco(
-        IDDETALHEBALANCO,
-        TOTALCONTAGEMGERAL
-    ) {
-        const response = await this.api.put(`${url}/api/administrativo/detalhe-balanco.xsjs`, [{
-            IDDETALHEBALANCO,
-            TOTALCONTAGEMGERAL
-        }]);
-
-        return response.data;
-    }
-
-    async atualizarPrepararLojaPrimeiroBalanco(
-        IDEMPRESA
-    ) {
-        const response = await this.api.put(`${url}/api/administrativo/prepara-primeiro-balanco-loja.xsjs`, [{
-            IDEMPRESA
-        }]);
-
-        return response.data;
-    }
-
-    async atualizarConsolidarBalanco(
-        IDRESUMOBALANCO,
-        IDEMPRESA
-    ) {
-        const response = await this.api.put(`${url}/api/administrativo/consolidar-balanco.xsjs`, [{
-            IDRESUMOBALANCO,
-            IDEMPRESA
-        }]);
-
-        return response.data;
+       }); 
     }
 
     async confirmarConsolidarBalanco(
@@ -65,61 +31,43 @@ export class BalancoClient {
         NUMEROCOLETOR,
         DSCOLETOR,
         IDPRODUTO,
-        TOTALCONTAGEMGERAL
-
+        CODIGODEBARRAS,
+        DSPRODUTO,
+        TOTALCONTAGEMGERAL,
+        PRECOCUSTO,
+        PRECOVENDA,
+        STCANCELADO,
+        INSBALANCO
     ) {
-        const response = await this.api.put(`${url}/api/administrativo/detalhe-balanco-avulso.xsjs`, {
+        const response = await this.api.put(`${url}/api/administrativo/detalhe-balanco-avulso.xsjs`,{
             IDEMPRESA,
             NUMEROCOLETOR,
             DSCOLETOR,
             IDPRODUTO,
-            TOTALCONTAGEMGERAL
+            CODIGODEBARRAS,
+            DSPRODUTO,
+            TOTALCONTAGEMGERAL,
+            PRECOCUSTO,
+            PRECOVENDA,
+            STCANCELADO,
+            INSBALANCO
         });
 
-        return response.data;
-    }
-
-    async criarDetalheBalancoAvulso(
-        IDEMPRESA,
-        DSRESUMOBALANCO,
-        DTABERTURA,
-        DTFECHAMENTO,
-        QTDTOTALITENS,
-        QTDTOTALSOBRA,
-        QTDTOTALFALTA,
-        TXTOBSERVACAO,
-        STATIVO,
-        det
-
-    ) {
-        const response = await this.api.post(`${url}/api/administrativo/detalhe-balanco-avulso.xsjs`, {
-            IDEMPRESA,
-            DSRESUMOBALANCO,
-            DTABERTURA,
-            DTFECHAMENTO,
-            QTDTOTALITENS,
-            QTDTOTALSOBRA,
-            QTDTOTALFALTA,
-            TXTOBSERVACAO,
-            STATIVO,
-            det
-
-        });
         return response.data;
     }
 
     async criarConfirmarBalanco(
-        IDEMPRESA,
         DSRESUMOBALANCO,
         DTABERTURA,
         DTFECHAMENTO,
+        IDEMPRESA,
+        INSBALANCO,
+        QTDTOTALFALTA,
         QTDTOTALITENS,
         QTDTOTALSOBRA,
-        QTDTOTALFALTA,
-        TXTOBSERVACAO,
         STATIVO,
-        INSBALANCO,
-
+        TXTOBSERVACAO,
+        det
     ) {
         const response = await this.api.post(`${url}/api/administrativo/detalhe-balanco-avulso.xsjs`, {
             DSRESUMOBALANCO,
@@ -132,30 +80,8 @@ export class BalancoClient {
             QTDTOTALSOBRA,
             STATIVO,
             TXTOBSERVACAO,
-        });
-        return response.data;
-    }
-
-    async atualizarColetorBalanco(
-        IDRESUMOBALANCO,
-        NUMEROCOLETOR
-    ) {
-        const response = await this.api.put(`${url}/api/administrativo/coletor-balanco.xsjs`, {
-            IDRESUMOBALANCO,
-            NUMEROCOLETOR
-        });
-        return response.data;
-    }
-
-    async atualizarConfirmarPrestacaoContas(
-        IDRESUMOBALANCO,
-
-    ) {
-        const response = await this.api.put(`${url}/api/administrativo/prestacao-contas-balanco.xsjs`, {
-            IDRESUMOBALANCO,
-
+            det
         });
         return response.data;
     }
 }
-

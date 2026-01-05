@@ -1,4 +1,4 @@
-/* import { Router } from 'express';
+import { Router } from 'express';
 import GerenciaControllers from '../controllers/index.js';
 
 
@@ -17,4 +17,4 @@ routes.put('/clientes/:id', GerenciaControllers.putCliente)
 
 // routes.put('/ajuste-recebimento', MovimentoCaixaControllers.putListaAjusteRecebimento)
 
-export default routes; */
+export default routes;

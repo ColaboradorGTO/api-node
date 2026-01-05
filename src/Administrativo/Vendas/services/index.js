@@ -3,14 +3,14 @@ export class VendasServices {
         this.client = client;
     }
 
-    async updateVendaPagamento(
+    async updateVendaPagamento( 
         STCANCELADO,
         DTULTIMAALTERACAO,
         IDFUNCIONARIOCANCELA,
         TXTMOTIVOCANCELA,
         IDVENDA
     ) {
-        if (!IDVENDA) {
+        if(!IDVENDA) {
             throw new Error('ID da venda é obrigatório.');
         }
 
@@ -20,25 +20,6 @@ export class VendasServices {
             IDFUNCIONARIOCANCELA,
             TXTMOTIVOCANCELA,
             IDVENDA
-        );
-
-        return result;
-    }
-
-    async updateVendaVendedor(
-        IDVENDEDOR,
-        IDVENDADETALHE,
-    ) {
-        if (!IDVENDEDOR) {
-            throw new Error('IDVENDEDOR é obrigatório.');
-        }
-        if (!IDVENDADETALHE) {
-            throw new Error('IDVENDADETALHE é obrigatório.');
-        }
-
-        const result = await this.client.atualizarVendaVendedor(
-            IDVENDEDOR,
-            IDVENDADETALHE,
         );
 
         return result;

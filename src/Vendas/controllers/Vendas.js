@@ -1,7 +1,5 @@
 import { dataFormatada } from "../../utils/dataFormatada.js";
 import axios from 'axios';
-import { getVendaXML } from "../repositories/vendaXML.js";
-import { getVendaCliente } from "../repositories/listaVendaCliente.js";
 import 'dotenv/config';
 const url = process.env.API_URL;
 
@@ -47,11 +45,10 @@ class VendasControllers {
             pageSize = pageSize ? pageSize : '';
         try {
          
-            // const apiUrl = `${url}/api/venda/lista-venda-cliente.xsjs?page=${page}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&cpfouIdVenda=${cpfOUidVenda}&nnf=${nnf}&serie=${serie}&idSubgrupoEmpresarial=${idSubGrupoEmpresarial}&idEmpresa=${idEmpresa}&pageSize=${pageSize}`
-            // const response = await axios.get(apiUrl)
-            const response = await getVendaCliente(nnf, serie, idEmpresa, idVenda, idSubGrupoEmpresarial, cpfOUidVenda, dataPesquisaInicio, dataPesquisaFim, page, pageSize)
+            const apiUrl = `${url}/api/venda/lista-venda-cliente.xsjs?page=${page}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&cpfouIdVenda=${cpfOUidVenda}&nnf=${nnf}&serie=${serie}&idSubgrupoEmpresarial=${idSubGrupoEmpresarial}&idEmpresa=${idEmpresa}&pageSize=${pageSize}`
+            const response = await axios.get(apiUrl)
     
-            return res.json(response); // Retorna
+            return res.json(response.data); // Retorna
         } catch (error) {
             console.error("Unable to connect to the database:", error);
             throw error;

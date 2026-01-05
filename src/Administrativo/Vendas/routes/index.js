@@ -1,37 +1,21 @@
 import { Router } from 'express';
 import AdmVendasControllers from '../controllers/admVendas.js';
 
-const AdministrativoVendas = new Router();
 
-AdministrativoVendas.get('/venda-total-forma-pagamento', AdmVendasControllers.getRecebimentosFormaPagamento)
-AdministrativoVendas.get('/venda-total-recebido-periodo-adm', AdmVendasControllers.getListaVendaTotalRecebido)
-AdministrativoVendas.get('/venda-vendedor-adm', AdmVendasControllers.getVendaVendedorAction);
-AdministrativoVendas.get('/venda-ativa', AdmVendasControllers.getListaVendaAtiva);
-AdministrativoVendas.get('/lista-venda/:id', AdmVendasControllers.getListaVendasById)
-AdministrativoVendas.get('/lista-venda-cliente', AdmVendasControllers.getListaVendaCliente);
-AdministrativoVendas.get('/vendaConvenio', AdmVendasControllers.getVendaConvenio)
-AdministrativoVendas.get('/vendaAtiva', AdmVendasControllers.getVendaAtiva)
-AdministrativoVendas.get('/vendaContigencia', AdmVendasControllers.getListaVendasContigenciaPorEmpresa)
-AdministrativoVendas.get('/vendaCanceladaEmpresa', AdmVendasControllers.getVendaCancelada30Minutos)
-AdministrativoVendas.get('/vendaCanceladaWeb', AdmVendasControllers.getVendaCanceladaWeb)
-AdministrativoVendas.get('/vendaCanceladaEmitidaPDV', AdmVendasControllers.getVendaCanceladaEmitidaPDV)
-AdministrativoVendas.get('/vendaAtivaCliente', AdmVendasControllers.getListaClientesVendas)
-AdministrativoVendas.get('/vendaAtivaResumo', AdmVendasControllers.getVendaAtivaResumo)
-AdministrativoVendas.get('/vendaAtivaAction', AdmVendasControllers.getVendaAtivaAction)
-AdministrativoVendas.get('/vendaCancelada', AdmVendasControllers.getVendaCancelada)
-AdministrativoVendas.get('/vendaCanceladaResumo', AdmVendasControllers.getVendaCanceladaResumo)
-AdministrativoVendas.get('/vendaCanceladaResumo', AdmVendasControllers.getListaVendasDetalheAlterar)
-AdministrativoVendas.get('/resumoVendaConvenio', AdmVendasControllers.getResumoVendaConvenio)
-AdministrativoVendas.get('/resumoVendaConveniodesconto', AdmVendasControllers.getResumoVendaConvenioDesconto)
-AdministrativoVendas.get('/resumoVenda', AdmVendasControllers.getResumoVenda)
-AdministrativoVendas.get('/recebimento-resumo', AdmVendasControllers.getRetornoListaPagamentoVenda)
-AdministrativoVendas.get('/pagamentoTef', AdmVendasControllers.getRetornoListaPagamentoTEFSelect)
-AdministrativoVendas.get('/pagamentoPos', AdmVendasControllers.getRetornoListaPagamentoPOSSelect)
-AdministrativoVendas.get('/vendaTotalFormaPagamento', AdmVendasControllers.getRetornoListaRecebimentosFormaPagamento)
-AdministrativoVendas.get('/listaAlteracaoPreco', AdmVendasControllers.getListaAlteracaoPreco)
-AdministrativoVendas.get('/formaPagamentos', AdmVendasControllers.getListaFormaPagamento)
+const admVendasRoutes = new Router();
 
-AdministrativoVendas.put('/alterar-venda-pagamento/:id', AdmVendasControllers.putAlterarVendasPagamento);
-AdministrativoVendas.put('/venda-vendedor/:id', AdmVendasControllers.putVendaVendedor);
+admVendasRoutes.get('/lista-venda-cliente', AdmVendasControllers.getListaVendaCliente);
+admVendasRoutes.get('/lista-venda/:id', AdmVendasControllers.getListaVendasById)
+admVendasRoutes.get('/alterar-venda-pagamento', AdmVendasControllers.getListaAlterarVendasPagamento);
+admVendasRoutes.get('/venda-ativa', AdmVendasControllers.getListaVendaAtiva);
+admVendasRoutes.get('/venda-vendedor-adm', AdmVendasControllers.getVendaVendedorAction);
+admVendasRoutes.get('/venda-total-forma-pagamento', AdmVendasControllers.getRecebimentosFormaPagamento)
+admVendasRoutes.get('/venda-total-recebido-periodo-adm', AdmVendasControllers.getListaVendaTotalRecebido)
 
-export default AdministrativoVendas;
+admVendasRoutes.put('/alterar-venda-pagamento/:id', AdmVendasControllers.putAlterarVendasPagamento);
+admVendasRoutes.put('/atualiza-recebimento-venda/:id', AdmVendasControllers.putAlterarVendaRecebimento);
+admVendasRoutes.put('/venda-vendedor/:id', AdmVendasControllers.putVendaVendedor);
+
+admVendasRoutes.post('/alterar-venda-pagamento', AdmVendasControllers.postAlterarVendasPagamento);
+
+export default admVendasRoutes;

@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import AdmPagamentosControllers from '../controllers/pagamentos.js'
 
-const AdministrativoPagamentos = new Router();
 
-AdministrativoPagamentos.get('/forma-pagamentos', AdmPagamentosControllers.getListaFormaPagamento)
-AdministrativoPagamentos.get('/pagamento-tef', AdmPagamentosControllers.getListaPagamentoTef)
-AdministrativoPagamentos.get('/pagamento-pos', AdmPagamentosControllers.getListaPagamentoPos)
+const admPagamentosRoutes = new Router();
 
-export default AdministrativoPagamentos;
+admPagamentosRoutes.get('/forma-pagamentos', AdmPagamentosControllers.getListaFormaPagamento)
+admPagamentosRoutes.get('/pagamento-tef', AdmPagamentosControllers.getListaPagamentoTef)
+admPagamentosRoutes.get('/pagamento-pos', AdmPagamentosControllers.getListaPagamentoPos)
 
+export default admPagamentosRoutes;

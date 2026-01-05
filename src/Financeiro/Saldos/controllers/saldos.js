@@ -1,18 +1,13 @@
+
 import axios from "axios";
 import 'dotenv/config';
 import { SaldosClient } from "../client/index.js";
 import { SaldoService } from "../services/index.js";
 import criarMovimentoBonificaoSchema from  '../schema/criarMovimentoSaldoSchema.js';
-
-//let url = `http://164.152.245.77:8000/quality/concentrador_homologacao`;
-//const url = process.env.API_URL;
-const url = 'http://164.152.245.77:8000/quality/concentrador_node';
-const saldoClient = new SaldosClient(url);
+const url = process.env.API_URL;
+const saldoClient = new SaldosClient(process.env.API_URL);
 const saldoService = new SaldoService(saldoClient);
-
-
 class SaldosControllers {
-  
   async getListaExtratoBonificacaoById(req, res) {
     let { idFuncionario, page, pageSize } = req.query;
     idFuncionario = idFuncionario ? idFuncionario : '';
@@ -31,7 +26,10 @@ class SaldosControllers {
 
   async getListaSaldoExtratoLoja(req, res) {
     let { idGrupoEmpresarial, dataPesquisa, pageSize, page } = req.query;
-    idGrupoEmpresarial = idGrupoEmpresarial ? idGrupoEmpresarial : '';
+      idGrupoEmpresarial = idGrupoEmpresarial ? idGrupoEmpresarial : '';
+      dataPesquisa = dataPesquisa ? dataPesquisa : '';
+      page = page ? page : '';
+      pageSize = pageSize ? pageSize : '';
     try {
       const apiUrl = `${url}/api/financeiro/saldo-loja-por-grupo.xsjs?idGrupoEmpresarial=${idGrupoEmpresarial}&dataPesquisa=${dataPesquisa}&pageSize=${pageSize}&page=${page}`
       const response = await axios.get(apiUrl)
@@ -44,12 +42,13 @@ class SaldosControllers {
   }
 
 
-  async postMovimentoSaldoBonificacao(req, res) {
+  async createMovimentoSaldoBonificacao(req, res) {
     try {
       const { error, value } = criarMovimentoBonificaoSchema.validate(req.body, { 
         abortEarly: false,
         stripUnknown: true
       });
+      
     
       if (error) {
         return res.status(400).json({
@@ -73,7 +72,7 @@ class SaldosControllers {
     } catch (error) {
       console.error("Unable to connect to the database:", error);
       return res.status(500).json({
-        message: 'Erro no SaldoControllers.postMovimentoSaldoBonificacao',
+        message: 'Erro interno do servidor',
         error: error.message
       });
     }

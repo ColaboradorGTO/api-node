@@ -1,33 +1,26 @@
 import axios from "axios";
 import { dataFormatada } from "../../utils/dataFormatada.js";
-import { DetalhesFaturasClient } from "../client/detalhesFaturasClient.js";
-import { DetalhesFaturasService } from "../service/detalhesFaturasService.js";
-import updateDetalheFaturaLoja from "../schema/updateDetalheFaturaLoja.js";
-import createDetalheFaturaLoja from "../schema/createDetalheFaturaLoja.js";
 import 'dotenv/config';
-import updateFaturaSchema from "../schema/updateFaturaSchema.js";
-
 const url = process.env.API_URL;
-const detalhesFaturasClient = new DetalhesFaturasClient(url);
-const detalhesFaturasService = new DetalhesFaturasService(detalhesFaturasClient);
 
 class DetalheFaturasControllers {
 
   async getDetalheFatura(req, res) {
 
-    let { idEmpresa, pageNumber, dataPesquisaInicio, dataPesquisaFim, } = req.query;
+    let { idEmpresa, page, pageSize, dataPesquisaInicio, dataPesquisaFim, } = req.query;
     if (!isNaN(idEmpresa)) {
       idEmpresa = Number(idEmpresa);
-      const pageSize = 100;
-      const offset = (pageNumber - 1) * pageSize;
       dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataPesquisaInicio : '';
       dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataPesquisaFim : '';
+      page = page ? page : '';
+      pageSize = pageSize ? pageSize : '';
+
 
       try {
         const apiUrl = `${url}/api/detalhe-fatura.xsjs?idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`
         const response = await axios.get(apiUrl)
 
-        return res.json(response.data);
+        return res.json(response.data); // Retorna
       } catch (error) {
         console.error("Unable to connect to the database:", error);
         throw error;
@@ -35,20 +28,37 @@ class DetalheFaturasControllers {
     }
   }
 
-  async getDetalheFaturaFinanceiro(req, res) {
-    let { idEmpresa, dataPesquisaInicio, dataPesquisaFim, codigoFatura, page, pageSize } = req.query;
+  // async getDetalheFaturaFinanceiro(req, res) {
+  //     let { idEmpresa, dataPesquisaInicio, dataPesquisaFim, codigoFatura,  page, pageSize} = req.query;
 
-    idEmpresa = idEmpresa ? idEmpresa : '';
-    dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
-    dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
-    codigoFatura = codigoFatura ? codigoFatura : '';
-    page = page ? page : '';
-    pageSize = pageSize ? pageSize : '';
+  //     idEmpresa = idEmpresa ? idEmpresa : '';
+  //     dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
+  //     dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
+  //     codigoFatura = codigoFatura ? codigoFatura : '';
+  //     page = page ? page : '';
+  //     pageSize = pageSize ? pageSize : '';
+
+
+  //     try {
+
+  //         const response = await getDetalheFatura(idEmpresa, dataPesquisaInicio, dataPesquisaFim, codigoFatura,  page, pageSize)
+  //         return res.json(response); 
+  //     } catch (error) {
+  //         console.error("Unable to connect to the database:", error);
+  //         throw error;
+  //     }
+
+  // }
+
+  async getDetalheFaturaById(req, res) {
+    let { idFatura } = req.query;
 
     try {
+      const apiUrl = `${url}/api/detalhe-fatura.xsjs?id=${idFatura}`
+      const response = await axios.get(apiUrl)
+      // const response = await getDetalheFaturaId(idFatura)
 
-      const response = await getDetalheFatura(idEmpresa, dataPesquisaInicio, dataPesquisaFim, codigoFatura, page, pageSize)
-      return res.json(response);
+      return res.json(response.data);
     } catch (error) {
       console.error("Unable to connect to the database:", error);
       throw error;
@@ -56,17 +66,11 @@ class DetalheFaturasControllers {
 
   }
 
-  async getDetalheFaturaById(req, res) {
-    let { idFatura } = req.query;
-
-    if (!idFatura) {
-      return res.status(400).json({ "error": "idFatura nao informado" })
-    }
-
+  async updateFatura(req, res) {
     try {
-      const apiUrl = `${url}/api/detalhe-fatura.xsjs?id=${idFatura}`
-      const response = await axios.get(apiUrl)
-
+      const despesas = Array.isArray(req.body) ? req.body : [req.body];
+      //   const apiUrl = `${url}/api/financeiro/atualizar-fatura.xsjs`
+      const response = await axios.put(`${url}/api/financeiro/atualizar-fatura.xsjs`, despesas);
       return res.json(response.data);
     } catch (error) {
       console.error("Unable to connect to the database:", error);
@@ -74,121 +78,96 @@ class DetalheFaturasControllers {
     }
   }
 
-  async putFatura(req, res) {
-
-    try {
-      const { error, value } = updateFaturaSchema.validate(req.body, {
-
-        abortEarly: false,
-        stripUnknown: true
-      });
-
-      if (error) {
-        return res.status(400).json({
-          message: 'Dados inválidos',
-          errors: error.details.map(detail => ({
-            field: detail.path.join('.'),
-            message: detail.message
-          }))
-        });
-      }
-
-      const response = await detalhesFaturasService.updateFatura(
-        value.NUCODAUTORIZACAO,
-        value.VRRECEBIDO,
-        value.STCANCELADO,
-        value.STPIX,
-        value.NUAUTORIZACAO,
-        value.IDDETALHEFATURA
-      );
-
-      return res.status(200).json(response);
-    } catch (error) {
-      console.log('Erro no DetalheFaturasControllers.putFatura:', error);
-      return res.status(500).json({ message: 'Erro DetalheFaturasControllers.putFatura' });
-
-    }
-  }
-
   async postDetalheFaturaLoja(req, res) {
-
     try {
-      const { error, value } = createDetalheFaturaLoja.validate(req.body, {
+      let {
+        IDEMPRESA,
+        IDFUNCIONARIO,
+        IDDETALHEFATURALOCAL,
+        IDCAIXAWEB,
+        IDCAIXALOCAL,
+        NUESTABELECIMENTO,
+        NUCARTAO,
+        DTPROCESSAMENTO,
+        HRPROCESSAMENTO,
+        NUNSU,
+        NUNSUHOST,
+        IDMOVIMENTOCAIXAWEB,
+        NUCODAUTORIZACAO,
+        VRRECEBIDO,
+        DTHRMIGRACAO,
+        STCANCELADO,
+        IDUSRCACELAMENTO
+      } = req.body;
 
-        abortEarly: false,
-        stripUnknown: true
-      });
-
-      if (error) {
-        return res.status(400).json({
-          message: 'Dados inválidos',
-          errors: error.details.map(detail => ({
-            field: detail.path.join('.'),
-            message: detail.message
-          }))
-        });
+      if(!IDEMPRESA) {
+        return res.status(400).json({ error: "IDEMPRESA is required" });
       }
 
-      const response = await detalhesFaturasService.createDetalheFaturaLoja(
-        value.IDEMPRESA,
-        value.IDFUNCIONARIO,
-        value.IDDETALHEFATURALOCAL,
-        value.IDCAIXAWEB,
-        value.IDCAIXALOCAL,
-        value.NUESTABELECIMENTO,
-        value.NUCARTAO,
-        value.DTPROCESSAMENTO,
-        value.HRPROCESSAMENTO,
-        value.NUNSU,
-        value.NUNSUHOST,
-        value.NUCODAUTORIZACAO,
-        value.VRRECEBIDO,
-        value.DTHRMIGRACAO,
-        value.STCANCELADO,
-        value.IDUSRCACELAMENTO,
-        value.IDMOVIMENTOCAIXAWEB,
-        value.STPIX,
-        value.NUAUTORIZACAO
-      );
+      if(!IDFUNCIONARIO) {
+        return res.status(400).json({ error: "IDFUNCIONARIO is required" });
+      }
 
-      return res.status(200).json(response);
+      if(!NUCODAUTORIZACAO) {
+        return res.status(400).json({ error: "NUCODAUTORIZACAO is required" });
+      }
+      // const response = await createDetalheFatura(detalhes);
+      const response = await axios.post(`${url}/api/detalhe-fatura.xsjs`, {
+        IDEMPRESA,
+        IDFUNCIONARIO,
+        IDDETALHEFATURALOCAL,
+        IDCAIXAWEB,
+        IDCAIXALOCAL,
+        NUESTABELECIMENTO,
+        NUCARTAO,
+        DTPROCESSAMENTO,
+        HRPROCESSAMENTO,
+        NUNSU,
+        NUNSUHOST,
+        IDMOVIMENTOCAIXAWEB,
+        NUCODAUTORIZACAO,
+        VRRECEBIDO,
+        DTHRMIGRACAO,
+        STCANCELADO,
+        IDUSRCACELAMENTO
+      });
+      return res.status(201).json({ message: "Detalhe Fatura created successfully" });
     } catch (error) {
-      console.log('Erro no DetalheFaturasControllers.postDetalheFaturaLoja:', error);
-      return res.status(500).json({ message: 'Erro DetalheFaturasControllers.postDetalheFaturaLoja' });
+      console.error("Erro no DetalheFaturasControllers.postDetalheFatura:", error);
+      return res.status(500).json({ error: error.message });
     }
   }
-
   async putDetalheFaturaLoja(req, res) {
-
     try {
-      const { error, value } = updateDetalheFaturaLoja.validate(req.body, {
+      let {IDDETALHEFATURA, TXTMOTIVOCANCELAMENTO, STCANCELADO, IDUSRCACELAMENTO } = req.body;
+      // const response = await createDetalheFatura(detalhes);
 
-        abortEarly: false,
-        stripUnknown: true
-      });
-
-      if (error) {
-        return res.status(400).json({
-          message: 'Dados inválidos',
-          errors: error.details.map(detail => ({
-            field: detail.path.join('.'),
-            message: detail.message
-          }))
-        });
+      if(!IDDETALHEFATURA) {
+        return res.status(400).json({ error: "IDDETALHEFATURA is required" });
       }
 
-      const response = await detalhesFaturasService.updateDetalheFaturaLoja(
-        value.STCANCELADO,
-        value.IDUSRCACELAMENTO,
-        value.TXTMOTIVOCANCELAMENTO,
-        value.IDDETALHEFATURA
-      );
+      if(!TXTMOTIVOCANCELAMENTO) {
+        return res.status(400).json({ error: "TXTMOTIVOCANCELAMENTO is required" });
+      }
 
-      return res.status(200).json(response);
+      if(!STCANCELADO) {
+        return res.status(400).json({ error: "STCANCELADO is required" });
+      }
+
+      if(!IDUSRCACELAMENTO) {
+        return res.status(400).json({ error: "IDUSRCACELAMENTO is required" }); 
+      }
+
+      const response = await axios.put(`${url}/api/fatura-loja/detalhe-fatura.xsjs`, {
+        IDDETALHEFATURA,
+        TXTMOTIVOCANCELAMENTO,
+        STCANCELADO,
+        IDUSRCACELAMENTO,
+      });
+      return res.status(200).json({ message: "Detalhe Fatura atualizada com sucesso", data: response.data });
     } catch (error) {
-      console.log('Erro no DetalheFaturasControllers.putDetalheFaturaLoja:', error);
-      return res.status(500).json({ message: 'Erro DetalheFaturasControllers.putDetalheFaturaLoja' });
-
+      console.error("Erro no DetalheFaturasControllers.putDetalheFatura:", error);
+      return res.status(500).json({ error: error.message });
     }
   }
 

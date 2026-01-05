@@ -1,14 +1,10 @@
 import app from './app.js';
+const PORT = process.env.PORT || 6001;
+// const PORT =  'http://164.152.244.96:6001';
+// const PORT =  'https://confidencial-api.vercel.app';
 
-// Para desenvolvimento local
-
-  const PORT = process.env.PORT || 6001;
-  app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta `, PORT);
-  });
-
-
-// Para Vercel (Serverless)
-export default app;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta `, PORT);
+});
 
 

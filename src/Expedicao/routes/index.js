@@ -4,7 +4,7 @@ import ExpedicaoControllers from '../controllers/index.js';
 
 const routes = new Router();
 
-/* 
+
 routes.get('/listaProdutos', ExpedicaoControllers.getListaProdutos)
 routes.get('/resumo-ordem-transferencia', ExpedicaoControllers.getListaOrdemTransferencia)
 routes.get('/resumoOrdemTransferenciaExpedicao', ExpedicaoControllers.getListaOrdemTransferenciaExpedicao)
@@ -20,6 +20,6 @@ routes.get('/impressao-etiqueta-ot', ExpedicaoControllers.getListaImpressaoEtiqu
 routes.put('/updateOrdemTransferencia', ExpedicaoControllers.updateOrdemTransferencia)
 routes.put('/updateStatusDivergencia', ExpedicaoControllers.updateAlterarSD)
 
-routes.put('/inserirSD', ExpedicaoControllers.storeInserirSD) */
+routes.put('/inserirSD', ExpedicaoControllers.storeInserirSD)
 
-export default routes; 
+export default routes;

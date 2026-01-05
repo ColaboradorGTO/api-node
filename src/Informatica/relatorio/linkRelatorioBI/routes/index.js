@@ -1,10 +1,10 @@
 import { Router } from "express";
-import LinkRelatorioBiController from '../controllers/controllersLinkRelatorioBi.js'
+//import LinkRelatorioBiController from '../controller/controllersLinkRelatorioBi'
 
-const InformaticaLinkRelatorioBi = new Router();
+const routes = new Router();
 
-InformaticaLinkRelatorioBi.post('/criarlinkRelatorioBI', LinkRelatorioBiController.postLinkRelatorioBi)
-InformaticaLinkRelatorioBi.put('/linkRelatorioBI/:id', LinkRelatorioBiController.putLinkRelatorioBi)
-InformaticaLinkRelatorioBi.get('/linkRelatorioBI', LinkRelatorioBiController.getListaLinkRelatorioBI)
+routes.post('/criarlinkRelatorioBI', LinkRelatorioBiController.postLinkRelatorioBi)
+routes.put('/linkRelatorioBI/:id', LinkRelatorioBiController.postLinkRelatorioBi)
 
-export default InformaticaLinkRelatorioBi;
+
+export default routes;

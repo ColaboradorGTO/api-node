@@ -1,4 +1,5 @@
-/* import { dataFormatada } from "../../utils/dataFormatada.js";
+import axios from "axios";
+import { dataFormatada } from "../../utils/dataFormatada.js";
 import { getMarcas } from "../Marcas/marca.js";
 import { getGrupoEmpresa } from "../Marcas/grupoEmpresa.js";
 import { updateFuncionarioLoja } from "../Funcionarios/repositories/funcionario.js";
@@ -19,15 +20,13 @@ import { getMeioPagamentoCredSystem } from "../credSystem/meioPagamento.js";
 import { getParceriaCredSystem } from "../credSystem/parceria.js";
 import { createCaixa, getCaixa, updateCaixa } from "../caixas/repositories/caixa.js";
 import { createConfiguracao, getConfiguracoes, updateConfiguracao } from "../configuracao/repositories/configuracao.js";
-import { updateFuncionarioDesconto } from "../Funcionarios/repositories/funcionarioDesconto.js"; */
-import axios from "axios";
+import { updateFuncionarioDesconto } from "../Funcionarios/repositories/funcionarioDesconto.js";
 import 'dotenv/config';
-const url = process.env.API_URL 
+const url = process.env.API_URL
 
 class InformaticaControllers {
 
-    //Empresas
-/*     async getListaEmpresas(req, res) {
+    async getListaEmpresas(req, res) {
         let {  } = req.query;
 
         try {
@@ -40,10 +39,9 @@ class InformaticaControllers {
             throw error;
         }
      
-    } */
+    }
 
-    //Empresa
-/*     async getListaEmpresasInformatica(req, res) {
+    async getListaEmpresasInformatica(req, res) {
         let { 
             idEmpresa 
 
@@ -61,10 +59,9 @@ class InformaticaControllers {
             throw error;
         }
      
-    } */
+    }
 
-    //Marca
-/*     async getListaMarcas(req, res) {
+    async getListaMarcas(req, res) {
          let {  } = req.query;
         try {
             const apiUrl = `${url}/api/grupo-empresarial.xsjs`
@@ -77,9 +74,8 @@ class InformaticaControllers {
             throw error;
         }
     }
- */
-    //Empresa
-/*     async getListaGrupoEmpresas(req, res) {
+
+    async getListaGrupoEmpresas(req, res) {
         let {  } = req.query;
 
         try {
@@ -92,10 +88,9 @@ class InformaticaControllers {
             throw error;
         }
      
-    } */
+    }
 
-    //Produto
- /*    async getListaProdutoPreco(req, res) {
+    async getListaProdutoPreco(req, res) {
         let { idEmpresa, dsProduto, pageNumber } = req.query;
         if (!isNaN(idEmpresa)) {
 
@@ -116,9 +111,8 @@ class InformaticaControllers {
                 throw error;
             }
         }
-    } */
-    //Produto
-/*     async getListaProdutoPrecoInformatica(req, res) {
+    }
+    async getListaProdutoPrecoInformatica(req, res) {
         let { idEmpresa, descricaoProduto, pageNumber } = req.query;
 
         idEmpresa = idEmpresa ? idEmpresa : '';
@@ -136,11 +130,10 @@ class InformaticaControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
+        
     }
-    */
 
-    //caixa
-/*     async getListaCaixas(req, res) {
+    async getListaCaixas(req, res) {
         let { idEmpresa, idCaixaWeb, dataUltimaAtualizacao,   page, pageSize, byId} = req.query;
        
             try {
@@ -162,10 +155,9 @@ class InformaticaControllers {
                 throw error;
             }
         
-    } */
+    }
 
-    //caixa
-/*     async getListaCaixasID(req, res) {
+    async getListaCaixasID(req, res) {
         let { idCaixa } = req.query;
         if (!isNaN(idCaixa)) {
             try {
@@ -182,9 +174,8 @@ class InformaticaControllers {
             }
         }
     }
- */
-    //Empresa
-/*     async getListaAtualizaEmpresaDiario(req, res) {
+
+    async getListaAtualizaEmpresaDiario(req, res) {
         let { idEmpresa,page, pageSize } = req.query;
 
         try {
@@ -203,10 +194,9 @@ class InformaticaControllers {
 
         }
         
-    } */
+    }
 
-    //Vendas
-  /*   async getListaVendasLojaInformatica(req, res) {
+    async getListaVendasLojaInformatica(req, res) {
         let { idEmpresa, status, dataPesquisaInicio, dataPesquisaFim, page, pageSize } = req.query;
         try {
             idEmpresa = idEmpresa ? idEmpresa : '';
@@ -226,10 +216,9 @@ class InformaticaControllers {
             throw error;
         }
         
-    } */
+    }
 
-    //Funcionario
-/*     async getListaAtualizarFuncionario(req, res) {
+    async getListaAtualizarFuncionario(req, res) {
         let { idFuncionario} = req.query;
         idFuncionario = idFuncionario ? idFuncionario : '';
        
@@ -247,9 +236,8 @@ class InformaticaControllers {
             throw error;
         }
         
-    } */
-    //Pagamento
- /*    async getListaPagamentoTEFInformatica(req, res) {
+    }
+    async getListaPagamentoTEFInformatica(req, res) {
         let { } = req.query;   
         try {
             const response = await getPagamentoTEF()
@@ -259,10 +247,8 @@ class InformaticaControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    } */
-
-    //Pagamento
-/*     async getListaPagamentoPOSInformatica(req, res) {
+    }
+    async getListaPagamentoPOSInformatica(req, res) {
         let { } = req.query;   
         try {
             const response = await getPagamentoPOS()
@@ -272,10 +258,9 @@ class InformaticaControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    } */
+    }
 
-    //Funcionario
-/*     async getListaFuncionariosLoja(req, res) {
+    async getListaFuncionariosLoja(req, res) {
         let { byId, idEmpresa, cpf, noFuncionarioCPF, page, pageSize} = req.query;
         
         try {
@@ -295,10 +280,9 @@ class InformaticaControllers {
             throw error;
         }
         
-    } */
+    }
 
-    //Vendas
-/*     async getListaVendasAlloc(req, res) {
+    async getListaVendasAlloc(req, res) {
         let { idEmpresa, status, idVenda, dataPesquisaInicio, dataPesquisaFim, stVendasAlloc , page, pageSize} = req.query;
         idEmpresa = idEmpresa ? idEmpresa : '';
         status = status ? status : '';
@@ -320,10 +304,9 @@ class InformaticaControllers {
             throw error;
         }
         
-    } */
+    }
 
-    //Vendas
-/*     async getListaVendasContigenciaIformatica(req, res) {
+    async getListaVendasContigenciaIformatica(req, res) {
         let { idEmpresa, dataPesquisaInicio, dataPesquisaFim, page, pageSize} = req.query;
         idEmpresa = idEmpresa ? idEmpresa : '';
         dataPesquisaInicio = dataPesquisaInicio ? dataFormatada(dataPesquisaInicio) : '';
@@ -343,10 +326,9 @@ class InformaticaControllers {
             throw error;
         }
         
-    } */
+    }
 
-    //Cliente
- /*    async getListaCliente(req, res) {
+    async getListaCliente(req, res) {
         let { idCliente} = req.query;
             
         try {
@@ -364,10 +346,9 @@ class InformaticaControllers {
             throw error;
         }
         
-    } */
+    }
 
-    //Cliente
-/*     async getListaClienteIformatica(req, res) {
+    async getListaClienteIformatica(req, res) {
         let {idEmpresa, idCliente, idMarca, cpf, descCliente, tpCliente, status,  page, pageSize} = req.query;
         
       
@@ -394,10 +375,9 @@ class InformaticaControllers {
             throw error;
         }
         
-    } */
+    }
 
-    //RelatorioBI
-/*     async getListaLinkRelatorioBI(req, res) {
+    async getListaLinkRelatorioBI(req, res) {
         let { idRelatorio, idEmpresa, page, pageSize, idLoja} = req.query;
         
         idRelatorio = idRelatorio ? idRelatorio : '';
@@ -419,10 +399,9 @@ class InformaticaControllers {
             throw error;
         }
         
-    } */
+    }
 
-    //RelatorioBI
- /*    async getListaRelatorioBI(req, res) {
+    async getListaRelatorioBI(req, res) {
         let { idRelatorio, status, page, pageSize } = req.query;
 
         try {
@@ -441,10 +420,9 @@ class InformaticaControllers {
             throw error;
         }
         
-    } */
+    }
 
-    //Cliente
-/*     async getListaCadastroClienteCredSystem(req, res) {
+    async getListaCadastroClienteCredSystem(req, res) {
         let { idEmpresa, dataPesquisaInicio, dataPesquisaFim,  page, pageSize } = req.query;
 
         try {
@@ -465,10 +443,9 @@ class InformaticaControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }   
-    } */
+    }
 
-    //Pagamento
-/*     async getListaMeioPagamentoCredSystem(req, res) {
+    async getListaMeioPagamentoCredSystem(req, res) {
         let { idEmpresa, dataPesquisaInicio, dataPesquisaFim,  page, pageSize } = req.query;
 
         try {
@@ -488,10 +465,8 @@ class InformaticaControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    } */
-
-    //Parceria
-/*     async getListaParceriaCredSystem(req, res) {
+    }
+    async getListaParceriaCredSystem(req, res) {
         let { idEmpresa, dataPesquisaInicio, dataPesquisaFim,  page, pageSize } = req.query;
 
         try {
@@ -510,9 +485,7 @@ class InformaticaControllers {
             throw error;
         }
     }
- */
-    //Configuracoes
-/*     async getListaConfiguracoes(req, res) {
+    async getListaConfiguracoes(req, res) {
         let { idConfiguracao, idEmpresa, page, pageSize } = req.query;
 
         try {
@@ -528,15 +501,14 @@ class InformaticaControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    } */
+    }
 
     // Create
  
 
 
     // Update
-    //Funcionario
-/*     async putInativarFuncionario(req, res) {
+    async putInativarFuncionario(req, res) {
         try {
             let  {DATAULTIMAALTERACAO,STATIVO,DATA_DEMISSAO,ID} = req.body; 
             const response = await axios.put(`${url}/api/informatica/funcionario-inativa.xsjs`, { 
@@ -551,10 +523,8 @@ class InformaticaControllers {
             console.error("Unable to connect to the database:", error);
             return res.status(500).json({ error: error.message });
         }
-    } */
-
-    //Relatorio
-/*     async putRelatorioBI(req, res) {
+    }
+    async putRelatorioBI(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body]; 
 
@@ -565,7 +535,7 @@ class InformaticaControllers {
             console.error("Unable to connect to the database:", error);
             return res.status(500).json({ error: error.message });
         }
-    } */
+    }
 /*     async putLinkRelatorioBI(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body]; 
@@ -607,9 +577,7 @@ class InformaticaControllers {
         }
     }
  */
-
-    //Funcionario
-/*     async putFuncionarioLoja(req, res) {
+    async putFuncionarioLoja(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body];   
             const response = await axios.put(`${url}/api/informatica/funcionario-loja.xsjs`, dados)
@@ -620,10 +588,8 @@ class InformaticaControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    } */
-
-    //Funcionario
-/*     async postFuncionarioLoja(req, res) {
+    }
+    async postFuncionarioLoja(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body];   
             const response = await axios.post(`${url}/api/informatica/funcionario-loja.xsjs`, dados)
@@ -633,10 +599,9 @@ class InformaticaControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    } */
+    }
 
-    //Funcionario
-/*     async putFuncionarioDesconto(req, res) {
+    async putFuncionarioDesconto(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body];   
             const response = await axios.put(`${url}/api/informatica/funcionario-desconto.xsjs`, dados)
@@ -647,10 +612,9 @@ class InformaticaControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    } */
-
-    //Caixa
-/*     async putCaixaLoja(req, res) {
+    }
+   
+    async putCaixaLoja(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body];   
             const response = await updateCaixa(dados)
@@ -660,10 +624,9 @@ class InformaticaControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    } */
+    }
    
-    //Configuracao
-/*     async putConfiguracao(req, res) {
+    async putConfiguracao(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body];   
             const response = await updateConfiguracao(dados)
@@ -673,7 +636,7 @@ class InformaticaControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    } */
+    }
 
 /*     async postRelatorioBI(req, res) {
         try {
@@ -702,9 +665,7 @@ class InformaticaControllers {
         }
     }
  */
-
-    //Caixa
-/*     async postCaixaLoja(req, res) {
+    async postCaixaLoja(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body];   
             const response = await createCaixa(dados)
@@ -714,10 +675,9 @@ class InformaticaControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    } */
+    }
 
-    //Configuracao
-/*     async postConfiguracao(req, res) {
+    async postConfiguracao(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body];   
             const response = await createConfiguracao(dados)
@@ -727,7 +687,7 @@ class InformaticaControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    } */
+    }
 }
 
 export default new InformaticaControllers();

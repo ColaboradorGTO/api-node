@@ -6,13 +6,13 @@ import { OTService } from "../OT/Services/index.js";
 import criarOTSchema from '../OT/Schema/criarOTSchema.js';
 import atualizarOTSchema from '../OT/Schema/atualizarOTSchema.js';
 // const url = process.env.API_URL;
-//const url = 'http://164.152.245.77:8000/quality/concentrador_node';
+const url = 'http://164.152.245.77:8000/quality/concentrador_node';
 const otClient = new OTClient(url);
 const otService = new OTService(otClient);
 
 class ExpedicaoControllers {
 
-   /*  async getListaProdutosExpedicao(req, res,) {
+    async getListaProdutosExpedicao(req, res,) {
         let {idEmpresa, codBarras, dsProduto, idProduto, page, pageSize, } = req.query;
 
         idEmpresa = idEmpresa ? idEmpresa : '';
@@ -382,14 +382,6 @@ class ExpedicaoControllers {
                     value.dadosdetalheot,
     
             );
-    
-            if(!value.IDEMPRESADESTINO) {
-                return res.status(400).json({message: 'IDEMPRESADESTINO é obrigatório.'});
-            }
-    
-            if(!value.IDEMPRESAORIGEM) {
-                return res.status(400).json({message: 'IDEMPRESAORIGEM é obrigatório.'});
-            }
            
             return res.status(200).json(response);
         } catch(error) {
@@ -533,7 +525,7 @@ class ExpedicaoControllers {
             return res.status(500).json({message: 'Erro ao criar ordem de transferência.'});
 
         }
-    } */
+    }
 }
 
-export default new ExpedicaoControllers(); 
+export default new ExpedicaoControllers();

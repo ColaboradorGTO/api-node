@@ -188,8 +188,8 @@ class DashBoardControllers {
         let { idEmpresaLogin, idFuncionarioPN, dataFechamento, dataInicio } = req.query;
         idEmpresaLogin = idEmpresaLogin ? idEmpresaLogin : '';
         idFuncionarioPN = idFuncionarioPN ? idFuncionarioPN : '';
-        dataFechamento = dataFechamento ? dataFechamento : '';
-        dataInicio = dataInicio ? dataInicio : '';
+        dataFormatada(dataFechamento)
+        dataFormatada(dataInicio)
         try {
             const apiUrl = `${url}/api/dashboard/venda/resumo-venda-convenio-desconto.xsjs?pagesize=1000&status=False&idEmpresa=${idEmpresaLogin}&dataInicio=${dataInicio}&dataFechamento=${dataFechamento}&idFuncPN=${idFuncionarioPN}`
             const response = await axios.get(apiUrl)
@@ -222,8 +222,8 @@ class DashBoardControllers {
 
         try {
             idEmpresa = idEmpresa ? idEmpresa : '';
-            dataFechamento = dataFechamento ? dataFechamento : '';
-            dataInicio = dataInicio ? dataInicio : '';
+            dataFormatada(dataFechamento) = dataFormatada(dataFechamento) ? dataFormatada(dataFechamento) : '';
+            dataFormatada(dataInicio) = dataFormatada(dataInicio) ? dataFormatada(dataInicio) : '';
             const apiUrl = `${url}/api/dashboard/venda/resumo-venda-convenio-desconto.xsjs?pagesize=1000&status=False&idEmpresa=${idEmpresa}&dataInicio=${dataInicio}&dataFechamento=${dataFechamento}`
             const response = await axios.get(apiUrl)
 

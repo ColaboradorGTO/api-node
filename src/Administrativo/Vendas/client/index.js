@@ -25,15 +25,4 @@ export class VendasClient {
         }]);
         return response.data;
     }
-
-    async atualizarVendaVendedor(
-        IDVENDEDOR,
-        IDVENDADETALHE
-    ) {
-        const response = await this.api.put(`${url}/api/administrativo/venda-vendedor.xsjs`, [{
-            IDVENDEDOR,
-            IDVENDADETALHE
-        }]);
-        return response.data;
-    }
 }

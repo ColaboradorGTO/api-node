@@ -1,14 +1,15 @@
-/*  import { dataFormatada } from "../../utils/dataFormatada.js";
- import { getPromocao } from "../Promocao/repositories/listaPromocao.js";
- import { createProdutoPromocao, getProdutoPromocao, updateProdutoPromocao } from "../../Produtos/repositories/produtoPromocao.js";
-import { createCampanhaCLiente, getCampanhaCliente, updateCampanhaCLiente } from "../Campanha/repositories/campanhaCliente.js";
-import { createCampanhaEmpresa, getCampanhaEmpresa, updateCampanhaEmpresa } from "../Campanha/repositories/todos.js"; */
+import { dataFormatada } from "../../utils/dataFormatada.js";
 import axios from 'axios';
-let url = `http://164.152.245.77:8000/quality/concentrador_react_node`;
+import { getPromocao } from "../Promocao/repositories/listaPromocao.js";
+import { createProdutoPromocao, getProdutoPromocao, updateProdutoPromocao } from "../../Produtos/repositories/produtoPromocao.js";
+import { createCampanhaCLiente, getCampanhaCliente, updateCampanhaCLiente } from "../Campanha/repositories/campanhaCliente.js";
+import { createCampanhaEmpresa, getCampanhaEmpresa, updateCampanhaEmpresa } from "../Campanha/repositories/todos.js";
+let url = `http://164.152.245.77:8000/quality/concentrador_node`;
 
 class MarketingControllers {
 
-   /*  // Promocao
+
+
     async getListaProdutosPromocao(req, res) {
         let { idProduto, codeBarsOuNome, page, pageSize} = req.query;
         try {
@@ -27,8 +28,6 @@ class MarketingControllers {
         }
         
     }
-
-    //Promocao
     async getListaPromocao(req, res) {
         let { idResumoPromocao, page, pageSize } = req.query;
         try {
@@ -45,10 +44,8 @@ class MarketingControllers {
             throw error;
         }
         
-    } */
-
-    //campanha
-/*     async getListaCampanha(req, res) {
+    }
+    async getListaCampanha(req, res) {
         let { idCampanha, page, pageSize } = req.query;
         try {
             idCampanha = idCampanha ? idCampanha : '';
@@ -64,9 +61,8 @@ class MarketingControllers {
             throw error;
         }
         
-    } */
-    //campanha
-/*     async getListaCampanhaCliente(req, res) {
+    }
+    async getListaCampanhaCliente(req, res) {
         let { cpf,telefone, idCampanha, page, pageSize } = req.query;
         try {
             cpf = cpf ? cpf : '';
@@ -87,9 +83,8 @@ class MarketingControllers {
         }
         
     }
- 
-    //campanha
-     async putCampanhaCliente(req, res) {
+
+    async putCampanhaCliente(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body];  
 
@@ -101,9 +96,8 @@ class MarketingControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    } 
+    }
 
-    
     async putProdutoPromocao(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body];   
@@ -116,7 +110,6 @@ class MarketingControllers {
         }
     }
    
-    //campanha
     async putCampanhaEmpresa(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body];   
@@ -127,10 +120,8 @@ class MarketingControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    } 
+    }
 
-
-    //campanha
     async postCampanhaCliente(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body];   
@@ -142,10 +133,8 @@ class MarketingControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    } 
-
-    //campanha
-     async postCampanhaEmpresa(req, res) {
+    }
+    async postCampanhaEmpresa(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body];   
 
@@ -157,9 +146,8 @@ class MarketingControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    } 
+    }
     
-//promocao
     async postProdutoPromocao(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body];   
@@ -172,8 +160,7 @@ class MarketingControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    }  */
+    }
 }
 
 export default new MarketingControllers();
- 

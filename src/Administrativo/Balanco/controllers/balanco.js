@@ -1,102 +1,133 @@
 import axios from "axios";
-import { BalancoClient } from '../client/index.js'
-import { BalancoServices } from '../services/index.js'
+
 import { dataFormatada } from "../../../utils/dataFormatada.js";
+import { getBalancoLoja } from "../repositories/balancoLoja.js";
+import { getColetorBalanco } from "../repositories/coletorBalanco.js";
+import { getPrepararPrimeiroBalancoLoja, updatePrepararPrimeiroBalancoLoja } from "../repositories/prepararPrimeiroBalancoLoja.js";
+import { getDetalheBalanco, putDetalheBalanco } from "../repositories/detalheBalanco.js";
+import { getConsolidarBalanco, updateConsolidarBalanco } from "../repositories/consolidarBalanco.js";
+import { getPrestacaoContasBalanco } from "../repositories/prestacaoContaBalanco.js";
+import { getNovoPreviaBalanco } from "../repositories/novoPreviaBalanco.js";
+import { createDetalheBalancoAvulso, getDetalheBalancoAvulso, putDetalheBalancoAvulso } from "../repositories/detalheBalancoAvulso.js";
+import 'dotenv/config';
+const url = process.env.API_URL;
 import updateBalancoConsolidadoSchema from '../schema/confirmarConsolidarBalanco.js';
 import updateDetalheBalancoAvulsoSchema from '../schema/atualizarDetalheBalancoAvulso.js';
-import atualizarConsolidarBalancoSchema from "../schema/atualizarConsolidarBalanco.js";
-import atualizarPrepararLojaPrimeiroBalancoSchema from "../schema/atualizarListaPrepararPrimeiroBalancoLoja.js";
-import atualizarListaDetalhesBalancoSchema from "../schema/atualizarListaDetalhesBalancoSchema.js.js";
-import criarDetalheBalancoAvulsoSchema from "../schema/criarDetalheBalanco.js";
-import atualizarColetorBalancoSchema from "../schema/atualizarColetorBalanco.js";
-import updateConfirmarPrestacaoContasSchema from "../schema/confirmarPrestacaoContas.js";
-
-const balancoClient = new BalancoClient(process.env.API_URL);
-const balancoServices = new BalancoServices(balancoClient);
-const url = process.env.API_URL;
+import confirmarBalancoSchema from '../schema/confirmarBalanco.js';
+import { BalancoClient} from '../client/index.js'
+import { BalancoServices } from '../services/index.js'
+const confirmarBalancoConsolidadoCliente = new BalancoClient(process.env.API_URL);
+const confirmarBalancoConsolidadoService = new BalancoServices(confirmarBalancoConsolidadoCliente);
+const atualizarDetalheBalancoAvulsoCliente = new BalancoClient(process.env.API_URL);
+const atualizarDetalheBalancoAvulsoService = new BalancoServices(atualizarDetalheBalancoAvulsoCliente);
+const confirmarBalancoCliente = new BalancoClient(process.env.API_URL);
+const confirmarBalancoService = new BalancoServices(confirmarBalancoCliente);
 
 class AdmBalancoControllers {
     async getListaBalancoLoja(req, res) {
         let { idEmpresa, dsDescricao, dataPesquisaInicio, dataPesquisaFim, page, pageSize } = req.query;
 
         idEmpresa = idEmpresa ? Number(idEmpresa) : '';
-        dsDescricao = dsDescricao ? dsDescricao : '';
+        dsDescricao = dsDescricao ? dsDescricao : ''; 
         dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataFormatada(dataPesquisaInicio) : ''
         dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataFormatada(dataPesquisaFim) : ''
         page = page ? Number(page) : '';
         pageSize = pageSize ? Number(pageSize) : '';
-
+        
         try {
-
+            // http://164.152.245.77:/api/administrativo/balanco-loja.xsjs?page=1&idEmpresa=1&dataInicial=2024-12-07&dataFinal=2024-12-07&DSdesc=
             const apiUrl = `${url}/api/administrativo/balanco-loja.xsjs?idEmpresa=${idEmpresa}&DSdesc=${dsDescricao}&dataInicial=${dataPesquisaInicio}&dataFinal=${dataPesquisaFim}&page=${page}&pageSize=${pageSize}`;
             const response = await axios.get(apiUrl)
-
+            // const response = await getBalancoLoja(idEmpresa, dsDescricao, dataPesquisaInicio, dataPesquisaFim, page, pageSize);
+        
             return res.json(response.data);
         } catch (error) {
             console.error("Erro no ADM Balanco Controllers getListaBalancoLoja:", error);
             return res.status(500).json({ error: "Erro ao buscar lista de balanços por loja." });
+         
         }
     }
 
+    // async getListaColetorBalanco(req, res) {
+    //     let { idEmpresa, idResumo, descricaoProduto, } = req.query;
+        
+    //     idEmpresa = idEmpresa ? idEmpresa : '';
+    //     idResumo = idResumo ? idResumo : '';
+    //     descricaoProduto = descricaoProduto ? descricaoProduto : '';
+        
+    //     try {
+    //         const apiUrl = `${url}/api/administrativo/coletor-balanco.xsjs?idresumo=${idResumo}&idempresa=${idEmpresa}`
+    //         const response = await axios.get(apiUrl)
+
+    //         return res.json(response.data); 
+    //     } catch (error) {
+    //         console.error("Unable to connect to the database:", error);
+    //         throw error;
+    //     }
+        
+    // }
+    
     async getListaColetorBalanco(req, res) {
         let { idEmpresa, idResumo, descricaoProduto, page, pageSize } = req.query;
-
+        
         idEmpresa = idEmpresa ? idEmpresa : '';
         idResumo = idResumo ? idResumo : '';
         descricaoProduto = descricaoProduto ? descricaoProduto : '';
         page = page ? page : '';
         pageSize = pageSize ? pageSize : '';
-
         try {
+            
+            // const response = await getColetorBalanco(idEmpresa, idResumo, descricaoProduto, page, pageSize)
             const apiUrl = `${url}/api/administrativo/coletor-balanco.xsjs?idresumo=${idResumo}&idempresa=${idEmpresa}&descProduto=${descricaoProduto}&page=${page}&pageSize=${pageSize}`
             const response = await axios.get(apiUrl)
-
-            return res.json(response.data);
+            return res.json(response.data); 
         } catch (error) {
             console.error("Erro no ADM Balanco Controllers getListaColetorBalanco:", error);
             throw error;
         }
+        
     }
 
     async getListaPrepararPrimeiroBalancoLoja(req, res) {
         let { idEmpresa, page, pageSize } = req.query;
-
+        
         idEmpresa = idEmpresa ? idEmpresa : '';
         page = page ? page : '';
         pageSize = pageSize ? pageSize : '';
         try {
             const apiUrl = `${url}/api/administrativo/prepara-primeiro-balanco-loja.xsjs`
             const response = await axios.get(apiUrl)
-
-            return res.json(response.data);
+            // const response = await getPrepararPrimeiroBalancoLoja(idEmpresa, page, pageSize)
+            return res.json(response.data); 
         } catch (error) {
             console.error("Erro no ADM Balanco Controllers getListaPrepararPrimeiroBalancoLoja:", error);
             throw error;
         }
-
+        
     }
     async getListaDetalheBalancoLoja(req, res) {
         let { idResumo, numeroColetor, page, pageSize } = req.query;
-
+        
         idResumo = idResumo ? idResumo : '';
         numeroColetor = numeroColetor ? numeroColetor : '';
         page = page ? page : '';
         pageSize = pageSize ? pageSize : '';
         try {
-
+            
+            // const response = await getDetalheBalanco(idResumo, numeroColetor, page, pageSize)
             const apiUrl = `${url}/api/administrativo/detalhe-balanco.xsjs?idresumo=${idResumo}&coletor=${numeroColetor}&page=${page}&pageSize=${pageSize}`
             const response = await axios.get(apiUrl)
-            return res.json(response.data);
+            return res.json(response.data); 
         } catch (error) {
             console.error("Erro no ADM Balanco Controllers getListaDetalheBalancoLoja:", error);
             throw error;
         }
-
+        
     }
 
     async getListaConsolidarBalanco(req, res) {
-        let { idResumo, page, pageSize } = req.query;
-
+        let { idResumo,  page, pageSize } = req.query;
+        
         idResumo = idResumo ? idResumo : '';
         page = page ? page : '';
         pageSize = pageSize ? pageSize : '';
@@ -109,28 +140,47 @@ class AdmBalancoControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
+        
     }
 
     async getListaPrestacaoContasBalanco(req, res) {
-        let { idResumoBalanco, page, pageSize } = req.query;
-
+        let { idResumoBalanco,  page, pageSize } = req.query;
+        
         idResumoBalanco = idResumoBalanco ? idResumoBalanco : '';
         page = page ? page : '';
         pageSize = pageSize ? pageSize : '';
         try {
             const apiUrl = `${url}/api/administrativo/prestacao-contas-balanco.xsjs?id=${idResumoBalanco}`
             const response = await axios.get(apiUrl)
-
-            return res.json(response.data);
+            // const response = await getPrestacaoContasBalanco(idResumoBalanco, page, pageSize)
+            return res.json(response.data); 
         } catch (error) {
             console.error("Erro no ADMBalancoControllers getListaPrestacaoContasBalanco:", error);
             throw error;
         }
+        
+    }
+
+    async getListaNovoPreviaBalanco(req, res) {
+        let { idResumoBalanco,  page, pageSize } = req.query;
+        
+        idResumoBalanco = idResumoBalanco ? idResumoBalanco : '';
+        page = page ? page : '';
+        pageSize = pageSize ? pageSize : '';
+        try {
+            
+            const response = await getNovoPreviaBalanco(idResumoBalanco, page, pageSize)
+            return res.json(response); 
+        } catch (error) {
+            console.error("Unable to connect to the database:", error);
+            throw error;
+        }
+        
     }
 
     async getListaDetalheBalancoAvulso(req, res) {
         let { idFilial, coletor, page, pageSize } = req.query;
-
+        
         idFilial = idFilial ? idFilial : '';
         coletor = coletor ? coletor : '';
         page = page ? page : '';
@@ -138,106 +188,76 @@ class AdmBalancoControllers {
         try {
             const apiUrl = `${url}/api/administrativo/detalhe-balanco-avulso.xsjs?idfilial=${idFilial}&coletor=${coletor}`;
             const response = await axios.get(apiUrl)
-
-            return res.json(response.data);
+            // const response = await getDetalheBalancoAvulso(idFilial, coletor, page, pageSize)
+            return res.json(response.data); 
         } catch (error) {
             console.error("erro no ADM Balanco Controllers getListaDetalheBalancoAvulso:", error);
             return res.status(500).json({ error: "Erro ao buscar lista de balanços avulso." });
+        
         }
+        
     }
 
+  
     async putConsolidarBalanco(req, res) {
-
         try {
-            const { error, value } = atualizarConsolidarBalancoSchema.validate(req.body, {
-
-                abortEarly: false,
-                stripUnknown: true
-            });
-
-            if (error) {
-                return res.status(400).json({
-                    message: 'Dados inválidos',
-                    errors: error.details.map(detail => ({
-                        field: detail.path.join('.'),
-                        message: detail.message
-                    }))
-                });
+            let {IDRESUMOBALANCO, IDEMPRESA} =  req.body;            
+            // const response = await updateConsolidarBalanco(balancos)
+            if (!IDRESUMOBALANCO || !IDEMPRESA) {
+                return res.status(400).json({ error: "IDRESUMOBALANCO and IDEMPRESA are required." });
             }
 
-            const response = await balancoServices.updateConsolidarBalanco(
-                value.IDRESUMOBALANCO,
-                value.IDEMPRESA
-            );
+            const apiUrl = `${url}/api/administrativo/consolidar-balanco.xsjs`;
+            const response = await axios.put(apiUrl, {
+                IDRESUMOBALANCO,
+                IDEMPRESA
+            });
 
-            return res.status(200).json(response);
+            return res.json(response.data);
         } catch (error) {
-            console.log('Erro no ExtratosControllers.putConsolidarBalanco:', error);
-            return res.status(500).json({ message: 'Erro ExtratosControllers.putListaAjusteExtrato', error });
-
+            console.error("Erro no ADM Balanco Controllers putConsolidarBalanco:", error);
+            return res.status(500).json({ error: error.message });
+            
         }
     }
 
     async putListaPrepararPrimeiroBalancoLoja(req, res) {
-
         try {
-            const { error, value } = atualizarPrepararLojaPrimeiroBalancoSchema.validate(req.body, {
+            let { IDEMPRESA } = req.body;   
+            // const response = await updatePrepararPrimeiroBalancoLoja(balancos)
 
-                abortEarly: false,
-                stripUnknown: true
-            });
-
-            if (error) {
-                return res.status(400).json({
-                    message: 'Dados inválidos',
-                    errors: error.details.map(detail => ({
-                        field: detail.path.join('.'),
-                        message: detail.message
-                    }))
-                });
+            if (!IDEMPRESA) {
+                return res.status(400).json({ error: "IDEMPRESA is required." });
             }
 
-            const response = await balancoServices.updatePrepararLojaPrimeiroBalanco(
-                value.IDEMPRESA
-            );
+            const apiUrl = `${url}/api/administrativo/prepara-primeiro-balanco-loja.xsjs`
+            
+            const response = await axios.put(apiUrl, {
+                IDEMPRESA
+            })
 
-            return res.status(200).json(response);
+            return res.json(response.data);
         } catch (error) {
-            console.log('Erro no ExtratosControllers.putListaPrepararPrimeiroBalancoLoja:', error);
-            return res.status(500).json({ message: 'Erro ExtratosControllers.putListaPrepararPrimeiroBalancoLoja', error });
-
+            console.error("Erro no ADM Balanco Controllers putListaPrepararPrimeiroBalancoLoja:", error);
+            return res.status(500).json({ error: error.message });
+            
         }
     }
 
     async putListaDetalheBalanco(req, res) {
-
         try {
-            const { error, value } = atualizarListaDetalhesBalancoSchema.validate(req.body, {
-
-                abortEarly: false,
-                stripUnknown: true
+            let {IDDETALHEBALANCO, TOTALCONTAGEMGERAL} = req.body;   
+           
+            const apiUrl = `${url}/api/administrativo/detalhe-balanco.xsjs`;
+            const response = await axios.put(apiUrl, {
+                IDDETALHEBALANCO: Number(IDDETALHEBALANCO),
+                TOTALCONTAGEMGERAL: Number(TOTALCONTAGEMGERAL)
             });
-
-            if (error) {
-                return res.status(400).json({
-                    message: 'Dados inválidos',
-                    errors: error.details.map(detail => ({
-                        field: detail.path.join('.'),
-                        message: detail.message
-                    }))
-                });
-            }
-
-            const response = await balancoServices.updateListaDetalhesBalanco(
-                value.IDDETALHEBALANCO,
-                value.TOTALCONTAGEMGERAL
-            );
-
-            return res.status(200).json(response);
+         
+            return res.json(response.data);
         } catch (error) {
-            console.log('Erro no ExtratosControllers.putListaPrepararPrimeiroBalancoLoja:', error);
-            return res.status(500).json({ message: 'Erro ExtratosControllers.putListaPrepararPrimeiroBalancoLoja', error });
-
+            console.error("Unable to connect to the database:", error);
+            throw error;
         }
     }
 
@@ -260,12 +280,18 @@ class AdmBalancoControllers {
             }
 
 
-            const response = await balancoServices.updateDetalheBalancoAvulso(
+            const response = await atualizarDetalheBalancoAvulsoService.updateDetalheBalancoAvulso(
                 value.IDEMPRESA,
                 value.NUMEROCOLETOR,
                 value.DSCOLETOR,
                 value.IDPRODUTO,
-                value.TOTALCONTAGEMGERAL
+                value.CODIGODEBARRAS,
+                value.DSPRODUTO,
+                value.TOTALCONTAGEMGERAL,
+                value.PRECOCUSTO,
+                value.PRECOVENDA,
+                value.STCANCELADO,
+                value.INSBALANCO
             );
 
             return res.json(response);
@@ -277,101 +303,88 @@ class AdmBalancoControllers {
 
     async postDetalheBalancoAvulso(req, res) {
         try {
+            // const { error, value } = confirmarBalancoSchema.validate(req.body, {
+            //     abortEarly: false,
+            //     stripUnknown: true
+            // })
 
-            const { error, value } = criarDetalheBalancoAvulsoSchema.validate(req.body, {
-                abortEarly: false,
-                stripUnknown: true
-            })
+            // if (error) {
+            //     return res.status(400).json({
+            //         message: 'Dados inválidos',
+            //         errors: error.details.map(detail => ({
+            //             field: detail.path.join('.'),
+            //             message: detail.message
+            //         }))
+            //     });
+            // }
 
-            if (error) {
-                return res.status(400).json({
-                    message: 'Dados inválidos',
-                    errors: error.details.map(detail => ({
-                        field: detail.path.join('.'),
-                        message: detail.message
-                    }))
-                });
-            }
+            let {} =  req.body;   
+            // const response = await createDetalheBalancoAvulso(detalhes)
 
-            const response = await balancoServices.createDetalheBalancoAvulso(
-                value.IDEMPRESA,
-                value.DSRESUMOBALANCO,
-                value.DTABERTURA,
-                value.DTFECHAMENTO,
-                value.QTDTOTALITENS,
-                value.QTDTOTALSOBRA,
-                value.QTDTOTALFALTA,
-                value.TXTOBSERVACAO,
-                value.STATIVO,
-                value.det
-            );
-
-            return res.json(response);
+            const apiUrl = `${url}/api/administrativo/detalhe-balanco-avulso.xsjs`;
+            
+            const response = await axios.post(apiUrl, req.body);
+            // const response = await confirmarBalancoService.createConfirmarBalanco(
+            //     value.DSRESUMOBALANCO,
+            //     value.DTABERTURA,
+            //     value.DTFECHAMENTO,
+            //     value.IDEMPRESA,
+            //     value.INSBALANCO,
+            //     value.QTDTOTALFALTA,
+            //     value.QTDTOTALITENS,
+            //     value.QTDTOTALSOBRA,
+            //     value.STATIVO,
+            //     value.TXTOBSERVACAO,
+            //     value.det
+            // )
+        
+            return res.json(response.data);
         } catch (error) {
             console.error("Erro no ADM Balanco Controllers postDetalheBalancoAvulso:", error);
             return res.status(500).json({ error: error.message });
+            
         }
     }
-
+ 
     async putColetorBalanco(req, res) {
         try {
-
-            const { error, value } = atualizarColetorBalancoSchema.validate(req.body, {
-                abortEarly: false,
-                stripUnknown: true
-            })
-
-            if (error) {
-                return res.status(400).json({
-                    message: 'Dados inválidos',
-                    errors: error.details.map(detail => ({
-                        field: detail.path.join('.'),
-                        message: detail.message
-                    }))
-                });
+            let { IDRESUMOBALANCO,  NUMEROCOLETOR} = req.body;
+            if (!IDRESUMOBALANCO || !NUMEROCOLETOR) {
+                return res.status(400).json({ error: "idResumo, e numeroColetor are required." });
             }
 
+            const apiUrl = `${url}/api/administrativo/coletor-balanco.xsjs`;
+            const response = await axios.put(apiUrl, {
+                IDRESUMOBALANCO,
+                NUMEROCOLETOR
+            });
 
-            const response = await balancoServices.updateColetorBalanco(
-                value.IDRESUMOBALANCO,
-                value.NUMEROCOLETOR
-            );
-
-            return res.json(response);
+            return res.json(response.data);
         } catch (error) {
-            console.error("Erro no ADM Balanco Controllers postDetalheBalancoAvulso:", error);
+            console.error("Erro no ADM Balanco Controllers putColetorBalanco:", error);
             return res.status(500).json({ error: error.message });
         }
     }
 
     async putConfirmarPrestacaoContas(req, res) {
         try {
-
-            const { error, value } = updateConfirmarPrestacaoContasSchema.validate(req.body, {
-                abortEarly: false,
-                stripUnknown: true
-            })
-
-            if (error) {
-                return res.status(400).json({
-                    message: 'Dados inválidos',
-                    errors: error.details.map(detail => ({
-                        field: detail.path.join('.'),
-                        message: detail.message
-                    }))
-                });
+            let { IDRESUMOBALANCO} = req.body;
+            if (!IDRESUMOBALANCO) {
+                return res.status(400).json({ error: "idResumo is required." });
             }
 
-            const response = await balancoServices.updateConfirmarPrestacaoContas(
-                value.IDRESUMOBALANCO,
-            );
+            const apiUrl = `${url}/api/administrativo/prestacao-contas-balanco.xsjs`;
+            const response = await axios.put(apiUrl, {
+                IDRESUMOBALANCO,
+            });
 
-            return res.json(response);
+            return res.json(response.data);
         } catch (error) {
-            console.error("Erro no ADM Balanco Controllers postDetalheBalancoAvulso:", error);
+            console.error("Erro no ADM Balanco Controllers putConfirmarPrestacaoContas:", error);
             return res.status(500).json({ error: error.message });
         }
     }
+
 
     async putConfirmarConsolidarBalanco(req, res) {
         try {
@@ -391,7 +404,7 @@ class AdmBalancoControllers {
                 });
             }
 
-            const response = await balancoServices.updateConfirmarBalancoConsolidado(
+            const response = await confirmarBalancoConsolidadoService.updateConfirmarBalancoConsolidado(
                 value.IDRESUMOBALANCO,
                 value.OBSCONTAGEM,
                 value.OBSDIVERGENCIACONTAGEM,
@@ -403,64 +416,6 @@ class AdmBalancoControllers {
             console.error("Erro no ADM Balanco Controllers putConfirmarConsolidarBalanco:", error);
             return res.status(500).json({ error: error.message });
         }
-    }
-
-    async getPesqBalanco(req, res) {
-        let { idEmpresa, descricao, dataPesqInicio, dataPesqFim } = req.query;
-
-        idEmpresa = idEmpresa ? idEmpresa : '';
-        const numPage = 100;
-        dataPesqInicio = dataFormatada(dataPesqInicio) ? dataPesqInicio : '';
-        dataPesqFim = dataFormatada(dataPesqFim) ? dataPesqFim : '';
-        descricao = descricao ? descricao : '';
-
-        try {
-            const apiUrl = `${url}/api/administrativo/balanco-loja.xsjs?idEmpresa=${idEmpresa}&dataInicial=${dataPesqInicio}&dataFinal=${dataPesqFim}&DSdesc=${descricao}`
-            const response = await axios.get(apiUrl)
-
-            return res.json(response.data); // Retorna
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-    }
-
-    async getListaPreviaBalanco(req, res) {
-        let { idEmpresa, idResumo, processa, diferenca } = req.query;
-
-        idEmpresa = idEmpresa ? idEmpresa : '';
-        idResumo = idResumo ? idResumo : '';
-        processa = processa ? processa : '';
-        diferenca = diferenca ? diferenca : '';
-        const numPage = 100;
-
-        try {
-            const apiUrl = `${url}/api/administrativo/novo-previa-balanco.xsjs?id=${idResumo}&idempresa=${idEmpresa}&processa=&${processa}&diferenca=${diferenca}`
-            const response = await axios.get(apiUrl)
-
-            return res.json(response.data);
-        } catch (error) {
-            console.error("Erro no AdministrativoController getListaPreviaBalanco:", error);
-            throw error;
-        }
-    }
-
-    async getDetalheBalancoAvulso(req, res) {
-        let { idFilial, coletor, descProduto, } = req.query;
-
-        idFilial = idFilial ? idFilial : '';
-        coletor = coletor ? coletor : '';
-
-        try {
-            const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/administrativo/detalhe-balanco-avulso.xsjs?page=1&idfilial=${idFilial}&coletor=${coletor}`
-            const response = await axios.get(apiUrl)
-
-            return res.json(response.data); // Retorna
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-
     }
 }
 

@@ -1,13 +1,13 @@
-//import { createPromocao, getPromocaoAtiva, updatePromocao } from "../repositories/promocaoAtiva.js";
-//let url = `http://164.152.245.77:8000/quality/concentrador_homologacao`;
+import { createPromocao, getPromocaoAtiva, updatePromocao } from "../repositories/promocaoAtiva.js";
+let url = `http://164.152.245.77:8000/quality/concentrador_homologacao`;
 // let url = `http://164.152.245.77:8000/quality/concentrador`;
 import axios from "axios";
-import 'dotenv/config';
+// import 'dotenv/config';
 // const url = process.env.API_URL;
 class PromocaoControllers  {
 
 
- /*   async getListaMecanicaAtivas(req, res) {
+   async getListaMecanicaAtivas(req, res) {
         let { idResumoPromocao, dataPesquisaInicio, dataPesquisaFim, page, pageSize } = req.query; 
             idResumoPromocao = idResumoPromocao ? idResumoPromocao : '';
             dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
@@ -387,7 +387,7 @@ class PromocaoControllers  {
             console.error("erro no PromocaoControllers  postMecanicaAtivas:", error);
             throw error;
         } 
-    } */
+    }
 
     // async postPromocao(req, res) {
     //     try {
@@ -473,4 +473,3 @@ class PromocaoControllers  {
 }
 
 export default new PromocaoControllers();
- 

@@ -1,9 +1,12 @@
 import { Router } from 'express';
 import CategoriaReceitaDespesasControllers from '../controllers/CategoriaReceitaDespesa.js';
 
-const categoriaReceitaRoutes = new Router();
 
-categoriaReceitaRoutes.get('/categoria-receita-despesa', CategoriaReceitaDespesasControllers.getListaCategoriaDespesas)
-categoriaReceitaRoutes.get('/categoriaReceitaDespesaFinanceira', CategoriaReceitaDespesasControllers.getListaCategoriaDespesasFinanceira)
+const categoriaRoutes = new Router();
 
-export default categoriaReceitaRoutes;
+
+categoriaRoutes.get('/categoria-receita-despesa', CategoriaReceitaDespesasControllers.getListaCategoriaDespesas)
+categoriaRoutes.get('/categoriaReceitaDespesaFinanceira', CategoriaReceitaDespesasControllers.getListaCategoriaDespesasFinanceira)
+
+
+export default categoriaRoutes;

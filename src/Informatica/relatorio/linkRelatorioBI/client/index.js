@@ -10,12 +10,7 @@ export class LinkRelatorioBiClient {
         });
     }
 
-    async criarLinkRelatoioBI(
-        IDRELATORIOBI,
-        IDEMPRESA,
-        LINK,
-        STATIVO
-    ) {
+    async criarLinkRelatoioBI(IDRELATORIOBI, IDEMPRESA, LINK, STATIVO) {
         const response = await this.api.post(`${url}/api/informatica/linkrelatoriobi.xsjs`, {
             IDRELATORIOBI,
             IDEMPRESA,
@@ -27,13 +22,7 @@ export class LinkRelatorioBiClient {
 
     }
 
-    async atualizarLinkRelatoioBI(
-        IDRELATORIOBI,
-        IDEMPRESA,
-        LINK,
-        STATIVO,
-        IDRELATORIOBIANTIGO
-    ) {
+    async atualizarLinkRelatoioBI(IDRELATORIOBI, IDEMPRESA, LINK, STATIVO, IDRELATORIOBIANTIGO) {
         const response = await this.api.put(`${url}/api/informatica/linkrelatoriobi.xsjs`, {
             IDRELATORIOBI,
             IDEMPRESA,

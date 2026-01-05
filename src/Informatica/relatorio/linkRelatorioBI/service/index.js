@@ -10,6 +10,9 @@ export class linkRelatorioBIService {
         STATIVO
     }) {
 
+        if (!IDRELATORIOBI) {
+            throw new Error('IDRELATORIOBI obrigatorio');
+        }
         if (!IDEMPRESA) {
             throw new Error('IDEMPRESA obrigatorio');
         }
