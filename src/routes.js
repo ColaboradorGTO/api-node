@@ -15,6 +15,7 @@ import ComercialControllers from './Comercial/controllers/Comercial.js';
 import ComprasControllers from './Compras/controllers/Compras.js';
 import CadastroControllers from './Cadastro/controllers/Cadastro.js';
 import ProdutoControllers from './Produtos/controllers/Produtos.js';
+import DepositosLojaControllers from './DepositoLoja/controllers/DepositosLoja.js';
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -369,6 +370,15 @@ routes.get('/responsaveisAlteracaoPrecos', ProdutoControllers.getListaResponsave
 routes.get('/lista-produtos-etiqueta-sap', ProdutoControllers.ListaProdutosEtiquetagem)
 routes.get('/alteracoes-de-precos-resumo', ProdutoControllers.getListaAlteracaoPrecoResumo)
 routes.get('/alteracoes-de-precos-detalhes', ProdutoControllers.getListaAlteracaoPrecoDetalhe)
+
+//  Depositos Loja
+routes.get('/depositosLoja', DepositosLojaControllers.getListaDepositosLojaEmpresa)
+routes.get('/deposito-loja-empresa', DepositosLojaControllers.getListaDepositosLojaEmpresa)
+
+routes.post('/cadastrar-deposito-loja', DepositosLojaControllers.postDepositoLoja)
+routes.put('/deposito-loja/:id', DepositosLojaControllers.putListaDepositosLoja)
+routes.put('/atualizacao-status-conferido/:id', DepositosLojaControllers.putAtualizarStatusConferido)
+routes.put('/deposito-loja-atualizacao-status/:id', DepositosLojaControllers.putAtualizarStatusDepositoLoja)
 
 
 export default routes;
