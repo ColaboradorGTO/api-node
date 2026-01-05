@@ -66,6 +66,8 @@ import GerenciaControllers from './Gerencia/controllers/index.js';
 import ServiceLayerControllers from './ServiceLayer/controllers/index.js'
 
 import GERAlteracaoPrecoControllers from './Gerencia/AlteracaoPreco/controllers/index.js'
+//  Comercial
+import ComercialProdutoControllers from './Comercial/Produto/controllers/index.js'
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -99,6 +101,15 @@ routes.get('/adiantamentos-salarial', DashBoardAdiantamentoSalarialControllers.g
 routes.put('/atualizacao-adiantamento-status', DashBoardAdiantamentoSalarialControllers.updateAdiantamentoStatus)
 routes.post('/cadastrar-adiantamento-salarial', DashBoardAdiantamentoSalarialControllers.postAdiantamentoSalarial)
 routes.put('/adiantamento-salarial/:id', DashBoardAdiantamentoSalarialControllers.putAdiantamentoSalarial)
+
+routes.get('/lista-marca-produto', ComercialProdutoControllers.getListaMarcaProduto)
+routes.get('/lista-fornecedor-produto', ComercialProdutoControllers.getListaFornecedorProduto)
+routes.get('/grupo-produto', ComercialProdutoControllers.getListaGrupoProduto)
+routes.get('/subgrupo-produto', ComercialProdutoControllers.getListaSubGrupoProduto)
+routes.get('/vendas-por-produtos', ComercialProdutoControllers.getListaVendasPorProduto)
+routes.get('/vendas-vendedor-estrutura', ComercialProdutoControllers.getListaVendasVendedorEstrutura)
+routes.get('/produtos-mais-vendidos', ComercialProdutoControllers.getListaProdutosMaisVendidosEstrutura)
+routes.get('/vendas-por-estrutura', ComercialProdutoControllers.getListaVendasIndicadoresEstrutura)
 
 routes.get('/resumo-venda-convenio-desconto', DashBoardVendasControllers.getVendasConvenioDescontoFuncionario)
 routes.get('/resumo-venda-convenio', DashBoardVendasControllers.getVendasConvenioDescontoFuncionario)
