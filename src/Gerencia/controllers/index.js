@@ -21,7 +21,7 @@ class GerenciaControllers {
 
         try {
             const apiUrl = `${url}/api/gerencia/detalhe-malotes-por-loja.xsjs?idMalote=${idMalote}`;
-            // const response = await getDetalhesMalortesPorLoja(idMalote, page, pageSize)
+           
             const response = await axios.get(apiUrl);
             return res.json(response.data); 
         } catch (error) {
@@ -50,7 +50,7 @@ class GerenciaControllers {
 
         try {
             const apiUrl = `${url}/api/gerencia/malotes-por-loja.xsjs?idEmpresa=${idEmpresa}&statusMalote=${statusMalote}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`;
-            // const response = await getMalortesPorLoja(idEmpresa, idMalote, statusMalote, pendenciaMalote, dataPesquisaInicio, dataPesquisaFim, page, pageSize)
+           
             const response = await axios.get(apiUrl);
             return res.json(response.data); 
         } catch (error) {
@@ -165,7 +165,7 @@ class GerenciaControllers {
                 IDUSERENVIO: req.body.IDUSERENVIO,
             }];
 
-            // const response = await createMalote(payload);
+            
             const response = await axios.post(`${url}/api/gerencia/malotes-por-loja.xsjs`, payload)
             
             return res.json(response.data); 

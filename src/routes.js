@@ -62,6 +62,7 @@ import AdmBalancoControllers from './Administrativo/Balanco/controllers/balanco.
 import DashBoardVendasControllers from './DashBoard/Vendas/controllers/venda.js';
 import DashBoardFuncionariosControllers from './DashBoard/Funcionario/controllers/funcionarios.js';
 import DashBoardAdiantamentoSalarialControllers from './DashBoard/AdiantamentoSalarial/controllers/index.js';
+import GerenciaControllers from './Gerencia/controllers/index.js';
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -75,6 +76,14 @@ routes.get('/ping', ApiPing.index);
 
 routes.post('/login', AuthentiCationController.login);
 routes.post('/login2', AuthentiCationController.login);
+
+// Início GERENCIA
+routes.get('/clientes', GerenciaControllers.getListaCliente)
+routes.get('/malotes-por-loja', GerenciaControllers.getListaMalortesPorLoja)
+routes.get('/detalhe-malotes-por-loja', GerenciaControllers.getListaDetalhesMalortesPorLoja)
+routes.post('/criar-malotes-por-loja', GerenciaControllers.postMalotesPorLoja)
+routes.put('/malotes-por-loja/:id', GerenciaControllers.putMalotesPorLoja)
+
 
 routes.get('/funcionarios', DashBoardFuncionariosControllers.getListaFuncionarios)
 
