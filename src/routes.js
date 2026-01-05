@@ -25,7 +25,8 @@ import MarketingControllers from './Marketing/controllers/Marketing.js';
 import ContabilidadeControllers from './Contabilidade/controllers/Contabilidade.js';
 import ConfiguracaoPixPDVControllers from './ConfiguracaoPIX/controllers/ConfiguracaoPixPDV.js';
 import ConferenciaCegaControllers from './ConferenciaCega/controllers/ConferenciaCega.js';
-
+import ListaPrecoControllers from './controllers/ListaPreco.js';
+import LogsControllers from './LogsUsuario/controllers/log.js';
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -460,6 +461,16 @@ routes.get('/status-divergencia', ConferenciaCegaControllers.getListaStatusOTCon
 routes.put('/resumo-ordem-transferencia-cega/:id', ConferenciaCegaControllers.putResumoOrdemTransferencia)
 routes.put('/status-divergencia/:id', ConferenciaCegaControllers.putStatusDivergencia)
 routes.post('/inserir-status-divergencia', ConferenciaCegaControllers.postStatusDivergencia)
+
+// Lista de Preço
+routes.get('/listaPreco', ListaPrecoControllers.getListaPrecoPorMarca)
+
+
+
+
+
+// routes.get('/log-web', LogsControllers.getListaLogsUsuario)
+routes.post('/log-web', LogsControllers.createLogsUsuario)
 
 export default routes;
 
