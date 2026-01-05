@@ -6,7 +6,7 @@ import ApiPing from './controllers/ApiPing.js';
 import AuthentiCationController from './Auth/controllers/Auth.js';
 import AdministrativoControllers from './Administrativo/controllers/Administrativo.js';
 import FinanceiroControllers from './Financeiro/controllers/Financeiro.js';
-// import InformaticaControllers from './Informatica/controllers/Informatica.js';
+import InformaticaControllers from './Informatica/controllers/Informatica.js';
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -125,5 +125,34 @@ routes.put('/conferencia-fatura/:id', FinanceiroControllers.putFaturaConferencia
 
 // Início Vendas 
 routes.get('/vendaLojaPeriodo', FinanceiroControllers.getListaVendasLojaPeriodo)
+
+
+
+// Início Informática GET
+routes.get('/marcasLista', InformaticaControllers.getListaMarcas)
+routes.get('/listaGrupoEmpresas', InformaticaControllers.getListaGrupoEmpresas)
+routes.get('/listaEmpresasControleTransferencia', InformaticaControllers.getListaEmpresas);
+routes.get('/listaEmpresasIformatica', InformaticaControllers.getListaEmpresasInformatica);
+routes.get('/listaProdutoPreco', InformaticaControllers.getListaProdutoPreco)
+routes.get('/lista-caixas', InformaticaControllers.getListaCaixas)
+// routes.get('/listaCaixasID', InformaticaControllers.getListaCaixasID)
+routes.get('/atualiza-empresa-diario', InformaticaControllers.getListaAtualizaEmpresaDiario)
+routes.get('/vendas-loja-informatica', InformaticaControllers.getListaVendasLojaInformatica)
+routes.get('/funcionarios-loja', InformaticaControllers.getListaFuncionariosLoja)
+routes.get('/funcionarios-loja-ativos', InformaticaControllers.getListaFuncionariosLoja)
+routes.get('/atualizarFuncionario', InformaticaControllers.getListaAtualizarFuncionario)
+// routes.get('/pagamento-tef-informatica', InformaticaControllers.getListaPagamentoTEFInformatica)
+// routes.get('/pagamento-pos-informatica', InformaticaControllers.getListaPagamentoPOSInformatica)
+
+routes.get('/vendas-alloc', InformaticaControllers.getListaVendasAlloc)
+routes.get('/vendas-contigencia', InformaticaControllers.getListaVendasContigenciaIformatica)
+routes.get('/lista-cliente', InformaticaControllers.getListaClienteIformatica)
+// routes.get('/listaClienteID', InformaticaControllers.getListaCliente)
+routes.get('/linkRelatorioBI', InformaticaControllers.getListaLinkRelatorioBI)
+routes.get('/relatorioInformaticaBI', InformaticaControllers.getListaRelatorioBI)
+routes.get('/lista-cliente-credsystem', InformaticaControllers.getListaCadastroClienteCredSystem)
+routes.get('/lista-meio-pagamento-credsystem', InformaticaControllers.getListaMeioPagamentoCredSystem)
+routes.get('/lista-parceria-credsystem', InformaticaControllers.getListaParceriaCredSystem)
+
 export default routes;
 
