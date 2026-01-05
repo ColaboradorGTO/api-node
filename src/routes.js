@@ -27,6 +27,8 @@ import ConfiguracaoPixPDVControllers from './ConfiguracaoPIX/controllers/Configu
 import ConferenciaCegaControllers from './ConferenciaCega/controllers/ConferenciaCega.js';
 import ListaPrecoControllers from './controllers/ListaPreco.js';
 import LogsControllers from './LogsUsuario/controllers/log.js';
+import PromocaoControllers from './Promocao/controllers/Promocao.js'
+
 
 const routes = new Router();
 // routes.use(authMiddleware)
