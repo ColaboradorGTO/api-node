@@ -3,7 +3,7 @@ import 'dotenv/config';
 import { EmpresaServices } from "../services/index.js";
 import { EmpresaClient } from "../client/index.js";
 import updateEmpresaSchema from "../schema/useUpdateEmpresa.js";
-const url = process.env.API_URL || 'localhost:6001'
+const url = process.env.API_URL;
 
 const atualizarEmpresaClient = new EmpresaClient(url)
 const updateEmpresaService = new EmpresaServices(atualizarEmpresaClient);

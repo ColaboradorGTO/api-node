@@ -1,6 +1,6 @@
 import axios from "axios";
 import 'dotenv/config';
-const url = process.env.API_URL || 'localhost:6001'
+const url = process.env.API_URL;
 
 class ConfiguracaoPixPDVControllers {
 

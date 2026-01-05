@@ -1,7 +1,7 @@
 
 import axios from "axios";
 import 'dotenv/config';
-const url = process.env.API_URL || 'localhost:6001'
+const url = process.env.API_URL;
 import criarDevolucaoSchema from "../schema/criarDevolucaoSchema.js";
 import atualizarDevolucaoSchema from "../schema/atualizarDevolucaoSchema.js";
 import { MotivoDevolucaoClient } from "../client/index.js";
