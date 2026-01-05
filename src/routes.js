@@ -468,6 +468,21 @@ routes.post('/inserir-status-divergencia', ConferenciaCegaControllers.postStatus
 routes.get('/listaPreco', ListaPrecoControllers.getListaPrecoPorMarca)
 
 
+routes.get('/promocoes-ativas', PromocaoControllers.getListaPromocoesAtivas)
+routes.get('/produto-promocao-ativa', PromocaoControllers.getListaProdutosPromocoesAtiva)
+routes.get('/produto-promocao-destino', PromocaoControllers.getListaProdutosDestinoPromocoesAtiva)
+routes.get('/produto-promocao-origem', PromocaoControllers.getListaProdutosOrigemPromocoesAtiva)
+routes.get('/mecanicas-ativas', PromocaoControllers.getListaMecanicaAtivas)
+routes.get('/detalhe-promocoes-ativas', PromocaoControllers.getListaDetalhesPromocoesAtivas)
+routes.get('/empresa-promocoes-ativas', PromocaoControllers.getListaEmpresasPromocoesAtiva)
+routes.post('/criar-promocoes-ativas', PromocaoControllers.postPromocao)
+routes.put('/promocoes-ativas/:id', PromocaoControllers.putPromocao)
+routes.post('/criar-mecanica', PromocaoControllers.postMecanicaAtivas)
+routes.put('/desativar-produto-promocao-destino', PromocaoControllers.putProdutoDestinoPromocao)
+routes.put('/desativar-produto-promocao-origem', PromocaoControllers.putProdutoOrigemPromocao)
+routes.put('/desativar-empresa-promocao', PromocaoControllers.putEmpresaPromocao)
+routes.put('/desativar-status-promocao', PromocaoControllers.putStatusPromocao)
+// routes.post('/criar-mecanica', PromocaoControllers.postMecanicaAtivas)
 
 
 
