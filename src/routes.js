@@ -16,6 +16,8 @@ import ComprasControllers from './Compras/controllers/Compras.js';
 import CadastroControllers from './Cadastro/controllers/Cadastro.js';
 import ProdutoControllers from './Produtos/controllers/Produtos.js';
 import DepositosLojaControllers from './DepositoLoja/controllers/DepositosLoja.js';
+import ContaBancoControllers from './ContaBanco/controllers/ContaBanco.js';
+import DespesasLojaControllers from './Despesas/controllers/DespesasLoja.js';
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -380,6 +382,16 @@ routes.put('/deposito-loja/:id', DepositosLojaControllers.putListaDepositosLoja)
 routes.put('/atualizacao-status-conferido/:id', DepositosLojaControllers.putAtualizarStatusConferido)
 routes.put('/deposito-loja-atualizacao-status/:id', DepositosLojaControllers.putAtualizarStatusDepositoLoja)
 
+// Conta Banco
+routes.get('/contaBanco', ContaBancoControllers.getListaContaBanco)
+
+// Despesas Loja
+routes.get('/despesas-loja-empresa', DespesasLojaControllers.getListaDespesasLojaEmpresa)
+routes.get('/despesa-Loja-todos', DespesasLojaControllers.getListaTodasDespesasLojas)
+routes.get('/despesa-lojas-dash', DespesasLojaControllers.getListaDespesasLojaDashBoard)
+routes.get('/despesasEmpresas', DespesasLojaControllers.getListaDespesasEmpresaGerencia)
+
+routes.post('/cadastrar-despesa-loja', DespesasLojaControllers.postCadastrarDespesasLoja)
 
 export default routes;
 
