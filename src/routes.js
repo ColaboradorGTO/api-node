@@ -65,6 +65,8 @@ import DashBoardAdiantamentoSalarialControllers from './DashBoard/AdiantamentoSa
 import GerenciaControllers from './Gerencia/controllers/index.js';
 import ServiceLayerControllers from './ServiceLayer/controllers/index.js'
 
+import GERAlteracaoPrecoControllers from './Gerencia/AlteracaoPreco/controllers/index.js'
+
 const routes = new Router();
 // routes.use(authMiddleware)
 
@@ -84,6 +86,8 @@ routes.get('/malotes-por-loja', GerenciaControllers.getListaMalortesPorLoja)
 routes.get('/detalhe-malotes-por-loja', GerenciaControllers.getListaDetalhesMalortesPorLoja)
 routes.post('/criar-malotes-por-loja', GerenciaControllers.postMalotesPorLoja)
 routes.put('/malotes-por-loja/:id', GerenciaControllers.putMalotesPorLoja)
+
+routes.get('/alteracaoPreco', GERAlteracaoPrecoControllers.getListaAlteracaoPreco)
 
 routes.post('/deposito-integracao', ServiceLayerControllers.postDepositoIntegrarNoSAP)
 routes.get('/funcionarios', DashBoardFuncionariosControllers.getListaFuncionarios)
