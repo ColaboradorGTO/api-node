@@ -526,6 +526,59 @@ routes.post('/criarlinkRelatorioBI', LinkRelatorioBiController.postLinkRelatorio
 routes.put('/linkRelatorioBI/:id', LinkRelatorioBiController.putLinkRelatorioBi)
 routes.put('/relatorioInformaticaBI/:id', RelatorioBIController.putRelatorioBi)
 
+// Faturas
+routes.get('/fatura-pix-periodo-consolidado', FinanceiroControllers.getListaFaturasPixConsolidado)
+routes.get('/fatura-pix-periodo', FaturasControllers.getListaFaturasPixPeriodo)
+routes.get('/detalhe-faturas', FaturasControllers.getDetalheFaturaFinanceiro)
+routes.get('/previa-consolidacao-faturas', FaturasControllers.getPreviaFaturasConsolidadas)
+routes.get('/consolidacao-faturas', FaturasControllers.getConsolidacaoFaturas)
+// routes.get('/faturaPixPeriodo', FaturasControllers.getListaVendaFaturaPixPeriodo)
+routes.get('/venda-total-fatura-pix-empresa', FaturasControllers.getListaVendaFaturaPixPeriodo)
+routes.get('/venda-total-fatura-pix-empresa-compensada', FaturasControllers.getListaVendaFaturaPixPeriodoCompensacao)
+
+routes.put('/atualizar-status-fatura-pix', FaturasControllers.putListaFaturaVendaPixStatusConferido)
+routes.put('/atualizar-recompra', FaturasControllers.putListaAtualizarRecompra)
+routes.put('/fatura-loja-atualizar', FaturasControllers.putListaAtualizarFatura)
+routes.put('/consolidacao-faturas/:id', FaturasControllers.putConsolidacaoFatura)
+routes.post('/consolidacao-faturas', FaturasControllers.postConsolidacaoFatura)
+routes.post('/consolidacao-faturas-integracao', FaturasControllers.postConsolidacaoFaturaSAP)
+
+
+
+//  Estabelecimento
+routes.get('/estabelecimento', EstabelecimentoControllers.getListaEstabelecimentos)
+
+
+// Devolução
+routes.get('/motivo-devolucao', DevolucaoControllers.getListaMotivosDevolucao)
+routes.put('/atualizar-motivo-devolucao', DevolucaoControllers.putMotivoDevolucao)
+routes.post('/criar-motivo-devolucao', DevolucaoControllers.createMotivoDevolucao)
+
+// Despesas
+routes.get('/despesa-loja', DespesasControllers.getListaDespesasLoja)
+routes.put('/editar-despesa', DespesasControllers.putDespesasLoja)
+routes.put('/editar-status-despesa/:id', DespesasControllers.putStatusDespesasLoja)
+
+// Desconto
+routes.get('/desconto-vendas', DescontoControllers.getListaDescontoVendas)
+routes.get('/desconto-vendas-simplificado', DescontoControllers.getListaDescontoVendasSimplificada)
+routes.get('/desconto-motivo-vendas', DescontoControllers.getListaDescontoMotivoVendas)
+
+//  Adiantamentos 
+routes.get('/adiantamento-salarial', AdiantamentosControllers.getListaAdiantamentoSalarialFinanceiro)
+
+// Caixas
+routes.get('/lista-caixas-movimento', CaixasControllers.getListaCaixasMovmentoFinanceiro)
+routes.get('/lista-caixas-status', CaixasControllers.getListaCaixaStatus)
+routes.get('/lista-caixas-zerados', CaixasControllers.getListaCaixaZerados)
+routes.put('/fechar-caixas-zerados', CaixasControllers.updateFecharCaixaZerado)
+
+
+// Depositos
+routes.put('/atualizar-deposito-loja/:id', DepositosControllers.updateDepositoLoja)
+routes.get('/deposito-loja', DepositosControllers.getListaDepositosLoja)
+
+
 
 // routes.get('/log-web', LogsControllers.getListaLogsUsuario)
 routes.post('/log-web', LogsControllers.createLogsUsuario)
