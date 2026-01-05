@@ -29,6 +29,11 @@ import ListaPrecoControllers from './controllers/ListaPreco.js';
 import LogsControllers from './LogsUsuario/controllers/log.js';
 import PromocaoControllers from './Promocao/controllers/Promocao.js'
 import CaixaControllers from './Informatica/caixas/controllers/controllersCaixas.js'
+import RelatorioBIController from './Informatica/relatorio/ralatoriaBI/controller/controllerRelatorioBi.js';
+import LinkRelatorioBiController from './Informatica/relatorio/linkRelatorioBI/controllers/controllersLinkRelatorioBi.js'
+import ConsultaNFceController  from './Informatica/ConsultaNFCE/controllers/index.js'
+import ConsultaNFeController from './Informatica/ConsultaNFCE/controllers/nfe.js'
+import ConsultaStatusNfeController from './Informatica/ConsultaNFCE/controllers/statusNfce.js'
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -175,6 +180,14 @@ routes.get('/relatorioInformaticaBI', InformaticaControllers.getListaRelatorioBI
 routes.get('/lista-cliente-credsystem', InformaticaControllers.getListaCadastroClienteCredSystem)
 routes.get('/lista-meio-pagamento-credsystem', InformaticaControllers.getListaMeioPagamentoCredSystem)
 routes.get('/lista-parceria-credsystem', InformaticaControllers.getListaParceriaCredSystem)
+
+routes.get('/status-sefaz', ConsultaStatusNfeController.statusSefaz);
+routes.post('/consultar-nfce', ConsultaNFceController.consultaNFce);
+routes.post('/downloadXML', ConsultaStatusNfeController.downloadNFE);
+routes.post('/cancelar-nfe', ConsultaStatusNfeController.cancelarNFE);
+routes.post('/inutilizar-nfe', ConsultaStatusNfeController.inutilizarNFE);
+routes.get('/validarConsulta', ConsultaStatusNfeController.validarConsulta);
+routes.post('/consultar-nfe', ConsultaNFeController.consultaNFe);
 
 // Expedição
 routes.get('/listaProdutos', ExpedicaoControllers.getListaProdutosExpedicao)
@@ -489,6 +502,15 @@ routes.post('/criar-caixas', CaixaControllers.postCaixaLojas)
 routes.put('/atualiza-empresa-diario/:id', CaixaControllers.putAtualizaEmpresaDiario)
 routes.put('/atualizar-todos-caixa', CaixaControllers.putAtualizarTodosCaixas)
 routes.put('/lista-caixas/:id', CaixaControllers.putCaixaLoja)
+
+
+// POST
+routes.post('/createRelatorioInformaticaBI', RelatorioBIController.postRelatorioBi)
+//routes.post('/createRelatorioInformaticaBI', InformaticaControllers.postRelatorioBI)
+routes.post('/criarlinkRelatorioBI', LinkRelatorioBiController.postLinkRelatorioBi)
+routes.put('/linkRelatorioBI/:id', LinkRelatorioBiController.putLinkRelatorioBi)
+routes.put('/relatorioInformaticaBI/:id', RelatorioBIController.putRelatorioBi)
+
 
 // routes.get('/log-web', LogsControllers.getListaLogsUsuario)
 routes.post('/log-web', LogsControllers.createLogsUsuario)
