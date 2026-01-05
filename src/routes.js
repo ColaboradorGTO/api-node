@@ -10,6 +10,7 @@ import InformaticaControllers from './Informatica/controllers/Informatica.js';
 import ExpedicaoControllers from './Expedicao/controllers/index.js';
 import DashBoardControllers from './DashBoard/controllers/DashBoard.js';
 import VendasControllers from './Vendas/controllers/Vendas.js';
+import ResumoVoucherControllers from './ResumoVoucher/controllers/index.js';
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -205,6 +206,28 @@ routes.get('/relatorioBI', DashBoardControllers.getListaRelatorioBIGerencia)
 // routes.get('/listaVendasGerencia', DashBoardControllers.getListaVendasGerencia)
 // routes.get('/extratoLojaPeriodo', DashBoardControllers.getListaExtratoDaLojaPeriodo)
 routes.get('/adiantamentoSalarialData', DashBoardControllers.getListAdiantamentoSalarialData)
+
+
+// Vouchers
+routes.get('/detalheVoucherDados', ResumoVoucherControllers.getListaDetalheVoucherDados)
+routes.get('/voucher-completo', ResumoVoucherControllers.getListaVoucherCompleto)
+routes.get('/detalheNumeroVoucherDados', ResumoVoucherControllers.getDetalheNumeroVoucherDados)
+routes.get('/detalhesVouchersId', ResumoVoucherControllers.getDetalheIDVoucherDadosModal)
+routes.get('/detalheIDVoucherDados', ResumoVoucherControllers.getDetalheIDVoucherDados)
+routes.get('/resumoDetalheVoucher', ResumoVoucherControllers.getResumoDetalheVoucher)
+routes.get('/detalhe-voucher', ResumoVoucherControllers.getListaVoucherGerencia)
+routes.get('/empresasVoucher', ResumoVoucherControllers.getListaEmpresasVoucher)
+routes.get('/cliente-todos', ResumoVoucherControllers.getListaTodosClientes)
+routes.put('/todos-web/:id', ResumoVoucherControllers.putResumoVoucher)
+routes.post('/todos-web', ResumoVoucherControllers.postResumoVoucher)
+
+routes.put('/todos-cliente/:id', ResumoVoucherControllers.putCliente)
+routes.post('/criar-cliente', ResumoVoucherControllers.postCliente)
+
+routes.post('/auth-funcionario-status', ResumoVoucherControllers.autorizacaoEditarStatusVoucher)
+routes.post('/auth-funcionario-create-voucher', ResumoVoucherControllers.postAuthFuncionarioCreateVoucher)
+routes.post('/auth-funcionario-print-voucher', ResumoVoucherControllers.postAuthFuncionarioPrintVoucher)
+routes.post('/auth-funcionario-update-voucher', ResumoVoucherControllers.postAuthFuncionarioUpdateVoucher)
 
 export default routes;
 
