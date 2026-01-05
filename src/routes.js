@@ -23,6 +23,9 @@ import MovimentoCaixaControllers from './Gerencia/MovimentoCaixa/controllers/Mov
 import DetalheFaturasControllers from './DetalheFaturas/controllers/Detalhes.js';
 import MarketingControllers from './Marketing/controllers/Marketing.js';
 import ContabilidadeControllers from './Contabilidade/controllers/Contabilidade.js';
+import ConfiguracaoPixPDVControllers from './ConfiguracaoPIX/controllers/ConfiguracaoPixPDV.js';
+import ConferenciaCegaControllers from './ConferenciaCega/controllers/ConferenciaCega.js';
+
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -446,6 +449,17 @@ routes.get('/vendasEstoqueComercial', ContabilidadeControllers.getListaVendasEst
 routes.get('/vendasProdutos', ContabilidadeControllers.getListaVendasPeriodo)
 routes.get('/vendasProdutosConsolidado', ContabilidadeControllers.getListaVendasPeriodoConsolidado)
 
+// Configuração Pix PDV
+routes.get('/configuracao-pix-pdv', ConfiguracaoPixPDVControllers.getListaConfiguracaoPixPDV)
+routes.put('/atualizarConfiguracaoPixPDV', ConfiguracaoPixPDVControllers.updateConfiguracaoPixPDV)
+
+// Conferencia Cega
+routes.get('/listaOrdemTransferenciaConferenciaCega', ConferenciaCegaControllers.getListaOrdemTransferenciaConferenciaCega)
+routes.get('/detalhe-ordem-transferencia-cega', ConferenciaCegaControllers.getDetalheOrdemTransferenciaConferenciaCega)
+routes.get('/status-divergencia', ConferenciaCegaControllers.getListaStatusOTConfrecencia)
+routes.put('/resumo-ordem-transferencia-cega/:id', ConferenciaCegaControllers.putResumoOrdemTransferencia)
+routes.put('/status-divergencia/:id', ConferenciaCegaControllers.putStatusDivergencia)
+routes.post('/inserir-status-divergencia', ConferenciaCegaControllers.postStatusDivergencia)
 
 export default routes;
 
