@@ -101,9 +101,7 @@ routes.get('/subGrupoEmpresarial', EmpresaControllers.getSelectLojaVouchers);
 routes.get('/listaEmpresas', EmpresaControllers.getListaEmpresas)
 routes.put('/empresas/:id', EmpresaControllers.putListaEmpresas)
 
-routes.get('/modulos', ModulosControllers.getListaModulos)
-routes.put('/modulos/:id', ModulosControllers.putModulo)
-routes.post('/criar-modulos', ModulosControllers.postModulo)
+
 
 routes.get('/menus-usuario', ModulosControllers.getListaPerfilUsuario)
 routes.get('/menus-usuario-excecao', ModulosControllers.getListaMenusPorUsuario)
@@ -111,7 +109,7 @@ routes.get('/menus-filho-usuario', ModulosControllers.getListaMenusFilhosUsuario
 routes.get('/menus', ModulosControllers.getListaSubMenusUsuario)
 routes.get('/menus-filho-usuario', ModulosControllers.getListaMenusFilhosUsuario)
 
-routes.put('/perfil-permissao/:id', ModulosControllers.putPerfilPermissoes)
+
 routes.put('/perfil-usuario/:id', ModulosControllers.putPerfilUsuarioMenu)
 routes.post('/criar-perfil-usuario', ModulosControllers.postPerfilUsuarioMenu)
 
@@ -184,17 +182,17 @@ routes.get('/inventariomovimento', EstoqueControllers.getListaEstoqueAtual)
 routes.get('/recebimento-resumo', AdministrativoControllers.getRetornoListaPagamentoVenda)
 routes.get('/lista-venda-cliente', AdmVendasControllers.getListaVendaCliente);
 routes.get('/lista-venda', AdmVendasControllers.getListaVendasById)
-routes.get('/alterar-venda-pagamento', AdmVendasControllers.getListaAlterarVendasPagamento);
 routes.get('/venda-ativa', AdmVendasControllers.getListaVendaAtiva);
 routes.get('/venda-vendedor-adm', AdmVendasControllers.getVendaVendedorAction);
 routes.get('/venda-total-forma-pagamento', AdmVendasControllers.getRecebimentosFormaPagamento)
 routes.get('/venda-total-recebido-periodo-adm', AdmVendasControllers.getListaVendaTotalRecebido)
 
 routes.put('/alterar-venda-pagamento/:id', AdmVendasControllers.putAlterarVendasPagamento);
-routes.put('/atualiza-recebimento-venda/:id', AdmVendasControllers.putAlterarVendaRecebimento);
 routes.put('/venda-vendedor/:id', AdmVendasControllers.putVendaVendedor);
 
-routes.post('/alterar-venda-pagamento', AdmVendasControllers.postAlterarVendasPagamento);
+// routes.put('/atualiza-recebimento-venda/:id', AdmVendasControllers.putAlterarVendaRecebimento);
+// routes.get('/alterar-venda-pagamento', AdmVendasControllers.getListaAlterarVendasPagamento);
+// routes.post('/alterar-venda-pagamento', AdmVendasControllers.postAlterarVendasPagamento);
 
 // Desconto
 // routes.get('/vendaConvenio', AdministrativoControllers.getVendaConvenio)
@@ -437,8 +435,8 @@ routes.get('/vendas-loja-informatica', InformaticaControllers.getListaVendasLoja
 routes.get('/funcionarios-loja', InformaticaControllers.getListaFuncionariosLoja)
 routes.get('/funcionarios-loja-ativos', InformaticaControllers.getListaFuncionariosLoja)
 routes.get('/atualizarFuncionario', InformaticaControllers.getListaAtualizarFuncionario)
-routes.get('/pagamento-tef-informatica', InformaticaControllers.getListaPagamentoTEFInformatica)
-routes.get('/pagamento-pos-informatica', InformaticaControllers.getListaPagamentoPOSInformatica)
+// routes.get('/pagamento-tef-informatica', InformaticaControllers.getListaPagamentoTEFInformatica)
+// routes.get('/pagamento-pos-informatica', InformaticaControllers.getListaPagamentoPOSInformatica)
 
 routes.get('/vendas-alloc', InformaticaControllers.getListaVendasAlloc)
 routes.get('/vendas-contigencia', InformaticaControllers.getListaVendasContigenciaIformatica)
