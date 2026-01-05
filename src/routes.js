@@ -63,6 +63,7 @@ import DashBoardVendasControllers from './DashBoard/Vendas/controllers/venda.js'
 import DashBoardFuncionariosControllers from './DashBoard/Funcionario/controllers/funcionarios.js';
 import DashBoardAdiantamentoSalarialControllers from './DashBoard/AdiantamentoSalarial/controllers/index.js';
 import GerenciaControllers from './Gerencia/controllers/index.js';
+import ServiceLayerControllers from './ServiceLayer/controllers/index.js'
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -84,7 +85,7 @@ routes.get('/detalhe-malotes-por-loja', GerenciaControllers.getListaDetalhesMalo
 routes.post('/criar-malotes-por-loja', GerenciaControllers.postMalotesPorLoja)
 routes.put('/malotes-por-loja/:id', GerenciaControllers.putMalotesPorLoja)
 
-
+routes.post('/deposito-integracao', ServiceLayerControllers.postDepositoIntegrarNoSAP)
 routes.get('/funcionarios', DashBoardFuncionariosControllers.getListaFuncionarios)
 
 routes.get('/adiantamento-loja', DashBoardAdiantamentoSalarialControllers.getListaAdiantamentoSalarialLoja)

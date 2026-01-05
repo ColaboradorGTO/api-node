@@ -1,6 +1,6 @@
+import 'dotenv/config';
 const url = process.env.API_URL;
 import axios from 'axios';
-
 
 class GerenciaControllers {
       async getListaDetalhesMalortesPorLoja(req, res) {
