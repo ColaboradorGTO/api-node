@@ -60,8 +60,8 @@ import AdmDescontoControllers from './Administrativo/Desconto/controllers/descon
 import EstoqueControllers from './Administrativo/Estoque/controllers/estoque.js'
 import AdmBalancoControllers from './Administrativo/Balanco/controllers/balanco.js'
 import DashBoardVendasControllers from './DashBoard/Vendas/controllers/venda.js';
-// import AdmDescontoControllers from './Administrativo/Desconto/controllers/desconto.js'
-
+import DashBoardFuncionariosControllers from './DashBoard/Funcionario/controllers/funcionarios.js';
+import DashBoardAdiantamentoSalarialControllers from './DashBoard/AdiantamentoSalarial/controllers/index.js';
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -75,6 +75,16 @@ routes.get('/ping', ApiPing.index);
 
 routes.post('/login', AuthentiCationController.login);
 routes.post('/login2', AuthentiCationController.login);
+
+routes.get('/funcionarios', DashBoardFuncionariosControllers.getListaFuncionarios)
+
+routes.get('/adiantamento-loja', DashBoardAdiantamentoSalarialControllers.getListaAdiantamentoSalarialLoja)
+routes.get('/adiantamento-funcionarios', DashBoardAdiantamentoSalarialControllers.getListaAdiantamentosFuncionarios)
+routes.get('/adiantamentos-salarial', DashBoardAdiantamentoSalarialControllers.getListaAdiantamentosSalarialDashBoard)
+
+routes.put('/atualizacao-adiantamento-status', DashBoardAdiantamentoSalarialControllers.updateAdiantamentoStatus)
+routes.post('/cadastrar-adiantamento-salarial', DashBoardAdiantamentoSalarialControllers.postAdiantamentoSalarial)
+routes.put('/adiantamento-salarial/:id', DashBoardAdiantamentoSalarialControllers.putAdiantamentoSalarial)
 
 routes.get('/resumo-venda-convenio-desconto', DashBoardVendasControllers.getVendasConvenioDescontoFuncionario)
 routes.get('/resumo-venda-convenio', DashBoardVendasControllers.getVendasConvenioDescontoFuncionario)

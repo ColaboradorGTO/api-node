@@ -37,7 +37,7 @@ class DashBoardAdiantamentoSalarialControllers {
         page = page ? page : '';
 
         try {
-                                //   /api/dashboard/adiantamento-salarial/funcionarios.xsjs?idEmpresa=1&dataPesquisaInicio=2024-12-07&dataPesquisaFim=2024-12-07
+                
             const apiUrl = `${url}/api/dashboard/adiantamento-salarial/funcionarios.xsjs?idEmpresa=${idEmpresa}&dataPesquisaIni=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&pageSize=${pageSize}&page=${page}`;
             const response = await axios.get(apiUrl);
             return res.json(response.data); 
