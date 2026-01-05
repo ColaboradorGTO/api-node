@@ -1,12 +1,13 @@
-import axios from "axios";
+ import axios from "axios";
 import { dataFormatada } from "../../utils/dataFormatada.js";
 import { getDetalheOrdemTransferencia } from "../repositories/detalheOrdemTransferencia.js";
 import { createStatusDivergencia, getStatusDivergencia, updateStatusDivergencia } from "../repositories/statusDivergencia.js";
-let url = `http://164.152.245.77:8000/quality/concentrador_homologacao`;
+//let url = `http://164.152.245.77:8000/quality/concentrador_homologacao`;
 
 class ConferenciaCegaControllers  {
 
-    async getListaOrdemTransferenciaConferenciaCega(req, res,) {
+    //OT conferencia cega
+  /*   async getListaOrdemTransferenciaConferenciaCega(req, res,) {
         let {idResumoOT, idTipoFiltro, idEmpresaOrigem, idEmpresaDestino, dataPesquisaInicio, dataPesquisaFim} = req.query;
        
         idResumoOT = idResumoOT ? idResumoOT : '';
@@ -29,8 +30,9 @@ class ConferenciaCegaControllers  {
             throw error; 
         }
         
-    }
-    async getDetalheOrdemTransferenciaConferenciaCega(req, res,) {
+    } */
+    //detalhes OT
+/*     async getDetalheOrdemTransferenciaConferenciaCega(req, res,) {
         let {idResumoOT, idTipoFiltro, page, pageSize} = req.query;
        
         idResumoOT = idResumoOT ? idResumoOT : ''; 
@@ -48,9 +50,10 @@ class ConferenciaCegaControllers  {
             throw error; 
         }
         
-    }
+    } */
 
-    async getListaStatusOTConfrecencia(req, res,) {
+    //Status Ot
+/*     async getListaStatusOTConfrecencia(req, res,) {
         let {idResumoOT, page, pageSize} = req.query;
         
         idResumoOT = idResumoOT ? idResumoOT : '';
@@ -64,9 +67,10 @@ class ConferenciaCegaControllers  {
             console.error("Unable to connect to the database:", error);
             throw error; 
         }
-    }
+    } */
 
-    async putStatusDivergencia(req, res) {
+    //Status Divergencia
+/*     async putStatusDivergencia(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body]; 
             const response = await  updateStatusDivergencia(dados);
@@ -75,17 +79,18 @@ class ConferenciaCegaControllers  {
             console.error("Unable to connect to the database:", error);
             return res.status(500).json({ error: error.message });
         }
-    }
-    async postStatusDivergencia(req, res) {
+    } */
+    //Status Divergencia
+ /*    async postStatusDivergencia(req, res) {
         try {
-            const dados = Array.isArray(req.body) ? req.body : [req.body]; 
+            const dados = Array.isArray(req.body) ? req.body : [req.Abody]; 
             const response = await  createStatusDivergencia(dados);
             return res.json(response);
         } catch (error) {
             console.error("Unable to connect to the database:", error);
             return res.status(500).json({ error: error.message });
         }
-    }
+    }  */
     
     // async putResumoOrdemTransferencia(req, res) {
     //     try {
@@ -98,7 +103,8 @@ class ConferenciaCegaControllers  {
     //     }
     // }
 
-    async  putResumoOrdemTransferencia(req, res) {
+    //Resumo OT
+ /*    async  putResumoOrdemTransferencia(req, res) {
         let {
             IDSTDIVERGENCIA,
             OBSDIVERGENCIA,
@@ -121,9 +127,9 @@ class ConferenciaCegaControllers  {
             console.log('Erro ao atualizar ordem de transferência:', error);
             throw error;
         }
-    }
+    } */
 
     
 }
 
-export default new ConferenciaCegaControllers();
+export default new ConferenciaCegaControllers(); 

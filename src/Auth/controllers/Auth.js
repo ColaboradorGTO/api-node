@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 class AuthentiCationController {
   async login(req, res) {
     const { usuario, senha, modulo, empusuario } = req.body;

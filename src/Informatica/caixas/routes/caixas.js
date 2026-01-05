@@ -1,9 +1,13 @@
 import { Router } from 'express' ;
-//import CaixaControllers from '.././controllers/controllersCaixas'
-const routes = new Router();
+import CaixaControllers from '.././controllers/controllersCaixas.js'
 
-routes.post('/criar-caixas', CaixaControllers.postCaixaLojas)
-routes.put('/lista-caixas/:id', CaixaControllers.putCaixaLoja)
-routes.put('/atualiza-empresa-diario/:id', CaixaControllers.putAtualizaEmpresaDiario)
-routes.put('/atualizar-todos-caixa', CaixaControllers.putAtualizarTodosCaixas)
-export default routes
+const InformaticaCaixas = new Router();
+
+InformaticaCaixas.post('/criar-caixas', CaixaControllers.postCaixaLojas)
+InformaticaCaixas.put('/lista-caixas/:id', CaixaControllers.putCaixaLoja)
+InformaticaCaixas.put('/atualiza-empresa-diario/:id', CaixaControllers.putAtualizaEmpresaDiario)
+InformaticaCaixas.put('/atualizar-todos-caixa', CaixaControllers.putAtualizarTodosCaixas)
+InformaticaCaixas.get('/lista-caixas', CaixaControllers.getListaCaixas)
+InformaticaCaixas.get('/listaCaixasID', CaixaControllers.getListaCaixasID)
+
+export default InformaticaCaixas

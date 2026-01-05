@@ -1,16 +1,78 @@
 import axios from "axios";
 import 'dotenv/config';
-const url = process.env.API_URL;
 import updateVoucherSchema from '../schema/useUpdateVoucher.js'
 import { VouchersClient } from '../client/index.js'
 import { VoucherServices } from '../services/index.js'
+import { dataFormatada } from "../../../utils/dataFormatada.js";
+
+const url = process.env.API_URL;
 const updateVoucherClient = new VouchersClient(process.env.API_URL);
 const updateVoucherService = new VoucherServices(updateVoucherClient);
 
-
 class AdmVouchersControllers {
-    async putEditarVoucher(req, res) {
 
+    async getDetalheVoucher(req, res) {
+ 
+        let { idEmpresa, page, pageSize, datapesq } = req.query;
+        if (!isNaN(idEmpresa)) {
+            idEmpresa = Number(idEmpresa) ? Number(idEmpresa) : '';
+            datapesq = dataFormatada(datapesq) ? datapesq : '';
+            page = page ? page : '';
+            pageSize = pageSize ? pageSize : '';
+            
+            try {
+                const apiUrl = `${url}/api/administrativo/detalhe-voucher.xsjs?pagesize=${pageSize}&idEmpresa=${idEmpresa}&dataPesquisa=${datapesq}`
+                const response = await axios.get(apiUrl)
+                return res.json(response.data); // Retorna
+            } catch (error) {
+                console.error("Unable to connect to the database:", error);
+                throw error;
+            }
+        }
+    }
+
+    async getDetalheProdutoVoucher(req, res) {
+
+        let { idVoucher } = req.query;
+        if (!isNaN(idVoucher)) {
+            idVoucher = Number(idVoucher);
+
+            try {
+                const apiUrl = `${url}/api/administrativo/detalhe-prod-voucher.xsjs?idvoucher=${idVoucher}`
+                const response = await axios.get(apiUrl)
+                return res.json(response.data); 
+            } catch (error) {
+                console.error("Unable to connect to the database:", error);
+                throw error;
+            }
+        }
+    }
+
+    async getListaDetalheVoucherDados(req, res) {
+        let { idSubGrupoEmpresa, idEmpresa, idVoucher, dataPesquisaInicio, dataPesquisaFim, dadosVoucher, stStatus, stTipoTroca, page, pageSize } = req.query;
+
+        idSubGrupoEmpresa = idSubGrupoEmpresa ? idSubGrupoEmpresa : ''
+        idEmpresa = idEmpresa ? idEmpresa : ''
+        idVoucher = idVoucher ? idVoucher : ''
+        dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : ''
+        dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : ''
+        dadosVoucher = dadosVoucher ? dadosVoucher : ''
+        stStatus = stStatus ? stStatus : ''
+        stTipoTroca = stTipoTroca ? stTipoTroca : ''
+        page = page ? page : ''
+        pageSize = pageSize ? pageSize : ''
+        try {
+            const apiUrl = `${url}/api/administrativo/detalhe-voucher-dados.xsjs?dadosVoucher=${dadosVoucher}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&page=${page}&pageSize=${pageSize}`
+            const response = await axios.get(apiUrl)
+
+            return res.json(response.data); 
+        } catch (error) {
+            console.error("Unable to connect to the database:", error);
+            throw error;
+        }
+    }
+
+    async putEditarVoucher(req, res) {
         try {
 
             const { error, value } = updateVoucherSchema.validate(req.body, {
@@ -27,7 +89,7 @@ class AdmVouchersControllers {
                     }))
                 });
             }
-            
+
             const response = await updateVoucherService.updateVoucher(
                 value.STATIVO,
                 value.STCANCELADO,

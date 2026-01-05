@@ -1,8 +1,8 @@
-import axios, { Axios } from "axios";
-import { dataFormatada } from "../../utils/dataFormatada.js";
-import { getDetalheFechamento } from "../Detalhes/repositories/detalheFachamento.js";
-import { getFaturaPixConsolidadoLoja } from "../Faturas/repositories/faturaPixConsolidadoLoja.js";
-import { getExtratoLojaPeriodo } from "../Extrato/repositories/extratoLojaPeriodo.js";
+//import axios, { Axios } from "axios";
+//import { dataFormatada } from "../../utils/dataFormatada.js";
+//import { getDetalheFechamento } from "../Detalhes/repositories/detalheFachamento.js";
+//import { getFaturaPixConsolidadoLoja } from "../Faturas/repositories/faturaPixConsolidadoLoja.js";
+//import { getExtratoLojaPeriodo } from "../Extrato/repositories/extratoLojaPeriodo.js";
 // import { getVendaTotal } from "../Financeiro/Vendas/repositories/vendaTotal.js";
 // import { getTotaisVenda} from "../Financeiro/Vendas/repositories/vendaLojaPeriodo.js";
 // import { getVendasPagamentos } from "../Financeiro/Vendas/repositories/vendaPagamentos.js";
@@ -41,9 +41,11 @@ import { MaloteService } from "../Malotes/services/index.js";
 const maloteClient = new MaloteClient(process.env.API_URL);
 const maloteService = new MaloteService(maloteClient);
 import maloteSchema from "../Malotes/schema/index.js";
-class FinanceiroControllers {
+class FinanceiroControllers { 
 
-  async getListasHistoricosMalotes(req, res) {
+
+/* MALOTE */
+/*   async getListasHistoricosMalotes(req, res) {
     let { idEmpresa, idMalote, idHistoricoMalote, dataPesquisaInicio, dataPesquisaFim, dataConferenciaInicio, dataConferenciaFim, page, pageSize } = req.query;
 
     idEmpresa = idEmpresa ? idEmpresa : '';
@@ -67,8 +69,9 @@ class FinanceiroControllers {
       throw error;
     }
   }
-
-  async getListasMalotesLojas(req, res) {
+ */
+  /* MALOTE */
+/*   async getListasMalotesLojas(req, res) {
     let { idEmpresa, idMarca, idMalote, statusMalote, pendenciaMalote, dataPesquisaInicio, dataPesquisaFim, dataConferenciaInicio, dataConferenciaFim, page, pageSize } = req.query;
 
 
@@ -97,8 +100,9 @@ class FinanceiroControllers {
       throw error;
     }
   }
-
-  async getListaPendenciasMalotes(req, res) {
+ */
+  /* MALOTE */
+ /*  async getListaPendenciasMalotes(req, res) {
     let { idEmpresa, idMalote, statusMalote, pendenciaMalote, page, pageSize } = req.query;
 
 
@@ -120,9 +124,10 @@ class FinanceiroControllers {
       throw error;
     }
 
-  }
+  } */
 
-  async getListaExtratoDaLojaPeriodoFinan(req, res) {
+  /* EXTRATO */
+ /*  async getListaExtratoDaLojaPeriodoFinan(req, res) {
     let { idEmpresa, dataPesquisaInicio, dataPesquisaFim, page, pageSize } = req.query;
 
 
@@ -145,9 +150,10 @@ class FinanceiroControllers {
 
     }
 
-  }
+  } */
 
-  async getListaVendasMarca(req, res) {
+  /* VENDAS */
+/*   async getListaVendasMarca(req, res) {
     let { idMarcaPesqVenda, pageNumber, dataPesqInicio, dataPesqFim } = req.query;
 
 
@@ -167,9 +173,11 @@ class FinanceiroControllers {
       throw error;
     }
 
-  }
+  } */
 
-  async getListaVendasMarcaFinanceiro(req, res) {
+  /* VENDAS */
+
+/*   async getListaVendasMarcaFinanceiro(req, res) {
     let { idMarca, idLoja, idLojaPesquisa, pageNumber, dataPesquisaInicio, dataPesquisaFim } = req.query;
 
 
@@ -193,6 +201,7 @@ class FinanceiroControllers {
 
   }
 
+  /* 
   async getListaVendasResumidaMarca(req, res) {
     let { dataPesquisaInicio, dataPesquisaFim } = req.query;
     const pageSize = 100;
@@ -211,7 +220,7 @@ class FinanceiroControllers {
 
   }
 
-
+/* 
   async getListaVendasResumidaFinanceiro(req, res) {
     let { dataPesquisa } = req.query;
     const pageSize = 100;
@@ -226,10 +235,10 @@ class FinanceiroControllers {
       console.error("Unable to connect to the database:", error);
       throw error;
     }
-  }
+  } */
 
-
-  async getListaVendasTransacoesEmpresa(req, res) {
+/* VENDAS */
+ /*  async getListaVendasTransacoesEmpresa(req, res) {
     let { dataPesquisa } = req.query;
     const pageSize = 100;
     dataPesquisa = dataFormatada(dataPesquisa)
@@ -244,9 +253,10 @@ class FinanceiroControllers {
       throw error;
     }
 
-  }
+  } */
 
-  async getListaVendasEmpresa(req, res) {
+  /* VENDAS */
+/*   async getListaVendasEmpresa(req, res) {
     let { dataPesquisa } = req.query;
     const pageSize = 100;
     dataPesquisa = dataFormatada(dataPesquisa)
@@ -261,9 +271,10 @@ class FinanceiroControllers {
       throw error;
     }
 
-  }
+  } */
 
-  async getListaDetalheFechamento(req, res) {
+  /* DETALHES */
+/*   async getListaDetalheFechamento(req, res) {
     let { idEmpresa, dataPesquisa, page, pageSize } = req.query;
     idEmpresa = idEmpresa ? idEmpresa : '';
     dataPesquisa = dataPesquisa ? dataPesquisa : '';
@@ -281,8 +292,10 @@ class FinanceiroControllers {
       throw error;
     }
 
-  }
-  async getListaVendasLojaPeriodo(req, res) {
+  } */
+
+  /* VENDAS */
+/*   async getListaVendasLojaPeriodo(req, res) {
     let { idEmpresa, dataPesquisaInicio, dataPesquisaFim } = req.query;
     const pageSize = 1000;
     const page = 1;
@@ -302,7 +315,7 @@ class FinanceiroControllers {
       throw error;
     }
 
-  }
+  } */
 
   // INICIO CONSUMINDO BANCO DO RECAT
 
@@ -558,7 +571,8 @@ class FinanceiroControllers {
 
   // FIM CONSUMINDO BANCO DO RECAT
 
-  async getListaCaixasMovmentoFinanceiro(req, res) {
+  /* CAIXA */
+/*   async getListaCaixasMovmentoFinanceiro(req, res) {
     let { idMarca, dataPesquisaInicio, dataPesquisaFim, idLoja, idLojasPesquisa } = req.query;
     const pageSize = 1000;
     dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataFormatada(dataPesquisaInicio) : '';
@@ -578,9 +592,10 @@ class FinanceiroControllers {
       throw error;
     }
 
-  }
+  } */
 
-  async getListaVendasMarcaROB(req, res) {
+  /* VENDAS */
+/*   async getListaVendasMarcaROB(req, res) {
     let { idMarca, pageNumber, dataPesquisaInicio, dataPesquisaFim } = req.query;
 
     if (!isNaN(idMarca)) {
@@ -601,9 +616,10 @@ class FinanceiroControllers {
         throw error;
       }
     }
-  }
+  } */
 
-  async getListaVendasMarcaMarckup(req, res) {
+  /* VENDAS */
+/*   async getListaVendasMarcaMarckup(req, res) {
     let { idMarca, pageNumber, dataPesquisaInicio, dataPesquisaFim, idLoja, idLojaPesquisa } = req.query;
 
     if (!isNaN(idMarca)) {
@@ -625,8 +641,9 @@ class FinanceiroControllers {
         throw error;
       }
     }
-  }
+  } */
 
+/*   
   async getListaVendasDigital(req, res) {
     let { idEmpresa, pageNumber, dataPesquisaInicio, dataPesquisaFim } = req.query;
 
@@ -648,9 +665,10 @@ class FinanceiroControllers {
         throw error;
       }
     }
-  }
+  } */
 
-  async getListaDespesasLoja(req, res) {
+  /* DESPESAS */
+/*   async getListaDespesasLoja(req, res) {
     let { idEmpresa, idCategoria, dataPesquisaInicio, dataPesquisaFim } = req.query;
 
     idEmpresa = Number(idEmpresa) ? Number(idEmpresa) : '';
@@ -671,8 +689,10 @@ class FinanceiroControllers {
     }
 
   }
+ */
 
-  async getListaVendasPixPeriodo(req, res) {
+/* VENDAS */
+/*   async getListaVendasPixPeriodo(req, res) {
     let { idMarca, pageSize, page, dataPesquisaInicio, dataPesquisaFim, idLoja, listaEmpresas } = req.query;
 
     if (!isNaN(idMarca)) {
@@ -695,9 +715,10 @@ class FinanceiroControllers {
         throw error;
       }
     }
-  }
+  } */
 
-  async getListaVendasPixConsolidadoLojas(req, res) {
+  /* VENDAS */
+/*   async getListaVendasPixConsolidadoLojas(req, res) {
     let { idMarca, pageSize, page, dataPesquisaInicio, dataPesquisaFim, idLoja, listaEmpresas } = req.query;
 
     if (!isNaN(idMarca)) {
@@ -719,7 +740,7 @@ class FinanceiroControllers {
         throw error;
       }
     }
-  }
+  } */
 
   // async getListaFaturasPixPeriodo(req, res) {
   //   let { idMarca, pageSize, page, dataPesquisaInicio, dataPesquisaFim, idLoja, listaEmpresas } = req.query;
@@ -746,7 +767,9 @@ class FinanceiroControllers {
   //   }
   // }
 
-  async getListaVendasPixConsolidado(req, res) {
+  /* VENDAS */
+
+/*   async getListaVendasPixConsolidado(req, res) {
     let { idMarca, pageSize, page, dataPesquisaInicio, dataPesquisaFim, idLoja, listaEmpresas } = req.query;
 
     if (!isNaN(idMarca)) {
@@ -769,9 +792,10 @@ class FinanceiroControllers {
         throw error;
       }
     }
-  }
+  } */
 
-  async getListaFaturasPixConsolidado(req, res) {
+  /* FATURAS */
+/*   async getListaFaturasPixConsolidado(req, res) {
     let { idMarca, page, pageSize, dataPesquisaInicio, dataPesquisaFim } = req.query;
 
     if (!isNaN(idMarca)) {
@@ -792,8 +816,9 @@ class FinanceiroControllers {
       }
     }
   }
-
-  async getListaFaturaPixConsolidadoLoja(req, res) {
+ */
+  /* FATURAS */
+/*   async getListaFaturaPixConsolidadoLoja(req, res) {
     let { idMarca, dataPesquisaInicio, dataPesquisaFim, idLoja, empresa, page, pageSize } = req.query;
 
     idMarca = Number(idMarca) ? Number(idMarca) : '';
@@ -817,8 +842,9 @@ class FinanceiroControllers {
     }
 
   }
-
-  async getListaVendasConciliar(req, res) {
+ */
+  /* VENDAS */
+ /*  async getListaVendasConciliar(req, res) {
     let { idGrupo, idLoja, dataPesquisaInicio, dataPesquisaFim, page, pageSize } = req.query;
 
 
@@ -838,7 +864,7 @@ class FinanceiroControllers {
       throw error;
     }
 
-  }
+  } */
 
   // async getListaConciliarBanco(req, res) {
   //   let {idDeposito, idConta, idEmpresa, dataCompInicio, dataCompFim, dataMovInicio, dataMovFim, dataPesquisaInicio, dataPesquisaFim, pageSize, page } = req.query;
@@ -865,7 +891,8 @@ class FinanceiroControllers {
 
   // }
 
-  async getListaConciliarBancoConsolidado(req, res) {
+  /* DESPOSITOS */
+/*   async getListaConciliarBancoConsolidado(req, res) {
     let { idConta, pageSize, page, dataPesquisaInicio, dataPesquisaFim, dataCompensacaoInicio, dataCompensacaoFim, dataMovimentoInicio, dataMovimentoFim } = req.query;
 
     pageSize = pageSize ? pageSize : '';
@@ -879,7 +906,7 @@ class FinanceiroControllers {
     dataMovimentoFim = dataMovimentoFim ? dataMovimentoFim : '';
 
     try {
-      const apiUrl = `${url}/api/financeiro/deposito-loja-consolidado.xsjs?dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&dataCompInicio=${dataCompensacaoInicio}&dataCompFim=${dataCompensacaoFim}&datamovinicio=${dataMovimentoInicio}&datamovfim=${dataMovimentoFim}&page=${page}&pageSize=${pageSize}`
+      const apiUrl = `${url}/api/financeiro/deposito-loja-consolidado.xsjs?page=${page}&pageSize=${pageSize}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&dataCompInicio=${dataCompensacaoInicio}&dataCompFim=${dataCompensacaoFim}&datamovinicio=${dataMovimentoInicio}&datamovfim=${dataMovimentoFim}`
       const response = await axios.get(apiUrl)
 
       return res.json(response.data);
@@ -888,7 +915,7 @@ class FinanceiroControllers {
       throw error;
     }
 
-  }
+  } */
 
   // async getListaDepositosLoja(req, res) {
   //   let {  idDeposito, idConta, idEmpresa, dataCompInicio, dataCompFim, dataMovInicio, dataMovFim, dataPesquisaInicio, dataPesquisaFim, page, pageSize } = req.query;
@@ -960,7 +987,9 @@ class FinanceiroControllers {
   //   }
 
   // }
-  async getListaDetalheRecebimentosEletronico(req, res) {
+
+  /* VENDAS */
+ /*  async getListaDetalheRecebimentosEletronico(req, res) {
     let { idEmpresa, page, pageSize, dataPesquisaInicio, dataPesquisaFim, nomeTef, nomeAutorizador, numeroParcelas } = req.query;
 
 
@@ -983,7 +1012,7 @@ class FinanceiroControllers {
       throw error;
     }
 
-  }
+  } */
 
   // async getListaEstabelecimentos(req, res) {
   //   let { idGrupo, idEstabelecimento, idEmpresa,  page, pageSize } = req.query;
@@ -1159,7 +1188,8 @@ class FinanceiroControllers {
   //   }
   // }
 
-  async getListaSaldoExtratoLoja(req, res) {
+/* SALDO */
+ /*  async getListaSaldoExtratoLoja(req, res) {
     let { dataPesquisaInicio, idMarca } = req.query;
     const numPage = [1, 2, 3, 4, 5]
     dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataFormatada(dataPesquisaInicio) : '';
@@ -1173,7 +1203,7 @@ class FinanceiroControllers {
       console.error("Unable to connect to the database:", error);
       throw error;
     }
-  }
+  } */
 
   // async getListaMotivosDevolucao(req, res) {
   //   let { idMotivo, descricaoMotivo, dataPesquisaInicio, dataPesquisaFim, page, pageSize } = req.query;
@@ -1245,8 +1275,8 @@ class FinanceiroControllers {
   //   }
   // }
 
-
-  async getListaBanco(req, res) {
+/*  */
+/*   async getListaBanco(req, res) {
     let { } = req.query;
 
     try {
@@ -1258,9 +1288,9 @@ class FinanceiroControllers {
       console.error("Error no FinanceiroControllers.getListaBanco:", error);
       throw error;
     }
-  }
+  } */
 
-  async getListaContaBanco(req, res) {
+ /*  async getListaContaBanco(req, res) {
     let { idContaBanco, idBanco, idEmpresa, dsConta, page, pageSize } = req.query;
     idContaBanco = idContaBanco ? idContaBanco : '';
     idBanco = idBanco ? idBanco : '';
@@ -1277,7 +1307,7 @@ class FinanceiroControllers {
       console.error("Error no FinanceiroControllers.getListaContaBanco:", error);
       throw error;
     }
-  }
+  } */
 
 
   // async updateMotivoDevolucao(req, res) {
@@ -1312,7 +1342,8 @@ class FinanceiroControllers {
   //   }
   // }
 
-  async putFaturaFinanceiro(req, res) {
+  /* FATURA */
+/*   async putFaturaFinanceiro(req, res) {
     let { IDDETALHEFATURA, NUCODAUTORIZACAO, VRRECEBIDO, NUAUTORIZACAO, STPIX, STCANCELADO } = req.body;
 
     if (!IDDETALHEFATURA) {
@@ -1337,32 +1368,9 @@ class FinanceiroControllers {
       throw error;
     }
   }
+ */
 
-  async putFaturaConferencia(req, res) {
-    let { IDS_FATURAS, STCONFERIDO, IDFUNCIONARIO } = req.body;
-
-    if (!IDS_FATURAS) {
-      console.error("Erro no FinanceiroControllers.putFaturaConferencia: Faltando Parametos obrigatórios");
-      return res.status(400).json({ error: "Faltando Parametos obrigatórios" });
-    }
-
-    try {
-      const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/fatura-atualizacao-conferencia.xsjs`
-      const response = await axios.put(apiUrl, {
-        IDS_FATURAS,
-        STCONFERIDO,
-        IDFUNCIONARIO,
-      })
-
-      return res.json(response.data);
-    } catch (error) {
-      console.error("Erro no FinanceiroControllers.putFaturaConferencia:", error);
-      throw error;
-    }
-  }
-
-
-  async updateAdiantamentoStatus(req, res) {
+/*   async updateAdiantamentoStatus(req, res) {
     let { IDADIANTAMENTOSALARIO, STATIVO } = req.body;
 
     try {
@@ -1377,9 +1385,10 @@ class FinanceiroControllers {
       console.error("Unable to connect to the database:", error);
       throw error;
     }
-  }
+  } */
 
-  async putContaBanco(req, res) {
+
+/*   async putContaBanco(req, res) {
     let { 
       IDCONTABANCO,
       IDBANCO,
@@ -1423,7 +1432,7 @@ class FinanceiroControllers {
       console.error("error no FinanceiroControllers.putContaBanco:", error);
       throw error;
     }
-  }
+  } */
   // async updateFecharCaixaZerado(req, res) {
   //   let { ID } = req.body;
 
@@ -1451,8 +1460,8 @@ class FinanceiroControllers {
   //     throw error;
   //   }
   // }
-
-  async createMotivoDevolucao(req, res) {
+/* DEVOLUÇÃO */
+/*   async createMotivoDevolucao(req, res) {
     let { IDUSUARIO, DSMOTIVO } = req.body;
 
     try {
@@ -1468,8 +1477,9 @@ class FinanceiroControllers {
       console.error("Unable to connect to the database:", error);
       throw error;
     }
-  }
+  } */
 
+/*
   async postContaBanco(req, res) {
     let { 
       IDCONTABANCO,
@@ -1506,7 +1516,7 @@ class FinanceiroControllers {
       console.error("error no FinanceiroControllers.postContaBanco:", error);
       throw error;
     }
-  }
+  } */
 
   // async createMovimentoSaldoBonificacao(req, res) {
   //   let { IDFUNCIONARIO, TIPOMOVIMENTO, VRMOVIMENTO, OBSERVACAO, IDFUNCIONARIORESP } = req.body;
@@ -1522,7 +1532,8 @@ class FinanceiroControllers {
   //   }
   // }
 
-  async putMalotesLoja(req, res) {
+  /* MALOTES */
+/*   async putMalotesLoja(req, res) {
 
     try {
       const { error, value } = maloteSchema.validate(req.body, { 
@@ -1553,7 +1564,7 @@ class FinanceiroControllers {
       console.error("Erro no FinanceiroControllers.putMalotes:", error);
       return res.status(500).json({ error: "Erro no servidor" });
     }
-  }
+  } */
 }
 
 

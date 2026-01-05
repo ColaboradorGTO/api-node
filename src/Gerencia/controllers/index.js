@@ -1,10 +1,12 @@
-import { createCliente, getCliente,  updateCliente } from "../cliente/index.js";
+ //import { createCliente, getCliente,  updateCliente } from "../cliente/index.js";
 const url = process.env.API_URL;
 import axios from 'axios';
 
 
 class GerenciaControllers {
-      async getListaDetalhesMalortesPorLoja(req, res) {
+
+    // Malotes
+     /*  async getListaDetalhesMalortesPorLoja(req, res) {
         let {idEmpresa, idMalote, status, dataPesquisaInicio, dataPesquisaFim, page, pageSize } = req.query;
         idEmpresa = idEmpresa ? idEmpresa : ''
         idMalote = idMalote ? idMalote : ''
@@ -14,7 +16,6 @@ class GerenciaControllers {
         page = page ? page : ''
         pageSize = pageSize ? pageSize : ''
 
-   
         
         if (!idMalote) {
             return res.status(400).json({
@@ -32,7 +33,10 @@ class GerenciaControllers {
             return res.status(500).json({ error: "Erro ao conectar ao banco de dados." });
         }
     }
-    async getListaMalortesPorLoja(req, res) {
+ */
+        // Malotes
+
+    /* async getListaMalortesPorLoja(req, res) {
         let { idEmpresa, idMalote, statusMalote, pendenciaMalote, dataPesquisaInicio, dataPesquisaFim, page, pageSize } = req.query;
 
         idEmpresa = idEmpresa ? idEmpresa : ''
@@ -60,9 +64,10 @@ class GerenciaControllers {
             console.error("Erro no GerenciaControllers.getListaMalortesPorLoja verifique se os parâmetros estão sendo preenchidos:", error);
             return res.status(500).json({ error: "Erro ao conectar ao banco de dados." });
         }
-    }
+    } */
 
-    async getListaCliente(req, res) {
+    // Cliente
+ /*    async getListaCliente(req, res) {
         let { idCliente, cpfoucnpj,  page, pageSize } = req.query;
 
         idCliente = idCliente ? idCliente : ''
@@ -81,9 +86,9 @@ class GerenciaControllers {
             return res.status(500).json({ error: "Erro ao conectar ao banco de dados." });
            
         }
-    }
-
-    async putListaCliente(req, res) {
+    } */
+    // Cliente
+ /*    async putListaCliente(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body]; 
             const response = await putCliente(dados);
@@ -92,8 +97,10 @@ class GerenciaControllers {
             console.error("Unable to connect to the database:", error);
             return res.status(500).json({ error: error.message });
         }
-    }
-    async putCliente(req, res) {
+    } */
+
+    // Cliente
+   /*  async putCliente(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body]; 
             const response = await updateCliente(dados);
@@ -103,8 +110,9 @@ class GerenciaControllers {
             return res.status(500).json({ error: error.message });
         }
     }
-
-    async postCliente(req, res) {
+ */
+    // Cliente
+   /*  async postCliente(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body]; 
             const response = await createCliente(dados);
@@ -114,9 +122,9 @@ class GerenciaControllers {
             return res.status(500).json({ error: error.message });
         }
     }
-
-        
-    async putMalotesPorLoja(req, res) {      
+ */
+    // Malotes    
+/*     async putMalotesPorLoja(req, res) {      
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body]; 
     
@@ -138,9 +146,10 @@ class GerenciaControllers {
             console.error("Erro no GerenciaControllers.putMalotesPorLoja verifique se os parâmetros estão sendo preenchidos:", error);
             return res.status(500).json({ error: "Erro ao conectar ao banco de dados." });
         }
-    }
+    } */
 
-    async postMalotesPorLoja(req, res) {      
+    // Malote
+   /*  async postMalotesPorLoja(req, res) {      
         try {
             const { IDEMPRESA, DATAMOVIMENTOCAIXA } = req.body;
             // const dataFormatada = formatarDataMalote(req.body.DATAMOVIMENTOCAIXA)
@@ -176,7 +185,7 @@ class GerenciaControllers {
             console.error("Erro no GerenciaControllers.postMalotesPorLoja verifique se os parâmetros estão sendo preenchidos:", error);
             return res.status(500).json({ error: "Erro ao conectar ao banco de dados." });
         }
-    }
+    } */
 }
 
-export default new GerenciaControllers();
+ export default new GerenciaControllers(); 

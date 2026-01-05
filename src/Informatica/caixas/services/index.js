@@ -38,7 +38,7 @@ export class caixaServices {
         STATUALIZA,
         STLIMPA
     }) {
-        //console.log('NUNFCEPROD no service:', NUNFCEPROD);
+
         if (!IDEMPRESA) {
             throw new Error('IDEMPRESA obrigatorio');
         }
@@ -182,41 +182,6 @@ export class caixaServices {
     }
     ) {
         if (!IDEMPRESA) {
-            throw new Error('DSCAIXAWEB obrigatorio');
-        }
-        if (!HORAATUALIZA) {
-            throw new Error('DSCAIXAWEB obrigatorio');
-        }
-        if (!STATUALIZADIARIO) {
-            throw new Error('DSCAIXAWEB obrigatorio');
-        }
-        if (!STLOJAABERTA) {
-            throw new Error('DSCAIXAWEB obrigatorio');
-        }
-        if (!IDFUNCIONARIOSUPERVISOR) {
-            throw new Error('DSCAIXAWEB obrigatorio');
-        }
-        const result = await this.client.atualizarCaixa(
-            IDEMPRESA,
-            HORAATUALIZA,
-            STATUALIZADIARIO,
-            STLOJAABERTA,
-            IDFUNCIONARIOSUPERVISOR,
-        );
-
-        //console.log(IDCAIXAWEB, 'idcaixaweb');
-        return result
-    }
-
-    async updateEmpresaDiario({
-        IDEMPRESA,
-        HORAATUALIZA,
-        STATUALIZADIARIO,
-        STLOJAABERTA,
-        IDFUNCIONARIOSUPERVISOR,
-    }
-    ) {
-        if (!IDEMPRESA) {
             throw new Error('IDEMPRESA obrigatorio');
         }
         if (!HORAATUALIZA) {
@@ -228,7 +193,7 @@ export class caixaServices {
         if (!STLOJAABERTA) {
             throw new Error('STLOJAABERTA obrigatorio');
         }
- 
+
         const result = await this.client.atualizarEmpresaDiario(
             IDEMPRESA,
             HORAATUALIZA,

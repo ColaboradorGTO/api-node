@@ -1,10 +1,8 @@
 import { Router } from 'express';
 import ContaBancoControllers from '../controllers/ContaBanco.js';
 
+const ContaBancoRoutes = new Router();
 
-const routes = new Router();
+ContaBancoRoutes.get('/contaBanco', ContaBancoControllers.getListaContaBanco)
 
-
-routes.get('/contaBanco', ContaBancoControllers.getListaContaBanco)
-
-export default routes;
+export default ContaBancoRoutes;

@@ -1,7 +1,7 @@
-
 import axios from 'axios';
 import 'dotenv/config';
 const url = process.env.API_URL;
+
 export class CaixaClient {
     constructor(baseURL) {
         this.api = axios.create({

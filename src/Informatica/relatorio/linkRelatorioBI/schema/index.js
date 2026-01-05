@@ -9,9 +9,8 @@ export const linkRelatorioBiSchema = Joi.object({
         'string.base': 'STATIVO deve ser uma string',
         'any.required': 'STATIVO é obrigatório'
     }),
-    IDRELATORIOBI: Joi.number().required().messages({
+    IDRELATORIOBI: Joi.number().messages({
         'number.base': 'IDRELATORIOBI deve ser um número',
-        'any.required': 'IDRELATORIOBI é obrigatório'
     }),
     IDEMPRESA: Joi.number().required().messages({
         'number.base': 'IDRELATORIOBI deve ser um número',

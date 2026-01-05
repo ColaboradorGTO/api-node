@@ -1,10 +1,11 @@
 import { Router } from 'express';
-//import RelatorioBIController from '../controller/controllerRelatorioBi';
+import RelatorioBIController from '../controller/controllerRelatorioBi.js';
 
-const routes = new Router();
+const InformaticaRelatorioBI = new Router();
 
-routes.post('/createRelatorioInformaticaBI', RelatorioBIController.postRelatorioBi)
-routes.put('/relatorioInformaticaBI/:id',  RelatorioBIController.putRelatorioBi)
+InformaticaRelatorioBI.post('/createRelatorioInformaticaBI', RelatorioBIController.postRelatorioBi)
+InformaticaRelatorioBI.put('/relatorioInformaticaBI/:id',  RelatorioBIController.putRelatorioBi)
+InformaticaRelatorioBI.get('/relatorioInformaticaBI',  RelatorioBIController.getListaRelatorioBI)
 
 
-export default routes
+export default InformaticaRelatorioBI

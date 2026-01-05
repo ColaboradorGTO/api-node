@@ -1,13 +1,13 @@
 import { Router } from 'express';
 import ModulosControllers from '../controllers/modulos.js';
 
+const ModulosRoutes = new Router();
 
-const routes = new Router();
+ModulosRoutes.get('/menus-usuario', ModulosControllers.getListaPerfilUsuario)
+ModulosRoutes.get('/menus-usuario-excecao', ModulosControllers.getListaMenusPorUsuario)
+ModulosRoutes.get('/menus-filho-usuario', ModulosControllers.getListaMenusFilhosUsuario)
+ModulosRoutes.get('/lista-menus-usuario', ModulosControllers.getListaMenusUsuario)
+ModulosRoutes.put('/perfil-usuario/:id', ModulosControllers.putPerfilUsuarioMenu)
+ModulosRoutes.post('/criar-perfil-usuario', ModulosControllers.postPerfilUsuarioMenu)
 
-routes.get('/modulos', ModulosControllers.getListaModulos)
-routes.put('/modulos/:id', ModulosControllers.putModulo)
-routes.post('/criar-modulos', ModulosControllers.postModulo)
-routes.get('/menus-usuario', ModulosControllers.getListaMenusUsuario)
-routes.get('/menus', ModulosControllers.getListaSubMenusUsuario)
-
-export default routes;
+export default ModulosRoutes;

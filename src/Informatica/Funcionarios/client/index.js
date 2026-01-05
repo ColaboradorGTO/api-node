@@ -9,60 +9,111 @@ export class FuncionarioClient {
             timeout: 80000
         });
     }
-        
-    async atualizarFuncionario(IDFUNCIONARIO, IDSUBGRUPOEMPRESARIAL, NOFUNCIONARIO, NUCPF, PWSENHA, DSTIPO, DTADMISSAO, IDPERFIL, DSFUNCAO, STCONVENIO, STDESCONTOFOLHA, STLOJA, STATIVO, IDFUNCALTERACAO, MOTIVODESC, ID) {
+
+    async atualizarFuncionario(
+        NOFUNCIONARIO,
+        NUCPF,
+        NOLOGIN,
+        PWSENHA,
+        DSFUNCAO,
+        DSTIPO,
+        PERC,
+        VALORSALARIO,
+        VALORDISPONIVEL,
+        MOTIVODESC,
+        STCONVENIO,
+        STDESCONTOFOLHA,
+        STLOJA,
+        DATA_ADMISSAO,
+        ID
+    ) {
         const response = await this.api.put(`/api/informatica/funcionario-loja.xsjs`, {
-            IDFUNCIONARIO,
-            IDSUBGRUPOEMPRESARIAL,
             NOFUNCIONARIO,
             NUCPF,
+            NOLOGIN,
             PWSENHA,
-            DSTIPO,
-            DTADMISSAO,
-            IDPERFIL,
             DSFUNCAO,
+            DSTIPO,
+            PERC,
+            VALORSALARIO,
+            VALORDISPONIVEL,
+            MOTIVODESC,
             STCONVENIO,
             STDESCONTOFOLHA,
             STLOJA,
-            STATIVO,
-            IDFUNCALTERACAO,
-            MOTIVODESC,
+            DATA_ADMISSAO,
             ID
         })
-        return response.data; 
+        return response.data;
     }
 
-    async criarFuncionario(IDFUNCIONARIO, IDSUBGRUPOEMPRESARIAL, NOFUNCIONARIO, NUCPF, PWSENHA, DSTIPO, DTADMISSAO, IDPERFIL, DSFUNCAO, STCONVENIO, STDESCONTOFOLHA, STLOJA, STATIVO, IDFUNCALTERACAO, MOTIVODESC, ID) {
-    const response = await this.api.post(`/api/informatica/funcionario-loja.xsjs`, { 
-            IDFUNCIONARIO,
+    async criarFuncionario(
+        IDSUBGRUPOEMPRESARIAL,
+        IDEMPRESA,
+        NOFUNCIONARIO,
+        NUCPF,
+        PWSENHA,
+        DSFUNCAO,
+        VALORSALARIO,
+        PERC,
+        STATIVO,
+        DSTIPO,
+        VALORDISPONIVEL,
+        STCONVENIO,
+        STLOJA,
+        DATA_ADMISSAO
+    ) {
+        const response = await this.api.post(`/api/informatica/funcionario-loja.xsjs`, [{
             IDSUBGRUPOEMPRESARIAL,
+            IDEMPRESA,
             NOFUNCIONARIO,
             NUCPF,
             PWSENHA,
-            DSTIPO,
-            DTADMISSAO,
-            IDPERFIL,
             DSFUNCAO,
-            STCONVENIO,
-            STDESCONTOFOLHA,
-            STLOJA,
+            VALORSALARIO,
+            PERC,
             STATIVO,
-            IDFUNCALTERACAO,
-            MOTIVODESC,
+            DSTIPO,
+            VALORDISPONIVEL,
+            STCONVENIO,
+            STLOJA,
+            DATA_ADMISSAO
+        }]);
+        return response.data;
+    }
+
+    async inativarFuncionario(
+        DATAULTIMAALTERACAO,
+        DATA_DEMISSAO,
+        STATIVO,
+        ID
+    ) {
+        const response = await this.api.put('/api/informatica/funcionario-inativa.xsjs', {
+            DATAULTIMAALTERACAO,
+            DATA_DEMISSAO,
+            STATIVO,
             ID
-    });
-    return response.data;
-  }
+        });
+        return response.data;
+    }
 
-  async inativarFuncionario(DATAULTIMAALTERACAO, STATIVO, DATA_DEMISSAO, ID) {
-  const response = await this.api.put('/inativar-funcionario', {
-    DATAULTIMAALTERACAO,
-    STATIVO,
-    DATA_DEMISSAO,
-    ID
-  });
-  return response.data;
+    async atualizarDescontoFuncionario(
+        DTINICIODESC,
+        DTFIMDESC,
+        PERCDESCUSUAUTORIZADO,
+        MOTIVODESC,
+        IDFUNCALTERACAO,
+        ID
+    ) {
+        const response = await this.api.put('/api/informatica/funcionario-desconto.xsjs', {
+            DTINICIODESC,
+            DTFIMDESC,
+            PERCDESCUSUAUTORIZADO,
+            MOTIVODESC,
+            IDFUNCALTERACAO,
+            ID
+        });
+        return response.data;
+    }
 }
 
-
-}

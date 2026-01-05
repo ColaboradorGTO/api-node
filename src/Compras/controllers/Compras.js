@@ -1,4 +1,4 @@
-import axios from "axios";
+ import axios from "axios";
 import { dataFormatada } from "../../utils/dataFormatada.js";
 import { getFornecedores } from "../repositories/fornecedor.js";
 import { getPedidos } from "../repositories/listaPedidos.js";
@@ -6,258 +6,257 @@ import { getDetalhePedido } from "../repositories/listaDetalhePedidosGrade.js";
 import { createEstilo, getEstilos, updateEstilo } from "../repositories/estilos.js";
 import 'dotenv/config';
 import { parse } from "path";
-const url = process.env.API_URL;
+const url = process.env.API_URL; 
 
 class ComprasControllers {
 
-    async getListaTodosPedidos(req, res) {
-        let { dataPesquisaInicio, dataPesquisaFim } = req.query;
-        dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataPesquisaInicio : '';
-        dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataPesquisaFim : '';
-        try {
-            const apiUrl = `${url}/api/compras/lista_pedidos.xsjs?pageSize=1000&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`;
-            const response = await axios.get(apiUrl)
-            return res.json(response.data); // Retorna
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-    }
+    //pedidos
+    /*     async getListaTodosPedidos(req, res) {
+            let { dataPesquisaInicio, dataPesquisaFim } = req.query;
+            dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataPesquisaInicio : '';
+            dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataPesquisaFim : '';
+            try {
+                const apiUrl = `${url}/api/compras/lista_pedidos.xsjs?pageSize=1000&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`;
+                const response = await axios.get(apiUrl)
+                return res.json(response.data); // Retorna
+            } catch (error) {
+                console.error("Unable to connect to the database:", error);
+                throw error;
+            }
+        } */
 
-    async getListaPedidosDetalhado(req, res) {
-        let { dataPesquisaInicio, dataPesquisaFim, idFornecedor, idMarca, idPedido } = req.query;
-        dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataPesquisaInicio : '';
-        dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataPesquisaFim : '';
-        idFornecedor = idFornecedor ? idFornecedor : '';
-        idMarca = idMarca ? idMarca : '';
-        idPedido = idPedido ? idPedido : '';
-
-        try {
-            const apiUrl = `${url}/api/compras/lista_pedidos_detalhado.xsjs?pageSize=500&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idFornPesquisa=${idFornecedor}&idMarcaPesquisa=${idMarca}&idpedido=${idPedido}`;
-            const response = await axios.get(apiUrl)
-            return res.json(response.data); // Retorna
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-    }
-    async getListaDetalhePedidos(req, res) {
-        let { idPedido } = req.query;
-        idPedido = idPedido ? idPedido : '';
-
-        try {
-            // const apiUrl = `${url}/api/compras/lista_detalhepedidos.xsjs?idpedido=${idPedido}`;
-            const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/compras/lista_detalhepedidos.xsjs?idpedido=${idPedido}`;
-            const response = await axios.get(apiUrl)
-            return res.json(response.data); 
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-    }
-
-    async getListaDetalhePedidoGrade(req, res) {
-        let { idDetalhePedido } = req.query;
-        idDetalhePedido = idDetalhePedido ? idDetalhePedido : '';
-
-        try {
-            // const apiUrl = `${url}/api/compras/lista_detalhepedidos.xsjs?idpedido=${idPedido}`;
-            const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/compras/lista_detalhepedidogradeedit.xsjs?idDetPedido=${idDetalhePedido}&page=1`;
-            const response = await axios.get(apiUrl)
-            return res.json(response.data); 
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-    }
-
-    async getListaPromocoes(req, res) {
-        let { dataPesquisaInicio, dataPesquisaFim } = req.query;
-        dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataPesquisaInicio : '';
-        dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataPesquisaFim : '';
-        try {
-            const apiUrl = `${url}/api/compras/lista_promocoes.xsjs?pageSize=1000&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`;
-            const response = await axios.get(apiUrl)
-            return res.json(response.data); // Retorna
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-
-    }
-
-    async getListaEmpresaPromocoes(req, res) {
-        let { idResumoPromocoes } = req.query;
-        idResumoPromocoes = idResumoPromocoes ? idResumoPromocoes : '';
-        try {
-            const apiUrl = `${url}/api/compras/lista_empresapromocoes.xsjs?idResPromo=${idResumoPromocoes}`;
-            const response = await axios.get(apiUrl)
-            return res.json(response.data); // Retorna
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-    }
-
-    async getListaProdutoOrigemPromocoes(req, res) {
-        let { idResumoPromocoes } = req.query;
-        idResumoPromocoes = idResumoPromocoes ? idResumoPromocoes : '';
-        try {
-            const apiUrl = `${url}/api/compras/lista_produtosorigempromocoes.xsjs?idResPromo=${idResumoPromocoes}`;
-            const response = await axios.get(apiUrl)
-            return res.json(response.data); // Retorna
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-    }
-
-    async getListaProdutoDestinoPromocoes(req, res) {
-        let { idResumoPromocoes } = req.query;
-        idResumoPromocoes = idResumoPromocoes ? idResumoPromocoes : '';
-        try {
-            const apiUrl = `${url}/api/compras/lista_produtosdestinopromocoes.xsjs?idResPromo=${idResumoPromocoes}`;
-            const response = await axios.get(apiUrl)
-            return res.json(response.data); // Retorna
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-    }
-
-
-    async getListaPedidos(req, res) {
-        let {idPedido, dataPesquisaFim, dataPesquisaInicio, idMarca, idFornecedor, idFabricante, idComprador, stSituacaoSap, page, pageSize } = req.query;
-        idPedido = idPedido ? idPedido : '';
-        dataPesquisaInicio = dataPesquisaInicio ? dataFormatada(dataPesquisaInicio) : '';
-        dataPesquisaFim = dataPesquisaFim ? dataFormatada(dataPesquisaFim) : '';
-        idMarca = idMarca ? idMarca : '';
-        idFornecedor = idFornecedor ? idFornecedor : '';
-        idFabricante = idFabricante ? idFabricante : '';
-        idComprador = idComprador ? idComprador : '';
-        stSituacaoSap = stSituacaoSap ? stSituacaoSap : '';
-        page = page ? page : '';
-        pageSize = pageSize ? pageSize : '';
-
-        try {
-            const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/compras/lista_pedidos.xsjs?dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idFornPesquisa=${idFornecedor}&idMarcaPesquisa=${idMarca}&idpedido=${idPedido}&idFabPesquisa=${idFabricante}&idCompradorPesquisa=${idComprador}&stSituacaoSAP=${stSituacaoSap}`;
-            // const apiUrl = `${url}/api/compras/lista_pedidos.xsjs?dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idFornPesquisa=${idFornecedor}&idMarcaPesquisa=${idMarca}&idpedido=${idPedido}&idFabPesquisa=${idFabricante}&idCompradorPesquisa=${idComprador}&stSituacaoSAP=${stSituacaoSap}`;
-           
-            const response = await axios.get(apiUrl)
-            // const response = await getPedidos(idPedido, dataPesquisaFim, dataPesquisaInicio, idMarca, idFornecedor, idFabricante, idComprador, stSituacaoSap, page, pageSize)
-            return res.json(response.data); // Retorna
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-    }
-
-    async getListaDetalhePedidosGrade(req, res) {
-        let {idPedido, idDetalhePedido, dataPesquisaInicio, dataPesquisaFim,  page, pageSize } = req.query;
-        idPedido = idPedido ? idPedido : '';
-        idDetalhePedido = idDetalhePedido ? idDetalhePedido : '';
-        dataPesquisaInicio = dataPesquisaInicio ? dataFormatada(dataPesquisaInicio) : '';
-        dataPesquisaFim = dataPesquisaFim ? dataFormatada(dataPesquisaFim) : '';
-        page = page ? page : '';
-        pageSize = pageSize ? pageSize : '';
-
-        try {
-            const apiUrl = `${url}/api/compras/lista_detalhepedidosgrade.xsjs?dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idpedido=${idPedido}`;
-            const response = await axios.get(apiUrl)
-            // const response = await getDetalhePedido(idPedido, idDetalhePedido, dataPesquisaInicio, dataPesquisaFim,  page, pageSize)
-            return res.json(response.data); // Retorna
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-    }
-
-    async getListaUltimoPedido(req, res) {
-        let { idComprador, idPedido } = req.query;
-        idComprador = idComprador ? idComprador : '';
-        idPedido = idPedido ? idPedido : '';
-
-        try {
-            const apiUrl = `${url}/api/compras/ultimo_pedidos.xsjs?idcomprador=${idComprador}&idPedido=${idPedido}`
-            const response = await axios.get(apiUrl)
-
-            return res.json(response.data); // Retorna
-        } catch (error) {
-            console.error("error no ComprasControllers.getListaUltimoPedido:", error);
-            throw error;
-        }
-    }
-
-    async getListaFornecedores(req, res) {
-        let { idFornecedor, descFornecedor, descFornecedorOuCNPJ, CNPJFornecedor,  page, pageSize } = req.query;
-        idFornecedor = idFornecedor ? idFornecedor : '';
-        descFornecedor = descFornecedor ? descFornecedor : '';
-        CNPJFornecedor = CNPJFornecedor ? CNPJFornecedor : '';
-        descFornecedorOuCNPJ = descFornecedorOuCNPJ ? descFornecedorOuCNPJ : '';
-        page = page ? page : '';
-        pageSize = pageSize ? pageSize : '';
-
-        try {
-            const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/compras/fornecedor.xsjs?id=${idFornecedor}&descFornecedor=${descFornecedor}&CNPJFornecedor=${CNPJFornecedor}&descFornOrCnpj=${descFornecedorOuCNPJ}&page=${page}&pageSize=${pageSize}`
-            // const apiUrl = `${url}/api/compras/fornecedor.xsjs?id=${idFornecedor}&descFornecedor=${descFornecedor}&CNPJFornecedor=${CNPJFornecedor}&descFornOrCnpj=${descFornecedorOuCNPJ}&page=${page}&pageSize=${pageSize}`
-            // const response = await getFornecedores(idFornecedor, descFornecedor, CNPJFornecedor,  page, pageSize)
-            const response = await axios.get(apiUrl)
-            
-            return res.json(response.data);
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-
-    }
-
-    async getListaFornecedorProduto(req, res) {
-        let { idFornecedor, idProduto } = req.query;
-        idFornecedor = idFornecedor ? idFornecedor : '';
-        idProduto = idProduto ? idProduto : '';
-
-        try {
-            const apiUrl = `${url}/api/compras/fornecedor-produto.xsjs?idFornecedor=${idFornecedor}&idProduto=${idProduto}`
-            const response = await axios.get(apiUrl)
-
-            return res.json(response.data); // Retorna
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-    }
-
-    async getListaProdutoPedido(req, res) {
-        let { referenciaProduto, fornecedorPedido } = req.query;
-        referenciaProduto = referenciaProduto ? referenciaProduto : '';
-        fornecedorPedido = fornecedorPedido ? fornecedorPedido : '';
-
-        try {
-            const apiUrl = `${url}/api/compras/produtospedido.xsjs?PesqProd=${referenciaProduto}&idForn=${fornecedorPedido}`
-            const response = await axios.get(apiUrl)
-
-            return res.json(response.data); // Retorna
-        } catch (error) {
-            console.error("error no ComprasControllers.getListaProdutoPedido:", error);
-            throw error;
-        }
-    }
+    //pedidos
+    /*     async getListaPedidosDetalhado(req, res) {
+            let { dataPesquisaInicio, dataPesquisaFim, idFornecedor, idMarca, idPedido } = req.query;
+            dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataPesquisaInicio : '';
+            dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataPesquisaFim : '';
+            idFornecedor = idFornecedor ? idFornecedor : '';
+            idMarca = idMarca ? idMarca : '';
+            idPedido = idPedido ? idPedido : '';
     
-    async getListaFabricantes(req, res) {
-        let { idFabricante } = req.query;
-        idFabricante = idFabricante ? idFabricante : '';
-        try {
-            const apiUrl = `${url}/api/compras/fabricante.xsjs?idFab=${idFabricante}`
-            const response = await axios.get(apiUrl)
+            try {
+                const apiUrl = `${url}/api/compras/lista_pedidos_detalhado.xsjs?pageSize=500&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idFornPesquisa=${idFornecedor}&idMarcaPesquisa=${idMarca}&idpedido=${idPedido}`;
+                const response = await axios.get(apiUrl)
+                return res.json(response.data); // Retorna
+            } catch (error) {
+                console.error("Unable to connect to the database:", error);
+                throw error;
+            }
+        } */
 
-            return res.json(response.data); // Retorna
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
+    //pedidos
+    /*     async getListaDetalhePedidos(req, res) {
+            let { idPedido } = req.query;
+            idPedido = idPedido ? idPedido : '';
+    
+            try {
+                const apiUrl = `${url}/api/compras/lista_detalhepedidos.xsjs?idpedido=${idPedido}`;
+                const response = await axios.get(apiUrl)
+                return res.json(response.data); 
+            } catch (error) {
+                console.error("Unable to connect to the database:", error);
+                throw error;
+            }
+        } */
 
-    }
-    async getListaCompradores(req, res) {
+    //promocao
+    /*     async getListaPromocoes(req, res) {
+            let { dataPesquisaInicio, dataPesquisaFim } = req.query;
+            dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataPesquisaInicio : '';
+            dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataPesquisaFim : '';
+            try {
+                const apiUrl = `${url}/api/compras/lista_promocoes.xsjs?pageSize=1000&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`;
+                const response = await axios.get(apiUrl)
+                return res.json(response.data); // Retorna
+            } catch (error) {
+                console.error("Unable to connect to the database:", error);
+                throw error;
+            }
+    
+        } */
+
+    //promocao
+    /*     async getListaEmpresaPromocoes(req, res) {
+            let { idResumoPromocoes } = req.query;
+            idResumoPromocoes = idResumoPromocoes ? idResumoPromocoes : '';
+            try {
+                const apiUrl = `${url}/api/compras/lista_empresapromocoes.xsjs?idResPromo=${idResumoPromocoes}`;
+                const response = await axios.get(apiUrl)
+                return res.json(response.data); // Retorna
+            } catch (error) {
+                console.error("Unable to connect to the database:", error);
+                throw error;
+            }
+        } */
+
+    //promocao
+    /*     async getListaProdutoOrigemPromocoes(req, res) {
+            let { idResumoPromocoes } = req.query;
+            idResumoPromocoes = idResumoPromocoes ? idResumoPromocoes : '';
+            try {
+                const apiUrl = `${url}/api/compras/lista_produtosorigempromocoes.xsjs?idResPromo=${idResumoPromocoes}`;
+                const response = await axios.get(apiUrl)
+                return res.json(response.data); // Retorna
+            } catch (error) {
+                console.error("Unable to connect to the database:", error);
+                throw error;
+            }
+        } */
+
+    //promocao
+    /*     async getListaProdutoDestinoPromocoes(req, res) {
+            let { idResumoPromocoes } = req.query;
+            idResumoPromocoes = idResumoPromocoes ? idResumoPromocoes : '';
+            try {
+                const apiUrl = `${url}/api/compras/lista_produtosdestinopromocoes.xsjs?idResPromo=${idResumoPromocoes}`;
+                const response = await axios.get(apiUrl)
+                return res.json(response.data); // Retorna
+            } catch (error) {
+                console.error("Unable to connect to the database:", error);
+                throw error;
+            }
+        } */
+
+    //Pedidos
+    /*     async getListaPedidos(req, res) {
+            let {idPedido, dataPesquisaFim, dataPesquisaInicio, idMarca, idFornecedor, idFabricante, idComprador, stSituacaoSap, page, pageSize } = req.query;
+            idPedido = idPedido ? idPedido : '';
+            dataPesquisaInicio = dataPesquisaInicio ? dataFormatada(dataPesquisaInicio) : '';
+            dataPesquisaFim = dataPesquisaFim ? dataFormatada(dataPesquisaFim) : '';
+            idMarca = idMarca ? idMarca : '';
+            idFornecedor = idFornecedor ? idFornecedor : '';
+            idFabricante = idFabricante ? idFabricante : '';
+            idComprador = idComprador ? idComprador : '';
+            stSituacaoSap = stSituacaoSap ? stSituacaoSap : '';
+            page = page ? page : '';
+            pageSize = pageSize ? pageSize : '';
+    
+            try {
+                const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/compras/lista_pedidos.xsjs?dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idFornPesquisa=${idFornecedor}&idMarcaPesquisa=${idMarca}&idpedido=${idPedido}&idFabPesquisa=${idFabricante}&idCompradorPesquisa=${idComprador}&stSituacaoSAP=${stSituacaoSap}`;
+                // const apiUrl = `${url}/api/compras/lista_pedidos.xsjs?dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idFornPesquisa=${idFornecedor}&idMarcaPesquisa=${idMarca}&idpedido=${idPedido}&idFabPesquisa=${idFabricante}&idCompradorPesquisa=${idComprador}&stSituacaoSAP=${stSituacaoSap}`;
+               
+                const response = await axios.get(apiUrl)
+                // const response = await getPedidos(idPedido, dataPesquisaFim, dataPesquisaInicio, idMarca, idFornecedor, idFabricante, idComprador, stSituacaoSap, page, pageSize)
+                return res.json(response.data); // Retorna
+            } catch (error) {
+                console.error("Unable to connect to the database:", error);
+                throw error;
+            }
+        } */
+
+    //pedidos
+    /*     async getListaDetalhePedidos(req, res) {
+            let {idPedido, idDetalhePedido, dataPesquisaInicio, dataPesquisaFim,  page, pageSize } = req.query;
+            idPedido = idPedido ? idPedido : '';
+            idDetalhePedido = idDetalhePedido ? idDetalhePedido : '';
+            dataPesquisaInicio = dataPesquisaInicio ? dataFormatada(dataPesquisaInicio) : '';
+            dataPesquisaFim = dataPesquisaFim ? dataFormatada(dataPesquisaFim) : '';
+            page = page ? page : '';
+            pageSize = pageSize ? pageSize : '';
+    
+            try {
+                const apiUrl = `${url}/api/compras/lista_detalhepedidosgrade.xsjs?dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idpedido=${idPedido}`;
+                const response = await axios.get(apiUrl)
+                // const response = await getDetalhePedido(idPedido, idDetalhePedido, dataPesquisaInicio, dataPesquisaFim,  page, pageSize)
+                return res.json(response.data); // Retorna
+            } catch (error) {
+                console.error("Unable to connect to the database:", error);
+                throw error;
+            }
+        } */
+
+    //pedido
+    /*     async getListaUltimoPedido(req, res) {
+            let { idComprador, idPedido } = req.query;
+            idComprador = idComprador ? idComprador : '';
+            idPedido = idPedido ? idPedido : '';
+    
+            try {
+                const apiUrl = `${url}/api/compras/ultimo_pedidos.xsjs?idcomprador=${idComprador}&idPedido=${idPedido}`
+                const response = await axios.get(apiUrl)
+    
+                return res.json(response.data); // Retorna
+            } catch (error) {
+                console.error("error no ComprasControllers.getListaUltimoPedido:", error);
+                throw error;
+            }
+        } */
+
+    //Fornecedores
+    /*    async getListaFornecedores(req, res) {
+           let { idFornecedor, descFornecedor, descFornecedorOuCNPJ, CNPJFornecedor,  page, pageSize } = req.query;
+           idFornecedor = idFornecedor ? idFornecedor : '';
+           descFornecedor = descFornecedor ? descFornecedor : '';
+           CNPJFornecedor = CNPJFornecedor ? CNPJFornecedor : '';
+           descFornecedorOuCNPJ = descFornecedorOuCNPJ ? descFornecedorOuCNPJ : '';
+           page = page ? page : '';
+           pageSize = pageSize ? pageSize : '';
+   
+           try {
+               const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/compras/fornecedor.xsjs?id=${idFornecedor}&descFornecedor=${descFornecedor}&CNPJFornecedor=${CNPJFornecedor}&descFornOrCnpj=${descFornecedorOuCNPJ}&page=${page}&pageSize=${pageSize}`
+               // const apiUrl = `${url}/api/compras/fornecedor.xsjs?id=${idFornecedor}&descFornecedor=${descFornecedor}&CNPJFornecedor=${CNPJFornecedor}&descFornOrCnpj=${descFornecedorOuCNPJ}&page=${page}&pageSize=${pageSize}`
+               // const response = await getFornecedores(idFornecedor, descFornecedor, CNPJFornecedor,  page, pageSize)
+               const response = await axios.get(apiUrl)
+               
+               return res.json(response.data);
+           } catch (error) {
+               console.error("Unable to connect to the database:", error);
+               throw error;
+           }
+   
+       } */
+
+    //Fornecedor
+    /*  async getListaFornecedorProduto(req, res) {
+         let { idFornecedor, idProduto } = req.query;
+         idFornecedor = idFornecedor ? idFornecedor : '';
+         idProduto = idProduto ? idProduto : '';
+ 
+         try {
+             const apiUrl = `${url}/api/compras/fornecedor-produto.xsjs?idFornecedor=${idFornecedor}&idProduto=${idProduto}`
+             const response = await axios.get(apiUrl)
+ 
+             return res.json(response.data); // Retorna
+         } catch (error) {
+             console.error("Unable to connect to the database:", error);
+             throw error;
+         }
+     } */
+
+    //pedidos
+    /*  async getListaProdutoPedido(req, res) {
+         let { referenciaProduto, fornecedorPedido } = req.query;
+         referenciaProduto = referenciaProduto ? referenciaProduto : '';
+         fornecedorPedido = fornecedorPedido ? fornecedorPedido : '';
+ 
+         try {
+             const apiUrl = `${url}/api/compras/produtospedido.xsjs?PesqProd=${referenciaProduto}&idForn=${fornecedorPedido}`
+             const response = await axios.get(apiUrl)
+ 
+             return res.json(response.data); // Retorna
+         } catch (error) {
+             console.error("error no ComprasControllers.getListaProdutoPedido:", error);
+             throw error;
+         }
+     } */
+
+    //fabricante
+    /*     async getListaFabricantes(req, res) {
+            let { idFabricante } = req.query;
+            idFabricante = idFabricante ? idFabricante : '';
+            try {
+                const apiUrl = `${url}/api/compras/fabricante.xsjs?idFab=${idFabricante}`
+                const response = await axios.get(apiUrl)
+    
+                return res.json(response.data); // Retorna
+            } catch (error) {
+                console.error("Unable to connect to the database:", error);
+                throw error;
+            }
+    
+        } */
+    //comprador
+/*     async getListaCompradores(req, res) {
         let { } = req.query;
 
         try {
@@ -270,63 +269,68 @@ class ComprasControllers {
             throw error;
         }
 
-    }
-    async getListaFornecedorFabricante(req, res) {
-        let { idFabricante, descricaoFornecedor, idFornecedor, cnpjFornecedor } = req.query;
-        idFabricante = idFabricante ? idFabricante : '';
-        descricaoFornecedor = descricaoFornecedor ? descricaoFornecedor : '';
-        idFornecedor = idFornecedor ? idFornecedor : '';
-        cnpjFornecedor = cnpjFornecedor ? cnpjFornecedor : '';
+    } */
+    //fabricante
+    /*  async getListaFornecedorFabricante(req, res) {
+         let { idFabricante, descricaoFornecedor, idFornecedor, cnpjFornecedor } = req.query;
+         idFabricante = idFabricante ? idFabricante : '';
+         descricaoFornecedor = descricaoFornecedor ? descricaoFornecedor : '';
+         idFornecedor = idFornecedor ? idFornecedor : '';
+         cnpjFornecedor = cnpjFornecedor ? cnpjFornecedor : '';
+ 
+         try {
+             const apiUrl = `${url}/api/compras/fornecedor-fabricante.xsjs?idFab=${idFabricante}&descFornecedor=${descricaoFornecedor}&idFor=${idFornecedor}&CNPJFornecedor=${cnpjFornecedor}`
+             const response = await axios.get(apiUrl)
+ 
+             return res.json(response.data); // Retorna
+         } catch (error) {
+             console.error("Unable to connect to the database:", error);
+             throw error;
+         }
+ 
+     } */
 
-        try {
-            const apiUrl = `${url}/api/compras/fornecedor-fabricante.xsjs?idFab=${idFabricante}&descFornecedor=${descricaoFornecedor}&idFor=${idFornecedor}&CNPJFornecedor=${cnpjFornecedor}`
-            const response = await axios.get(apiUrl)
+    //fabricante
+    /*   async getListaFabricanteCadastro(req, res) {
+          let { idFabricante, descricaoFabricante, idFornecedor } = req.query;
+          idFabricante = idFabricante ? idFabricante : '';
+          descricaoFabricante = descricaoFabricante ? descricaoFabricante : '';
+          idFornecedor = idFornecedor ? idFornecedor : '';
+  
+  
+          try {
+              const apiUrl = `${url}/api/compras/fabricante-fornecedor.xsjs?idFab=${idFabricante}&descFab=${descricaoFabricante}&idFor=${idFornecedor}`
+              const response = await axios.get(apiUrl)
+  
+              return res.json(response.data); // Retorna
+          } catch (error) {
+              console.error("Unable to connect to the database:", error);
+              throw error;
+          }
+  
+      } */
 
-            return res.json(response.data); // Retorna
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
+    //fabricante
+    /*    async getListaVinculoFornecedorFabricante(req, res) {
+           let { idFabricanteFornecedor, idFornecedorPedido, idFabricantePedido } = req.query;
+           idFabricanteFornecedor = idFabricanteFornecedor ? idFabricanteFornecedor : '';
+           idFornecedorPedido = idFornecedorPedido ? idFornecedorPedido : '';
+           idFabricantePedido = idFabricantePedido ? idFabricantePedido : '';
+           
+           try {
+               const apiUrl = `${url}/api/compras/vincfabforn.xsjs?idvincfornfab=${idFabricanteFornecedor}&idfornpedido=${idFornecedorPedido}&idfabnpedido=${idFabricantePedido}`
+               const response = await axios.get(apiUrl)
+             
+               return res.json(response.data); // Retorna
+           } catch (error) {
+               console.error("error no ComprasController.getListaVinculoFornecedorFabricante:", error);
+               throw error;
+           }
+   
+       } */
 
-    }
-    async getListaFabricanteCadastro(req, res) {
-        let { idFabricante, descricaoFabricante, idFornecedor } = req.query;
-        idFabricante = idFabricante ? idFabricante : '';
-        descricaoFabricante = descricaoFabricante ? descricaoFabricante : '';
-        idFornecedor = idFornecedor ? idFornecedor : '';
-
-
-        try {
-            const apiUrl = `${url}/api/compras/fabricante-fornecedor.xsjs?idFab=${idFabricante}&descFab=${descricaoFabricante}&idFor=${idFornecedor}`
-            const response = await axios.get(apiUrl)
-
-            return res.json(response.data); // Retorna
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-
-    }
-
-    async getListaVinculoFornecedorFabricante(req, res) {
-        let { idFabricanteFornecedor, idFornecedorPedido, idFabricantePedido } = req.query;
-        idFabricanteFornecedor = idFabricanteFornecedor ? idFabricanteFornecedor : '';
-        idFornecedorPedido = idFornecedorPedido ? idFornecedorPedido : '';
-        idFabricantePedido = idFabricantePedido ? idFabricantePedido : '';
-        
-        try {
-            const apiUrl = `${url}/api/compras/vincfabforn.xsjs?idvincfornfab=${idFabricanteFornecedor}&idfornpedido=${idFornecedorPedido}&idfabnpedido=${idFabricantePedido}`
-            const response = await axios.get(apiUrl)
-          
-            return res.json(response.data); // Retorna
-        } catch (error) {
-            console.error("error no ComprasController.getListaVinculoFornecedorFabricante:", error);
-            throw error;
-        }
-
-    }
-
-    async getListaCondicoesPagamento(req, res) {
+    //pagamento
+ /*    async getListaCondicoesPagamento(req, res) {
         let { idCondPagamento, descricaoPagamento } = req.query;
         idCondPagamento = idCondPagamento ? idCondPagamento : '';
         descricaoPagamento = descricaoPagamento ? descricaoPagamento : '';
@@ -340,9 +344,10 @@ class ComprasControllers {
             throw error;
         }
 
-    }
+    } */
 
-    async getListaTransportador(req, res) {
+    //transportador
+  /*   async getListaTransportador(req, res) {
         let { idFornecedorFabricante } = req.query;
         idFornecedorFabricante = idFornecedorFabricante ? idFornecedorFabricante : '';
 
@@ -356,9 +361,10 @@ class ComprasControllers {
             throw error;
         }
 
-    }
+    } */
 
-    async getListaTransportadora(req, res) {
+    //transportador
+/*     async getListaTransportadora(req, res) {
         let { idTransportador, descricaoTransportador, cnpjTransportador } = req.query;
         idTransportador = idTransportador ? idTransportador : '';
         descricaoTransportador = descricaoTransportador ? descricaoTransportador : '';
@@ -373,8 +379,10 @@ class ComprasControllers {
             throw error;
         }
 
-    }
-    async getListaByIdTransportador(req, res) {
+    } */
+
+    //transportador
+/*     async getListaByIdTransportador(req, res) {
         let { idTransportador } = req.query;
         idTransportador = idTransportador ? idTransportador : '';
 
@@ -388,10 +396,11 @@ class ComprasControllers {
             throw error;
         }
 
-    }
+    } */
 
-    async getListaEstruturaMercadoria(req, res) {
-        let {idSubGrupoEstrutura, descricao } = req.query;
+    //mercadoria
+/*     async getListaEstruturaMercadoria(req, res) {
+        let { idSubGrupoEstrutura, descricao } = req.query;
         idSubGrupoEstrutura = idSubGrupoEstrutura ? idSubGrupoEstrutura : '';
         descricao = descricao ? descricao : '';
         try {
@@ -403,9 +412,10 @@ class ComprasControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    }
+    } */
 
-    async getListaImagemProduto(req, res) {
+    //produto
+/*     async getListaImagemProduto(req, res) {
         let { numPage, numeroRefProduto, idFabricante, idSubEstrutura, idPedido } = req.query;
         numPage = numPage ? numPage : '';
         numeroRefProduto = numeroRefProduto ? numeroRefProduto : '';
@@ -423,41 +433,44 @@ class ComprasControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    }
+    } */
 
-    async getListaProdutosImagens(req, res) {
-        let { numeroRefProduto} = req.query;
-        numeroRefProduto = numeroRefProduto ? numeroRefProduto : '';
+    //produto
+    /*   async getListaProdutosImagens(req, res) {
+          let { numeroRefProduto} = req.query;
+          numeroRefProduto = numeroRefProduto ? numeroRefProduto : '';
+  
+  
+          try {
+              const apiUrl = `${url}/api/compras/produtos-imagens.xsjs?nuRefProd=${numeroRefProduto}`
+              const response = await axios.get(apiUrl)
+  
+              return res.json(response.data); // Retorna
+          } catch (error) {
+              console.error("error no ComprasControllers.getListaProdutosImagens:", error);
+              throw error;
+          }
+      } */
 
+    //produto
+    /*   async getListaDetalheImagemProduto(req, res) {
+          let { idImagem } = req.query;
+          idImagem = idImagem ? idImagem : '';
+  
+  
+          try {
+              const apiUrl = `${url}/api/compras/lista_produtosimagem.xsjs?IDImagens=${idImagem}`
+              const response = await axios.get(apiUrl)
+  
+              return res.json(response.data); // Retorna
+          } catch (error) {
+              console.error("Unable to connect to the database:", error);
+              throw error;
+          }
+      } */
 
-        try {
-            const apiUrl = `${url}/api/compras/produtos-imagens.xsjs?nuRefProd=${numeroRefProduto}`
-            const response = await axios.get(apiUrl)
-
-            return res.json(response.data); // Retorna
-        } catch (error) {
-            console.error("error no ComprasControllers.getListaProdutosImagens:", error);
-            throw error;
-        }
-    }
-
-    async getListaDetalheImagemProduto(req, res) {
-        let { idImagem } = req.query;
-        idImagem = idImagem ? idImagem : '';
-
-
-        try {
-            const apiUrl = `${url}/api/compras/lista_produtosimagem.xsjs?IDImagens=${idImagem}`
-            const response = await axios.get(apiUrl)
-
-            return res.json(response.data); // Retorna
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-    }
-
-    async getListaTPDocumento(req, res) {
+    //tipodocumento
+/*     async getListaTPDocumento(req, res) {
         let { } = req.query;
 
         try {
@@ -469,9 +482,10 @@ class ComprasControllers {
             console.error("erro nos campos do banco:", error);
             throw error;
         }
-    }
+    } */
 
-    async getListaTPDocumento(req, res) {
+    //tipodocumento
+ /*    async getListaTPDocumento(req, res) {
         let { } = req.query;
 
         try {
@@ -483,10 +497,11 @@ class ComprasControllers {
             console.error("erro nos campos do banco:", error);
             throw error;
         }
-    }
+    } */
 
-    async getListaGrupoEstrutura(req, res) {
-        let { idGrupoEstrutura, descricaoGrupoEstrutura} = req.query;
+    //estrutura
+/*     async getListaGrupoEstrutura(req, res) {
+        let { idGrupoEstrutura, descricaoGrupoEstrutura } = req.query;
         idGrupoEstrutura = idGrupoEstrutura ? idGrupoEstrutura : '';
         descricaoGrupoEstrutura = descricaoGrupoEstrutura ? descricaoGrupoEstrutura : '';
         try {
@@ -498,10 +513,11 @@ class ComprasControllers {
             console.error("erro nos campos do banco:", error);
             throw error;
         }
-    }
+    } */
 
-    async getListaUnidadesMedidas(req, res) {
-        let { idUnidadeMedida, descricao} = req.query;
+    //unidadesmedidas
+/*     async getListaUnidadesMedidas(req, res) {
+        let { idUnidadeMedida, descricao } = req.query;
         idUnidadeMedida = idUnidadeMedida ? idUnidadeMedida : '';
         descricao = descricao ? descricao : '';
         try {
@@ -513,10 +529,11 @@ class ComprasControllers {
             console.error("erro ComprasControllers.getListaUnidadesMedidas:", error);
             throw error;
         }
-    }
+    } */
 
-    async getListaCores(req, res) {
-        let { idCor, descricao} = req.query;
+    //cores
+/*     async getListaCores(req, res) {
+        let { idCor, descricao } = req.query;
         idCor = idCor ? idCor : '';
         descricao = descricao ? descricao : '';
         try {
@@ -528,10 +545,11 @@ class ComprasControllers {
             console.error("erro nos campos do banco:", error);
             throw error;
         }
-    }
+    } */
 
-    async getListaGrupoCores(req, res) {
-        let { idCor, descricao} = req.query;
+    //cores
+/*     async getListaGrupoCores(req, res) {
+        let { idCor, descricao } = req.query;
         idCor = idCor ? idCor : '';
         descricao = descricao ? descricao : '';
         try {
@@ -543,10 +561,11 @@ class ComprasControllers {
             console.error("erro nos campos do banco:", error);
             throw error;
         }
-    }
+    } */
 
-    async getListaEstilos(req, res) {
-        let { idEstilo, idGrupoEstilo, descEstilo, page, pageSize} = req.query;
+    //estilo
+ /*    async getListaEstilos(req, res) {
+        let { idEstilo, idGrupoEstilo, descEstilo, page, pageSize } = req.query;
         idEstilo = idEstilo ? idEstilo : '';
         idGrupoEstilo = idGrupoEstilo ? idGrupoEstilo : '';
         descEstilo = descEstilo ? descEstilo : '';
@@ -563,86 +582,92 @@ class ComprasControllers {
             console.error("erro nos campos do banco:", error);
             throw error;
         }
-    }
+    } */
 
-    async getListaTipoTecidos(req, res) {
-        let { idTecido, descricao} = req.query;
+    //tecidos
+/*     async getListaTipoTecidos(req, res) {
+        let { idTecido, descricao } = req.query;
         idTecido = idTecido ? idTecido : '';
         descricao = descricao ? descricao : '';
         try {
             const apiUrl = `${url}/api/compras/tipotecidos.xsjs?idTecido=${idTecido}&descTecido=${descricao}`
             const response = await axios.get(apiUrl)
-       
-            return res.json(response.data);
-        } catch (error) {
-            console.error("erro nos campos do banco:", error);
-            throw error;
-        }
-    }
-
-    async getListaCategoriaPedidos(req, res) {
-        let { idCategoriaPedido, descricao} = req.query;
-        idCategoriaPedido = idCategoriaPedido ? idCategoriaPedido : '';
-        descricao = descricao ? descricao : '';
-        try {
-            const apiUrl = `${url}/api/compras/categoriapedidos.xsjs?idCatPed=${idCategoriaPedido}&descCatPed=${descricao}`
-            const response = await axios.get(apiUrl)
 
             return res.json(response.data);
         } catch (error) {
             console.error("erro nos campos do banco:", error);
             throw error;
         }
-    }
+    } */
 
-    async getListaCategoriaPedido(req, res) {
-        let { idCategoriaPedido, descricao} = req.query;
-        idCategoriaPedido = idCategoriaPedido ? idCategoriaPedido : '';
-        descricao = descricao ? descricao : '';
-        try {
-            const apiUrl = `${url}/api/compras/categoriapedido.xsjs?idtipopedido=${idCategoriaPedido}`
-            const response = await axios.get(apiUrl)
+    //pedidos
+    /*   async getListaCategoriaPedidos(req, res) {
+          let { idCategoriaPedido, descricao} = req.query;
+          idCategoriaPedido = idCategoriaPedido ? idCategoriaPedido : '';
+          descricao = descricao ? descricao : '';
+          try {
+              const apiUrl = `${url}/api/compras/categoriapedidos.xsjs?idCatPed=${idCategoriaPedido}&descCatPed=${descricao}`
+              const response = await axios.get(apiUrl)
+  
+              return res.json(response.data);
+          } catch (error) {
+              console.error("erro nos campos do banco:", error);
+              throw error;
+          }
+      } */
 
-            return res.json(response.data);
-        } catch (error) {
-            console.error("error no ComprasController.getListaCategoriaPedido:", error);
-            throw error;
-        }
-    }
+    //pedidos
+    /*    async getListaCategoriaPedido(req, res) {
+           let { idCategoriaPedido, descricao} = req.query;
+           idCategoriaPedido = idCategoriaPedido ? idCategoriaPedido : '';
+           descricao = descricao ? descricao : '';
+           try {
+               const apiUrl = `${url}/api/compras/categoriapedido.xsjs?idtipopedido=${idCategoriaPedido}`
+               const response = await axios.get(apiUrl)
+   
+               return res.json(response.data);
+           } catch (error) {
+               console.error("error no ComprasController.getListaCategoriaPedido:", error);
+               throw error;
+           }
+       } */
 
-    async getListaTamanhosPedidos(req, res) {
-        let { idTamanhoPedido, descricao} = req.query;
-        idTamanhoPedido = idTamanhoPedido ? idTamanhoPedido : '';
-        descricao = descricao ? descricao : '';
-        try {
-            const apiUrl = `${url}/api/compras/tamanhospedidos.xsjs?idTamPed=${idTamanhoPedido}&descTamPed=${descricao}`
-            const response = await axios.get(apiUrl)
+    //pedidos
+    /*    async getListaTamanhosPedidos(req, res) {
+           let { idTamanhoPedido, descricao} = req.query;
+           idTamanhoPedido = idTamanhoPedido ? idTamanhoPedido : '';
+           descricao = descricao ? descricao : '';
+           try {
+               const apiUrl = `${url}/api/compras/tamanhospedidos.xsjs?idTamPed=${idTamanhoPedido}&descTamPed=${descricao}`
+               const response = await axios.get(apiUrl)
+   
+               return res.json(response.data);
+           } catch (error) {
+               console.error("erro nos campos do banco:", error);
+               throw error;
+           }
+       } */
 
-            return res.json(response.data);
-        } catch (error) {
-            console.error("erro nos campos do banco:", error);
-            throw error;
-        }
-    }
+    //pedidos
+    /*     async getListaTamanhosCategoriaPedidos(req, res) {
+            let { idCategoriaPedido, descricao, idTamanhoPedido} = req.query;
+            idCategoriaPedido = idCategoriaPedido ? idCategoriaPedido : '';
+            descricao = descricao ? descricao : '';
+            idTamanhoPedido = idTamanhoPedido ? idTamanhoPedido : '';
+            try {
+                const apiUrl = `${url}/api/compras/vinctamcat.xsjs?idCatPeid=${idCategoriaPedido}&descCatPed=${descricao}&idTamPed=${idTamanhoPedido}`
+                const response = await axios.get(apiUrl)
+    
+                return res.json(response.data);
+            } catch (error) {
+                console.error("erro nos campos do banco:", error);
+                throw error;
+            }
+        } */
 
-    async getListaTamanhosCategoriaPedidos(req, res) {
-        let { idCategoriaPedido, descricao, idTamanhoPedido} = req.query;
-        idCategoriaPedido = idCategoriaPedido ? idCategoriaPedido : '';
-        descricao = descricao ? descricao : '';
-        idTamanhoPedido = idTamanhoPedido ? idTamanhoPedido : '';
-        try {
-            const apiUrl = `${url}/api/compras/vinctamcat.xsjs?idCatPeid=${idCategoriaPedido}&descCatPed=${descricao}&idTamPed=${idTamanhoPedido}`
-            const response = await axios.get(apiUrl)
-
-            return res.json(response.data);
-        } catch (error) {
-            console.error("erro nos campos do banco:", error);
-            throw error;
-        }
-    }
-
-    async getListaUnidadeMedida(req, res) {
-        let { idUnidadeMedida, descricao} = req.query;
+    //medidas
+/*     async getListaUnidadeMedida(req, res) {
+        let { idUnidadeMedida, descricao } = req.query;
         idUnidadeMedida = idUnidadeMedida ? idUnidadeMedida : '';
         descricao = descricao ? descricao : '';
         try {
@@ -654,10 +679,11 @@ class ComprasControllers {
             console.error("erro nos campos do banco:", error);
             throw error;
         }
-    }
+    } */
 
-    async getListaTipoTecidoSelect(req, res) {
-        let { idTecido, descricao} = req.query;
+    //tecidos
+ /*    async getListaTipoTecidoSelect(req, res) {
+        let { idTecido, descricao } = req.query;
         idTecido = idTecido ? idTecido : '';
         descricao = descricao ? descricao : '';
         try {
@@ -669,11 +695,12 @@ class ComprasControllers {
             console.error("erro nos campos do banco:", error);
             throw error;
         }
-    }
+    } */
 
-    async getListaLocalExposicao(req, res) {
+    //exposicao
+/*     async getListaLocalExposicao(req, res) {
         let { } = req.query;
-   
+
         try {
             const apiUrl = `${url}/api/compras/localexposicao.xsjs`
             const response = await axios.get(apiUrl)
@@ -683,11 +710,12 @@ class ComprasControllers {
             console.error("erro nos campos do banco:", error);
             throw error;
         }
-    }
+    } */
 
-    async getListaDistribuicaoHistorico(req, res) {
-        let {idFornecedor, dataPesquisaInicio, dataPesquisaFim } = req.query;
-        
+    //distribuicao
+  /*   async getListaDistribuicaoHistorico(req, res) {
+        let { idFornecedor, dataPesquisaInicio, dataPesquisaFim } = req.query;
+
         idFornecedor = idFornecedor ? idFornecedor : '';
         dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataPesquisaInicio : '';
         dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataPesquisaFim : '';
@@ -700,11 +728,12 @@ class ComprasControllers {
             console.error("erro nos campos do banco:", error);
             throw error;
         }
-    }
+    } */
 
-    async getListaDetalheDistribuicao(req, res) {
-        let {idPedido } = req.query;
-        
+    //distribuicao
+/*     async getListaDetalheDistribuicao(req, res) {
+        let { idPedido } = req.query;
+
         idPedido = idPedido ? idPedido : '';
         try {
             const apiUrl = `${url}/api/compras/detalhe-distribuicao-compras.xsjs?page=&id=${idPedido}`
@@ -715,10 +744,11 @@ class ComprasControllers {
             console.error("erro nos campos do banco:", error);
             throw error;
         }
-    }
-    async getListaDistribuicaoSugestoesHistorico(req, res) {
-        let {idPedido } = req.query;
-        
+    } */
+    //distribuicao
+  /*   async getListaDistribuicaoSugestoesHistorico(req, res) {
+        let { idPedido } = req.query;
+
         idPedido = idPedido ? idPedido : '';
         try {
             const apiUrl = `${url}/api/compras/distribuicao-compras-sugestoes-historico.xsjs?page=&id=${idPedido}`
@@ -729,90 +759,95 @@ class ComprasControllers {
             console.error("erro nos campos do banco:", error);
             throw error;
         }
-    }
+    } */
 
-    async getListaProdutosEntreFiliais(req, res) {
-        let {idFilialOrigem, idFilialDestino, idProduto, descricaoProduto, codBarras, page, pageSize} = req.query;
-
-        idFilialOrigem = idFilialOrigem ? idFilialOrigem : '';
-        idFilialDestino = idFilialDestino ? idFilialDestino : '';
-        idProduto = idProduto ? idProduto : '';
-        descricaoProduto = descricaoProduto ? descricaoProduto : '';
-        codBarras = codBarras ? codBarras : '';
-        page = page ? page : '';
-        pageSize = pageSize ? pageSize : '';
-        
-        try {
-            const apiUrl = `${url}/api/compras/lista-produtos-entre-filiais.xsjs?idFilialOrigem=${idFilialOrigem}&idFilialDestino=${idFilialDestino}&idProd=${idProduto}&descProd=${descricaoProduto}&codBarrasProd=${codBarras}&page=${page}&pageSize=${pageSize}`
-            const response = await axios.get(apiUrl)
-
-            return res.json(response.data);
-        } catch (error) {
-            console.error("erro nos campos do banco:", error);
-            throw error;
-        }
-    }
-
-    async getListaProdutosPorPedido(req, res) {
-        let {idResumoPedido, idFilial, dataInicio, dataFim, idProduto, descricaoProduto, codBarras, page, pageSize} = req.query;
-            idResumoPedido = idResumoPedido ? idResumoPedido : '';
-            idFilial = idFilial ? idFilial : '';
-            dataInicio = dataInicio ? dataInicio : '';
-            dataFim = dataFim ? dataFim : '';
+    //produtos
+    /*     async getListaProdutosEntreFiliais(req, res) {
+            let {idFilialOrigem, idFilialDestino, idProduto, descricaoProduto, codBarras, page, pageSize} = req.query;
+    
+            idFilialOrigem = idFilialOrigem ? idFilialOrigem : '';
+            idFilialDestino = idFilialDestino ? idFilialDestino : '';
             idProduto = idProduto ? idProduto : '';
             descricaoProduto = descricaoProduto ? descricaoProduto : '';
             codBarras = codBarras ? codBarras : '';
             page = page ? page : '';
             pageSize = pageSize ? pageSize : '';
-        
-        try {
-            const apiUrl = `${url}/api/compras/lista-produtos-por-pedido-e-filial.xsjs?dtInicio=${dataInicio}&dtFim=${dataFim}&idFilial=${idFilial}&idResumoPedido=${idResumoPedido}&idProd=${idProduto}&descProd=${descricaoProduto}&codBarrasProd=${codBarras}&page=${page}&pageSize=${pageSize}`
-            const response = await axios.get(apiUrl)
+            
+            try {
+                const apiUrl = `${url}/api/compras/lista-produtos-entre-filiais.xsjs?idFilialOrigem=${idFilialOrigem}&idFilialDestino=${idFilialDestino}&idProd=${idProduto}&descProd=${descricaoProduto}&codBarrasProd=${codBarras}&page=${page}&pageSize=${pageSize}`
+                const response = await axios.get(apiUrl)
+    
+                return res.json(response.data);
+            } catch (error) {
+                console.error("erro nos campos do banco:", error);
+                throw error;
+            }
+        } */
 
-            return res.json(response.data);
-        } catch (error) {
-            console.error("erro nos campos do banco:", error);
-            throw error;
-        }
-    }
-    async getListaFornecedorSap(req, res) {
-        let {nomeFornecedor, cnpjFinal, cnpjFornecedorSemFormatar, page, pageSize} = req.query;
-            nomeFornecedor = nomeFornecedor ? nomeFornecedor : '';
-            cnpjFinal = cnpjFinal ? cnpjFinal : '';
-            cnpjFornecedorSemFormatar = cnpjFornecedorSemFormatar ? cnpjFornecedorSemFormatar : '';
-            page = page ? page : '';
-            pageSize = pageSize ? pageSize : '';
-        
-        try {
-            const apiUrl = `${url}/api/service-layer/pedido-compra/por-codigo/consulta-fornecedor-sap.xsjs?descFornecedor=${nomeFornecedor}&cnpjfor=${cnpjFinal}&cnpjforsemformat=${cnpjFornecedorSemFormatar}&page=${page}&pageSize=${pageSize}`
-            const response = await axios.get(apiUrl)
+    //produtos
+    /*  async getListaProdutosPorPedido(req, res) {
+         let {idResumoPedido, idFilial, dataInicio, dataFim, idProduto, descricaoProduto, codBarras, page, pageSize} = req.query;
+             idResumoPedido = idResumoPedido ? idResumoPedido : '';
+             idFilial = idFilial ? idFilial : '';
+             dataInicio = dataInicio ? dataInicio : '';
+             dataFim = dataFim ? dataFim : '';
+             idProduto = idProduto ? idProduto : '';
+             descricaoProduto = descricaoProduto ? descricaoProduto : '';
+             codBarras = codBarras ? codBarras : '';
+             page = page ? page : '';
+             pageSize = pageSize ? pageSize : '';
+         
+         try {
+             const apiUrl = `${url}/api/compras/lista-produtos-por-pedido-e-filial.xsjs?dtInicio=${dataInicio}&dtFim=${dataFim}&idFilial=${idFilial}&idResumoPedido=${idResumoPedido}&idProd=${idProduto}&descProd=${descricaoProduto}&codBarrasProd=${codBarras}&page=${page}&pageSize=${pageSize}`
+             const response = await axios.get(apiUrl)
+ 
+             return res.json(response.data);
+         } catch (error) {
+             console.error("erro nos campos do banco:", error);
+             throw error;
+         }
+     } */
+    //fornecedor
+    /*  async getListaFornecedorSap(req, res) {
+         let {nomeFornecedor, cnpjFinal, cnpjFornecedorSemFormatar, page, pageSize} = req.query;
+             nomeFornecedor = nomeFornecedor ? nomeFornecedor : '';
+             cnpjFinal = cnpjFinal ? cnpjFinal : '';
+             cnpjFornecedorSemFormatar = cnpjFornecedorSemFormatar ? cnpjFornecedorSemFormatar : '';
+             page = page ? page : '';
+             pageSize = pageSize ? pageSize : '';
+         
+         try {
+             const apiUrl = `${url}/api/service-layer/pedido-compra/por-codigo/consulta-fornecedor-sap.xsjs?descFornecedor=${nomeFornecedor}&cnpjfor=${cnpjFinal}&cnpjforsemformat=${cnpjFornecedorSemFormatar}&page=${page}&pageSize=${pageSize}`
+             const response = await axios.get(apiUrl)
+ 
+             return res.json(response.data);
+         } catch (error) {
+             console.error("erro nos campos do banco:", error);
+             throw error;
+         }
+     } */
 
-            return res.json(response.data);
-        } catch (error) {
-            console.error("erro nos campos do banco:", error);
-            throw error;
-        }
-    }
-
+    //produtos
     //  UPDATE
-    async updateProdutoImagem(req, res) {
-        let { IDIMAGEMPRODUTO, STATIVO } = req.body;
+    /*     async updateProdutoImagem(req, res) {
+            let { IDIMAGEMPRODUTO, STATIVO } = req.body;
+    
+            try {
+                const apiUrl = `${url}/api/compras/atualiza_produtosimagem.xsjs`
+                const response = await axios.put(apiUrl, {
+                    IDIMAGEMPRODUTO,
+                    STATIVO
+                })
+    
+                return res.json(response.data); // Retorna
+            } catch (error) {
+                console.error("Unable to connect to the database:", error);
+                throw error;
+            }
+        } */
 
-        try {
-            const apiUrl = `${url}/api/compras/atualiza_produtosimagem.xsjs`
-            const response = await axios.put(apiUrl, {
-                IDIMAGEMPRODUTO,
-                STATIVO
-            })
-
-            return res.json(response.data); // Retorna
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-    }
-
-    async putCadastroTransportador(req, res) {
+    //transportador
+   /*  async putCadastroTransportador(req, res) {
         let {
             IDTRANSPORTADORA,
             IDGRUPOEMPRESARIAL,
@@ -873,9 +908,10 @@ class ComprasControllers {
             console.error("erro nos campos do banco:", error);
             throw error;
         }
-    }
+    } */
 
-    async putCondicaoPagamento(req, res) {
+    //pagamento
+/*     async putCondicaoPagamento(req, res) {
         let {
             IDCONDICAOPAGAMENTO,
             IDGRUPOEMPRESARIAL,
@@ -932,9 +968,10 @@ class ComprasControllers {
             console.error("erro nos campos do banco:", error);
             throw error;
         }
-    }
+    } */
 
-    async updateSubGrupoEstrutura(req, res) {
+    //estrutura
+/*     async updateSubGrupoEstrutura(req, res) {
         let {
             IDGRUPOESTRUTURAANTIGA,
             IDGRUPOESTRUTURA,
@@ -962,9 +999,10 @@ class ComprasControllers {
             console.error("erro nos campos do banco:", error);
             throw error;
         }
-    }
+    } */
 
-    async putGrupoEstrutura(req, res) {
+    //estrutura
+/*     async putGrupoEstrutura(req, res) {
         let {
             IDGRUPOESTRUTURA,
             IDGRUPOEMPRESARIAL,
@@ -986,8 +1024,9 @@ class ComprasControllers {
             throw error;
         }
     }
-
-    async updateUnidadeMedida(req, res) {
+ */
+    //medidas
+/*     async updateUnidadeMedida(req, res) {
         let {
             IDUNIDADEMEDIDA,
             DSUNIDADE,
@@ -1007,14 +1046,15 @@ class ComprasControllers {
                 DTULTATUALIZACAO,
                 STATIVO
             });
-            return res.status(200).json({message: 'Atualizado com sucesso'});
+            return res.status(200).json({ message: 'Atualizado com sucesso' });
         } catch (error) {
             console.error("erro nos campos do banco:", error);
             throw error;
         }
-    }
+    } */
 
-    async updateCores(req, res) {
+    //cores
+ /*    async updateCores(req, res) {
         let {
             IDCOR,
             IDGRUPOCOR,
@@ -1036,9 +1076,10 @@ class ComprasControllers {
             console.error("erro nos campos do banco:", error);
             throw error;
         }
-    }
+    } */
 
-    async putEstilos(req, res) {
+    //estilos
+/*     async putEstilos(req, res) {
         try {
             let { IDVINCESTILOSESTRUTURA, IDGRUPOESTRUTURAANTIGA, IDESTILO, DSESTILO, IDGRUPOESTRUTURA, STATIVO } = req.body;
             const apiUrl = `${url}/api/compras/estilos.xsjs`
@@ -1050,15 +1091,16 @@ class ComprasControllers {
                 IDGRUPOESTRUTURA,
                 STATIVO,
             })
-            
+
             return res.json(response.data);
         } catch (error) {
             console.error("Erro no ComprasControllers.putEstilos:", error);
             return res.status(500).json({ error: error.message });
         }
-    }
+    } */
 
-    async updateTipoTecidos(req, res) {
+    //tecidos
+/*     async updateTipoTecidos(req, res) {
         let {
             IDTPTECIDO,
             DSTIPOTECIDO,
@@ -1077,81 +1119,85 @@ class ComprasControllers {
             console.error("erro nos campos do banco:", error);
             throw error;
         }
-    }
+    } */
 
-    async putCategoriaPedidos(req, res) {
-        let {
-            IDCATEGORIAPEDIDO,
-            DSCATEGORIAPEDIDO,
-            TIPOPEDIDO,
-            STATIVO
-        } = req.body;
-
-        try {
-            const apiUrl = `${url}/api/compras/categoriapedidos.xsjs`
-            const response = await axios.put(apiUrl, {
+    //pedidos
+    /*     async putCategoriaPedidos(req, res) {
+            let {
                 IDCATEGORIAPEDIDO,
                 DSCATEGORIAPEDIDO,
                 TIPOPEDIDO,
                 STATIVO
-            });
-            return res.json(response.data);
-        } catch (error) {
-            console.error("error no ComprasControllers.putCategoriaPedidos:", error);
-            throw error;
+            } = req.body;
+    
+            try {
+                const apiUrl = `${url}/api/compras/categoriapedidos.xsjs`
+                const response = await axios.put(apiUrl, {
+                    IDCATEGORIAPEDIDO,
+                    DSCATEGORIAPEDIDO,
+                    TIPOPEDIDO,
+                    STATIVO
+                });
+                return res.json(response.data);
+            } catch (error) {
+                console.error("error no ComprasControllers.putCategoriaPedidos:", error);
+                throw error;
+            }
         }
-    }
-
-    async putFabricante(req, res) {
-        let {
-            IDFABRICANTE,
-            DSFABRICANTE,
-            DTULTATUALIZACAO,
-            DTCADASTRO,
-            STATIVO,
-        } = req.body;
-
-        try {
-            const apiUrl = `${url}/api/compras/fabricante.xsjs`
-            const response = await axios.put(apiUrl, {
+     */
+    //fabricantes
+    /*     async putFabricante(req, res) {
+            let {
                 IDFABRICANTE,
                 DSFABRICANTE,
                 DTULTATUALIZACAO,
                 DTCADASTRO,
-                STATIVO
-            });
-            return res.json(response.data);
-        } catch (error) {
-            console.error("error no ComprasControllers.putFabricante:", error);
-            throw error;
-        }
-    }
+                STATIVO,
+            } = req.body;
+    
+            try {
+                const apiUrl = `${url}/api/compras/fabricante.xsjs`
+                const response = await axios.put(apiUrl, {
+                    IDFABRICANTE,
+                    DSFABRICANTE,
+                    DTULTATUALIZACAO,
+                    DTCADASTRO,
+                    STATIVO
+                });
+                return res.json(response.data);
+            } catch (error) {
+                console.error("error no ComprasControllers.putFabricante:", error);
+                throw error;
+            }
+        } */
 
-    async putFabricanteFornecedor(req, res) {
-        let {
-            IDFABRICANTEFORN,
-            IDFABRICANTE,
-            IDFORNECEDOR,
-            STATIVO,
-        } = req.body;
-
-        try {
-            const apiUrl = `${url}/api/compras/fabricante-fornecedor.xsjs`
-            const response = await axios.put(apiUrl, {
+    //fabricante
+    /*     async putFabricanteFornecedor(req, res) {
+            let {
                 IDFABRICANTEFORN,
                 IDFABRICANTE,
                 IDFORNECEDOR,
                 STATIVO,
-            });
-            return res.json(response.data);
-        } catch (error) {
-            console.error("error no ComprasControllers.putFabricanteFornecedor:", error);
-            throw error;
-        }
-    }
+            } = req.body;
+    
+            try {
+                const apiUrl = `${url}/api/compras/fabricante-fornecedor.xsjs`
+                const response = await axios.put(apiUrl, {
+                    IDFABRICANTEFORN,
+                    IDFABRICANTE,
+                    IDFORNECEDOR,
+                    STATIVO,
+                });
+                return res.json(response.data);
+            } catch (error) {
+                console.error("error no ComprasControllers.putFabricanteFornecedor:", error);
+                throw error;
+            }
+        } */
 
+    //tamanho
     //  este update é para excluir vinculo de tamanho com categoria
-    async updateVinculoTamanhoCategoria(req, res) {
+/*     async updateVinculoTamanhoCategoria(req, res) {
         let {
             IDCATPEDIDOTAMANHO,
         } = req.query;
@@ -1159,37 +1205,40 @@ class ComprasControllers {
         try {
             const apiUrl = `${url}/api/compras/del_vinctamcat.xsjs?IDCATPEDIDOTAMANHO=${IDCATPEDIDOTAMANHO}`
             const response = await axios.put(apiUrl);
+
             return res.json(response.data);
         } catch (error) {
             console.error("erro nos dados enviados:", error);
             throw error;
         }
-    }
+    } */
 
-    async putFornecedorFabricante(req, res) {
-        let {
-            IDFABRICANTEFORN,
-            IDFABRICANTE,
-            IDFORNECEDOR,
-            STATIVO,
-        } = req.body;
-
-        try {
-            const apiUrl = `${url}/api/compras/fornecedor-fabricante.xsjs`
-            const response = await axios.put(apiUrl, {
+    //fabricante
+    /*     async putFornecedorFabricante(req, res) {
+            let {
                 IDFABRICANTEFORN,
                 IDFABRICANTE,
                 IDFORNECEDOR,
                 STATIVO,
-            });
-            return res.json(response.data);
-        } catch (error) {
-            console.error("error no ComprasControllers.putFornecedorFabricante:", error);
-            throw error;
+            } = req.body;
+    
+            try {
+                const apiUrl = `${url}/api/compras/fornecedor-fabricante.xsjs`
+                const response = await axios.put(apiUrl, {
+                    IDFABRICANTEFORN,
+                    IDFABRICANTE,
+                    IDFORNECEDOR,
+                    STATIVO,
+                });
+                return res.json(response.data);
+            } catch (error) {
+                console.error("error no ComprasControllers.putFornecedorFabricante:", error);
+                throw error;
+            }
         }
-    }
-
-    async putFornecedor(req, res) {
+     */
+    //fornecedor
+ /*    async putFornecedor(req, res) {
         let {
             IDFORNECEDOR,
             IDGRUPOEMPRESARIAL,
@@ -1228,7 +1277,7 @@ class ComprasControllers {
 
         try {
             const apiUrl = `${url}/api/compras/fornecedor.xsjs`
-        
+
             const response = await axios.put(apiUrl, {
                 IDFORNECEDOR,
                 IDGRUPOEMPRESARIAL,
@@ -1269,59 +1318,26 @@ class ComprasControllers {
             console.error("error no ComprasControllers.putFornecedor:", error);
             throw error;
         }
-    }
+    } */
 
-    async putExcluirVinculoFornecedorFabricante(req, res) {
-        let {  IDFABRICANTEFORNOCEDOR    } = req.query;
+    //fabricante
+    /*     async putExcluirVinculoFornecedorFabricante(req, res) {
+            let {  IDFABRICANTEFORNOCEDOR    } = req.query;
+    
+            try {
+                const apiUrl = `${url}/api/compras/del_vincfabforn.xsjs?IDFABRICANTEFORN=${IDFABRICANTEFORNOCEDOR}`
+            
+                const response = await axios.put(apiUrl);
+                return res.json(response.data);
+            } catch (error) {
+                console.error("error no ComprasControllers.putExcluirVinculoFornecedor:", error);
+                throw error;
+            }
+        } */
 
-        try {
-            const apiUrl = `${url}/api/compras/del_vincfabforn.xsjs?IDFABRICANTEFORN=${IDFABRICANTEFORNOCEDOR}`
-        
-            const response = await axios.put(apiUrl);
-            return res.json(response.data);
-        } catch (error) {
-            console.error("error no ComprasControllers.putExcluirVinculoFornecedor:", error);
-            throw error;
-        }
-    }
-
-    async putFinalizarPedido(req, res) {
-        let {  
-            IDRESUMOPEDIDO,
-            IDGRUPOEMPRESARIAL,
-            IDSUBGRUPOEMPRESARIAL,
-            IDCOMPRADOR,
-            IDCONDICAOPAGAMENTO,
-            IDFORNECEDOR,
-            IDTRANSPORTADORA,
-            IDANDAMENTO,
-            MODPEDIDO,
-            NOVENDEDOR,
-            EEMAILVENDEDOR,
-            DTPEDIDO,
-            DTPREVENTREGA,
-            TPFRETE,
-            DESCPERC01,
-            DESCPERC02,
-            DESCPERC03,
-            PERCCOMISSAO,
-            VRTOTALLIQUIDO,
-            OBSPEDIDO,
-            OBSPEDIDO2,
-            DTFECHAMENTOPEDIDO,
-            DTCADASTRO,
-            TPARQUIVO,
-            STDISTRIBUIDO,
-            STAGRUPAPRODUTO,
-            STCANCELADO,
-            TPFISCAL,
-            STRASCUNHO,
-        } = req.body;
-
-        try {
-            const apiUrl = `${url}/api/compras/finalizar-pedido.xsjs`
-        
-            const response = await axios.put(apiUrl, {
+    //pedido
+    /*     async putFinalizarPedido(req, res) {
+            let {  
                 IDRESUMOPEDIDO,
                 IDGRUPOEMPRESARIAL,
                 IDSUBGRUPOEMPRESARIAL,
@@ -1351,51 +1367,52 @@ class ComprasControllers {
                 STCANCELADO,
                 TPFISCAL,
                 STRASCUNHO,
-            });
-            return res.json(response.data);
-        } catch (error) {
-            console.error("error no ComprasControllers.putFinalizarPedido:", error);
-            throw error;
-        }
-    }
+            } = req.body;
+    
+            try {
+                const apiUrl = `${url}/api/compras/finalizar-pedido.xsjs`
+            
+                const response = await axios.put(apiUrl, {
+                    IDRESUMOPEDIDO,
+                    IDGRUPOEMPRESARIAL,
+                    IDSUBGRUPOEMPRESARIAL,
+                    IDCOMPRADOR,
+                    IDCONDICAOPAGAMENTO,
+                    IDFORNECEDOR,
+                    IDTRANSPORTADORA,
+                    IDANDAMENTO,
+                    MODPEDIDO,
+                    NOVENDEDOR,
+                    EEMAILVENDEDOR,
+                    DTPEDIDO,
+                    DTPREVENTREGA,
+                    TPFRETE,
+                    DESCPERC01,
+                    DESCPERC02,
+                    DESCPERC03,
+                    PERCCOMISSAO,
+                    VRTOTALLIQUIDO,
+                    OBSPEDIDO,
+                    OBSPEDIDO2,
+                    DTFECHAMENTOPEDIDO,
+                    DTCADASTRO,
+                    TPARQUIVO,
+                    STDISTRIBUIDO,
+                    STAGRUPAPRODUTO,
+                    STCANCELADO,
+                    TPFISCAL,
+                    STRASCUNHO,
+                });
+                return res.json(response.data);
+            } catch (error) {
+                console.error("error no ComprasControllers.putFinalizarPedido:", error);
+                throw error;
+            }
+        } */
 
-    async putPedido(req, res) {
-        let {  
-            IDRESUMOPEDIDO,
-            IDGRUPOEMPRESARIAL,
-            IDSUBGRUPOEMPRESARIAL,
-            IDCOMPRADOR,
-            IDCONDICAOPAGAMENTO,
-            IDFORNECEDOR,
-            IDTRANSPORTADORA,
-            IDANDAMENTO,
-            MODPEDIDO,
-            NOVENDEDOR,
-            EEMAILVENDEDOR,
-            DTPEDIDO,
-            DTPREVENTREGA,
-            TPFRETE,
-            DESCPERC01,
-            DESCPERC02,
-            DESCPERC03,
-            PERCCOMISSAO,
-            VRTOTALLIQUIDO,
-            OBSPEDIDO,
-            OBSPEDIDO2,
-            DTFECHAMENTOPEDIDO,
-            DTCADASTRO,
-            TPARQUIVO,
-            STDISTRIBUIDO,
-            STAGRUPAPRODUTO,
-            STCANCELADO,
-            TPFISCAL,
-            STRASCUNHO,
-        } = req.body;
-
-        try {
-            const apiUrl = `${url}/api/compras/atualizar-pedidos.xsjs`
-        
-            const response = await axios.post(apiUrl, {
+    //pedido
+    /*     async putPedido(req, res) {
+            let {  
                 IDRESUMOPEDIDO,
                 IDGRUPOEMPRESARIAL,
                 IDSUBGRUPOEMPRESARIAL,
@@ -1425,16 +1442,52 @@ class ComprasControllers {
                 STCANCELADO,
                 TPFISCAL,
                 STRASCUNHO,
-            });
-            return res.json(response.data);
-        } catch (error) {
-            console.error("error no ComprasControllers.putPedido:", error);
-            throw error;
-        }
-    }
+            } = req.body;
+    
+            try {
+                const apiUrl = `${url}/api/compras/atualizar-pedidos.xsjs`
+            
+                const response = await axios.post(apiUrl, {
+                    IDRESUMOPEDIDO,
+                    IDGRUPOEMPRESARIAL,
+                    IDSUBGRUPOEMPRESARIAL,
+                    IDCOMPRADOR,
+                    IDCONDICAOPAGAMENTO,
+                    IDFORNECEDOR,
+                    IDTRANSPORTADORA,
+                    IDANDAMENTO,
+                    MODPEDIDO,
+                    NOVENDEDOR,
+                    EEMAILVENDEDOR,
+                    DTPEDIDO,
+                    DTPREVENTREGA,
+                    TPFRETE,
+                    DESCPERC01,
+                    DESCPERC02,
+                    DESCPERC03,
+                    PERCCOMISSAO,
+                    VRTOTALLIQUIDO,
+                    OBSPEDIDO,
+                    OBSPEDIDO2,
+                    DTFECHAMENTOPEDIDO,
+                    DTCADASTRO,
+                    TPARQUIVO,
+                    STDISTRIBUIDO,
+                    STAGRUPAPRODUTO,
+                    STCANCELADO,
+                    TPFISCAL,
+                    STRASCUNHO,
+                });
+                return res.json(response.data);
+            } catch (error) {
+                console.error("error no ComprasControllers.putPedido:", error);
+                throw error;
+            }
+        } */
 
+    //Estrutura
     // CREATE
-    async createSubGrupoEstrutura(req, res) {
+/*     async createSubGrupoEstrutura(req, res) {
         let {
             IDGRUPOESTRUTURAANTIGA,
             IDGRUPOESTRUTURA,
@@ -1461,9 +1514,10 @@ class ComprasControllers {
             console.error("error no ComprasController.postGrupoEstrutura:", error);
             throw error;
         }
-    }
+    } */
 
-    async postGrupoEstrutura(req, res) {
+    //estrutura
+/*     async postGrupoEstrutura(req, res) {
         let {
             DSGRUPOESTRUTURA,
             IDGRUPOEMPRESARIAL,
@@ -1482,10 +1536,11 @@ class ComprasControllers {
             console.error("error no ComprasController.postGrupoEstrutura:", error);
             throw error;
         }
-    }
+    } */
 
-    async postCondicaoPagamento(req, res) {
-        let  {
+    //pagamento
+   /*  async postCondicaoPagamento(req, res) {
+        let {
             IDCONDICAOPAGAMENTO,
             IDGRUPOEMPRESARIAL,
             DSCONDICAOPAG,
@@ -1536,15 +1591,16 @@ class ComprasControllers {
                 STATIVO,
                 IDTPDOCUMENTO
             });
-        
+
             return res.json(response.data);
         } catch (error) {
             console.error("error no ComprasController.createCondicaoPagamento:", error);
             throw error;
         }
     }
-
-    async createUnidadeMedida(req, res) {
+ */
+    //medida
+/*     async createUnidadeMedida(req, res) {
         let {
             DSUNIDADE,
             DSSIGLA,
@@ -1567,10 +1623,11 @@ class ComprasControllers {
             console.error("erro nos campos do banco:", error);
             throw error;
         }
-    }
+    } */
 
-    async createCores(req, res) {
-        let  {
+    //cores
+/*     async createCores(req, res) {
+        let {
             IDGRUPOCOR,
             DSCOR,
             STATIVO
@@ -1588,9 +1645,10 @@ class ComprasControllers {
             console.error("erro ComprasController.createCores:", error);
             throw error;
         }
-    }
+    } */
 
-    async postEstilos(req, res) {
+    //estilos
+/*     async postEstilos(req, res) {
         try {
             let { DSESTILO, IDGRUPOESTRUTURA, STATIVO, IDESTILO, IDGRUPOESTRUTURAANTIGA, IDVINCESTILOSESTRUTURA } = req.body;
             const apiUrl = `${url}/api/compras/estilos.xsjs`
@@ -1603,15 +1661,16 @@ class ComprasControllers {
                 IDGRUPOESTRUTURA,
                 STATIVO,
             });
-         
+
             return res.json(response.data);
         } catch (error) {
             console.error("Unable to connect to the database:", error);
             return res.status(500).json({ error: error.message });
         }
-    }
+    } */
 
-    async createTipoTecidos(req, res) {
+    //tecido
+/*     async createTipoTecidos(req, res) {
         let {
             IDTPTECIDO,
             DSTIPOTECIDO,
@@ -1630,8 +1689,9 @@ class ComprasControllers {
             throw error;
         }
     }
-
-    async createCategoriaPedidos(req, res) {
+ */
+    //pedidos
+/*     async createCategoriaPedidos(req, res) {
         let {
             IDCATEGORIAPEDIDO,
             DSCATEGORIAPEDIDO,
@@ -1652,30 +1712,32 @@ class ComprasControllers {
             console.error("error ComprasController.createCategoriaPedidos:", error);
             throw error;
         }
-    }
+    } */
 
-    async postVinculoCategoriaPedido(req, res) {
-        let {
-            IDCATEGORIAPEDIDO,
-            IDTAMANHO,
-            STATIVO
-        } = req.body;
+    //pedidos
+    /*  async postVinculoCategoriaPedido(req, res) {
+         let {
+             IDCATEGORIAPEDIDO,
+             IDTAMANHO,
+             STATIVO
+         } = req.body;
+ 
+         try {
+             const apiUrl = `${url}/api/compras/vinctamcat.xsjs`
+             const response = await axios.post(apiUrl, {
+                 IDCATEGORIAPEDIDO,
+                 IDTAMANHO,
+                 STATIVO
+             });
+             return res.json(response.data);
+         } catch (error) {
+             console.error("error no ComprasController.postVinculoCategoriaPedido:", error);
+             throw error;
+         }
+     } */
 
-        try {
-            const apiUrl = `${url}/api/compras/vinctamcat.xsjs`
-            const response = await axios.post(apiUrl, {
-                IDCATEGORIAPEDIDO,
-                IDTAMANHO,
-                STATIVO
-            });
-            return res.json(response.data);
-        } catch (error) {
-            console.error("error no ComprasController.postVinculoCategoriaPedido:", error);
-            throw error;
-        }
-    }
-
-    async postCadastroTransportador(req, res) {
+    //transportadores
+/*     async postCadastroTransportador(req, res) {
         let {
             IDTRANSPORTADORA,
             IDGRUPOEMPRESARIAL,
@@ -1736,180 +1798,186 @@ class ComprasControllers {
             console.error("erro nos campos do banco:", error);
             throw error;
         }
-    }
+    } */
 
-    async postFabricante(req, res) {
-        let {
-            IDFABRICANTE,
-            DSFABRICANTE,
-            DTCADASTRO,
-            DTULTATUALIZACAO,
-            STATIVO,
-        } = req.body;
+    //fabricantes
+    /*    async postFabricante(req, res) {
+           let {
+               IDFABRICANTE,
+               DSFABRICANTE,
+               DTCADASTRO,
+               DTULTATUALIZACAO,
+               STATIVO,
+           } = req.body;
+   
+           try {
+               const apiUrl = `${url}/api/compras/fabricante.xsjs`
+               const response = await axios.post(apiUrl, {
+                   IDFABRICANTE,
+                   DSFABRICANTE,
+                   DTCADASTRO,
+                   DTULTATUALIZACAO,
+                   STATIVO
+               });
+               return res.json(response.data);
+           } catch (error) {
+               console.error("error no ComprasControllers.postFabricanteFornecedor:", error);
+               throw error;
+           }
+       } */
 
-        try {
-            const apiUrl = `${url}/api/compras/fabricante.xsjs`
-            const response = await axios.post(apiUrl, {
-                IDFABRICANTE,
-                DSFABRICANTE,
-                DTCADASTRO,
-                DTULTATUALIZACAO,
-                STATIVO
-            });
-            return res.json(response.data);
-        } catch (error) {
-            console.error("error no ComprasControllers.postFabricanteFornecedor:", error);
-            throw error;
-        }
-    }
+    //fabricantes
+    /*     async postMigrarFabricanteSap(req, res) {
+            let {
+                codFabricante
+            } = req.query;
+    
+            try {
+                const apiUrl = `${url}/api/service-layer/pedido-compra/por-codigo/fabricante.xsjs?codFabricante=${codFabricante}`
+                const response = await axios.post(apiUrl, {
+                    codFabricante,
+                });
+                console.log(response.data,'response.data');
+                return res.json(response.data);
+            } catch (error) {
+                console.error("error no ComprasControllers.postMigrarFabricanteSap:", error);
+                throw error;
+            }
+        } */
 
-    async postMigrarFabricanteSap(req, res) {
-        let {
-            codFabricante
-        } = req.query;
+    //fabricantes
+    /*   async postFabricanteFornecedor(req, res) {
+          let {
+              IDFABRICANTE,
+              IDFORNECEDOR,
+              STATIVO,
+          } = req.body;
+  
+          try {
+              const apiUrl = `${url}/api/compras/fabricante-fornecedor.xsjs`
+              const response = await axios.post(apiUrl, {
+                  IDFABRICANTE,
+                  IDFORNECEDOR,
+                  STATIVO
+              });
+              return res.json(response.data);
+          } catch (error) {
+              console.error("error no ComprasControllers.postFabricanteFornecedor:", error);
+              throw error;
+          }
+      } */
 
-        try {
-            const apiUrl = `${url}/api/service-layer/pedido-compra/por-codigo/fabricante.xsjs?codFabricante=${codFabricante}`
-            const response = await axios.post(apiUrl, {
-                codFabricante,
-            });
-            console.log(response.data,'response.data');
-            return res.json(response.data);
-        } catch (error) {
-            console.error("error no ComprasControllers.postMigrarFabricanteSap:", error);
-            throw error;
-        }
-    }
+    //fornecedores
+    /*    async postFornecedor(req, res) {
+           let {
+               IDFORNECEDOR,
+               IDGRUPOEMPRESARIAL,
+               IDSUBGRUPOEMPRESARIAL,
+               MODPEDIDO,
+               NORAZAOSOCIAL,
+               NOFANTASIA,
+               NUCNPJ,
+               NUINSCESTADUAL,
+               NUINSCMUNICIPAL,
+               NUIBGE,
+               EENDERECO,
+               ENUMERO,
+               ECOMPLEMENTO,
+               EBAIRRO,
+               ECIDADE,
+               SGUF,
+               NUCEP,
+               EEMAIL,
+               NUTELEFONE1,
+               NUTELEFONE2,
+               NUTELEFONE3,
+               NOREPRESENTANTE,
+               DTCADASTRO,
+               DTULTATUALIZACAO,
+               STATIVO,
+               IDCONDPAGPADRAO,
+               IDTRANSPORTADORAPADRAO,
+               TPPEDIDOPADRAO,
+               NOVENDEDORPADRAO,
+               TPFRETEPADRAO,
+               TPARQUIVOPADRAO,
+               TPFISCALPADRAO,
+               EMAILVENDEDORPADRAO,
+           } = req.body;
+   
+           try {
+               const apiUrl = `${url}/api/compras/fornecedor.xsjs`
+               const response = await axios.post(apiUrl, {
+                   IDFORNECEDOR,
+                   IDGRUPOEMPRESARIAL,
+                   IDSUBGRUPOEMPRESARIAL,
+                   MODPEDIDO,
+                   NORAZAOSOCIAL,
+                   NOFANTASIA,
+                   NUCNPJ,
+                   NUINSCESTADUAL,
+                   NUINSCMUNICIPAL,
+                   NUIBGE,
+                   EENDERECO,
+                   ENUMERO,
+                   ECOMPLEMENTO,
+                   EBAIRRO,
+                   ECIDADE,
+                   SGUF,
+                   NUCEP,
+                   EEMAIL,
+                   NUTELEFONE1,
+                   NUTELEFONE2,
+                   NUTELEFONE3,
+                   NOREPRESENTANTE,
+                   DTCADASTRO,
+                   DTULTATUALIZACAO,
+                   STATIVO,
+                   IDCONDPAGPADRAO,
+                   IDTRANSPORTADORAPADRAO,
+                   TPPEDIDOPADRAO,
+                   NOVENDEDORPADRAO,
+                   TPFRETEPADRAO,
+                   TPARQUIVOPADRAO,
+                   TPFISCALPADRAO,
+                   EMAILVENDEDORPADRAO,
+               });
+               return res.json(response.data);
+           } catch (error) {
+               console.error("error no ComprasControllers.postFornecedor:", error);
+               throw error;
+           }
+       }
+    */
+    //produtos
+    /*    async postImagemProduto(req, res) {
+           let {
+               IDRESUMOPEDIDO,
+               NUREF,
+               IMAGEM,
+               STATIVO,
+               IDPRODIMAGEM
+           } = req.body;
+   
+           try {
+               const apiUrl = `${url}/api/compras/imagemproduto.xsjs`
+               const response = await axios.post(apiUrl, {
+                   IDRESUMOPEDIDO,
+                   NUREF,
+                   IMAGEM,
+                   STATIVO,
+                   IDPRODIMAGEM
+                   
+               });
+               return res.json(response.data);
+           } catch (error) {
+               console.error("error no ComprasControllers.postImagemProduto:", error);
+               throw error;
+           }
+       } */
 
-    async postFabricanteFornecedor(req, res) {
-        let {
-            IDFABRICANTE,
-            IDFORNECEDOR,
-            STATIVO,
-        } = req.body;
-
-        try {
-            const apiUrl = `${url}/api/compras/fabricante-fornecedor.xsjs`
-            const response = await axios.post(apiUrl, {
-                IDFABRICANTE,
-                IDFORNECEDOR,
-                STATIVO
-            });
-            return res.json(response.data);
-        } catch (error) {
-            console.error("error no ComprasControllers.postFabricanteFornecedor:", error);
-            throw error;
-        }
-    }
-
-    async postFornecedor(req, res) {
-        let {
-            IDFORNECEDOR,
-            IDGRUPOEMPRESARIAL,
-            IDSUBGRUPOEMPRESARIAL,
-            MODPEDIDO,
-            NORAZAOSOCIAL,
-            NOFANTASIA,
-            NUCNPJ,
-            NUINSCESTADUAL,
-            NUINSCMUNICIPAL,
-            NUIBGE,
-            EENDERECO,
-            ENUMERO,
-            ECOMPLEMENTO,
-            EBAIRRO,
-            ECIDADE,
-            SGUF,
-            NUCEP,
-            EEMAIL,
-            NUTELEFONE1,
-            NUTELEFONE2,
-            NUTELEFONE3,
-            NOREPRESENTANTE,
-            DTCADASTRO,
-            DTULTATUALIZACAO,
-            STATIVO,
-            IDCONDPAGPADRAO,
-            IDTRANSPORTADORAPADRAO,
-            TPPEDIDOPADRAO,
-            NOVENDEDORPADRAO,
-            TPFRETEPADRAO,
-            TPARQUIVOPADRAO,
-            TPFISCALPADRAO,
-            EMAILVENDEDORPADRAO,
-        } = req.body;
-
-        try {
-            const apiUrl = `${url}/api/compras/fornecedor.xsjs`
-            const response = await axios.post(apiUrl, {
-                IDFORNECEDOR,
-                IDGRUPOEMPRESARIAL,
-                IDSUBGRUPOEMPRESARIAL,
-                MODPEDIDO,
-                NORAZAOSOCIAL,
-                NOFANTASIA,
-                NUCNPJ,
-                NUINSCESTADUAL,
-                NUINSCMUNICIPAL,
-                NUIBGE,
-                EENDERECO,
-                ENUMERO,
-                ECOMPLEMENTO,
-                EBAIRRO,
-                ECIDADE,
-                SGUF,
-                NUCEP,
-                EEMAIL,
-                NUTELEFONE1,
-                NUTELEFONE2,
-                NUTELEFONE3,
-                NOREPRESENTANTE,
-                DTCADASTRO,
-                DTULTATUALIZACAO,
-                STATIVO,
-                IDCONDPAGPADRAO,
-                IDTRANSPORTADORAPADRAO,
-                TPPEDIDOPADRAO,
-                NOVENDEDORPADRAO,
-                TPFRETEPADRAO,
-                TPARQUIVOPADRAO,
-                TPFISCALPADRAO,
-                EMAILVENDEDORPADRAO,
-            });
-            return res.json(response.data);
-        } catch (error) {
-            console.error("error no ComprasControllers.postFornecedor:", error);
-            throw error;
-        }
-    }
-
-    async postImagemProduto(req, res) {
-        let {
-            IDRESUMOPEDIDO,
-            NUREF,
-            IMAGEM,
-            STATIVO,
-            IDPRODIMAGEM
-        } = req.body;
-
-        try {
-            const apiUrl = `${url}/api/compras/imagemproduto.xsjs`
-            const response = await axios.post(apiUrl, {
-                IDRESUMOPEDIDO,
-                NUREF,
-                IMAGEM,
-                STATIVO,
-                IDPRODIMAGEM
-                
-            });
-            return res.json(response.data);
-        } catch (error) {
-            console.error("error no ComprasControllers.postImagemProduto:", error);
-            throw error;
-        }
-    }
-
-    async postFinalizarPedido(req, res) {
+    //pedidos
+    /* async postFinalizarPedido(req, res) {
         let {  
             IDRESUMOPEDIDO,
             IDGRUPOEMPRESARIAL,
@@ -1981,9 +2049,10 @@ class ComprasControllers {
             console.error("error no ComprasControllers.postFinalizarPedido:", error);
             throw error;
         }
-    }
+    } */
 
-    async postPedido(req, res) {
+    //pedidos
+    /* async postPedido(req, res) {
         let {  
             IDRESUMOPEDIDO,
             IDGRUPOEMPRESARIAL,
@@ -2055,7 +2124,7 @@ class ComprasControllers {
             console.error("error no ComprasControllers.postFinalizarPedido:", error);
             throw error;
         }
-    }
+    } */
 }
 
 export default new ComprasControllers();

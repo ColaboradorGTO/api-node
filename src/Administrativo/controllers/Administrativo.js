@@ -1,18 +1,19 @@
-import axios from "axios";
+/* import axios from "axios";
 import { dataFormatada } from "../../utils/dataFormatada.js";
-import { getDetalheVendas } from "../Vendas/repositories/detalheVenda.js";
-import { getDetalheVoucherDados } from "../Vouchers/repositories/detalheVoucherDados.js";
+//import { getDetalheVendas } from "../Vendas/repositories/detalheVenda.js";
+//import { getDetalheVoucherDados } from "../Vouchers/repositories/detalheVoucherDados.js";
 import 'dotenv/config';
 const url = process.env.API_URL;
 import updateVoucherSchema from '../Vouchers/schema/useUpdateVoucher.js'
 import { VouchersClient} from '../Vouchers/client/index.js'
 import { VoucherServices} from '../Vouchers/services/index.js'
 const updateVoucherClient = new VouchersClient(process.env.API_URL);
-const updateVoucherService = new VoucherServices(updateVoucherClient);
+const updateVoucherService = new VoucherServices(updateVoucherClient); */
 
 class AdministrativoControllers {
 
-    async getListaExtratoDaLojaDia(req, res) {
+    // Extrato
+   /*  async getListaExtratoDaLojaDia(req, res) {
         let { idEmpresa, pageNumber, datapesq } = req.query;
 
         if (!isNaN(idEmpresa)) {
@@ -31,9 +32,9 @@ class AdministrativoControllers {
                 throw error;
             }
         }
-    }
-
-    async getListaQuebraCaixaResumoADM(req, res) {
+    } */
+    //caixa
+  /*   async getListaQuebraCaixaResumoADM(req, res) {
         let { idEmpresa, pageNumber, dataPesquisa } = req.query;
 
         if (!isNaN(idEmpresa)) {
@@ -53,8 +54,9 @@ class AdministrativoControllers {
             }
         }
     }
-
-    async retornoListaCaixasMovimento(req, res) {
+ */
+    //caixa
+  /*   async retornoListaCaixasMovimento(req, res) {
         let { idEmpresa, dataFechamento } = req.query;
       
         idEmpresa = Number(idEmpresa) ? Number(idEmpresa) : '';
@@ -70,9 +72,10 @@ class AdministrativoControllers {
             throw error;
         }
         
-    }
+    } */
 
-    async retornoListaCaixasFechados(req, res) {
+    //caixa
+/*     async retornoListaCaixasFechados(req, res) {
 
         let { idEmpresa, pageSize, dataFechamento } = req.query;
         if (!isNaN(idEmpresa)) {
@@ -91,9 +94,10 @@ class AdministrativoControllers {
                 
             }
         }
-    }
+    } */
   
-    async getVendaConvenio(req, res) {
+    //Venda
+/*     async getVendaConvenio(req, res) {
         let { idEmpresa, idGrupo, pageNumber, dataPesquisaInicio, dataPesquisaFim, descontoFuncionario } = req.query;
       
 
@@ -115,9 +119,10 @@ class AdministrativoControllers {
             throw error;
         }
         
-    }
+    } */
 
-    async getVendaVendedor(req, res) {
+    //venda
+ /*    async getVendaVendedor(req, res) {
         let { idEmpresa, dataPesquisaInicio, dataPesquisaFim } = req.query;
         if (!isNaN(idEmpresa)) {
 
@@ -135,8 +140,9 @@ class AdministrativoControllers {
                 throw error;
             }
         }
-    }
-    async getVendaVendedorAction(req, res) {
+    } */
+    //venda
+/*     async getVendaVendedorAction(req, res) {
         let { idEmpresa, idGrupo, pageNumber, dataPesquisaInicio, dataPesquisaFim } = req.query;
 
 
@@ -160,9 +166,10 @@ class AdministrativoControllers {
             throw error;
         }
         
-    }
+    } */
 
-    async getVendaAtiva(req, res) {
+    //venda
+  /*   async getVendaAtiva(req, res) {
 
         let { idEmpresa, idGrupo,  dataPesquisaInicio, dataPesquisaFim } = req.query;
         idEmpresa = Number(idEmpresa) ? Number(idEmpresa) : '';
@@ -179,8 +186,9 @@ class AdministrativoControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    }
-    async getListaVendasContigenciaPorEmpresa(req, res) {
+    } */
+    //venda
+/*     async getListaVendasContigenciaPorEmpresa(req, res) {
 
         let { idEmpresa, idGrupo,  dataPesquisaInicio, dataPesquisaFim } = req.query;
         idEmpresa = Number(idEmpresa) ? Number(idEmpresa) : '';
@@ -197,35 +205,10 @@ class AdministrativoControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    }
+    } */
 
-    async getVendaCancelada30Minutos(req, res) {
-
-        let { idMarca, idEmpresa, dataPesquisaInicio, dataPesquisaFim, stCancelado, stCanceladoWeb,stCanceladoPDVEmitida,stCanceladoApos30Min, stCanceladoPDVEmTela,  } = req.query;
-      
-        idMarca = Number(idMarca) ? Number(idMarca) : '';
-        idEmpresa = Number(idEmpresa) ? Number(idEmpresa) : '';
-        dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataPesquisaInicio : '';
-        dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataPesquisaFim : '';
-        stCancelado = stCancelado ? stCancelado : '';
-        stCanceladoWeb = stCanceladoWeb ? stCanceladoWeb : '';
-        stCanceladoPDVEmitida = stCanceladoPDVEmitida ? stCanceladoPDVEmitida : '';
-        stCanceladoApos30Min = stCanceladoApos30Min ? stCanceladoApos30Min : '';
-        stCanceladoPDVEmTela = stCanceladoPDVEmTela ? stCanceladoPDVEmTela : '';
-                
-        try {
-            const apiUrl = `${url}/api/administrativo/venda-ativa.xsjs?idMarca=${idMarca}&idEmpresa=${idEmpresa}&dataFechamento=${dataPesquisaInicio}&dataFechamentoFim=${dataPesquisaFim}&status=${stCancelado}&stCanceladoWeb=${stCanceladoWeb}&stCanceladoPDVEmitida=${stCanceladoPDVEmitida}&stCanceladoApos30Min=${stCanceladoApos30Min}&stCanceladoPDVEmTela=${stCanceladoPDVEmTela}`
-            const response = await axios.get(apiUrl)
-
-            return res.json(response.data); // Retorna
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-        
-    }
-
-    async getVendaCanceladaWeb(req, res) {
+    //venda
+   /*  async getVendaCancelada30Minutos(req, res) {
 
         let { idMarca, idEmpresa, dataPesquisaInicio, dataPesquisaFim, stCancelado, stCanceladoWeb,stCanceladoPDVEmitida,stCanceladoApos30Min, stCanceladoPDVEmTela,  } = req.query;
       
@@ -249,9 +232,10 @@ class AdministrativoControllers {
             throw error;
         }
         
-    }
+    } */
 
-    async getVendaCanceladaEmitidaPDV(req, res) {
+    //venda
+/*     async getVendaCanceladaWeb(req, res) {
 
         let { idMarca, idEmpresa, dataPesquisaInicio, dataPesquisaFim, stCancelado, stCanceladoWeb,stCanceladoPDVEmitida,stCanceladoApos30Min, stCanceladoPDVEmTela,  } = req.query;
       
@@ -275,9 +259,37 @@ class AdministrativoControllers {
             throw error;
         }
         
-    }
+    } */
 
-    async getListaClientesVendas(req, res) {
+    //venda
+  /*   async getVendaCanceladaEmitidaPDV(req, res) {
+
+        let { idMarca, idEmpresa, dataPesquisaInicio, dataPesquisaFim, stCancelado, stCanceladoWeb,stCanceladoPDVEmitida,stCanceladoApos30Min, stCanceladoPDVEmTela,  } = req.query;
+      
+        idMarca = Number(idMarca) ? Number(idMarca) : '';
+        idEmpresa = Number(idEmpresa) ? Number(idEmpresa) : '';
+        dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataPesquisaInicio : '';
+        dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataPesquisaFim : '';
+        stCancelado = stCancelado ? stCancelado : '';
+        stCanceladoWeb = stCanceladoWeb ? stCanceladoWeb : '';
+        stCanceladoPDVEmitida = stCanceladoPDVEmitida ? stCanceladoPDVEmitida : '';
+        stCanceladoApos30Min = stCanceladoApos30Min ? stCanceladoApos30Min : '';
+        stCanceladoPDVEmTela = stCanceladoPDVEmTela ? stCanceladoPDVEmTela : '';
+                
+        try {
+            const apiUrl = `${url}/api/administrativo/venda-ativa.xsjs?idMarca=${idMarca}&idEmpresa=${idEmpresa}&dataFechamento=${dataPesquisaInicio}&dataFechamentoFim=${dataPesquisaFim}&status=${stCancelado}&stCanceladoWeb=${stCanceladoWeb}&stCanceladoPDVEmitida=${stCanceladoPDVEmitida}&stCanceladoApos30Min=${stCanceladoApos30Min}&stCanceladoPDVEmTela=${stCanceladoPDVEmTela}`
+            const response = await axios.get(apiUrl)
+
+            return res.json(response.data); // Retorna
+        } catch (error) {
+            console.error("Unable to connect to the database:", error);
+            throw error;
+        }
+        
+    } */
+
+    //venda
+  /*   async getListaClientesVendas(req, res) {
 
         let { cpfCliente,  dataPesquisaInicio, dataPesquisaFim } = req.query;
  
@@ -297,9 +309,10 @@ class AdministrativoControllers {
         }
         
 
-    }
+    } */
 
-    async getVendaAtivaResumo(req, res) {
+    //venda
+/*     async getVendaAtivaResumo(req, res) {
 
         let { idEmpresa, pageNumber, dataPesquisaInicio, dataPesquisaFim } = req.query;
         if (!isNaN(idEmpresa)) {
@@ -321,9 +334,10 @@ class AdministrativoControllers {
             }
         }
 
-    }
+    } */
 
-    async getVendaAtivaAction(req, res) {
+    //venda
+/*     async getVendaAtivaAction(req, res) {
 
         let { idEmpresa, pageNumber, dataFechamento, dataFechamentoFim } = req.query;
         
@@ -345,9 +359,10 @@ class AdministrativoControllers {
         }
         
 
-    }
+    } */
 
-    async getVendaCancelada(req, res) {
+    //venda
+/*     async getVendaCancelada(req, res) {
         let { idEmpresa,idGrupo, pageNumber, datapesq } = req.query;
         if (!isNaN(idEmpresa) && !isNaN(idGrupo)) {
             idEmpresa = Number(idEmpresa);
@@ -369,9 +384,10 @@ class AdministrativoControllers {
                 throw error;
             }
         }
-    }
+    } */
     
-    async getVendaCanceladaResumo(req, res) {
+    //venda
+/*     async getVendaCanceladaResumo(req, res) {
         let { idEmpresa, pageNumber, dataPesquisaInicio, dataPesquisaFim } = req.query;
         if (!isNaN(idEmpresa)) {
             idEmpresa = Number(idEmpresa);
@@ -391,9 +407,10 @@ class AdministrativoControllers {
                 throw error;
             }
         }
-    }
+    } */
 
-    async getListaVendasDetalheAlterar(req, res) {
+    //venda
+/*     async getListaVendasDetalheAlterar(req, res) {
         let { idVenda, idEmpresa, page, pageSize } = req.query;
  
             
@@ -414,9 +431,10 @@ class AdministrativoControllers {
                 return res.status(500).json({ error: "Erro ao conectar ao servidor" });
             }
         
-    }
+    } */
 
-    async pesquisaMovimentoDeCaixa(req, res) {
+    //caixa
+/*     async pesquisaMovimentoDeCaixa(req, res) {
 
         let { idEmpresa, pageNumber } = req.query;
         if (!isNaN(idEmpresa)) {
@@ -435,9 +453,10 @@ class AdministrativoControllers {
                 throw error;
             }
         }
-    }
+    } */
 
-    async listaCaixasMovimento(req, res) {
+    //caixa
+/*     async listaCaixasMovimento(req, res) {
 
         let { idEmpresa, pageNumber, dataPesq } = req.query;
         if (!isNaN(idEmpresa)) {
@@ -455,9 +474,10 @@ class AdministrativoControllers {
                 throw error;
             }
         }
-    }
+    } */
 
-    async getDetalheFatura(req, res) {
+    //fatura
+ /*    async getDetalheFatura(req, res) {
 
         let { idEmpresa, pageSize, dataPesquisaInicio, dataPesquisaFim } = req.query;
         if (!isNaN(idEmpresa)) {
@@ -477,9 +497,10 @@ class AdministrativoControllers {
                 throw error;
             }
         }
-    }
+    } */
 
-    async getDetalheDespesas(req, res) {
+    //despesa
+/*     async getDetalheDespesas(req, res) {
 
         let { idEmpresa, pageNumber, datapesq } = req.query;
         if (!isNaN(idEmpresa)) {
@@ -497,9 +518,10 @@ class AdministrativoControllers {
                 throw error;
             }
         }
-    }
+    } */
 
-    async getDetalheVoucher(req, res) {
+    //voucher
+/*     async getDetalheVoucher(req, res) {
 
         let { idEmpresa, page, pageSize, datapesq } = req.query;
         if (!isNaN(idEmpresa)) {
@@ -519,8 +541,9 @@ class AdministrativoControllers {
             }
 
         }
-    }
-    async getDetalheProdutoVoucher(req, res) {
+    } */
+    //voucher
+/*     async getDetalheProdutoVoucher(req, res) {
 
         let { idVoucher } = req.query;
         if (!isNaN(idVoucher)) {
@@ -536,9 +559,10 @@ class AdministrativoControllers {
             }
 
         }
-    }
+    } */
 
-    async getResumoVendaConvenio(req, res) {
+    //venda
+/*     async getResumoVendaConvenio(req, res) {
 
         let { idEmpresa, pageNumber } = req.query;
         if (!isNaN(idEmpresa)) {
@@ -558,9 +582,10 @@ class AdministrativoControllers {
                 throw error;
             }
         }
-    }
+    } */
 
-    async getResumoVendaConvenioDesconto(req, res) {
+    //venda
+/*     async getResumoVendaConvenioDesconto(req, res) {
 
         let { idEmpresa, pageNumber } = req.query;
         if (!isNaN(idEmpresa)) {
@@ -579,9 +604,10 @@ class AdministrativoControllers {
             }
 
         }
-    }
+    } */
     
-    async getResumoVenda(req, res) {
+    //venda
+/*     async getResumoVenda(req, res) {
         let { idEmpresa, pageSize, dataPesquisa } = req.query;
   
         if (!isNaN(idEmpresa)) {
@@ -599,8 +625,9 @@ class AdministrativoControllers {
                 throw error;
             }
         }
-    }
-    async getListaDespesasLojaADM(req, res) {
+    } */
+    //despesa
+/*     async getListaDespesasLojaADM(req, res) {
         let { idEmpresa, pageSize, dataPesquisa } = req.query;
   
         if (!isNaN(idEmpresa)) {
@@ -618,9 +645,10 @@ class AdministrativoControllers {
                 throw error;
             }
         }
-    }
+    } */
 
-    async getPesqBalanco(req, res) {
+    //balanco
+/*     async getPesqBalanco(req, res) {
         let { idEmpresa, descricao, dataPesqInicio, dataPesqFim } = req.query;
 
         idEmpresa = idEmpresa ? idEmpresa : '';
@@ -638,8 +666,10 @@ class AdministrativoControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    }
-    async getListaPrestacaoDeContas(req, res) {
+    } */
+
+    //conta
+/*     async getListaPrestacaoDeContas(req, res) {
         let { idResumo } = req.query;
         idResumo = idResumo ? idResumo : '';
         try {
@@ -652,7 +682,7 @@ class AdministrativoControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    }
+    } */
 
     // async getListaColetorBalanco(req, res) {
     //     let { idEmpresa, idResumo, descProduto, dataPesqInicio, dataPesqFim } = req.query;
@@ -673,7 +703,8 @@ class AdministrativoControllers {
         
     // }
 
-    async getListaPreviaBalanco(req, res) {
+    //Balanco
+/*     async getListaPreviaBalanco(req, res) {
         let { idEmpresa, idResumo, processa, diferenca } = req.query;
         
         idEmpresa = idEmpresa ? idEmpresa : '';
@@ -694,9 +725,10 @@ class AdministrativoControllers {
             throw error;
         }
         
-    }
+    } */
 
-    async getDetalheBalancoAvulso(req, res) {
+    //Balanco
+/*     async getDetalheBalancoAvulso(req, res) {
         let { idFilial, coletor, descProduto, } = req.query;
             
             idFilial = idFilial ? idFilial : '';
@@ -712,9 +744,10 @@ class AdministrativoControllers {
             throw error;
         }
         
-    }
+    } */
 
-    async getEstoqueAtual(req, res) {
+    //estoque
+/*     async getEstoqueAtual(req, res) {
         let { idEmpresa, idGrupo, idSubGrupo, idMarca, idFornecedor, descProduto, pageNumber, dataInicial, dataFinal, } = req.query;
 
    
@@ -742,9 +775,10 @@ class AdministrativoControllers {
                 throw error;
             }
         
-    }
+    } */
 
-    async getRetornoListaPagamentoVenda(req, res) {
+    //vendas
+ /*    async getRetornoListaPagamentoVenda(req, res) {
         let { idVenda,  } = req.query;
 
         try {
@@ -756,9 +790,10 @@ class AdministrativoControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }  
-    }
+    } */
 
-    async getRetornoListaPagamentoTEFSelect(req, res) {
+    //venda
+/*     async getRetornoListaPagamentoTEFSelect(req, res) {
         try {
             const apiUrl = `${url}/api/administrativo/pagamento-tef.xsjs`;
             const response = await axios.get(apiUrl)
@@ -768,9 +803,10 @@ class AdministrativoControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }  
-    }
+    } */
 
-    async getRetornoListaPagamentoPOSSelect(req, res) {
+    //venda
+/*     async getRetornoListaPagamentoPOSSelect(req, res) {
         try {
             const apiUrl = `${url}/api/administrativo/pagamento-pos.xsjs`;
             const response = await axios.get(apiUrl)
@@ -780,9 +816,10 @@ class AdministrativoControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }  
-    }
+    } */
 
-    async getRetornoListaRecebimentosFormaPagamento(req, res) {
+    //venda
+  /*   async getRetornoListaRecebimentosFormaPagamento(req, res) {
         let { idEmpresa, dataPesquisaInicio, dataPesquisaFim, idFuncionario, formaPagamento, parcela, idMarca, numPage } = req.query; 
         idEmpresa = idEmpresa ? idEmpresa : '';
         dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataPesquisaInicio : '';
@@ -802,8 +839,9 @@ class AdministrativoControllers {
             throw error;
         }  
     }
-
-    async getListaAlteracaoPreco(req, res) {
+ */
+    //venda
+/*     async getListaAlteracaoPreco(req, res) {
         let { idEmpresa, dataPesquisa, idSubGrupo, descricaoProduto, idGrupo } = req.query; 
         idEmpresa = idEmpresa ? idEmpresa : '';
         dataPesquisa = dataFormatada(dataPesquisa) ? dataPesquisa : '';
@@ -820,9 +858,10 @@ class AdministrativoControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }  
-    }
+    } */
 
-    async getListaFormaPagamento(req, res) {
+    //venda
+/*     async getListaFormaPagamento(req, res) {
         let { idEmpresa} = req.query; 
         try {
 
@@ -834,10 +873,10 @@ class AdministrativoControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }  
-    }
+    } */
     
-
-    async getListaFuncionarioRecebimento(req, res) {
+    //recebimento
+/*     async getListaFuncionarioRecebimento(req, res) {
         let { idEmpresa} = req.query; 
         try {
 
@@ -849,9 +888,10 @@ class AdministrativoControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }  
-    }
+    } */
 
-    async getListaDetalheVoucherDados(req, res) {
+    //voucher
+/*     async getListaDetalheVoucherDados(req, res) {
         let { idSubGrupoEmpresa, idEmpresa, idVoucher, dataPesquisaInicio, dataPesquisaFim, dadosVoucher, stStatus, stTipoTroca, page, pageSize} = req.query;
         
         idSubGrupoEmpresa = idSubGrupoEmpresa ? idSubGrupoEmpresa : ''
@@ -875,7 +915,7 @@ class AdministrativoControllers {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-    }
+    } */
 
     // async getListaVendaTotalRecebido(req, res) {
     //     let { idEmpresa, dataPesquisaInicio, dataPesquisaFim, idFuncionario, formaPagamento, parcela, idMarca,} = req.query; 
@@ -899,7 +939,8 @@ class AdministrativoControllers {
     //     }  
     // }
 
-    async getListaEstoqueUltimaPosicao(req, res) {
+    // estoque
+   /*  async getListaEstoqueUltimaPosicao(req, res) {
         let { idEmpresa, idGrupo, idSubGrupo, idMarca, idFornecedor, descProduto, dataPesquisaInicio} = req.query; 
             idEmpresa = idEmpresa ? idEmpresa : '';
             idGrupo = idGrupo ? idGrupo : '';
@@ -920,9 +961,10 @@ class AdministrativoControllers {
             throw error;
         }  
     }
-
+ */
     // PUT 
-    async updateAlterarVendaVendedor(req, res) {
+    //venda
+/*     async updateAlterarVendaVendedor(req, res) {
         
         try {
             let {IDVENDADETALHE,IDVENDEDOR } = req.body;         
@@ -946,9 +988,10 @@ class AdministrativoControllers {
             return res.status(500).json({ error: "Erro ao conectar ao servidor" });
         }
         
-    }
+    } */
 
-    async putEditarVoucher(req, res) {
+    //voucher
+/*     async putEditarVoucher(req, res) {
         
         try {            
 
@@ -985,11 +1028,7 @@ class AdministrativoControllers {
             return res.status(500).json({ error: "Erro ao conectar ao servidor" });
         }
         
-    }
-    
-    async deleteAdministrativo(req, res) {
-
-    }
+    } */
 
 
 }

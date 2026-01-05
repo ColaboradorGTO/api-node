@@ -1,10 +1,9 @@
-
 import axios from "axios";
 import { dataFormatada } from "../../../utils/dataFormatada.js";
-import { getPedidosCompras } from "../repositories/pedidosCompra.js";
 import 'dotenv/config';
-const url = process.env.API_URL;
 
+//const url = process.env.API_URL|| 'localhost:6001'
+const url = 'http://164.152.245.77:8000/quality/concentrador_node';
 
 
 class PedidosControllers {
@@ -17,12 +16,10 @@ class PedidosControllers {
     idFornecedor = idFornecedor ? idFornecedor : '';
     idMarca = idMarca ? idMarca : '';
     idPedido = idPedido ? idPedido : '';
-    // numeroPedido = numeroPedido ? numeroPedido : '';
-    try {
 
+    try {
       const apiUrl = `${url}/api/financeiro/pedidos_compra.xsjs?pageSize=${pageSize}&page=${page}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idFornPesquisa=${idFornecedor}&idMarcaPesquisa=${idMarca}&idpedido=${idPedido}`
       const response = await axios.get(apiUrl);
-      // const response = await getPedidosCompras(id, idContaPagar, idPedido, idMarca, idFornecedor, dataPesquisaInicio, dataPesquisaFim, page, pageSize)
 
       return res.json(response.data);
     } catch (error) {

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import 'dotenv/config';
-const url = process.env.API_URL;
+//const url = process.env.API_URL;
+const url = 'http://164.152.245.77:8000/quality/concentrador_node';
 
 export class MaloteClient {
     constructor(baseURL) {
@@ -10,17 +11,61 @@ export class MaloteClient {
         });
     }
 
-    
-    async atualizarMalote(IDMALOTE, STATUS, OBSERVACAOADMINISTRATIVO, PENDENCIAS, IDUSERULTIMAALTERACAO) {
+    async atualizarMalote(
+        IDMALOTE,
+        STATUS,
+        OBSERVACAOADMINISTRATIVO,
+        PENDENCIAS,
+        IDUSERULTIMAALTERACAO
+    ) {
 
         const response = await this.api.put(`${url}/api/financeiro/malotes-por-loja.xsjs`, {
-          IDMALOTE,
-          STATUS,
-          OBSERVACAOADMINISTRATIVO,
-          PENDENCIAS,
-          IDUSERULTIMAALTERACAO
+            IDMALOTE,
+            STATUS,
+            OBSERVACAOADMINISTRATIVO,
+            PENDENCIAS,
+            IDUSERULTIMAALTERACAO
         });
-     
+
+        return response.data;
+    }
+
+    async criarMalotePorLoja(
+        IDEMPRESA,
+        DATAMOVIMENTOCAIXA,
+        VRDINHEIRO,
+        VRCARTAO,
+        VRPOS,
+        VRPIX,
+        VRCONVENIO,
+        VRVOUCHER,
+        VRFATURA,
+        VRFATURAPIX,
+        VRDESPESA,
+        VRTOTALRECEBIDO,
+        VRDISPONIVEL,
+        IDUSERCRIACAO,
+        OBSERVACAOLOJA,
+    ) {
+
+        const response = await this.api.post(`/api/gerencia/malotes-por-loja.xsjs`, {
+            IDEMPRESA,
+            DATAMOVIMENTOCAIXA,
+            VRDINHEIRO,
+            VRCARTAO,
+            VRPOS,
+            VRPIX,
+            VRCONVENIO,
+            VRVOUCHER,
+            VRFATURA,
+            VRFATURAPIX,
+            VRDESPESA,
+            VRTOTALRECEBIDO,
+            VRDISPONIVEL,
+            IDUSERCRIACAO,
+            OBSERVACAOLOJA,
+
+        });
         return response.data;
     }
 }

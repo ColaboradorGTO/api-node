@@ -1,15 +1,15 @@
-
 import axios from "axios";
-import { getMotivoDevolucao, postMotivoDevolucao, putMotivoDevolucao } from "../repositories/motivoDevolucao.js";
 import 'dotenv/config';
-const url = process.env.API_URL || 'localhost:6001'
 import criarDevolucaoSchema from "../schema/criarDevolucaoSchema.js";
 import atualizarDevolucaoSchema from "../schema/atualizarDevolucaoSchema.js";
-
 import { MotivoDevolucaoClient } from "../client/index.js";
 import { MotivoDevolucaoService } from "../services/index.js";
+
 const devolucaoDevolucaoClient = new MotivoDevolucaoClient(process.env.API_URL);
-const deevolucaoService = new MotivoDevolucaoService(devolucaoDevolucaoClient);
+const devolucaoService = new MotivoDevolucaoService(devolucaoDevolucaoClient);
+//const url = process.env.API_URL
+//let url = `http://164.152.245.77:8000/quality/concentrador_homologacao`;
+const url = 'http://164.152.245.77:8000/quality/concentrador_node';  
 
 class DevolucaoControllers {
   async getListaMotivosDevolucao(req, res) {
@@ -24,7 +24,7 @@ class DevolucaoControllers {
     try {
       const apiUrl = `${url}/api/financeiro/motivo-devolucao.xsjs?idMotivo=${idMotivo}&descMotivo=${descricaoMotivo}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&page=${page}&pageSize=${pageSize}`;
       const response = await axios.get(apiUrl);
-      // const response = await getMotivoDevolucao(idMotivo, descricaoMotivo, dataPesquisaInicio, dataPesquisaFim, page, pageSize)
+      
       return res.json(response.data);
     } catch (error) {
       console.error("Unable to connect to the database:", error);
@@ -49,7 +49,7 @@ class DevolucaoControllers {
         });
       }
       
-      const response = await deevolucaoService.updateMotivoDevolucao(
+      const response = await devolucaoService.updateMotivoDevolucao(
         value.DSMOTIVO,
         value.STATIVO,
         value.IDUSUARIO,
@@ -64,7 +64,7 @@ class DevolucaoControllers {
   }
 
 
-  async createMotivoDevolucao(req, res) {
+  async postMotivoDevolucao(req, res) {
 
     try {
       const { error, value } = criarDevolucaoSchema.validate(req.body, {
@@ -82,14 +82,14 @@ class DevolucaoControllers {
         });
       }
 
-      const response = await deevolucaoService.createMotivo(
+      const response = await devolucaoService.createMotivo(
         value.IDUSUARIO,
         value.DSMOTIVO
       );
 
       return res.status(200).json(response);
     } catch (error) {
-      console.error("Erro no DevolucaoControllers.createMotivoDevolucao", error);
+      console.error("Erro no DevolucaoControllers.postMotivoDevolucao", error);
       return res.status(500).json({ error: "Erro no servidor" });
     }
   }
