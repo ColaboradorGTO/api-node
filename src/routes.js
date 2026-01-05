@@ -55,7 +55,12 @@ import QuebraCaixaControllers from './DashBoard/QuebraCaixa/controllers/quebraCa
 import ADMCaixasControllers from './Administrativo/Caixa/controllers/admCaixas.js'
 import AdmVendasControllers from './Administrativo/Vendas/controllers/admVendas.js'
 import AdmPagamentosControllers from './Administrativo/Pagamentos/controllers/pagamentos.js'
-
+import AdmRecebimentosControllers from './Administrativo/Recebimentos/controllers/recebimentos.js'
+import AdmDescontoControllers from './Administrativo/Desconto/controllers/desconto.js'
+import EstoqueControllers from './Administrativo/Estoque/controllers/estoque.js'
+import AdmBalancoControllers from './Administrativo/Balanco/controllers/balanco.js'
+import DashBoardVendasControllers from './DashBoard/Vendas/controllers/venda.js';
+// import AdmDescontoControllers from './Administrativo/Desconto/controllers/desconto.js'
 
 
 const routes = new Router();
@@ -71,6 +76,24 @@ routes.get('/ping', ApiPing.index);
 routes.post('/login', AuthentiCationController.login);
 routes.post('/login2', AuthentiCationController.login);
 
+routes.get('/resumo-venda-convenio-desconto', DashBoardVendasControllers.getVendasConvenioDescontoFuncionario)
+routes.get('/resumo-venda-convenio', DashBoardVendasControllers.getVendasConvenioDescontoFuncionario)
+routes.get('/detalhe-venda', DashBoardVendasControllers.getRetornoVendasAtivasDetalheProduto)
+routes.get('/resumo-venda-caixa-detalhado', DashBoardVendasControllers.getListaVendaDetalhe)
+routes.get('/resumo-venda-caixa', DashBoardVendasControllers.getListaResumoVendasCaixas)
+routes.get('/venda-resumido', DashBoardVendasControllers.getListaVendasLojaResumidoGerencia)
+routes.get('/venda-vendedor', DashBoardVendasControllers.getListaVendasVendedorPeriodoGerencia)
+routes.get('/vendas-recebimentos', DashBoardVendasControllers.getListaRecebimento)
+routes.get('/lista-caixas-movimento-gerencia', DashBoardVendasControllers.getListaCaixaMovimentosGerencia)
+routes.get('/lista-caixas-fechados-nao-conferido', DashBoardVendasControllers.getListaCaixasFechados)
+
+// Desconto
+// routes.get('/vendaConvenio', AdministrativoControllers.getVendaConvenio)
+routes.get('/desconto-motivo-vendas-adm', AdmDescontoControllers.getListaDescontoMotivoVendas)
+// routes.get('/estoqueAtual', AdministrativoControllers.getEstoqueAtual)
+routes.get('/ultimaPosicaoEstoque', EstoqueControllers.getListaEstoqueUltimaPosicao)
+routes.get('/inventariomovimento', EstoqueControllers.getListaEstoqueAtual)
+
 //  Funcionarios 
 
 routes.get('/autorizarVoucher', FuncionariosControllers.getAutorizacaoVoucherFuncionarios)
@@ -83,6 +106,24 @@ routes.get('/grupoEmpresarial', EmpresaControllers.getAllGrupoEmpresarial);
 routes.get('/subGrupoEmpresarial', EmpresaControllers.getSelectLojaVouchers);
 routes.get('/listaEmpresas', EmpresaControllers.getListaEmpresas)
 routes.put('/empresas/:id', EmpresaControllers.putListaEmpresas)
+
+routes.get('/detalheBalancoAvulso', AdmBalancoControllers.getListaDetalheBalancoAvulso)
+routes.get('/coletor-balanco', AdmBalancoControllers.getListaColetorBalanco)
+routes.get('/balanco-loja', AdmBalancoControllers.getListaBalancoLoja)
+routes.get('/detalhe-balanco', AdmBalancoControllers.getListaDetalheBalancoLoja)
+routes.get('/preparar-primeiro-balanco-loja', AdmBalancoControllers.getListaPrepararPrimeiroBalancoLoja)
+routes.get('/prestacao-contas-balanco', AdmBalancoControllers.getListaPrestacaoContasBalanco)
+routes.get('/consolidar-balanco', AdmBalancoControllers.getListaConsolidarBalanco)
+
+routes.put('/coletor-balanco/:id', AdmBalancoControllers.putColetorBalanco)
+routes.put('/prestacao-contas-balanco/:id', AdmBalancoControllers.putConfirmarPrestacaoContas)
+routes.put('/consolidar-balanco/:id', AdmBalancoControllers.putConsolidarBalanco)
+routes.put('/confirmar-consolidar-balanco/:id', AdmBalancoControllers.putConfirmarConsolidarBalanco)
+routes.put('/preparar-primeiro-balanco-loja/:id', AdmBalancoControllers.putListaPrepararPrimeiroBalancoLoja)
+routes.put('/detalhe-balanco/:id', AdmBalancoControllers.putListaDetalheBalanco)
+routes.put('/detalhe-balanco-avulso/:id', AdmBalancoControllers.putListaDetalheBalancoAvulso)
+routes.post('/criar-detalhe-balanco-avulso', AdmBalancoControllers.postDetalheBalancoAvulso)
+
 
 //Início Administrativo
 routes.get('/listaCaixasMovimento', AdministrativoControllers.retornoListaCaixasMovimento);
@@ -610,8 +651,11 @@ routes.put('/venda-vendedor/:id', AdmVendasControllers.putVendaVendedor);
 
 // routes.post('/alterar-venda-pagamento', AdmVendasControllers.postAlterarVendasPagamento);
 
-// Forma de Pagamento
+//  Recebimentos
+routes.get('/recebimento', AdmRecebimentosControllers.getListaPagamentoVenda)
+routes.get('/funcionario-recebimento', AdmRecebimentosControllers.getListaFuncionarioRecebimento)
 
+// Forma de Pagamento
 routes.get('/forma-pagamentos', AdmPagamentosControllers.getListaFormaPagamento)
 routes.get('/pagamento-tef', AdmPagamentosControllers.getListaPagamentoTef)
 routes.get('/pagamento-pos', AdmPagamentosControllers.getListaPagamentoPos)
