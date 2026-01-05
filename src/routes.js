@@ -12,6 +12,7 @@ import DashBoardControllers from './DashBoard/controllers/DashBoard.js';
 import VendasControllers from './Vendas/controllers/Vendas.js';
 import ResumoVoucherControllers from './ResumoVoucher/controllers/index.js';
 import ComercialControllers from './Comercial/controllers/Comercial.js';
+import ComprasControllers from './Compras/controllers/Compras.js';
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -245,6 +246,99 @@ routes.get('/colaboradorProdutosVendidos', ComercialControllers.getListaColabora
 routes.get('/listaMetaVendas', ComercialControllers.getListaMetasGrupo)
 routes.get('/listaPremiacoes', ComercialControllers.getListaPremiacoesPeriodo)
 
+
+// Compras
+routes.get('/lista-pedidos', ComprasControllers.getListaPedidos)
+routes.get('/ultimo-pedido', ComprasControllers.getListaUltimoPedido)
+routes.get('/lista-detalhe-pedidos', ComprasControllers.getListaDetalhePedidos)
+routes.get('/lista-detalhe-pedidos-grade', ComprasControllers.getListaDetalhePedidoGrade)
+routes.get('/listaTodosPedidos', ComprasControllers.getListaTodosPedidos)
+routes.get('/fornecedores', ComprasControllers.getListaFornecedores)
+routes.get('/fabricantes', ComprasControllers.getListaFabricantes)
+routes.get('/compradores', ComprasControllers.getListaCompradores)
+routes.get('/listaPromocoes', ComprasControllers.getListaPromocoes)
+routes.get('/listaEmpresaPromocoes', ComprasControllers.getListaEmpresaPromocoes)
+routes.get('/listaProdutosOrigemPromocoes', ComprasControllers.getListaProdutoOrigemPromocoes)
+routes.get('/listaProdutoDestinoPromocoes', ComprasControllers.getListaProdutoDestinoPromocoes)
+routes.get('/fornecedorFabricante', ComprasControllers.getListaFornecedorFabricante)
+routes.get('/vincularFabricanteFornecedor', ComprasControllers.getListaVinculoFornecedorFabricante)
+routes.get('/condicaoPagamento', ComprasControllers.getListaCondicoesPagamento)
+routes.get('/transportadoras', ComprasControllers.getListaTransportadora)
+routes.get('/listaPedidosDetalhado', ComprasControllers.getListaPedidosDetalhado)
+routes.get('/fabricante-fornecedor', ComprasControllers.getListaFabricanteCadastro)
+routes.get('/subGrupoEstrutura', ComprasControllers.getListaEstruturaMercadoria)
+routes.get('/imagemProdutos', ComprasControllers.getListaImagemProduto)
+routes.get('/listaProdutosImagem', ComprasControllers.getListaDetalheImagemProduto)
+routes.get('/produtos-imagens', ComprasControllers.getListaProdutosImagens)
+routes.get('/listaTransportador', ComprasControllers.getListaTransportador)
+routes.get('/transportadorID', ComprasControllers.getListaByIdTransportador)
+routes.get('/tipoDocumento', ComprasControllers.getListaTPDocumento)
+routes.get('/grupoEstrutura', ComprasControllers.getListaGrupoEstrutura)
+routes.get('/listaCores', ComprasControllers.getListaCores)
+routes.get('/grupoCores', ComprasControllers.getListaGrupoCores)
+routes.get('/listaEstilos', ComprasControllers.getListaEstilos)
+routes.get('/tipoTecidos', ComprasControllers.getListaTipoTecidos)
+routes.get('/tipo-tecido', ComprasControllers.getListaTipoTecidoSelect)
+routes.get('/categoriaPedidos', ComprasControllers.getListaCategoriaPedidos)
+routes.get('/categoria-pedido', ComprasControllers.getListaCategoriaPedido)
+routes.get('/tamanhosPedidos', ComprasControllers.getListaTamanhosPedidos)
+routes.get('/vinculo-tamanho-categoria', ComprasControllers.getListaTamanhosCategoriaPedidos)
+routes.get('/fornecedor-produto', ComprasControllers.getListaFornecedorProduto)
+routes.get('/produtos-pedido', ComprasControllers.getListaProdutoPedido)
+routes.get('/listaDetalhePedidos', ComprasControllers.getListaDetalhePedidosGrade)
+routes.get('/unidadeMedida', ComprasControllers.getListaUnidadeMedida)
+routes.get('/unidades-de-Medidas', ComprasControllers.getListaUnidadesMedidas)
+
+routes.get('/localExposicao', ComprasControllers.getListaLocalExposicao)
+routes.get('/distribuicaoComprasHistorico', ComprasControllers.getListaDistribuicaoHistorico)
+routes.get('/detalheDistribuicaoCompras', ComprasControllers.getListaDetalheDistribuicao)
+routes.get('/distribuicaoSugestoesHistorico', ComprasControllers.getListaDistribuicaoSugestoesHistorico)
+routes.get('/produtos-entre-filiais', ComprasControllers.getListaProdutosEntreFiliais)
+routes.get('/produtos-por-pedido', ComprasControllers.getListaProdutosPorPedido)
+routes.get('/consulta-fornecedor-sap', ComprasControllers.getListaFornecedorSap)
+
+
+
+// UPDATE'
+routes.put('/condicaoPagamento/:id', ComprasControllers.putCondicaoPagamento)
+routes.put('/transportador/:id', ComprasControllers.putCadastroTransportador)
+routes.put('/atualizarProdutoImagem', ComprasControllers.updateProdutoImagem)
+routes.put('/sub-grupo-estrutura/:id', ComprasControllers.updateSubGrupoEstrutura)
+routes.put('/grupo-estrutura/:id', ComprasControllers.putGrupoEstrutura)
+routes.put('/unidadeMedida/:id', ComprasControllers.updateUnidadeMedida)
+routes.put('/cores/:id', ComprasControllers.updateCores)
+// routes.put('/atualizarEstilos', ComprasControllers.updateEstilos)
+routes.put('/listaEstilos/:id', ComprasControllers.putEstilos)
+routes.put('/tipo-tecido/:id', ComprasControllers.updateTipoTecidos)
+routes.put('/categoriaPedidos/:id', ComprasControllers.putCategoriaPedidos)
+routes.put('/fabricante/:id', ComprasControllers.putFabricante)
+routes.put('/fabricante-fornecedor/:id', ComprasControllers.putFabricanteFornecedor)
+routes.put('/fornecedor-fabricante/:id', ComprasControllers.putFornecedorFabricante)
+routes.put('/excluir-vinculo-fornecedor', ComprasControllers.putExcluirVinculoFornecedorFabricante)
+
+routes.put('/deletar-vinculo-tamanho-categoria', ComprasControllers.updateVinculoTamanhoCategoria)
+routes.put('/fornecedor/:id', ComprasControllers.putFornecedor)
+routes.put('/finalizar-pedido/:id', ComprasControllers.putFinalizarPedido)
+routes.put('/atualizar-pedido/:id', ComprasControllers.putPedido)
+
+// POST
+routes.post('/cadastrarCondicaoPagamento', ComprasControllers.postCondicaoPagamento)
+routes.post('/cadastro-sub-grupo-estrutura', ComprasControllers.createSubGrupoEstrutura)
+routes.post('/cadastrarUnidadeMedida', ComprasControllers.createUnidadeMedida)
+routes.post('/cadastrar-cores', ComprasControllers.createCores)
+routes.post('/criarlistaEstilos', ComprasControllers.postEstilos)
+routes.post('/cadastrar-tipo-tecido', ComprasControllers.createTipoTecidos)
+routes.post('/criar-categoria-pedidos', ComprasControllers.createCategoriaPedidos)
+routes.post('/cadastro-grupoEstrutura', ComprasControllers.postGrupoEstrutura)
+routes.post('/cadastro-vinculo-tamanho-categoria', ComprasControllers.postVinculoCategoriaPedido)
+routes.post('/cadastrar-transportador', ComprasControllers.postCadastroTransportador)
+routes.post('/cadastrar-fabricante', ComprasControllers.postFabricante)
+routes.post('/cadastrar-fabricante-fornecedor', ComprasControllers.postFabricanteFornecedor)
+routes.post('/migrar-fabricante', ComprasControllers.postMigrarFabricanteSap)
+routes.post('/cadastrar-fornecedor', ComprasControllers.postFornecedor)
+routes.post('/cadastrar-imagem-produto', ComprasControllers.postImagemProduto)
+routes.post('/finalizar-pedido', ComprasControllers.postFinalizarPedido)
+routes.post('/pedido', ComprasControllers.postPedido)
 
 export default routes;
 
