@@ -7,6 +7,7 @@ import AuthentiCationController from './Auth/controllers/Auth.js';
 import AdministrativoControllers from './Administrativo/controllers/Administrativo.js';
 import FinanceiroControllers from './Financeiro/controllers/Financeiro.js';
 import InformaticaControllers from './Informatica/controllers/Informatica.js';
+import ExpedicaoControllers from './Expedicao/controllers/index.js';
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -153,6 +154,27 @@ routes.get('/relatorioInformaticaBI', InformaticaControllers.getListaRelatorioBI
 routes.get('/lista-cliente-credsystem', InformaticaControllers.getListaCadastroClienteCredSystem)
 routes.get('/lista-meio-pagamento-credsystem', InformaticaControllers.getListaMeioPagamentoCredSystem)
 routes.get('/lista-parceria-credsystem', InformaticaControllers.getListaParceriaCredSystem)
+
+// Expedição
+routes.get('/listaProdutos', ExpedicaoControllers.getListaProdutosExpedicao)
+routes.get('/resumoOrdemTransferenciaExpedicao', ExpedicaoControllers.getListaOrdemTransferenciaExpedicao)
+routes.get('/detalhe-ordem-transferencia', ExpedicaoControllers.getListaDetalheOT)
+
+routes.get('/statusDivergencia', ExpedicaoControllers.getListaSD)
+routes.get('/statusOrdemTransferencia', ExpedicaoControllers.getListaStatusOT)
+routes.get('/faturasOT', ExpedicaoControllers.getListaFaturasOT)
+routes.get('/rotinaMovimentacao', ExpedicaoControllers.getListaRotinaMovimentacao)
+routes.get('/otTransferencia', ExpedicaoControllers.getListaOTDepLoja)
+routes.get('/impressao-etiqueta-ot', ExpedicaoControllers.getListaImpressaoEtiquetaOT)
+routes.get('/consulta-nfe-saida-tranferencia', ExpedicaoControllers.getListaNFESaidaTransferencia)
+routes.put('/updateOrdemTransferencia', ExpedicaoControllers.updateOrdemTransferencia)
+routes.put('/updateStatusDivergencia', ExpedicaoControllers.updateAlterarSD)
+
+routes.put('/inserirSD', ExpedicaoControllers.storeInserirSD)
+
+routes.get('/resumo-ordem-transferencia', ExpedicaoControllers.getListaOrdemTransferencia)
+routes.put('/resumo-ordem-transferencia/:id', ExpedicaoControllers.putResumoOrdemTransferencia)
+routes.post('/criar-resumo-ordem-transferencia', ExpedicaoControllers.postResumoOrdemTransferencia)
 
 export default routes;
 
