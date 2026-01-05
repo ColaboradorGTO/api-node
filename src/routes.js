@@ -18,6 +18,9 @@ import ProdutoControllers from './Produtos/controllers/Produtos.js';
 import DepositosLojaControllers from './DepositoLoja/controllers/DepositosLoja.js';
 import ContaBancoControllers from './ContaBanco/controllers/ContaBanco.js';
 import DespesasLojaControllers from './Despesas/controllers/DespesasLoja.js';
+import CategoriaReceitaDespesasControllers from './CategoriaReceita/controllers/CategoriaReceitaDespesa.js';
+import MovimentoCaixaControllers from './Gerencia/MovimentoCaixa/controllers/MovimentoCaixa.js';
+
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -392,6 +395,20 @@ routes.get('/despesa-lojas-dash', DespesasLojaControllers.getListaDespesasLojaDa
 routes.get('/despesasEmpresas', DespesasLojaControllers.getListaDespesasEmpresaGerencia)
 
 routes.post('/cadastrar-despesa-loja', DespesasLojaControllers.postCadastrarDespesasLoja)
+
+//  Categoria Despesas
+routes.get('/categoria-receita-despesa', CategoriaReceitaDespesasControllers.getListaCategoriaDespesas)
+routes.get('/categoriaReceitaDespesaFinanceira', CategoriaReceitaDespesasControllers.getListaCategoriaDespesasFinanceira)
+
+// Movimento Caixa
+
+routes.get('/ajusteFisicoDinheiro', MovimentoCaixaControllers.listaCaixasMovimentojuste)
+routes.get('/movimento-caixa-gerencia', MovimentoCaixaControllers.listaCaixasMovimentoGerencia)
+routes.get('/fechamento-caixa', MovimentoCaixaControllers.getListaFechamentoCaixa)
+routes.get('/ajusteMovimento', MovimentoCaixaControllers.listaAjusteMovimentoCaixa)
+routes.put('/atualizacao-status', MovimentoCaixaControllers.putListaAtualizacaoStatus)
+
+routes.put('/ajuste-recebimento', MovimentoCaixaControllers.putListaAjusteRecebimento)
 
 export default routes;
 
