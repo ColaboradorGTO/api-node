@@ -9,6 +9,7 @@ import FinanceiroControllers from './Financeiro/controllers/Financeiro.js';
 import InformaticaControllers from './Informatica/controllers/Informatica.js';
 import ExpedicaoControllers from './Expedicao/controllers/index.js';
 import DashBoardControllers from './DashBoard/controllers/DashBoard.js';
+import VendasControllers from './Vendas/controllers/Vendas.js';
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -177,7 +178,11 @@ routes.get('/resumo-ordem-transferencia', ExpedicaoControllers.getListaOrdemTran
 routes.put('/resumo-ordem-transferencia/:id', ExpedicaoControllers.putResumoOrdemTransferencia)
 routes.post('/criar-resumo-ordem-transferencia', ExpedicaoControllers.postResumoOrdemTransferencia)
 
-
+routes.get('/movimentacaoSaldo', VendasControllers.getListaVendasSaldo)
+routes.get('/rotatividadeVendas', VendasControllers.getListaRotatividade)
+routes.get('/listaDetalheVendaCliente', VendasControllers.getListaDetalheVendaCliente)
+routes.get('/venda-xml', VendasControllers.getListaVendaXML)
+routes.get('/venda-cliente', VendasControllers.getListaVendaClienteGerencia)
 
 // Dashboard
 
