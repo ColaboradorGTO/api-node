@@ -20,7 +20,7 @@ import ContaBancoControllers from './ContaBanco/controllers/ContaBanco.js';
 import DespesasLojaControllers from './Despesas/controllers/DespesasLoja.js';
 import CategoriaReceitaDespesasControllers from './CategoriaReceita/controllers/CategoriaReceitaDespesa.js';
 import MovimentoCaixaControllers from './Gerencia/MovimentoCaixa/controllers/MovimentoCaixa.js';
-
+import DetalheFaturasControllers from './DetalheFaturas/controllers/Detalhes.js';
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -409,6 +409,16 @@ routes.get('/ajusteMovimento', MovimentoCaixaControllers.listaAjusteMovimentoCai
 routes.put('/atualizacao-status', MovimentoCaixaControllers.putListaAtualizacaoStatus)
 
 routes.put('/ajuste-recebimento', MovimentoCaixaControllers.putListaAjusteRecebimento)
+
+// Detalhes 
+routes.get('/detalheFaturaGerencia', DetalheFaturasControllers.getDetalheFatura)
+
+routes.get('/detalhe-Fatura-id', DetalheFaturasControllers.getDetalheFaturaById)
+routes.put('/atualizar-fatura', DetalheFaturasControllers.updateFatura)
+
+routes.put('/atualizar-detalhe-fatura-loja', DetalheFaturasControllers.putDetalheFaturaLoja)
+routes.post('/criar-detalhe-fatura', DetalheFaturasControllers.postDetalheFaturaLoja)
+
 
 export default routes;
 
