@@ -21,6 +21,8 @@ import DespesasLojaControllers from './Despesas/controllers/DespesasLoja.js';
 import CategoriaReceitaDespesasControllers from './CategoriaReceita/controllers/CategoriaReceitaDespesa.js';
 import MovimentoCaixaControllers from './Gerencia/MovimentoCaixa/controllers/MovimentoCaixa.js';
 import DetalheFaturasControllers from './DetalheFaturas/controllers/Detalhes.js';
+import MarketingControllers from './Marketing/controllers/Marketing.js';
+
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -418,6 +420,23 @@ routes.put('/atualizar-fatura', DetalheFaturasControllers.updateFatura)
 
 routes.put('/atualizar-detalhe-fatura-loja', DetalheFaturasControllers.putDetalheFaturaLoja)
 routes.post('/criar-detalhe-fatura', DetalheFaturasControllers.postDetalheFaturaLoja)
+
+
+
+// Marketing
+routes.get('/produto-promocao', MarketingControllers.getListaProdutosPromocao)
+routes.get('/listaPromocao', MarketingControllers.getListaPromocao)
+routes.get('/campanha', MarketingControllers.getListaCampanha)
+routes.get('/campanha-cliente', MarketingControllers.getListaCampanhaCliente)
+
+
+routes.put('/campanha/:id', MarketingControllers.putCampanhaEmpresa)
+routes.put('/campanha-cliente/:id', MarketingControllers.putCampanhaCliente)
+routes.put('/produto-promocao/:id', MarketingControllers.putProdutoPromocao)
+
+routes.post('/cadastrar-campanha-cliente', MarketingControllers.postCampanhaCliente)
+routes.post('/cadastra-campanha', MarketingControllers.postCampanhaEmpresa)
+routes.post('/cadastrar-produto-promocao', MarketingControllers.postProdutoPromocao)
 
 
 export default routes;
