@@ -2,6 +2,8 @@ import { Router } from 'express';
 
 import FuncionariosControllers from "./Funcionarios/controllers/index.js";
 import EmpresaControllers from "./Empresas/controllers/Empresas.js"
+import ApiPing from './controllers/ApiPing.js';
+import AuthentiCationController from './Auth/controllers/Auth.js';
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -9,6 +11,12 @@ const routes = new Router();
 routes.get('/', (req, res) => {
     res.send('Hello World! Myltiane');
 });
+
+
+routes.get('/ping', ApiPing.index);
+
+routes.post('/login', AuthentiCationController.login);
+routes.post('/login2', AuthentiCationController.login);
 
 //  Funcionarios 
 
