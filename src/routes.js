@@ -13,6 +13,8 @@ import VendasControllers from './Vendas/controllers/Vendas.js';
 import ResumoVoucherControllers from './ResumoVoucher/controllers/index.js';
 import ComercialControllers from './Comercial/controllers/Comercial.js';
 import ComprasControllers from './Compras/controllers/Compras.js';
+import CadastroControllers from './Cadastro/controllers/Cadastro.js';
+import ProdutoControllers from './Produtos/controllers/Produtos.js';
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -339,6 +341,35 @@ routes.post('/cadastrar-fornecedor', ComprasControllers.postFornecedor)
 routes.post('/cadastrar-imagem-produto', ComprasControllers.postImagemProduto)
 routes.post('/finalizar-pedido', ComprasControllers.postFinalizarPedido)
 routes.post('/pedido', ComprasControllers.postPedido)
+
+
+// Cadastro
+routes.get('/listaProdutoCriadoPedidoCompra', CadastroControllers.getListaProdutoCriadoPedidoCompra)
+routes.get('/categoriasProdutos', CadastroControllers.getListaCategoriasProduto)
+routes.get('/tipoProduto', CadastroControllers.getListaTipoProdutos)
+routes.get('/tipoFiscalProduto', CadastroControllers.getListaTipoFiscalProdutos)
+routes.get('/consultaProdutos', CadastroControllers.getConsultaProdutos)
+routes.get('/nfPedido', CadastroControllers.getListaNFPedido)
+
+
+routes.get('/produtoAvulso', CadastroControllers.getListaProdutosAvulso)
+routes.put('/produtoAvulso/:id', CadastroControllers.getListaTipoFiscalProdutos)
+// routes.post('/produtoAvulso', CadastroControllers.postDetalheProdutoPedido)
+
+// Produtos 
+routes.get('/produtoQuality', ProdutoControllers.getListaProdutosLojaQuality)
+routes.get('/produtoSap', ProdutoControllers.getListaProdutosLojaSap)
+routes.get('/produto-preco', ProdutoControllers.getListaProdutosPrecoInformatica)
+routes.get('/grupoProdutoSap', ProdutoControllers.getListaGrupoProdutoSap)
+routes.get('/produtoInformatica', ProdutoControllers.getListaProdutosInformaticaQuality)
+routes.get('/lista-produtos', ProdutoControllers.getListaProdutos)
+routes.get('/listaGrade', ProdutoControllers.getListaGrade)
+routes.get('/listas-de-precos-sap', ProdutoControllers.ListaProdutosEtiqueta)
+routes.get('/responsaveisAlteracaoPrecos', ProdutoControllers.getListaResponsavelAlteracaoPreco)
+routes.get('/lista-produtos-etiqueta-sap', ProdutoControllers.ListaProdutosEtiquetagem)
+routes.get('/alteracoes-de-precos-resumo', ProdutoControllers.getListaAlteracaoPrecoResumo)
+routes.get('/alteracoes-de-precos-detalhes', ProdutoControllers.getListaAlteracaoPrecoDetalhe)
+
 
 export default routes;
 
