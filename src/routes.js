@@ -69,6 +69,9 @@ import GERAlteracaoPrecoControllers from './Gerencia/AlteracaoPreco/controllers/
 //  Comercial
 import ComercialProdutoControllers from './Comercial/Produto/controllers/index.js'
 
+import ModulosControllers from './Modulos/controllers/modulos.js';
+
+
 const routes = new Router();
 // routes.use(authMiddleware)
 
@@ -90,6 +93,17 @@ routes.post('/criar-malotes-por-loja', GerenciaControllers.postMalotesPorLoja)
 routes.put('/malotes-por-loja/:id', GerenciaControllers.putMalotesPorLoja)
 
 routes.get('/alteracaoPreco', GERAlteracaoPrecoControllers.getListaAlteracaoPreco)
+
+
+routes.get('/menus-usuario', ModulosControllers.getListaPerfilUsuario)
+routes.get('/menus-usuario-excecao', ModulosControllers.getListaMenusPorUsuario)
+routes.get('/menus-filho-usuario', ModulosControllers.getListaMenusFilhosUsuario)
+routes.get('/menus', ModulosControllers.getListaSubMenusUsuario)
+routes.get('/menus-filho-usuario', ModulosControllers.getListaMenusFilhosUsuario)
+
+
+routes.put('/perfil-usuario/:id', ModulosControllers.putPerfilUsuarioMenu)
+routes.post('/criar-perfil-usuario', ModulosControllers.postPerfilUsuarioMenu)
 
 routes.post('/deposito-integracao', ServiceLayerControllers.postDepositoIntegrarNoSAP)
 routes.get('/funcionarios', DashBoardFuncionariosControllers.getListaFuncionarios)
