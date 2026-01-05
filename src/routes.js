@@ -22,7 +22,7 @@ import CategoriaReceitaDespesasControllers from './CategoriaReceita/controllers/
 import MovimentoCaixaControllers from './Gerencia/MovimentoCaixa/controllers/MovimentoCaixa.js';
 import DetalheFaturasControllers from './DetalheFaturas/controllers/Detalhes.js';
 import MarketingControllers from './Marketing/controllers/Marketing.js';
-
+import ContabilidadeControllers from './Contabilidade/controllers/Contabilidade.js';
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -437,6 +437,14 @@ routes.put('/produto-promocao/:id', MarketingControllers.putProdutoPromocao)
 routes.post('/cadastrar-campanha-cliente', MarketingControllers.postCampanhaCliente)
 routes.post('/cadastra-campanha', MarketingControllers.postCampanhaEmpresa)
 routes.post('/cadastrar-produto-promocao', MarketingControllers.postProdutoPromocao)
+
+// Contabilidade
+routes.get('/listaVendasContigencia', ContabilidadeControllers.getListaVendasContigencia)
+routes.get('/vendasDetalheContigencia', ContabilidadeControllers.getListaDetalheVendasContigencia)
+routes.get('/vendasPagamentoContigencia', ContabilidadeControllers.getListaPagamentoVendasContigencia)
+routes.get('/vendasEstoqueComercial', ContabilidadeControllers.getListaVendasEstoqueComercial)
+routes.get('/vendasProdutos', ContabilidadeControllers.getListaVendasPeriodo)
+routes.get('/vendasProdutosConsolidado', ContabilidadeControllers.getListaVendasPeriodoConsolidado)
 
 
 export default routes;
