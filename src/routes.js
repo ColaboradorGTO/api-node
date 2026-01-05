@@ -5,8 +5,8 @@ import EmpresaControllers from "./Empresas/controllers/Empresas.js"
 import ApiPing from './controllers/ApiPing.js';
 import AuthentiCationController from './Auth/controllers/Auth.js';
 import AdministrativoControllers from './Administrativo/controllers/Administrativo.js';
-
-
+import FinanceiroControllers from './Financeiro/controllers/Financeiro.js';
+// import InformaticaControllers from './Informatica/controllers/Informatica.js';
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -72,5 +72,58 @@ routes.get('/formaPagamentos', AdministrativoControllers.getListaFormaPagamento)
 // routes.get('/coletorBalanco', AdministrativoControllers.getListaColetorBalanco)
 // routes.get('/detalheBalancoAvulso', AdministrativoControllers.getDetalheBalancoAvulso)
 
+
+
+// Início Financeiro
+
+routes.get('/listaExtratoDaLojaPeriodo', FinanceiroControllers.getListaExtratoDaLojaPeriodoFinan)
+routes.get('/historicos-malotes', FinanceiroControllers.getListasHistoricosMalotes)
+routes.get('/malotes-loja', FinanceiroControllers.getListasMalotesLojas)
+routes.get('/pendencias-malotes', FinanceiroControllers.getListaPendenciasMalotes)
+
+routes.put('/malotes-loja/:id', FinanceiroControllers.putMalotesLoja)
+
+// routes.get('/listaVendasMarca', FinanceiroControllers.getListaVendasMarca)
+routes.get('/resumoVendaFinanceiro', FinanceiroControllers.getListaVendasResumidaFinanceiro)
+
+routes.get('/vendaPagamento', FinanceiroControllers.getListaVendasTransacoesEmpresa)
+routes.get('/vendaTotalEmpresa', FinanceiroControllers.getListaVendasEmpresa)
+routes.get('/detalheFechamento', FinanceiroControllers.getListaDetalheFechamento)
+routes.get('/listaCaixasMovimentoFinanceiro', FinanceiroControllers.getListaCaixasMovmentoFinanceiro)
+routes.get('/vendaMarcaPeriodoFinanceiro', FinanceiroControllers.getListaVendasMarcaFinanceiro)
+routes.get('/vendaMarcaRob', FinanceiroControllers.getListaVendasMarcaROB)
+routes.get('/vendaMarcaMarckup', FinanceiroControllers.getListaVendasMarcaMarckup)
+routes.get('/vendaDigitalFinanceiro', FinanceiroControllers.getListaVendasDigital)
+routes.get('/vendaPixPeriodo', FinanceiroControllers.getListaVendasPixPeriodo)
+routes.get('/vendaPixConsolidadoLoja', FinanceiroControllers.getListaVendasPixConsolidadoLojas)
+routes.get('/vendaPixConsolidado', FinanceiroControllers.getListaVendasPixConsolidado)
+
+// routes.get('/faturaPixPeriodoConsolidado', FinanceiroControllers.getListaFaturasPixConsolidado)
+routes.get('/faturaPixConsolidadoLoja', FinanceiroControllers.getListaFaturaPixConsolidadoLoja)
+// routes.get('/vendaConciliar', FinanceiroControllers.getListaVendasConciliar)
+routes.get('/venda-detalhe-recebimento-eletronico', FinanceiroControllers.getListaDetalheRecebimentosEletronico)
+// routes.get('/vendaDetalheRecebimentoEletronico', FinanceiroControllers.getListaDetalheRecebimentosEletronico)
+// routes.get('/deposito-loja', FinanceiroControllers.getListaConciliarBanco)
+routes.get('/deposito-loja-consolidado', FinanceiroControllers.getListaConciliarBancoConsolidado)
+// routes.get('/saldoLojaPorGrupo', FinanceiroControllers.getListaSaldoExtratoLoja)
+routes.post('/motivoDevolucao', FinanceiroControllers.createMotivoDevolucao)
+// routes.get('/detalheFaturaFinanceiro', FinanceiroControllers.getListaDetalheFaturaFinanceiro)
+routes.get('/banco', FinanceiroControllers.getListaBanco)
+routes.get('/conta-banco', FinanceiroControllers.getListaContaBanco)
+routes.put('/conta-banco/:id', FinanceiroControllers.putContaBanco)
+routes.post('/cadastrar-conta-banco', FinanceiroControllers.postContaBanco)
+
+// routes.get('/lista-extrato', ExtratosControllers.getListaExtratoDaLojaPeriodoFinanceiro)
+// routes.put('/ajuste-extrato/:id', ExtratosControllers.putListaAjusteExtrato)
+// routes.post('/ajuste-extrato', ExtratosControllers.postListaAjusteExtrato)
+
+// routes.get('/resumo-voucher', VoucherControllers.getListaResumoVoucherFinanceiro)
+// routes.put('/atualizacaoAdiantamentoStatus', FinanceiroControllers.updateAdiantamentoStatus)
+routes.put('/atualizarFatura/:id', FinanceiroControllers.putFaturaFinanceiro)
+routes.put('/conferencia-fatura/:id', FinanceiroControllers.putFaturaConferencia)
+
+
+// Início Vendas 
+routes.get('/vendaLojaPeriodo', FinanceiroControllers.getListaVendasLojaPeriodo)
 export default routes;
 
