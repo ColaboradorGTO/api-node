@@ -35,6 +35,21 @@ import ConsultaNFceController  from './Informatica/ConsultaNFCE/controllers/inde
 import ConsultaNFeController from './Informatica/ConsultaNFCE/controllers/nfe.js'
 import ConsultaStatusNfeController from './Informatica/ConsultaNFCE/controllers/statusNfce.js'
 
+// Financeiro Início
+import AdiantamentosControllers from './Financeiro/Adiantamentos/controllers/adiantamentos.js'
+import DepositosControllers from './Financeiro/Depositos/controllers/depositos.js'
+import CaixasControllers from './Financeiro/Caixas/controllers/caixas.js'
+import DescontoControllers from './Financeiro/Desconto/controllers/desconto.js'
+import DespesasControllers from './Financeiro/Despesas/controllers/depesas.js'
+import DevolucaoControllers from './Financeiro/Devolucao/controllers/devolucao.js'
+import EstabelecimentoControllers from './Financeiro/Estabelecimentos/controllers/estabelecimento.js'
+import FaturasControllers from './Financeiro/Faturas/controllers/faturas.js'
+import PedidosControllers from './Financeiro/Pedidos/controllers/pedidos.js'
+import SaldosControllers from './Financeiro/Saldos/controllers/saldos.js'
+import FinanceiroVendasControllers from './Financeiro/Vendas/controllers/vendas.js'
+import VoucherControllers from './Financeiro/Voucher/controllers/voucher.js'
+import ExtratosControllers from './Financeiro/Extrato/controllers/extrato.js'
+
 const routes = new Router();
 // routes.use(authMiddleware)
 

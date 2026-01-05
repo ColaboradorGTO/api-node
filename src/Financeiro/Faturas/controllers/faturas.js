@@ -62,7 +62,7 @@ class FaturasControllers {
     try {
                       
       // const apiUrl = `${url}/api/detalhe-fatura.xsjs?idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&nuCodigoAutorizacao=${codigoFatura}&id=${idDetalheFatura}&page=${page}&pageSize=${pageSize}`;
-      const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/detalhe-fatura.xsjs?idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&nuCodigoAutorizacao=${codigoFatura}&id=${idDetalheFatura}&page=${page}&pageSize=${pageSize}`;
+      const apiUrl = `${url}/api/detalhe-fatura.xsjs?idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&nuCodigoAutorizacao=${codigoFatura}&id=${idDetalheFatura}&page=${page}&pageSize=${pageSize}`;
       const response = await axios.get(apiUrl);
      
       return res.json(response.data); 
@@ -85,7 +85,7 @@ class FaturasControllers {
     try {
                       
       // const apiUrl = `${url}/api/detalhe-fatura.xsjs?idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&nuCodigoAutorizacao=${codigoFatura}&idDetalheFatura=${idDetalheFatura}&page=${page}&pageSize=${pageSize}`;
-      const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/previa-consolidacao-faturas.xsjs?idEmpresa=${idEmpresa}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&page=${page}&pageSize=${pageSize}`;
+      const apiUrl = `${url}/api/financeiro/previa-consolidacao-faturas.xsjs?idEmpresa=${idEmpresa}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&page=${page}&pageSize=${pageSize}`;
       const response = await axios.get(apiUrl);
 
       return res.json(response.data); 
@@ -108,7 +108,7 @@ class FaturasControllers {
     try {
                       
       // const apiUrl = `${url}/api/detalhe-fatura.xsjs?idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&nuCodigoAutorizacao=${codigoFatura}&idDetalheFatura=${idDetalheFatura}&page=${page}&pageSize=${pageSize}`;
-      const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/consolidacao-faturas.xsjs?idEmpresa=${idEmpresa}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&page=${page}&pageSize=${pageSize}`;
+      const apiUrl = `${url}/api/financeiro/consolidacao-faturas.xsjs?idEmpresa=${idEmpresa}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&page=${page}&pageSize=${pageSize}`;
       const response = await axios.get(apiUrl);
 
       return res.json(response.data); 
@@ -225,7 +225,7 @@ class FaturasControllers {
     try {
       let { IDCONSOLIDACAOFATURA, STCANCELADO, TXTMOTIVOCANCELAMENTO, IDFUNCIONARIO } = req.body; 
 
-      const response = await axios.put(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/consolidacao-faturas.xsjs`, {
+      const response = await axios.put(`${url}/api/financeiro/consolidacao-faturas.xsjs`, {
         IDCONSOLIDACAOFATURA,
         STCANCELADO,
         TXTMOTIVOCANCELAMENTO,
@@ -242,7 +242,7 @@ class FaturasControllers {
     try {
       let { IDEMPRESA, DTPROCESSAMENTO, QTDTOTALFATURAS, VRTOTALRECEBIDO, IDFUNCIONARIO } = req.body; 
 
-      const response = await axios.post(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/consolidacao-faturas.xsjs`, {
+      const response = await axios.post(`${url}/api/financeiro/consolidacao-faturas.xsjs`, {
         IDEMPRESA,
         DTPROCESSAMENTO,
         QTDTOTALFATURAS,
@@ -260,7 +260,7 @@ class FaturasControllers {
     try {
       let { IDS_CONSOLIDACOES, IDFUNCIONARIO } = req.body; 
 
-      const response = await axios.post(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/service-layer/fatura/jobs/consolidacao-faturas-integracao.xsjs`, {
+      const response = await axios.post(`${url}/api/service-layer/fatura/jobs/consolidacao-faturas-integracao.xsjs`, {
         IDS_CONSOLIDACOES,
         IDFUNCIONARIO
       });

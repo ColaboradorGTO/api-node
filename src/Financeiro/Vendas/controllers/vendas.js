@@ -2,7 +2,7 @@
 import axios from "axios";
 import { dataFormatada } from "../../../utils/dataFormatada.js";
 import 'dotenv/config';
-const url = process.env.API_URL || 'localhost:6001'
+const url = process.env.API_URL;
 
 class FinanceiroVendasControllers {
 
@@ -301,7 +301,7 @@ class FinanceiroVendasControllers {
     page = page ? page : '';
     pageSize = pageSize ? pageSize : '';
     try {
-      const apiUrl = `http://164.152.245.77:8000/quality/concentrador/api/financeiro/venda-total-mes.xsjs?dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisa=${dataPesquisaFim}&horaFinal=${horaFinal}`
+      const apiUrl = `${url}/api/financeiro/venda-total-mes.xsjs?dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisa=${dataPesquisaFim}&horaFinal=${horaFinal}`
       const response = await axios.get(apiUrl)
 
       return res.json(response.data);
@@ -319,7 +319,7 @@ class FinanceiroVendasControllers {
     page = page ? page : '';
     pageSize = pageSize ? pageSize : '';
     try {
-      const apiUrl = `http://164.152.245.77:8000/quality/concentrador/api/dashboard/venda-total-loja-hora.xsjs?dataPesquisa=${dataPesquisa}&horaFinal=${horaFinal}`
+      const apiUrl = `${url}/api/dashboard/venda-total-loja-hora.xsjs?dataPesquisa=${dataPesquisa}&horaFinal=${horaFinal}`
       const response = await axios.get(apiUrl)
 
       return res.json(response.data);
@@ -337,7 +337,7 @@ class FinanceiroVendasControllers {
     page = page ? page : '';
     pageSize = pageSize ? pageSize : '';
     try {
-      const apiUrl = `http://164.152.245.77:8000/quality/concentrador/api/dashboard/venda-total-loja-hora.xsjs?dataPesquisa=${dataPesquisa}&horaFinal=${horaFinal}`
+      const apiUrl = `${url}/api/dashboard/venda-total-loja-hora.xsjs?dataPesquisa=${dataPesquisa}&horaFinal=${horaFinal}`
       const response = await axios.get(apiUrl)
 
 
@@ -356,7 +356,7 @@ class FinanceiroVendasControllers {
     page = page ? page : '';
     pageSize = pageSize ? pageSize : '';
     try {
-      const apiUrl = `http://164.152.245.77:8000/quality/concentrador/api/financeiro/venda-total-to.xsjs?dataPesquisa=${dataPesquisa}&idgrupo=${idGrupo}`
+      const apiUrl = `${url}/api/financeiro/venda-total-to.xsjs?dataPesquisa=${dataPesquisa}&idgrupo=${idGrupo}`
       const response = await axios.get(apiUrl)
 
       return res.json(response.data);
