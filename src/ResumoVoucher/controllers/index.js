@@ -1,11 +1,5 @@
 
 import axios from 'axios';
-import { getDetalheVoucherDados } from '../repositories/detalheVoucherDados.js';
-import { getDetalheVoucher } from '../repositories/detalheVoucher.js';
-import { createAuthFuncionarioCreateVoucher } from '../repositories/authFuncionarioCreateVoucher.js';
-import { getEmpresasVoucher } from '../repositories/empresa.js';
-import { createAuthFuncionarioPrintVoucher } from '../repositories/authFuncionarioPrintVoucher.js';
-import { createAuthFuncionarioUpdateVoucher } from '../repositories/authFuncionarioUpdateVoucher.js';
 import 'dotenv/config';
 const url = process.env.API_URL;
 

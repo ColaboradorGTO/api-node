@@ -1,9 +1,5 @@
 import { dataFormatada } from "../../utils/dataFormatada.js";
 import axios from 'axios';
-import { getPromocao } from "../Promocao/repositories/listaPromocao.js";
-import { createProdutoPromocao, getProdutoPromocao, updateProdutoPromocao } from "../../Produtos/repositories/produtoPromocao.js";
-import { createCampanhaCLiente, getCampanhaCliente, updateCampanhaCLiente } from "../Campanha/repositories/campanhaCliente.js";
-import { createCampanhaEmpresa, getCampanhaEmpresa, updateCampanhaEmpresa } from "../Campanha/repositories/todos.js";
 let url = `http://164.152.245.77:8000/quality/concentrador_node`;
 
 class MarketingControllers {
@@ -19,7 +15,7 @@ class MarketingControllers {
             pageSize = pageSize ? pageSize : '';
             const apiUrl = `${url}/api/produto-promocao.xsjs?codeBarsOuNome=${descricaoProduto}`
             const response = await axios.get(apiUrl)
-            // const response = await getProdutoPromocao(idProduto, codeBarsOuNome, page, pageSize)
+     
     
             return res.json(response.data); // Retorna
         } catch (error) {
@@ -36,7 +32,7 @@ class MarketingControllers {
             pageSize = pageSize ? pageSize : '';
             const apiUrl = `${url}/api/promocao/listapromocao.xsjs?idResumoPromocao=${idResumoPromocao}&page=${page}&pageSize=${pageSize}`  
             const response = await axios.get(apiUrl)
-            // const response = await getPromocao(idResumoPromocao, page, pageSize)
+           
     
             return res.json(response.data); // Retorna
         } catch (error) {
@@ -53,7 +49,7 @@ class MarketingControllers {
             pageSize = pageSize ? pageSize : '';
             const apiUrl = `${url}/api/campanha/todos.xsjs`
             const response = await axios.get(apiUrl)
-            // const response = await getCampanhaEmpresa(idCampanha, page, pageSize)
+           
     
             return res.json(response.data);
         } catch (error) {
@@ -74,7 +70,7 @@ class MarketingControllers {
             const apiUrl = `${url}/api/campanha/cliente.xsjs?cpf=${cpf}&telefone=${telefone}&idCampanha=${idCampanha}&page=${page}&pageSize=${pageSize}`
           
             const response = await axios.get(apiUrl)
-            // const response = await getCampanhaCliente(cpf,telefone, idCampanha, page, pageSize)
+          
     
             return res.json(response.data); 
         } catch (error) {
@@ -89,7 +85,7 @@ class MarketingControllers {
             const dados = Array.isArray(req.body) ? req.body : [req.body];  
 
             const response = await axios.put(`${url}/api/campanha/cliente.xsjs`, dados)
-            // const response = await  updateCampanhaCLiente(dados)
+         
         
             return res.json(response.data);
         } catch (error) {
@@ -101,9 +97,9 @@ class MarketingControllers {
     async putProdutoPromocao(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body];   
-            const response = await updateProdutoPromocao(dados)
+            const response = await axios.put(`${url}/api/produto-promocao.xsjs`, dados)
         
-            return res.json(response);
+            return res.json(response.data);
         } catch (error) {
             console.error("Unable to connect to the database:", error);
             throw error;
@@ -113,7 +109,7 @@ class MarketingControllers {
     async putCampanhaEmpresa(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body];   
-            const response = await updateCampanhaEmpresa(dados)
+            const response = await axios.put(`${url}/api/campanha/todos.xsjs`, dados)
         
             return res.json(response);
         } catch (error) {
