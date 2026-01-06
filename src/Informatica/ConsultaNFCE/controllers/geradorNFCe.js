@@ -23,9 +23,8 @@ import fs from 'fs';
 import path from 'path';
 import axios from 'axios';
 import 'dotenv/config';
+const url = process.env.API_URL;
 
-// Configurar precisão do Decimal para cálculos monetários
-Decimal.set({ precision: 10, rounding: Decimal.ROUND_HALF_UP });
 
 /**
  * =============================================================================
@@ -577,7 +576,7 @@ class GeradorNFCe {
 
       // 1. Buscar dados da venda
       const response = await axios.get(
-        `http://164.152.245.77:8000/quality/concentrador/api/venda/lista-venda-new-xml.xsjs?id=${idVenda}`,
+        `${url}/api/venda/lista-venda-new-xml.xsjs?id=${idVenda}`,
         { timeout: 10000 }
       );
       const vendaData = response.data;

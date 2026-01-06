@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import axios from 'axios';
-
+const url = process.env.API_URL;
 export async function getCertOptions(senha, fallbackPfxPath = './GTO COMERCIO 2025-2026.pfx') {
   // -----------------------------
   // 1) PFX BASE64 VIA ENV
@@ -80,7 +80,7 @@ class SoapController {
 
       // ================== 1. BUSCAR VENDA ==================
       const response = await axios.get(
-        `http://164.152.245.77:8000/quality/concentrador_homologacao/api/venda/lista-venda-new-xml.xsjs?id=${idVenda}`
+        `${url}/api/venda/lista-venda-new-xml.xsjs?id=${idVenda}`
       );
 
       const vendaApi = response.data.data[0];

@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from "node:path";
 import axios from 'axios';
 import 'dotenv/config';
-
+const url = process.env.API_URL;
 
 async function getCertOptions(senha, fallbackPfxPath = './GTO COMERCIO 2025-2026.pfx') {
   // 1) PFX via env base64
@@ -102,7 +102,7 @@ class ConsultaNFceController {
         return map[u] || "51";
       }
 
-      const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/venda/lista-venda-new-xml.xsjs?id=${idVenda}`);
+      const response = await axios.get(`${url}/api/venda/lista-venda-new-xml.xsjs?id=${idVenda}`);
       const vendaData = response.data;
       
       let v_TotICMS = 0;

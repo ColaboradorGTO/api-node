@@ -4,6 +4,8 @@ import path from 'path';
 import axios from 'axios';
 import os from 'os';
 import 'dotenv/config';
+const url = process.env.API_URL;
+
 async function getCertOptions(senha, fallbackPfxPath = './GTO COMERCIO 2025-2026.pfx') {
   // 1) PFX via env base64
   const pfxBase64 = process.env.CERT_PFX_BASE64;
@@ -101,7 +103,7 @@ class ConsultaNfeController {
         return map[u] || "35";
       }
 
-      const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/venda/lista-venda-new-xml.xsjs?id=${idVenda}`);
+      const response = await axios.get(`${url}/api/venda/lista-venda-new-xml.xsjs?id=${idVenda}`);
       const vendaData = response.data;
 
       let v_TotICMS = 0;
@@ -964,7 +966,7 @@ class ConsultaNfeController {
       let { IDVENDA, STVALIDACONTINGENCIA, page, pageSize } = req.body;
       page = page ? page : ''
       pageSize = pageSize ? pageSize : ''
-      const response = await axios.put(`http://164.152.245.77:8000/quality/concentrador/api/venda/valida-venda-contingencia.xsjs?page=${page}&pageSize=${pageSize}`, {
+      const response = await axios.put(`${url}/api/venda/valida-venda-contingencia.xsjs?page=${page}&pageSize=${pageSize}`, {
         IDVENDA
       })
       return res.json(response.data);
@@ -997,7 +999,7 @@ class ConsultaNfeController {
         if (page) queryParams.append('page', page);
         if (pageSize) queryParams.append('pageSize', pageSize);
 
-        const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/venda/valida-venda-contingencia.xsjs?page=${page}&pageSize=${pageSize}`;
+        const apiUrl = `${url}/api/venda/valida-venda-contingencia.xsjs?page=${page}&pageSize=${pageSize}`;
         const response = await axios.get(apiUrl);
         vendas = response.data;
       }
