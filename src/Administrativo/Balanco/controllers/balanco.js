@@ -294,7 +294,7 @@ class AdmBalancoControllers {
     async postDetalheBalancoAvulso(req, res) {
         try {
             let {
-                 DSRESUMOBALANCO,
+                DSRESUMOBALANCO,
                 DTABERTURA,
                 DTFECHAMENTO,
                 IDEMPRESA,
@@ -304,14 +304,14 @@ class AdmBalancoControllers {
                 QTDTOTALSOBRA,
                 STATIVO,
                 TXTOBSERVACAO,
-                det 
+                det
             } = req.body;
             // const response = await createDetalheBalancoAvulso(detalhes)
-            if(!IDEMPRESA){
+            if (!IDEMPRESA) {
                 return res.status(400).json({ error: "IDEMPRESA is required." });
             }
             const apiUrl = `${url}/api/administrativo/detalhe-balanco-avulso.xsjs`;
-            const response = await axios.post(apiUrl,
+            const response = await axios.post(apiUrl, {
                 DSRESUMOBALANCO,
                 DTABERTURA,
                 DTFECHAMENTO,
@@ -324,7 +324,7 @@ class AdmBalancoControllers {
                 TXTOBSERVACAO,
                 det
 
-            )
+            })
             return res.json(response.data);
         } catch (error) {
             console.error("Erro no ADM Balanco Controllers postDetalheBalancoAvulso:", error);
