@@ -15,7 +15,7 @@ class ResumoVoucherControllers {
         dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : ''
     
         try {
-            // ${url}/api/resumo-voucher/detalhe-voucher-dados.xsjs?page=1&dataPesquisaInicio=2024-01-03&dataPesquisaFim=2024-01-03&subgrupoEmpresa=1&idEmpresa=1
+            
             const apiUrl = `${url}/api/resumo-voucher/detalhe-voucher.xsjs?id=${numeroVoucher}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`
             const response = await axios.get(apiUrl)
     
@@ -40,11 +40,7 @@ class ResumoVoucherControllers {
                 pageSize = pageSize ? pageSize : ''
                 const apiUrl = `${url}/api/resumo-voucher/detalhe-voucher.xsjs?id=${idVoucher}`
                 const response = await axios.get(apiUrl)
-                // const response = await getDetalheVoucher(idVoucher)
-        
-                if (response.data && response.data.error) {
-                    return res.status(400).json({ error: response.data.error });
-                }
+              
                 return res.json(response.data);
             } catch (error) {
                 console.error("Erro no ResumoVoucherControllers.getListaVoucherGerencia:", error);
@@ -71,8 +67,7 @@ class ResumoVoucherControllers {
             
             const apiUrl = `${url}/api/resumo-voucher/detalhe-voucher-dados.xsjs?id=${idVoucher}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&dadosVoucher=${dadosVoucher}&subgrupoEmpresa=${idSubGrupoEmpresa}&idEmpresa=${idEmpresa}&stStatus=${stStatus}&page=${page}&pageSize=${pageSize}`
             const response = await axios.get(apiUrl)
-            // const response = await getDetalheVoucherDados(idSubGrupoEmpresa, idEmpresa, idVoucher, dataPesquisaInicio, dataPesquisaFim, dadosVoucher, stStatus, stTipoTroca, page, pageSize)
-           
+
             return res.json(response.data); // Retorna
         } catch (error) {
             console.error("Error in ResumoVoucherControllers.getListaDetalheVoucherDados:", error);
@@ -94,12 +89,10 @@ class ResumoVoucherControllers {
         page = page ? page : ''
         pageSize = pageSize ? pageSize : ''
         try {
-            // ${url}/api/resumo-voucher/detalhe-voucher-dados.xsjs?page=1&dataPesquisaInicio=2024-01-03&dataPesquisaFim=2024-01-03&subgrupoEmpresa=1&idEmpresa=1
+           
             const apiUrl = `${url}/api/administrativo/voucher-completo.xsjs?id=${idVoucher}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&dadosVoucher=${dadosVoucher}&subgrupoEmpresa=${idSubGrupoEmpresa}&idEmpresa=${idEmpresa}&stStatus=${stStatus}&page=${page}&pageSize=${pageSize}`
             const response = await axios.get(apiUrl)
-            // const response = await getVoucherCompleto(idVoucher, numeroVoucher, idSubGrupoEmpresa, idEmpresa, dataPesquisaInicio, dataPesquisaFim, dadosVoucher, stStatus, page, pageSize)
-           
-            return res.json(response.data); 
+            return res.json(response.data); // Retorna
         } catch (error) {
             console.error("erro no ResumoVoucherControllers getListaVouchercOMPLETO:", error);
             throw error;
@@ -116,9 +109,8 @@ class ResumoVoucherControllers {
 
         try {
             const apiUrl = `${url}/api/resumo-voucher/empresa.xsjs?idEmpresa=${idEmpresa}&idSubGrupoEmpresa=${idSubGrupoEmpresa}&page=${page}&pageSize=${pageSize}`;
-
             const response = await axios.get(apiUrl);
-            // const response = await getEmpresasVoucher(idEmpresa, idSubGrupoEmpresa, page, pageSize);
+         
             
             return res.json(response.data); // Retorna
         } catch (error) {
@@ -133,8 +125,8 @@ class ResumoVoucherControllers {
 
         if(!isNaN(numeroVoucher)) {
 
-            idSubGrupoEmpresa = ''
-          
+            idSubGrupoEmpresa = idSubGrupoEmpresa ? idSubGrupoEmpresa : ''
+            numeroVoucher = numeroVoucher ? numeroVoucher : ''
             try {
                 
                 const apiUrl = `${url}/api/resumo-voucher/detalhe-voucher-dados.xsjs?dadosVoucher=${numeroVoucher}&subgrupoEmpresa=${idSubGrupoEmpresa}`
@@ -156,7 +148,7 @@ class ResumoVoucherControllers {
         idSubGrupoEmpresa = idSubGrupoEmpresa ? idSubGrupoEmpresa : ''        
     
         try {
-            //api/resumo-voucher/detalhe-voucher-dados.xsjs?id=${idVoucher}&subgrupoEmpresa=${grupoEmpresa}
+            
             const apiUrl = `${url}/api/resumo-voucher/detalhe-voucher-dados.xsjs?id=${idVoucher}&subgrupoEmpresa=${idSubGrupoEmpresa}`
             const response = await axios.get(apiUrl)
     
@@ -171,7 +163,7 @@ class ResumoVoucherControllers {
         let { idVoucher } = req.query;
 
         if(!isNaN(idVoucher) ) {
-            idVoucher = Number(idVoucher)
+            idVoucher = idVoucher ? idVoucher : ''
                     
         
             try {
@@ -249,11 +241,11 @@ class ResumoVoucherControllers {
     async postAuthFuncionarioPrintVoucher(req, res) {
         try {
             let {MATRICULA, SENHA, IDEMPRESALOGADA, IDGRUPOEMPRESARIAL, IDVOUCHER} = req.body;  
-            // const response = await createAuthFuncionarioUpdateVoucher(dados)
+           
             if (!MATRICULA || !SENHA || !IDEMPRESALOGADA || !IDGRUPOEMPRESARIAL || !IDVOUCHER) {
                 return res.status(400).json({ error: 'Todos os campos são obrigatórios.' });
             }
-            // const response = await createAuthFuncionarioPrintVoucher(dados)
+   
             const response = await axios.post(`${url}/api/resumo-voucher/auth-funcionario-print-voucher.xsjs`, {
                 MATRICULA, 
                 SENHA, 
@@ -285,7 +277,6 @@ class ResumoVoucherControllers {
             return res.json(response.data);
         } catch (error) {
             console.error("Error no ResumoVoucherControllers.postAuthFuncionarioUpdateVoucher:", error);
-            // Retorna mensagem de erro mas não lança exceção, permitindo que a API continue rodando normalmente
             return res.status(500).json({ 
                 error: error.response?.data || null
             });
@@ -394,16 +385,6 @@ class ResumoVoucherControllers {
                 DSINDICACAOIE,
                 IDFUNCIONARIO 
             } = req.body
-   
-            // const response = await createCliente(dados);
-
-            // if(!IDCLIENTE) {
-            //     return res.status(400).json({ error: 'IDCLIENTE é obrigatório.' });
-            // }   
-
-            // if(!IDFUNCIONARIO) {
-            //     return res.status(400).json({ error: 'IDFUNCIONARIO é obrigatório.' });
-            // }
 
             if(!NUCPFCNPJ) {
                 return res.status(400).json({ error: 'NUCPFCNPJ é obrigatório.' });
@@ -489,20 +470,6 @@ class ResumoVoucherControllers {
         try {
           
             let { STATIVO, STCANCELADO, DSMOTIVOTROCASTATUS, IDFUNCIONARIO, STSTATUS, STTIPOTROCA, IDVOUCHER, IDEMPRESALOGADA, IDGRUPOEMPRESARIAL } = req.body;
-   
-            // const response = await updateResumoVoucher(dados);
-
-            // if(!IDVOUCHER) {
-            //     return res.status(400).json({ error: 'IDVOUCHER é obrigatório.' });
-            // }
-
-            // if(!IDEMPRESALOGADA) {
-            //     return res.status(400).json({ error: 'IDEMPRESALOGADA é obrigatório.' });
-            // }
-
-            // if(!IDFUNCIONARIO) {
-            //     return res.status(400).json({ error: 'IDFUNCIONARIO é obrigatório.' });
-            // }
 
             const response = await axios.put(`${url}/api/resumo-voucher/todos-web.xsjs`, {
                 STATIVO,
