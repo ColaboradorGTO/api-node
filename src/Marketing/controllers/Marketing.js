@@ -1,5 +1,7 @@
 import axios from 'axios';
-let url = `http://164.152.245.77:8000/quality/concentrador_node`;
+import 'dotenv/config';
+const url = process.env.API_URL;
+
 
 class MarketingControllers {
 
@@ -102,7 +104,7 @@ class MarketingControllers {
     async putCampanhaEmpresa(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body];   
-            // const response = await updateCampanhaEmpresa(dados)
+          
             const response = await axios.put(`${url}/api/campanha/todos.xsjs`, dados)
         
             return res.json(response.data);

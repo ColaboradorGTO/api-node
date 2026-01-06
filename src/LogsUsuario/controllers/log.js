@@ -1,5 +1,6 @@
 
 import axios from "axios";
+import 'dotenv/config';
 const url = process.env.API_URL;
 
 class LogsControllers {
@@ -14,8 +15,8 @@ class LogsControllers {
 
         try {
     
-          const apiUrl = await `${url}/api/log-web.xsjs`;
-          const response = axios.get(apiUrl)
+          const apiUrl = `${url}/api/log-web.xsjs`;
+          const response = await axios.get(apiUrl)
 
           return res.json(response.data);
         } catch (error) {
@@ -29,7 +30,6 @@ class LogsControllers {
         try {
             const logs = Array.isArray(req.body) ? req.body : [req.body]; 
             
-            // const response = await postLogUsuario(logs);
             const response = await axios.post(`${url}/api/log-web.xsjs`, logs);
             
             return res.json(response.data);

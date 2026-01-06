@@ -28,7 +28,7 @@ class InformaticaControllers {
             idEmpresa = idEmpresa ? idEmpresa : '';
         try {
 
-            const apiUrl = `http://164.152.245.77:8000/quality/concentrador/api/informatica/empresa.xsjs?id=${idEmpresa}`
+            const apiUrl = `${url}/api/informatica/empresa.xsjs?id=${idEmpresa}`
        
             const response = await axios.get(apiUrl)
         
@@ -45,7 +45,6 @@ class InformaticaControllers {
         try {
             const apiUrl = `${url}/api/grupo-empresarial.xsjs`
             const response = await axios.get(apiUrl)
-            // const response = await getGrupoEmpresa()
             
             return res.json(response.data); 
         } catch (error) {
@@ -70,15 +69,15 @@ class InformaticaControllers {
     }
 
     async getListaProdutoPreco(req, res) {
-        let { idEmpresa, dsProduto, pageNumber } = req.query;
+        let { idEmpresa, dsProduto, page, pageSize } = req.query;
         if (!isNaN(idEmpresa)) {
 
             idEmpresa = Number(idEmpresa);
-            const numPage = 100;            
-            const offset = (pageNumber - 1) * numPage;
-         
+            dsProduto = dsProduto ? dsProduto : '';
+            page = page ? page : '';
+            pageSize = pageSize ? pageSize : '';
             try {
-                const apiUrl = `${url}/api/informatica/produto-preco.xsjs?page=10&idEmpresa=${idEmpresa}&dsProduto=${dsProduto}`
+                const apiUrl = `${url}/api/informatica/produto-preco.xsjs?page=${page}&pageSize=${pageSize}&idEmpresa=${idEmpresa}&dsProduto=${dsProduto}`
                 const response = await axios.get(apiUrl)
                 if(response.status === 200){
                     return res.json(response.data); 
@@ -92,13 +91,14 @@ class InformaticaControllers {
         }
     }
     async getListaProdutoPrecoInformatica(req, res) {
-        let { idEmpresa, descricaoProduto, pageNumber } = req.query;
+        let { idEmpresa, descricaoProduto, page, pageSize } = req.query;
 
         idEmpresa = idEmpresa ? idEmpresa : '';
         descricaoProduto = descricaoProduto ? descricaoProduto : '';
-       
+        page = page ? page : '';
+        pageSize = pageSize ? pageSize : '';
         try {
-            const apiUrl = `${url}/api/informatica/produto-preco.xsjs?idEmpresa=${idEmpresa}&dsProduto=${descricaoProduto}`
+            const apiUrl = `${url}/api/informatica/produto-preco.xsjs?idEmpresa=${idEmpresa}&dsProduto=${descricaoProduto}&page=${page}&pageSize=${pageSize}`
             const response = await axios.get(apiUrl)
             if(response.status === 200){
                 return res.json(response.data); 
@@ -123,9 +123,9 @@ class InformaticaControllers {
                 pageSize = pageSize ? pageSize : '';
                 byId = byId ? byId : '';
 
-                const apiUrl = `${url}/api/informatica/caixa.xsjs?idEmpresa=${idEmpresa}&id=${idCaixaWeb}`
+                const apiUrl = `${url}/api/informatica/caixa.xsjs?idEmpresa=${idEmpresa}&id=${idCaixaWeb}&page=${page}&pageSize=${pageSize}&byId=${byId}`
                 const response = await axios.get(apiUrl)
-                 //const response = await getCaixa(idEmpresa, idCaixaWeb, dataUltimaAtualizacao,   page, pageSize) 
+
                 
                 return res.json(response.data); 
              
@@ -140,7 +140,7 @@ class InformaticaControllers {
         let { idCaixa } = req.query;
         if (!isNaN(idCaixa)) {
             try {
-                const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/informatica/caixa.xsjs?id=${idCaixa}`
+                const apiUrl = `${url}/api/informatica/caixa.xsjs?id=${idCaixa}`
                 const response = await axios.get(apiUrl)
                 if(response.status === 200){
                     return res.json(response.data); 
@@ -163,8 +163,7 @@ class InformaticaControllers {
             pageSize = pageSize ? pageSize : '';    
             const apiUrl = `${url}/api/informatica/atualiza-empresa-diario.xsjs?id=${idEmpresa}`
             const response = await axios.get(apiUrl)
-            // const response = await getAtualizaEmpresaDiario(idEmpresa)
-            
+
             return res.json(response.data); 
             
         } catch (error) {
@@ -184,9 +183,8 @@ class InformaticaControllers {
             dataPesquisaFim = dataPesquisaFim ? dataFormatada(dataPesquisaFim) : '';
             page = page ? page : '';
             pageSize = pageSize ? pageSize : '';
-            const apiUrl = `${url}/api/informatica/vendas-lojas.xsjs?idEmpresa=${idEmpresa}&status=${status}&dataInicio=${dataPesquisaInicio}&dataFim=${dataPesquisaFim}`
+            const apiUrl = `${url}/api/informatica/vendas-lojas.xsjs?idEmpresa=${idEmpresa}&status=${status}&dataInicio=${dataPesquisaInicio}&dataFim=${dataPesquisaFim}&page=${page}&pageSize=${pageSize}`
             const response = await axios.get(apiUrl)
-            // const response = await getVendasLoja(idEmpresa, status, dataPesquisaInicio, dataPesquisaFim, page, pageSize)
    
             return res.json(response.data); 
          
@@ -198,12 +196,14 @@ class InformaticaControllers {
     }
 
     async getListaAtualizarFuncionario(req, res) {
-        let { idFuncionario} = req.query;
+        let { idFuncionario, page, pageSize } = req.query;
         idFuncionario = idFuncionario ? idFuncionario : '';
+        page = page ? page : '';
+        pageSize = pageSize ? pageSize : '';
        
         try {
-            // ajaxGet('api/informatica/funcionario-loja.xsjs?pagesize=1000&id)
-            const apiUrl = `http://164.152.245.77:8000/quality/concentrador/api/informatica/funcionario-loja.xsjs?pagesize=1000&id=${idFuncionario}`
+            
+            const apiUrl = `${url}/api/informatica/funcionario-loja.xsjs?page=${page}&pageSize=${pageSize}&id=${idFuncionario}`
             const response = await axios.get(apiUrl)
             if(response.status === 200){
                 return res.json(response.data); 
@@ -248,12 +248,10 @@ class InformaticaControllers {
         dataPesquisaInicio = dataPesquisaInicio ? dataFormatada(dataPesquisaInicio) : '';
         dataPesquisaFim = dataPesquisaFim ? dataFormatada(dataPesquisaFim) : '';
         try {
-            // ajaxGet('api/informatica/lista-vendas-alloc.xsjs?idVenda=' + idVenda + '&idEmpresa=' + IDEmpresaLoja + '&dataPesquisaInic=' + datapesqinicio + '&dataPesquisaFim=' + datapesqfim + '&stvendasalloc=' + stvendasalloc)
-            const apiUrl = `${url}/api/informatica/lista-vendas-alloc.xsjs?idVenda=${idVenda}&idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&stvendasalloc=${stVendasAlloc}`
+            
+            const apiUrl = `${url}/api/informatica/lista-vendas-alloc.xsjs?idVenda=${idVenda}&idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&stvendasalloc=${stVendasAlloc}&status=${status}&page=${page}&pageSize=${pageSize}`
             const response = await axios.get(apiUrl)
 
-            // const response = await getVendasAlloc(idEmpresa, status, idVenda, dataPesquisaInicio, dataPesquisaFim, page, pageSize)
-            
             return res.json(response.data); 
             
         } catch (error) {
@@ -272,10 +270,10 @@ class InformaticaControllers {
         pageSize = pageSize ? pageSize : '';
       
         try {
-            // ajaxGet('api/informatica/lista-vendas-contingencia.xsjs?idEmpresa=' + IDEmpresaLoja + '&dataPesquisaInic=' + datapesqinicio + '&dataPesquisaFim=' + datapesqfim)
-            const apiUrl = `${url}/api/informatica/lista-vendas-contingencia.xsjs?idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`
+            
+            const apiUrl = `${url}/api/informatica/lista-vendas-contingencia.xsjs?idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&page=${page}&pageSize=${pageSize}`
             const response = await axios.get(apiUrl)
-            // const response = await getVendasContigencia(idEmpresa, dataPesquisaInicio, dataPesquisaFim, page, pageSize)
+
             return res.json(response.data); 
   
         } catch (error) {
@@ -319,12 +317,11 @@ class InformaticaControllers {
             status = status ? status : '';
             page = page ? page : '';
             pageSize = pageSize ? pageSize : '';
-            // ajaxGet('api/informatica/cliente.xsjs?page=' + numPage + '&idmarca=' + idmarca + '&idloja=' + idloja + '&dscliente=' + dscliente + '&idcpfcnpj=' + idcpfcnpj + '&idtipocliente=' + idtipocliente + '&idstatus=' + idstatus)
-
-            const apiUrl = `${url}/api/informatica/cliente.xsjs?idmarca=${idMarca}&idloja=${idEmpresa}&dscliente=${descCliente}&idcpfcnpj=${cpf}&idtipocliente=${tpCliente}&idstatus=${status}&id=${idCliente}`
-            const response = await axios.get(apiUrl)
-            // const response = await getCliente(idEmpresa, idCliente, idMarca, cpf, descCliente, tpCliente, status,  page, pageSize)
          
+
+            const apiUrl = `${url}/api/informatica/cliente.xsjs?idmarca=${idMarca}&idloja=${idEmpresa}&dscliente=${descCliente}&idcpfcnpj=${cpf}&idtipocliente=${tpCliente}&idstatus=${status}&id=${idCliente}&page=${page}&pageSize=${pageSize}`
+            const response = await axios.get(apiUrl)
+
             return res.json(response.data); 
         
         } catch (error) {
@@ -344,10 +341,10 @@ class InformaticaControllers {
         idLoja = idLoja ? idLoja : '';
         
         try {
-            // ajaxGet('api/informatica/linkrelatoriobi.xsjs?page=' + numPage + '&id=' + idrelatoriobi + '&idfilial=' + idloja)
+            
             const apiUrl = `${url}/api/informatica/linkrelatoriobi.xsjs?id=${idRelatorio}&idfilial=${idEmpresa}&page=${page}&pageSize=${pageSize}`
             const response = await axios.get(apiUrl)
-            // const response = await getLinkRelatorioBI(idRelatorio, idEmpresa, page, pageSize)
+        
         
             return res.json(response.data); 
          
@@ -368,7 +365,7 @@ class InformaticaControllers {
             pageSize = pageSize ? pageSize : '';
             const apiUrl = `${url}/api/informatica/relatoriobi.xsjs?id=${idRelatorio}&status=${status}&page=${page}&pageSize=${pageSize}`
             const response = await axios.get(apiUrl)
-            // const response = await getRelatorioBI(idRelatorio, status, page, pageSize)
+ 
           
             return res.json(response.data); 
          
@@ -388,12 +385,9 @@ class InformaticaControllers {
             dataPesquisaFim = dataPesquisaFim ? dataFormatada(dataPesquisaFim) : '';
             page = page ? page : '';
             pageSize = pageSize ? pageSize : '';
-          
-            // http://164.152.245.77:8000/quality/concentrador/api/informatica/cadastro-cliente-credsystem.xsjs?idEmpresa=&dtInicio=2024-12-09&dtFim=2024-12-09&page=1
+            
             const apiUrl = `${url}/api/informatica/cadastro-cliente-credsystem.xsjs?idEmpresa=${idEmpresa}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&page=${page}&pageSize=${pageSize}`;
             const response = await axios.get(apiUrl)
-            
-            // const response = await getCadastroClienteCredSystem(idEmpresa, dataPesquisaInicio, dataPesquisaFim,  page, pageSize)
           
             return res.json(response.data); 
         } catch (error) {
@@ -414,9 +408,7 @@ class InformaticaControllers {
             
             const apiUrl = `${url}/api/informatica/meio-pagamento-credsystem.xsjs?idEmpresa=${idEmpresa}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&page=${page}&pageSize=${pageSize}`
             const response = await axios.get(apiUrl)
-            
-            // const response = await getMeioPagamentoCredSystem(idEmpresa, dataPesquisaInicio, dataPesquisaFim,  page, pageSize)
-        
+ 
             return res.json(response.data); 
         } catch (error) {
             console.error("Unable to connect to the database:", error);
@@ -434,8 +426,7 @@ class InformaticaControllers {
             pageSize = pageSize ? pageSize : '';
             const apiUrl = `${url}/api/informatica/parceria-credsystem.xsjs?idEmpresa=${idEmpresa}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&page=${page}&pageSize=${pageSize}`
             const response = await axios.get(apiUrl)
-            // const response = await getParceriaCredSystem(idEmpresa, dataPesquisaInicio, dataPesquisaFim,  page, pageSize)
-          
+
             return res.json(response.data); 
         } catch (error) {
             console.error("Unable to connect to the database:", error);
@@ -469,59 +460,19 @@ class InformaticaControllers {
             const dados = Array.isArray(req.body) ? req.body : [req.body]; 
 
             const response = await axios.put(`${url}/api/informatica/relatoriobi.xsjs`, dados)
-            // const response = await updateRelatarioBI(dados);
+ 
             return res.json(response.data);
         } catch (error) {
             console.error("Unable to connect to the database:", error);
             return res.status(500).json({ error: error.message });
         }
     }
-/*     async putLinkRelatorioBI(req, res) {
-        try {
-            const dados = Array.isArray(req.body) ? req.body : [req.body]; 
-            const response = await axios.put(`${url}/api/informatica/linkrelatoriobi.xsjs`, dados)
 
-            // const response = await updateLinkRelatarioBI(dados);
-            return res.json(response.data);
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            return res.status(500).json({ error: error.message });
-        }
-    }
- */
-  
-/*     async putAtualizaEmpresaDiario(req, res) {
-        try {
-            const dados = Array.isArray(req.body) ? req.body : [req.body];   
-            const response = await axios.put(`${url}/api/informatica/atualiza-empresa-diario.xsjs`, dados)
-            // const response = await updateAtualizaEmpresaDiario(dados)
-            return res.json(response.data);
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-    } */
-   
-
-/*     async putAtualizarTodosCaixas(req, res) {
-        try {
-            const dados = Array.isArray(req.body) ? req.body : [req.body];   
-            const response = await axios.put(`${url}/api/informatica/atualizar_todos_caixa.xsjs`, dados)
-
-            // const response = await updateAtualizarTodosCaixa(dados)
-        
-            return res.json(response.data);
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-    }
- */
     async putFuncionarioLoja(req, res) {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body];   
             const response = await axios.put(`${url}/api/informatica/funcionario-loja.xsjs`, dados)
-            // const response = await updateFuncionario(dados)
+    
         
             return res.json(response.data);
         } catch (error) {
@@ -545,7 +496,6 @@ class InformaticaControllers {
         try {
             const dados = Array.isArray(req.body) ? req.body : [req.body];   
             const response = await axios.put(`${url}/api/informatica/funcionario-desconto.xsjs`, dados)
-            // const response = await updateFuncionarioDesconto(dados)
 
             return res.json(response.data);
         } catch (error) {
@@ -553,36 +503,6 @@ class InformaticaControllers {
             throw error;
         }
     }
-   
-
-/*     async postRelatorioBI(req, res) {
-        try {
-            const dados = Array.isArray(req.body) ? req.body : [req.body];   
-            const response = await axios.post(`${url}/api/informatica/relatoriobi.xsjs`, dados)
-
-            // const response = await createRelatarioBI(dados)
-        
-            return res.json(response.data);
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-    } */
-/*     async postLinkRelatorioBI(req, res) {
-        try {
-            const dados = Array.isArray(req.body) ? req.body : [req.body];   
-            const response = await axios.post(`${url}/api/informatica/linkrelatoriobi.xsjs`, dados)
-
-            // const response = await createLinkRelatarioBI(dados)
-        
-            return res.json(response.data);
-        } catch (error) {
-            console.error("Unable to connect to the database:", error);
-            throw error;
-        }
-    }
- */
-
 }
 
 export default new InformaticaControllers();

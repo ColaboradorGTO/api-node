@@ -53,8 +53,6 @@ class LinkRelatorioBiController {
                     }))
                 });
             }
-            console.log("params:", req.params);
-            console.log("body:", req.body);
 
             const response = await linkRelatorioBiServices.createLinkRelatorioBi({
                 IDRELATORIOBI: value.IDRELATORIOBI,

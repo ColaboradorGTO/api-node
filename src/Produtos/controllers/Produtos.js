@@ -6,15 +6,21 @@ const url = process.env.API_URL;
 class ProdutoControllers  {
 
     async getListaPedidos(req,res) {
-        let { dataPesquisaInicio, dataPesquisaFim, idFornPesquisa, idMarcaPesquisa, NuPedidoPesquisa, idFabPesquisa, idCompradorPesq, STSituacoPedidoPesq, pageNumber } = req.query;
+        let { dataPesquisaInicio, dataPesquisaFim, idFornPesquisa, idMarcaPesquisa, NuPedidoPesquisa, idFabPesquisa, idCompradorPesq, STSituacoPedidoPesq, page, pageSize } = req.query;
 
-        const pageSize = 100;
-        const offset = (pageNumber - 1) * pageSize;
-        dataPesquisaInicio = dataFormatada(dataPesquisaInicio)
-        dataPesquisaFim = dataFormatada(dataPesquisaFim)
+        dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
+        dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
+        idFornPesquisa = idFornPesquisa ? idFornPesquisa : '';
+        idMarcaPesquisa = idMarcaPesquisa ? idMarcaPesquisa : '';
+        NuPedidoPesquisa = NuPedidoPesquisa ? NuPedidoPesquisa : '';
+        idFabPesquisa = idFabPesquisa ? idFabPesquisa : '';
+        idCompradorPesq = idCompradorPesq ? idCompradorPesq : '';
+        STSituacoPedidoPesq = STSituacoPedidoPesq ? STSituacoPedidoPesq : '';
+        page = page ? page : '';
+        pageSize = pageSize ? pageSize : '';
         try {
-            // ajaxGet('api/compras/lista_pedidos.xsjs?pageSize=1000&page=' + numPage + '&dataPesquisaInicio=' + dataPesqInic + '&dataPesquisaFim=' + dataPesqFim + '&idFornPesquisa=' + idFornPesq + '&idMarcaPesquisa=' + idMarcaPesq + '&idpedido=' + NuPedidoPesq + '&idFabPesquisa=' + idFabPesq + '&idCompradorPesquisa=' + idCompradorPesq + '&stSituacaoSAP=' + STSituacoPedidoPesq)
-            const apiUrl = `${url}/api/compras/lista_pedidos.xsjs?pageSize=1000&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idFornPesquisa=${idFornPesquisa}&idMarcaPesquisa=${idMarcaPesquisa}&idpedido=${NuPedidoPesquisa}&idFabPesquisa=${idFabPesquisa}&idCompradorPesquisa=${idCompradorPesq}&stSituacaoSAP=${STSituacoPedidoPesq}`;
+          
+            const apiUrl = `${url}/api/compras/lista_pedidos.xsjs?&page=${page}&pageSize=${pageSize}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idFornPesquisa=${idFornPesquisa}&idMarcaPesquisa=${idMarcaPesquisa}&idpedido=${NuPedidoPesquisa}&idFabPesquisa=${idFabPesquisa}&idCompradorPesquisa=${idCompradorPesq}&stSituacaoSAP=${STSituacoPedidoPesq}`;
             const response = await axios.get(apiUrl)
             return res.json(response.data); // Retorna
         } catch(error) {
@@ -98,7 +104,7 @@ class ProdutoControllers  {
         page = page ? page : '';
     
         try {   
-            // api/produto-sap/produto-sap.xsjs?page=' + numPage + '&codeBarsOuNome=' + DSdesc + '&IdEmpresaLoja=' + IDEmpresaLogin + '&IdListaLoja=' + IDListaEmp
+          
             const apiUrl = `${url}/api/produto-sap/produto-sap.xsjs?page=${page}&pageSize=${pageSize}&codeBarsOuNome=${descricaoProduto}&IdEmpresaLoja=${idEmpresaLogin}&IdListaLoja=${idListaLoja}`;
             const response = await axios.get(apiUrl)
             return res.json(response.data); // Retorna
@@ -199,7 +205,7 @@ class ProdutoControllers  {
         page = page ? page : '';
         pageSize = pageSize ? pageSize : '';
         try {
-            // http://164.152.245.77:8000/quality/concentrador_homologacao/api/produtos/alteracoes-de-precos-resumo.xsjs?dtInicio=2024-12-11&dtFim=2024-12-11&id=&idLista=&idLoja=&idUser=&idProd=&descProd=&codeBars=&page=1
+            
             const apiUrl = `${url}/api/produtos/alteracoes-de-precos-resumo.xsjs?dtIinicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&id=${id}&idLista=${idLista}&idLoja=${idLoja}&idUser=${idUsuario}&idProd=${idProduto}&descProd=${descProduto}&codeBars=${codBarras}&page=${page}&pageSize=${pageSize}`;
             const response = await axios.get(apiUrl)
             
@@ -217,7 +223,7 @@ class ProdutoControllers  {
         page = page ? page : '';
         pageSize = pageSize ? pageSize : '';
         try {
-            // http://164.152.245.77:8000/quality/concentrador_homologacao/api/produtos/alteracoes-de-precos-resumo.xsjs?dtInicio=2024-12-11&dtFim=2024-12-11&id=&idLista=&idLoja=&idUser=&idProd=&descProd=&codeBars=&page=1
+          
             const apiUrl = `${url}/api/produtos/alteracoes-de-precos-detalhes.xsjs?idAlteracao=${idAlteracaoPreco}&page=${page}&pageSize=${pageSize}`;
             const response = await axios.get(apiUrl)
             
