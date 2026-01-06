@@ -4,34 +4,14 @@ const url = process.env.API_URL;
 
 
 class FuncionariosControllers {
-    async buscarTodosFuncionario(req, res) {
-        try {
-          const { byId, cpf, empresa, matricula, senha } = req.body; 
-        //   const result = await getFuncionarios();
-          
-          return res.json(result);
-        } catch (err) {
-          console.error('Erro ao buscar funcionário:', err);
-          return res.status(500).json({ message: 'Erro ao buscar funcionário' });
-        }
-    }
-
-    async createFuncionarios(req, res) {
-
-    }
-
     async getAllFuncionarios(req, res,) {
 
         try {
-            const funcionariosResponse = await axios.get(`${url}/api/funcionario/todos.xsjs`)
+            const apiUrl = `${url}/api/funcionario/todos.xsjs`
+            const response = await axios.get(apiUrl);
 
-            const funcionarios = funcionariosResponse.data;
 
-            if (!funcionarios) {
-                return res.status(401).json({ error: 'Credenciais inválidas ou token não recebido' });
-            }
-
-            return res.json(funcionarios); // Retorna
+            return res.json(response.data); // Retorna
         } catch (error) {
             console.error("Unable to connect to the database:", error);
             throw error; // Lança o erro para tratamento posterior, se necessário
@@ -78,15 +58,10 @@ class FuncionariosControllers {
         let { matricula, senha } = req.query;
         
         try {
-            const funcionariosResponse = await axios.get(`${url}/api/funcionario/todos.xsjs?matricula=${matricula}&senha=${senha}`)
+            const apiUrl = `${url}/api/funcionario/todos.xsjs?matricula=${matricula}&senha=${senha}`
+            const response = await axios.get(apiUrl);
 
-            const funcionarios = funcionariosResponse.data;
-
-            if (!funcionarios) {
-                return res.status(401).json({ error: 'Credenciais inválidas ou token não recebido' });
-            }
-
-            return res.json(funcionarios); // Retorna
+            return res.json(response.data); // Retorna
         } catch (error) {
             console.error("Unable to connect to the database:", error);
             throw error; // Lança o erro para tratamento posterior, se necessário
@@ -96,15 +71,10 @@ class FuncionariosControllers {
         let { idFuncionario } = req.query;
         
         try {
-            const funcionariosResponse = await axios.get(`${url}/api/adiantamento-salarial.xsjs?id=${idFuncionario}`)
+            const apiUrl = `${url}/api/adiantamento-salarial.xsjs?id=${idFuncionario}`
+            const response = await axios.get(apiUrl);
 
-            const funcionarios = funcionariosResponse.data;
-
-            if (!funcionarios) {
-                return res.status(401).json({ error: 'Credenciais inválidas ou token não recebido' });
-            }
-
-            return res.json(funcionarios); 
+            return res.json(response.data); 
         } catch (error) {
             console.error("Unable to connect to the database:", error);
             throw error; 

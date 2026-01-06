@@ -11,14 +11,15 @@ class MovimentoCaixaControllers {
 
     async listaCaixasMovimentojuste(req, res) {
 
-        let { idEmpresa, pageNumber, dataPesq } = req.query;
+        let { idEmpresa, page, pageSize, dataPesq } = req.query;
         if (!isNaN(idEmpresa)) {
-            idEmpresa = Number(idEmpresa);
-            const pageSize = 100;
-            const offset = (pageNumber - 1) * pageSize;
-            dataPesq = dataFormatada(dataPesq)
+            idEmpresa = Number(idEmpresa) ? idEmpresa : '';
+            dataPesq = dataFormatada(dataPesq) ? dataFormatada(dataPesq) : ''
+            page = page ? page : ''
+            pageSize = pageSize ? pageSize : ''
+             
             try {
-                const apiUrl = `${url}/api/movimento-caixa/ajuste-fisicodinheiro.xsjs?pagesize=${pageSize}&idEmpresa=${idEmpresa}&offset=${offset}`
+                const apiUrl = `${url}/api/movimento-caixa/ajuste-fisicodinheiro.xsjs?page=${page}&pageSize=${pageSize}&idEmpresa=${idEmpresa}`
                 const response = await axios.get(apiUrl)
 
                 return res.json(response.data);
@@ -56,7 +57,7 @@ class MovimentoCaixaControllers {
         dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
 
         try {
-            // http://164.152.245.77:8000/quality/concentrador_homologacao/api/movimento-caixa/gerencia.xsjs?idEmpresa=1&dataPesquisaInic=2023-12-09&dataPesquisaFim=2024-12-09
+        
             const apiUrl = `${url}/api/movimento-caixa/gerencia.xsjs?idEmpresa=${idEmpresa}&idMovimentoCaixa=${idMovimentoCaixa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`
             const response = await axios.get(apiUrl)
        

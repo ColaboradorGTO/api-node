@@ -127,7 +127,6 @@ class GerenciaControllers {
                 }
             }
 
-            // const response = await updateMalote(dados)
             const response = await axios.put(`${url}/api/gerencia/malotes-por-loja.xsjs`, dados);
           
             return res.json(response.data);
@@ -140,7 +139,7 @@ class GerenciaControllers {
     async postMalotesPorLoja(req, res) {      
         try {
             const { IDEMPRESA, DATAMOVIMENTOCAIXA } = req.body;
-            // const dataFormatada = formatarDataMalote(req.body.DATAMOVIMENTOCAIXA)
+
             if (!IDEMPRESA || !DATAMOVIMENTOCAIXA) {
                 return res.status(400).json({error: "Parâmetros inválidos. É necessário informar 'IDEMPRESA'."    });
             }  

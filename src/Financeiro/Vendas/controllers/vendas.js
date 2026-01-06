@@ -36,8 +36,6 @@ class FinanceiroVendasControllers {
       page = page ? page : '';
       pageSize = pageSize ? pageSize : '';
 
-
-      // http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/venda-digital.xsjs?pageSize=500&page=2&idEmpresa=1&dataPesquisaInicio=2021-12-06&dataPesquisaFim=2024-12-06
       const apiUrl = `${url}/api/financeiro/venda-digital.xsjs?pageSize=${pageSize}&idEmpresa=${idEmpresa}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&page=${page}`
       const response = await axios.get(apiUrl)
       return res.json(response.data);
@@ -95,7 +93,7 @@ class FinanceiroVendasControllers {
     pageSize = pageSize ? pageSize : '';
     try {
 
-      const apiUrl = await `${url}/api/financeiro/venda-total.xsjs?dataPesquisa=${dataPesquisa}`
+      const apiUrl =`${url}/api/financeiro/venda-total.xsjs?dataPesquisa=${dataPesquisa}`
       const response = await axios.get(apiUrl)
       return res.json(response.data);
     } catch (error) {
@@ -129,7 +127,7 @@ class FinanceiroVendasControllers {
   async getListaVendasPagamentos(req, res) {
     try {
       let { idEmpresa, dataPesquisa, page, pageSize } = req.query;
-      const apiUrl = await `${url}/api/financeiro/venda-pagamentos.xsjs?idEmpresa=${idEmpresa}&dataPesquisa=${dataPesquisa}`
+      const apiUrl = `${url}/api/financeiro/venda-pagamentos.xsjs?idEmpresa=${idEmpresa}&dataPesquisa=${dataPesquisa}`
       const response = await axios.get(apiUrl)
 
 
