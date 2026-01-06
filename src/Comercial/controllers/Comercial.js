@@ -1,6 +1,5 @@
 import axios from "axios";
 import { dataFormatada } from "../../utils/dataFormatada.js";
-
 import 'dotenv/config';
 const url = process.env.API_URL;
 
@@ -82,7 +81,6 @@ class CormercialControllers {
             try {
                 const apiUrl = `http://164.152.245.77:8000/quality/concentrador/api/comercial/empresa.xsjs?idmarca=${idMarca}`;
                 const response = await axios.get(apiUrl)
-                // const response = await getEmpresas(idMarca, idEmpresa, ufProd, page, pageSize)
                 return res.json(response.data); // Retorna
             } catch (error) {
                 console.error("Unable to connect to the database:", error);
@@ -109,88 +107,6 @@ class CormercialControllers {
         }
     }
 
-    // async getListaVendasVendedorEstrutura(req, res) {
-    //     let { idEmpresaLogin, dataPesquisaInicio, dataPesquisaFim, idMarcaPesquisaVenda, idLojaPesquisaVenda, descricaoProduto, ufPesquisa, idFornecedor, idGrupo, idGrade, idMarca } = req.query;
-
-    //     idEmpresaLogin = idEmpresaLogin ? idEmpresaLogin : '';
-    //     idMarcaPesquisaVenda = idMarcaPesquisaVenda ? idMarcaPesquisaVenda : '';
-    //     idLojaPesquisaVenda = idLojaPesquisaVenda ? idLojaPesquisaVenda : '';
-    //     descricaoProduto = descricaoProduto ? descricaoProduto : '';
-    //     ufPesquisa = ufPesquisa ? ufPesquisa : '';
-    //     idFornecedor = idFornecedor ? idFornecedor : '';
-    //     idGrupo = idGrupo ? idGrupo : '';
-    //     idGrade = idGrade ? idGrade : '';
-    //     idMarca = idMarca ? idMarca : '';
-    //     dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataFormatada(dataPesquisaInicio) : '';
-    //     dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataFormatada(dataPesquisaFim) : '';
-    //     try {
-    //         // ajaxGet('api/comercial/vendas-vendedor-estrutura.xsjs?page='+numPage+'&dataInicio=' + datapesqinicio + '&dataFim=' + datapesqfim + '&idGrupoEmpresarial=' + IDMarcaPesqVenda + '&idEmpresa=' + IDLojaPesqVenda + '&descricaoProduto=' + ProdutoPesqVenda + '&uf=' + UFPesquisa+ '&idFornecedor=' + IDForn+ '&idGrupoGrade=' + IDGrupo+ '&idGrade=' + IDGrade + '&idMarcaProduto='+IDMarca)
-    //         const apiUrl = `${url}/api/comercial/vendas-vendedor-estrutura.xsjs?page=&dataInicio=${dataPesquisaInicio}&dataFim=${dataPesquisaFim}&idGrupoEmpresarial=${idMarcaPesquisaVenda}&idEmpresa=${idLojaPesquisaVenda}&descricaoProduto=${descricaoProduto}&uf=${ufPesquisa}&idFornecedor=${idFornecedor}&idGrupoGrade=${idGrupo}&idGrade=${idGrade}&idMarcaProduto=${idMarca}`;
-    //         const response = await axios.get(apiUrl)
-
-    //         return res.json(response.data); // Retorna
-    //     } catch (error) {
-    //         console.error("Unable to connect to the database:", error);
-    //         throw error;
-    //     }
-
-    // }
-
-    // async getListaVendasIndicadoresEstrutura(req, res) {
-    //     let { idEmpresaLogin, dataPesquisaInicio, dataPesquisaFim, idMarcaPesquisaVenda, idLojaPesquisaVenda, descricaoProduto, ufPesquisa, idFornecedor, idGrupo, idGrade, idMarca } = req.query;
-
-    //     idEmpresaLogin = idEmpresaLogin ? idEmpresaLogin : '';
-    //     idMarcaPesquisaVenda = idMarcaPesquisaVenda ? idMarcaPesquisaVenda : '';
-    //     idLojaPesquisaVenda = idLojaPesquisaVenda ? idLojaPesquisaVenda : '';
-    //     descricaoProduto = descricaoProduto ? descricaoProduto : '';
-    //     ufPesquisa = ufPesquisa ? ufPesquisa : '';
-    //     idFornecedor = idFornecedor ? idFornecedor : '';
-    //     idGrupo = idGrupo ? idGrupo : '';
-    //     idGrade = idGrade ? idGrade : '';
-    //     idMarca = idMarca ? idMarca : '';
-    //     dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataFormatada(dataPesquisaInicio) : '';
-    //     dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataFormatada(dataPesquisaFim) : '';
-    //     try {
-    //         // ajaxGet('api/comercial/vendas-por-estrutura.xsjs?page='+numPage+'&dataPesquisaInicio=' + datapesqinicio + '&dataPesquisaFim=' + datapesqfim + '&idMarca=' + IDMarcaPesqVenda + '&idEmpresa=' + IDLojaPesqVenda + '&descricaoProduto=' + ProdutoPesqVenda + '&uf=' + UFPesquisa+ '&idFornecedor=' + IDForn+ '&idGrupoGrade=' + IDGrupo+ '&idGrade=' + IDGrade + '&idMarcaProduto='+IDMarca)
-                         
-    //         const apiUrl = `${url}/api/comercial/vendas-por-estrutura.xsjs?page=&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idMarca=${idMarcaPesquisaVenda}&idEmpresa=${idLojaPesquisaVenda}&descricaoProduto=${descricaoProduto}&uf=${ufPesquisa}&idFornecedor=${idFornecedor}&idGrupoGrade=${idGrupo}&idGrade=${idGrade}&idMarcaProduto=${idMarca}`;
-    //         const response = await axios.get(apiUrl)
-
-    //         return res.json(response.data); // Retorna
-    //     } catch (error) {
-    //         console.error("Unable to connect to the database:", error);
-    //         throw error;
-    //     }
-
-    // }
-
-    // async getListaProdutosMaisVendidosEstrutura(req, res) {
-    //     let { dataPesquisaInicio, dataPesquisaFim, idGrupoEmpresarial, idMarcaPesquisaVenda, idLojaPesquisaVenda, descricaoProduto, ufPesquisa, idFornecedor, idGrupo, idGrade, idMarca } = req.query;
-    //     idGrupoEmpresarial = idGrupoEmpresarial ? idGrupoEmpresarial : '';
-    //     idMarcaPesquisaVenda = idMarcaPesquisaVenda ? idMarcaPesquisaVenda : '';
-    //     idLojaPesquisaVenda = idLojaPesquisaVenda ? idLojaPesquisaVenda : '';
-    //     descricaoProduto = descricaoProduto ? descricaoProduto : '';
-    //     ufPesquisa = ufPesquisa ? ufPesquisa : '';
-    //     idFornecedor = idFornecedor ? idFornecedor : '';
-    //     idGrupo = idGrupo ? idGrupo : '';
-    //     idGrade = idGrade ? idGrade : '';
-    //     idMarca = idMarca ? idMarca : '';
-    //     dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataFormatada(dataPesquisaInicio) : '';
-    //     dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataFormatada(dataPesquisaFim) : '';
-    //     try {
-    //         // ajaxGet('api/comercial/produtos-mais-vendidos.xsjs?page='+numPage+'&dataInicio=' + datapesqinicio + '&dataFim=' + datapesqfim + '&idEmpresa=' + IDLojaPesqVenda + '&descricaoProduto=' + ProdutoPesqVenda + '&idFornecedor=' + IDForn+ '&idGrupoGrade=' + IDGrupo+ '&idGrade=' + IDGrade + '&idMarcaProduto='+IDMarca)
-
-    //         const apiUrl = `${url}/api/comercial/produtos-mais-vendidos.xsjs?page=&dataInicio=${dataPesquisaInicio}&dataFim=${dataPesquisaFim}&idEmpresa=${idLojaPesquisaVenda}&descricaoProduto=${descricaoProduto}&idFornecedor=${idFornecedor}&idGrupoGrade=${idGrupo}&idGrade=${idGrade}&idMarcaProduto=${idMarca}`;
-    //         const response = await axios.get(apiUrl)
-
-    //         return res.json(response.data); // Retorna
-    //     } catch (error) {
-    //         console.error("Unable to connect to the database:", error);
-    //         throw error;
-    //     }
-
-    // }
-
     async getListaProdutosEstoquePrecoLoja(req, res) {
         let { dataPesquisaInicio, dataPesquisaFim, idMarcaProduto, idEmpresa, descricaoProduto, ufPesquisa, idFornecedor, idGrupo, idGrade, idMarca, vlPrecoProduto } = req.query;
         idEmpresa = idEmpresa ? idEmpresa : '';
@@ -206,7 +122,7 @@ class CormercialControllers {
         vlPrecoProduto = vlPrecoProduto ? vlPrecoProduto : '';
 
         try {
-            // ajaxGet('api/comercial/produtos-precos-estoques-lojas.xsjs?page='+numPage+'&dataPesquisaInicio=' + datapesqinicio + '&dataPesquisaFim=' + datapesqfim + '&idMarca=' + IDMarcaPesqVenda + '&idEmpresa=' + IDLojaPesqVenda + '&descricaoProduto=' + ProdutoPesqVenda + '&uf=' + UFPesquisa+ '&idFornecedor=' + IDForn+ '&idGrupoGrade=' + IDGrupo+ '&idGrade=' + IDGrade + '&idMarcaProduto=' + IDMarca + '&vlPreco='+vlPrecoProduto)
+            
             const apiUrl = `${url}/api/comercial/produtos-precos-estoques-lojas.xsjs?page=&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idMarca=${idMarca}&idEmpresa=${idEmpresa}&descricaoProduto=${descricaoProduto}&uf=${ufPesquisa}&idFornecedor=${idFornecedor}&idGrupoGrade=${idGrupo}&idGrade=${idGrade}&idMarcaProduto=${idMarcaProduto}&vlPreco=${vlPrecoProduto}`;
             const response = await axios.get(apiUrl)
 
@@ -240,17 +156,15 @@ class CormercialControllers {
     }
 
     async getListaVendasEstoqueGrupoSubGrupoComercial(req, res) {
-        let { idMarca, pageNumber, dataInicio, dataFim, idGrupo, idGrade } = req.query;
+        let { idMarca, dataInicio, dataFim, idGrupo, idGrade } = req.query;
     
         if (!isNaN(idMarca)) {
           idMarca = idMarca ? idMarca : '';
-          const pageSize = 100;
-          const offset = (pageNumber - 1) * pageSize;
           dataInicio = dataFormatada(dataInicio) ? dataInicio : ''
           dataFim = dataFormatada(dataFim) ? dataFim : '' 
     
           try {
-            // ajaxGet('api/comercial/vendas-estoque-grupo-subgrupo.xsjs?page='+numPage+'&dataPesquisaInicio=' + datapesqinicio + '&dataPesquisaFim=' + datapesqfim + '&idMarca=' + IDMarcaPesqVenda + '&idGrupoGrade=' + IDGrupo+ '&idGrade=' + IDGrade )
+           
             const apiUrl = `${url}/api/comercial/vendas-estoque-grupo-subgrupo.xsjs?pageSize=${pageSize}&dataPesquisaInicio=${dataInicio}&dataPesquisaFim=${dataFim}&idMarca=${idMarca}&idGrupoGrade=${idGrupo}&idGrade=${idGrade}`
             const response = await axios.get(apiUrl)
     
@@ -294,7 +208,7 @@ class CormercialControllers {
         dataPesquisaFimC = dataFormatada(dataPesquisaFimC) ? dataFormatada(dataPesquisaFimC) : '';
     
         try {
-            // ajaxGet('api/comercial/vendas-estoque-produto.xsjs?page='+numPage+'&dataPesquisaInicio=' + datapesqinicio + '&dataPesquisaFim=' + datapesqfim + '&dataPesquisaInicioB=' + datapesqinicioB + '&dataPesquisaFimB=' + datapesqfimB + '&dataPesquisaInicioC=' + datapesqinicioC + '&dataPesquisaFimC=' + datapesqfimC + '&descricaoProduto=' + ProdutoPesqVenda + '&idFornecedor=' + IDForn+ '&idGrupoGrade=' + IDGrupo+ '&idGrade=' + IDGrade + '&idMarcaProduto='+IDMarca)
+            
             const apiUrl = `${url}/api/comercial/vendas-estoque-produto.xsjs?page=&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&dataPesquisaInicioB=${dataPesquisaInicioB}&dataPesquisaFimB${dataPesquisaFimB}&dataPesquisaInicioC=${dataPesquisaInicioC}&dataPesquisaFimC=${dataPesquisaFimC}&descricaoProduto=${descricaoProduto}&idFornecedor=${idFornecedor}&idGrupoGrade=${idGrupo}&idGrade=${idGrade}&idMarcaProduto=${idMarcaProduto}`
             const response = await axios.get(apiUrl)
             return res.json(response.data); 
@@ -334,7 +248,7 @@ class CormercialControllers {
         dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataFormatada(dataPesquisaInicio) : '';
         dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataFormatada(dataPesquisaFim) : '';
         try {
-            // ajaxGet('api/comercial/vendas-vendedor-estrutura.xsjs?page='+numPage+'&dataInicio=' + datapesqinicio + '&dataFim=' + datapesqfim + '&idGrupoEmpresarial=' + IDMarcaPesqVenda + '&idEmpresa=' + IDLojaPesqVenda + '&descricaoProduto=' + ProdutoPesqVenda + '&uf=' + UFPesquisa+ '&idFornecedor=' + IDForn+ '&idGrupoGrade=' + IDGrupo+ '&idGrade=' + IDGrade + '&idMarcaProduto='+IDMarca)
+
             const apiUrl = `${url}/api/comercial/custo-por-loja.xsjs?page=&dataInicio=${dataPesquisaInicio}&dataFim=${dataPesquisaFim}&idGrupoEmpresarial=${idGrupoEmpresarial}&idEmpresa=${idEmpresa}&descricaoProduto=${descricaoProduto}&uf=${ufPesquisa}&idFornecedor=${idFornecedor}&idGrupoGrade=${idGrupo}&idGrade=${idGrade}&idMarcaProduto=${idMarcaProduto}`;
             const response = await axios.get(apiUrl)
 
@@ -360,8 +274,7 @@ class CormercialControllers {
         dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataFormatada(dataPesquisaInicio) : '';
         dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataFormatada(dataPesquisaFim) : '';
         try {
-            // ajaxGet('api/comercial/vendas-posicionamento-estoque.xsjs?page='+numPage+'&dataPesquisaInicio=' + datapesqinicio + '&dataPesquisaFim=' + datapesqfim + '&idMarca=' + IDMarcaPesqVenda + '&idEmpresa=' + IDLojaPesqVenda + '&descricaoProduto=' + ProdutoPesqVenda + '&uf=' + UFPesquisa+ '&idFornecedor=' + IDForn+ '&idGrupoGrade=' + IDGrupo+ '&idGrade=' + IDGrade + '&idMarcaProduto='+IDMarca)
-
+           
             const apiUrl = `${url}/api/comercial/vendas-posicionamento-estoque.xsjs?page=&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idMarca=${idMarca}&idEmpresa=${idEmpresa}&descricaoProduto=${descricaoProduto}&uf=${ufPesquisa}&idFornecedor=${idFornecedor}&idGrupoGrade=${idGrupo}&idGrade=${idGrade}&idMarcaProduto=${idMarcaProduto}`;
             const response = await axios.get(apiUrl)
 
@@ -388,7 +301,7 @@ class CormercialControllers {
         dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataFormatada(dataPesquisaFim) : '';
         idFuncionario = idFuncionario ? idFuncionario : '';
         try {
-            // ajaxGet('api/comercial/colaborador-produtos-vendidos.xsjs?page='+numPage+'&dataInicio=' + datapesqinicio + '&dataFim=' + datapesqfim + '&idGrupoEmpresarial=' + IDMarcaPesqVenda + '&idEmpresa=' + IDLojaPesqVenda + '&descricaoProduto=' + ProdutoPesqVenda + '&uf=' + UFPesquisa+ '&idFornecedor=' + IDForn+ '&idGrupoGrade=' + IDGrupo+ '&idGrade=' + IDGrade + '&idMarcaProduto='+IDMarca + '&IdFunc='+IDColaborador)
+          
 
             const apiUrl = `${url}/api/comercial/colaborador-produtos-vendidos.xsjs?page=&dataInicio=${dataPesquisaInicio}&dataFim=${dataPesquisaFim}&idGrupoEmpresarial=${idMarca}&idEmpresa=${idEmpresa}&descricaoProduto=${descricaoProduto}&uf=${ufPesquisa}&idFornecedor=${idFornecedor}&idGrupoGrade=${idGrupo}&idGrade=${idGrade}&idMarcaProduto=${idMarcaProduto}&idFunc=${idFuncionario}`;
             const response = await axios.get(apiUrl)

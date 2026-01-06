@@ -1,8 +1,7 @@
 import axios from "axios";
 import { dataFormatada } from "../../utils/dataFormatada.js";
-
-
-let url = `http://164.152.245.77:8000/quality/concentrador_homologacao`;
+import 'dotenv/config';
+const url = process.env.API_URL;
 
 class CadastroControllers  {
 
@@ -125,7 +124,7 @@ class CadastroControllers  {
         page = page ? page : '';
         pageSize = pageSize ? pageSize : '';
         try {
-            // const apiUrl = `${url}/api/cadastro/cadastro_nfpedido.xsjs?idPedido=${idPedido}&idResumoEntrada=${idResumoEntrada}&idFonecedor=${idFonecedor}&numSerie=${numSerie}&numNFE=${numNFE}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&stTransformado=${stTransformado}&page=${page}&pageSize=${pageSize}`;
+           
             const apiUrl = `${url}/api/cadastro/cadastrar-nota-fiscal-entrada.xsjs?id=${idPedido}&idResumoEntrada=${idResumoEntrada}&idFonecedor=${idFonecedor}&numSerie=${numSerie}&numNFE=${numNFE}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&stTransformado=${stTransformado}&page=${page}&pageSize=${pageSize}`;
             const response = await axios.get(apiUrl)
           

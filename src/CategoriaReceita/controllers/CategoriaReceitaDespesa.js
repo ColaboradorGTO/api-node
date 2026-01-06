@@ -28,7 +28,7 @@ class CategoriaReceitaDespesasControllers  {
 
         try {
 
-            const apiUrl = `http://164.152.245.77:8000/quality/concentrador/api/categoria-receita-despesa.xsjs?tipo=D`;
+            const apiUrl = `${url}/api/categoria-receita-despesa.xsjs?tipo=D`;
             const response = await axios.get(apiUrl)
             return res.json(response.data); // Retorna
         } catch(error) {

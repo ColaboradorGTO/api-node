@@ -1,4 +1,6 @@
 import axios from "axios";
+import 'dotenv/config';
+const url = process.env.API_URL;
 
 class AuthentiCationController {
   async login(req, res) {
@@ -6,7 +8,7 @@ class AuthentiCationController {
     
     try {
       const loginResponse = await axios.post(
-        "http://164.152.245.77:8000/quality/concentrador_node/api/login-tst.xsjs",
+        `${url}/api/login-tst.xsjs`,
         {
           timeout: 10000,
           usuario: usuario,
