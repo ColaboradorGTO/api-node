@@ -1,8 +1,8 @@
-import 'dotenv/config';
 import { OTClient } from "../Client/index.js";
 import { OTService } from "../Services/index.js";
 import criarOTSchema from '../Schema/criarOTSchema.js';
 import atualizarOTSchema from '../Schema/atualizarOTSchema.js';
+import 'dotenv/config';
 const url = process.env.API_URL;
 const otClient = new OTClient(url);
 const otService = new OTService(otClient);

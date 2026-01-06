@@ -40,7 +40,7 @@ class QuebraCaixaControllers {
         pageSize = pageSize ? pageSize : '';
         
         try {
-            // http://164.152.245.77:8000/quality/concentrador/api/dashboard/quebra-caixa/lista-quebra-caixa.xsjs?pageSize=1000&page=2&idEmpresa=0&dataPesquisaInic=2024-12-06&dataPesquisaFim=2024-12-06&idMarca=0&cpfquebraop=
+           
             const apiUrl = `${url}/api/dashboard/quebra-caixa/lista-quebra-caixa.xsjs?pageSize=${pageSize}&page=${page}&idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idMarca=${idMarca}&cpfquebraop=${cpfOperadorQuebra}&stQuebraPositivaNegativa=${stQuebraPositivaNegativa}&uf=${uf}`;
             const response = await axios.get(apiUrl);
 
@@ -74,7 +74,7 @@ class QuebraCaixaControllers {
     async putListaStatusQuebraCaixa(req, res) {
         try {
             let { IDQUEBRACAIXA, STATIVO } = req.body 
-            // const response = await  updateStatusQuebraCaixa(quebras);
+           
             if(!IDQUEBRACAIXA || !STATIVO)  {
                 return res.status(400).json({ error: "IDQUEBRACAIXA and STATIVO are required." });
             }
@@ -104,7 +104,6 @@ class QuebraCaixaControllers {
 
         try {
             let {IDCAIXAWEB, IDMOVIMENTOCAIXA, IDGERENTE, IDFUNCIONARIO, DTLANCAMENTO, VRQUEBRASISTEMA, VRQUEBRAEFETIVADO, TXTHISTORICO, STATIVO} = req.body; 
-            // const response = await createQuebraCaixa(quebras);
 
             if(!IDCAIXAWEB) {
                 return res.status(400).json({ error: "IDCAIXAWEB is required." });

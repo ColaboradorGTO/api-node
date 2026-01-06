@@ -19,13 +19,13 @@ class DepositosLojaControllers  {
         dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataFormatada(dataPesquisaInicio) : '';
         dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataFormatada(dataPesquisaFim) : '';
         try {
-            // ajaxGet('api/compras/lista_pedidos.xsjs?pageSize=1000&page=' + numPage + '&dataPesquisaInicio=' + dataPesqInic + '&dataPesquisaFim=' + dataPesqFim + '&idFornPesquisa=' + idFornPesq + '&idMarcaPesquisa=' + idMarcaPesq + '&idpedido=' + NuPedidoPesq + '&idFabPesquisa=' + idFabPesq + '&idCompradorPesquisa=' + idCompradorPesq + '&stSituacaoSAP=' + STSituacoPedidoPesq)
+            
             const apiUrl = `${url}/api/deposito-loja/empresa.xsjs?idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`;
             const response = await axios.get(apiUrl)
             return res.json(response.data); // Retorna
         } catch(error) {
             console.error("Unable to connect to the database:", error);
-                throw error;
+            throw error;
         }
     }
     
@@ -37,13 +37,9 @@ class DepositosLojaControllers  {
         idEmpresa = idEmpresa ? idEmpresa : ''; 
         idListaEmpresa = idListaEmpresa ? idListaEmpresa : '';         
         pageNumber = pageNumber ? pageNumber : 1; 
-
-    
-        const pageSize = 100;
-        const offset = (pageNumber - 1) * pageSize;
     
         try {   
-            // api/produto-sap/produto-sap.xsjs?page=' + numPage + '&codeBarsOuNome=' + DSdesc + '&IdEmpresaLoja=' + IDEmpresaLogin + '&IdListaLoja=' + IDListaEmp
+           
             const apiUrl = `${url}/api/produto-sap/produto-sap.xsjs?codeBarsOuNome=${descricaoProduto}&IdEmpresaLoja=${idEmpresa}&IDEmpresaLogin=${idEmpresa}&IdListaLoja=${idListaEmpresa}`;
             const response = await axios.get(apiUrl)
             return res.json(response.data); // Retorna

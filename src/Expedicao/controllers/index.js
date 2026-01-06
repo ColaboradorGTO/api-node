@@ -1,12 +1,11 @@
 import axios from "axios";
 import { dataFormatada } from "../../utils/dataFormatada.js";
-import 'dotenv/config';
 import { OTClient } from "../OT/Client/index.js";
 import { OTService } from "../OT/Services/index.js";
 import criarOTSchema from '../OT/Schema/criarOTSchema.js';
 import atualizarOTSchema from '../OT/Schema/atualizarOTSchema.js';
-// const url = process.env.API_URL;
-const url = 'http://164.152.245.77:8000/quality/concentrador_node';
+import 'dotenv/config';
+const url = process.env.API_URL;
 const otClient = new OTClient(url);
 const otService = new OTService(otClient);
 
@@ -88,7 +87,7 @@ class ExpedicaoControllers {
         pageSize = pageSize ? pageSize : '';
         page = page ? page : '';
         try {
-            // ajaxGet('api/expedicao/detalhe-ordem-transferencia.xsjs?page=' + numPage + '&id=' + id + '&idtipofiltro=' + 1)
+          
             const response = await axios.get(`${url}/api/expedicao/detalhe-ordem-transferencia.xsjs?id=${idResumoOT}`)
      
             return res.json(response.data); 
@@ -144,7 +143,7 @@ class ExpedicaoControllers {
         dataFimFatura = dataFimFatura ? dataFimFatura : '';
         idStatusOt = idStatusOt ? idStatusOt : '';
         try {
-            const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/expedicao/resumo-ordem-transferencia.xsjs?page=1&idtipofiltro=1&idEmpresaOrigem=${idLojaOrigem}&idEmpresaDestino=${idLojaDestino}&datapesqinicio=${dataPesquisaInicio}&datapesqfim=${dataPesquisaFim}&idstatusot=${idStatusOt}&dtinifat=${dataInicioFatura}&dtfimfat=${dataFimFatura}`)
+            const response = await axios.get(`${url}/api/expedicao/resumo-ordem-transferencia.xsjs?page=1&idtipofiltro=1&idEmpresaOrigem=${idLojaOrigem}&idEmpresaDestino=${idLojaDestino}&datapesqinicio=${dataPesquisaInicio}&datapesqfim=${dataPesquisaFim}&idstatusot=${idStatusOt}&dtinifat=${dataInicioFatura}&dtfimfat=${dataFimFatura}`)
            
             return res.json(response.data); 
         } catch (error) {
@@ -166,7 +165,7 @@ class ExpedicaoControllers {
         pageSize = pageSize ? pageSize : '';
         page = page ? page : '';
         try {
-            const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/expedicao/resumo-ordem-transferencia.xsjs?page=1&idtipofiltro=2&idEmpresaOrigem=${idEmpresaOrigem}&idEmpresaDestino=${idEmpresaDestino}&datapesqinicio=${dataPesquisaInicio}&datapesqfim=${dataPesquisaFim}&idrotina=${idRotina}&dtinient=${dataPesquisaInicio}&dtfiment=${dataPesquisaFim}`)
+            const response = await axios.get(`${url}/api/expedicao/resumo-ordem-transferencia.xsjs?page=1&idtipofiltro=2&idEmpresaOrigem=${idEmpresaOrigem}&idEmpresaDestino=${idEmpresaDestino}&datapesqinicio=${dataPesquisaInicio}&datapesqfim=${dataPesquisaFim}&idrotina=${idRotina}&dtinient=${dataPesquisaInicio}&dtfiment=${dataPesquisaFim}`)
             
             
             return res.json(response.data); 

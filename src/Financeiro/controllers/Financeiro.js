@@ -1,6 +1,5 @@
 import axios from "axios";
 import { dataFormatada } from "../../utils/dataFormatada.js";
-
 import 'dotenv/config';
 const url = process.env.API_URL;
 import { MaloteClient } from "../Malotes/client/index.js";
@@ -26,7 +25,7 @@ class FinanceiroControllers {
 
     try {
 
-      // const response = await getHistoricosMalotes(idEmpresa, idMalote, idHistoricoMalote, dataPesquisaInicio, dataPesquisaFim, page, pageSize)
+     
       const apiUrl = `${url}/api/financeiro/historicos-malotes.xsjs?idEmpresa=${idEmpresa}&idMalote=${idMalote}&idHistoricoMalote=${idHistoricoMalote}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&page=${page}&pageSize=${pageSize}`
       const response = await axios.get(apiUrl)
       return res.json(response.data);
@@ -55,10 +54,8 @@ class FinanceiroControllers {
     try {
 
       const apiUrl = `${url}/api/financeiro/malotes-por-loja.xsjs?idGrupoEmpresarial=${idMarca}&idEmpresa=${idEmpresa}&statusMalote=${statusMalote}&idMalote=${idMalote}&idPendenciaMalote=${pendenciaMalote}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&dataConferenciaInicio=${dataConferenciaInicio}&dataConferenciaFim=${dataConferenciaFim}&page=${page}&pageSize=${pageSize}`
-      // const apiUrl = `http://164.152.245.77:8000/quality/concentrador/api/financeiro/malotes-por-loja.xsjs?idGrupoEmpresarial=${idMarca}&idEmpresa=${idEmpresa}&statusMalote=${statusMalote}&idMalote=${idMalote}&idPendenciaMalote=${pendenciaMalote}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&dataConferenciaInicio=${dataConferenciaInicio}&dataConferenciaFim=${dataConferenciaFim}&page=${page}&pageSize=${pageSize}`
+      
       const response = await axios.get(apiUrl)
-      // const response = await getMalortesPorLoja(idEmpresa, idMarca, idMalote, statusMalote, pendenciaMalote, dataPesquisaInicio, dataPesquisaFim, page, pageSize)
-
       return res.json(response.data);
     } catch (error) {
       console.error("Erro no FinanceiroControllers.getListasMalotes verifique se os parâmetros estão sendo preenchidos:", error);
@@ -80,7 +77,7 @@ class FinanceiroControllers {
     try {
       const apiUrl = `${url}/api/financeiro/pendencias-malotes.xsjs?idEmpresa=${idEmpresa}&idMalote=${idMalote}&statusMalote=${statusMalote}&pendenciaMalote=${pendenciaMalote}&page=${page}&pageSize=${pageSize}`
       const response = await axios.get(apiUrl)
-      // const response = await getPendenciasMalotes(idEmpresa, idMalote, statusMalote, pendenciaMalote, page, pageSize)
+      
 
       return res.json(response.data);
     } catch (error) {
@@ -99,13 +96,12 @@ class FinanceiroControllers {
     dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataFormatada(dataPesquisaFim) : '';
     page = page ? page : '';
     pageSize = pageSize ? pageSize : '';
-    // ajaxGet('api/dashboard/extrato-loja-periodo.xsjs?pageSize=500&page=1&idEmpresa=' + idemp + '&dataPesquisaInicio=' + datapesq + '&dataPesquisaFim=' + datapesq)
+   
     try {
       const apiUrl = `${url}/api/financeiro/extrato-loja-periodo.xsjs?pageSize=${pageSize}&page=${page}&idEmpresa=${idEmpresa}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`
-      // const apiUrl = `http://164.152.245.77:8000/quality/concentrador/api/financeiro/extrato-loja-periodo.xsjs?pageSize=${pageSize}&page=${page}&idEmpresa=${idEmpresa}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`
+     
       const response = await axios.get(apiUrl)
-      // const response = await getExtratoLojaPeriodo(idEmpresa, dataPesquisaInicio, dataPesquisaFim, page, pageSize)
-
+  
       return res.json(response.data); // Retorna
     } catch (error) {
       console.error("Erro no FinanceiroControllers.getListaExtratoDaLojaPeriodoFinan verifique se os parâmetros estão sendo preenchidos:", error);
@@ -116,17 +112,16 @@ class FinanceiroControllers {
   }
 
   async getListaVendasMarca(req, res) {
-    let { idMarcaPesqVenda, pageNumber, dataPesqInicio, dataPesqFim } = req.query;
+    let { idMarcaPesqVenda, page, pageSize, dataPesqInicio, dataPesqFim } = req.query;
 
 
     idMarcaPesqVenda = idMarcaPesqVenda ? idMarcaPesqVenda : '';
-    const pageSize = 100;
-    const offset = (pageNumber - 1) * pageSize;
+
     dataPesqInicio = dataFormatada(dataPesqInicio) ? dataFormatada(dataPesqInicio) : '';
     dataPesqFim = dataFormatada(dataPesqFim) ? dataFormatada(dataPesqFim) : '';
 
     try {
-      const apiUrl = `${url}/api/financeiro/venda-marca-periodo.xsjs?pageSize=1000&idMarca=${idMarcaPesqVenda}&dataPesquisaInicio=${dataPesqInicio}&dataPesquisaFim=${dataPesqFim}`
+      const apiUrl = `${url}/api/financeiro/venda-marca-periodo.xsjs?pageSize=${pageSize}&page=${page}&idMarca=${idMarcaPesqVenda}&dataPesquisaInicio=${dataPesqInicio}&dataPesquisaFim=${dataPesqFim}`
       const response = await axios.get(apiUrl)
 
       return res.json(response.data); // Retorna
@@ -138,19 +133,17 @@ class FinanceiroControllers {
   }
 
   async getListaVendasMarcaFinanceiro(req, res) {
-    let { idMarca, idLoja, idLojaPesquisa, pageNumber, dataPesquisaInicio, dataPesquisaFim } = req.query;
+    let { idMarca, idLoja, idLojaPesquisa, page, pageSize, dataPesquisaInicio, dataPesquisaFim } = req.query;
 
 
     idMarca = Number(idMarca);
-    const pageSize = 100;
-    const offset = (pageNumber - 1) * pageSize;
     dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
     dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
     idLoja = idLoja ? idLoja : '';
     idLojaPesquisa = idLojaPesquisa ? idLojaPesquisa : '';
 
     try {
-      const apiUrl = `${url}/api/financeiro/venda-marca-periodo.xsjs?pageSize=500&idMarca=${idMarca}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idLoja=${idLoja}&idLojaPesquisa=${idLojaPesquisa}`
+      const apiUrl = `${url}/api/financeiro/venda-marca-periodo.xsjs?pageSize=${pageSize}&page=${page}&idMarca=${idMarca}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idLoja=${idLoja}&idLojaPesquisa=${idLojaPesquisa}`
       const response = await axios.get(apiUrl)
 
       return res.json(response.data); // Retorna
@@ -162,13 +155,12 @@ class FinanceiroControllers {
   }
 
   async getListaVendasResumidaMarca(req, res) {
-    let { dataPesquisaInicio, dataPesquisaFim } = req.query;
-    const pageSize = 100;
+    let { dataPesquisaInicio, dataPesquisaFim, page, pageSize } = req.query;
     dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataFormatada(dataPesquisaInicio) : '';
     dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataFormatada(dataPesquisaFim) : '';
 
     try {
-      const apiUrl = `${url}/api/financeiro/venda-digital-marca.xsjs?pageSize=500&page=1&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`
+      const apiUrl = `${url}/api/financeiro/venda-digital-marca.xsjs?pageSize=${pageSize}&page=${page}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`
       const response = await axios.get(apiUrl)
 
       return res.json(response.data); // Retorna
@@ -181,12 +173,11 @@ class FinanceiroControllers {
 
 
   async getListaVendasResumidaFinanceiro(req, res) {
-    let { dataPesquisa } = req.query;
-    const pageSize = 100;
+    let { dataPesquisa, page, pageSize } = req.query;
     dataPesquisa = dataFormatada(dataPesquisa)
 
     try {
-      const apiUrl = `${url}/api/financeiro/venda-total.xsjs?dataPesquisa=${dataPesquisa}`
+      const apiUrl = `${url}/api/financeiro/venda-total.xsjs?dataPesquisa=${dataPesquisa}&page=${page}&pageSize=${pageSize}`
       const response = await axios.get(apiUrl)
 
       return res.json(response.data); // Retorna
@@ -198,12 +189,11 @@ class FinanceiroControllers {
 
 
   async getListaVendasTransacoesEmpresa(req, res) {
-    let { dataPesquisa } = req.query;
-    const pageSize = 100;
+    let { dataPesquisa, page, pageSize } = req.query;
     dataPesquisa = dataFormatada(dataPesquisa)
 
     try {
-      const apiUrl = `${url}/api/financeiro/venda-pagamentos.xsjs?dataPesquisa=${dataPesquisa}`
+      const apiUrl = `${url}/api/financeiro/venda-pagamentos.xsjs?dataPesquisa=${dataPesquisa}&page=${page}&pageSize=${pageSize}`
       const response = await axios.get(apiUrl)
 
       return res.json(response.data); // Retorna
@@ -215,12 +205,11 @@ class FinanceiroControllers {
   }
 
   async getListaVendasEmpresa(req, res) {
-    let { dataPesquisa } = req.query;
-    const pageSize = 100;
+    let { dataPesquisa, page, pageSize } = req.query;
     dataPesquisa = dataFormatada(dataPesquisa)
 
     try {
-      const apiUrl = `${url}/api/financeiro/venda-total-empresa.xsjs?dataPesquisa=${dataPesquisa}`
+      const apiUrl = `${url}/api/financeiro/venda-total-empresa.xsjs?dataPesquisa=${dataPesquisa}&page=${page}&pageSize=${pageSize}`
       const response = await axios.get(apiUrl)
 
       return res.json(response.data); // Retorna
@@ -239,9 +228,8 @@ class FinanceiroControllers {
     pageSize = pageSize ? pageSize : '';
 
     try {
-      const apiUrl = `${url}/api/financeiro/detalhe-fechamento.xsjs?idEmpresa=${idEmpresa}&dataPesquisa=${dataPesquisa}`
+      const apiUrl = `${url}/api/financeiro/detalhe-fechamento.xsjs?idEmpresa=${idEmpresa}&dataPesquisa=${dataPesquisa}&page=${page}&pageSize=${pageSize}`
       const response = await axios.get(apiUrl)
-      // const response = await getDetalheFechamento(idEmpresa, dataPesquisa);
 
       return res.json(response.data);
     } catch (error) {
@@ -251,15 +239,15 @@ class FinanceiroControllers {
 
   }
   async getListaVendasLojaPeriodo(req, res) {
-    let { idEmpresa, dataPesquisaInicio, dataPesquisaFim } = req.query;
-    const pageSize = 1000;
-    const page = 1;
+    let { idEmpresa, dataPesquisaInicio, dataPesquisaFim, page, pageSize } = req.query;
     dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
     dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
     idEmpresa = idEmpresa ? idEmpresa : '';
+    page = page ? page : '';
+    pageSize = pageSize ? pageSize : '';
 
     try {
-      // ajaxGet('api/financeiro/venda-loja-periodo.xsjs?pageSize=500&page='+numPage+'&idEmpresa=' + IDEmpresaPesqVenda + '&dataPesquisaInicio=' + datapesqinicio + '&dataPesquisaFim=' + datapesqfim)
+      
 
       const apiUrl = `${url}/api/financeiro/venda-loja-periodo.xsjs?pageSize=${pageSize}&page=${page}&idEmpresa=${idEmpresa}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`
       const response = await axios.get(apiUrl)
@@ -277,17 +265,18 @@ class FinanceiroControllers {
   // FIM CONSUMINDO BANCO DO RECAT
 
   async getListaCaixasMovmentoFinanceiro(req, res) {
-    let { idMarca, dataPesquisaInicio, dataPesquisaFim, idLoja, idLojasPesquisa } = req.query;
-    const pageSize = 1000;
+    let { idMarca, dataPesquisaInicio, dataPesquisaFim, idLoja, idLojasPesquisa, page, pageSize } = req.query;
+
     dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataFormatada(dataPesquisaInicio) : '';
     dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataFormatada(dataPesquisaFim) : '';
     idMarca = idMarca ? idMarca : '';
     idLoja = idLoja ? idLoja : '';
     idLojasPesquisa = idLojasPesquisa ? idLojasPesquisa : '';
-
+    page = page ? page : '';
+    pageSize = pageSize ? pageSize : '';
     try {
-      // ajaxGet('api/financeiro/lista-caixas-movimento.xsjs?pageSize=1000&idMarca=' + IDMarcaPesqVenda + '&dataPesquisaInicio=' + datapesqinicio + '&dataPesquisaFim=' + datapesqfim + '&idLoja=' + IDLojaPesqVenda + '&idLojasPesq=' + IDLojasPesq)
-      const apiUrl = `${url}/api/financeiro/lista-caixas-movimento.xsjs?pageSize=1000&idMarca=${idMarca}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idLoja=${idLoja}&idLojasPesq=${idLojasPesquisa}`
+      
+      const apiUrl = `${url}/api/financeiro/lista-caixas-movimento.xsjs?pageSize=${pageSize}&page=${page}&idMarca=${idMarca}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idLoja=${idLoja}&idLojasPesq=${idLojasPesquisa}`
       const response = await axios.get(apiUrl)
 
       return res.json(response.data); // Retorna
@@ -299,18 +288,17 @@ class FinanceiroControllers {
   }
 
   async getListaVendasMarcaROB(req, res) {
-    let { idMarca, pageNumber, dataPesquisaInicio, dataPesquisaFim } = req.query;
+    let { idMarca, dataPesquisaInicio, dataPesquisaFim, page, pageSize } = req.query;
 
     if (!isNaN(idMarca)) {
       idMarca = Number(idMarca);
-      const pageSize = 100;
-      const offset = (pageNumber - 1) * pageSize;
       dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataFormatada(dataPesquisaInicio) : '';
       dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataFormatada(dataPesquisaFim) : '';
-
+      page = page ? page : '';
+      pageSize = pageSize ? pageSize : '';
       try {
 
-        const apiUrl = `${url}/api/financeiro/venda-marca-rob.xsjs?pageSize=500&idMarca=${idMarca}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`
+        const apiUrl = `${url}/api/financeiro/venda-marca-rob.xsjs?pageSize=${pageSize}&page=${page}&idMarca=${idMarca}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`
         const response = await axios.get(apiUrl)
 
         return res.json(response.data);
@@ -322,19 +310,20 @@ class FinanceiroControllers {
   }
 
   async getListaVendasMarcaMarckup(req, res) {
-    let { idMarca, pageNumber, dataPesquisaInicio, dataPesquisaFim, idLoja, idLojaPesquisa } = req.query;
+    let { idMarca, page, pageSize, dataPesquisaInicio, dataPesquisaFim, idLoja, idLojaPesquisa } = req.query;
 
     if (!isNaN(idMarca)) {
       idMarca = Number(idMarca);
-      const pageSize = 100;
-      const offset = (pageNumber - 1) * pageSize;
+
       dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataFormatada(dataPesquisaInicio) : '';
       dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataFormatada(dataPesquisaFim) : '';
       idLoja = idLoja ? idLoja : '';
       idLojaPesquisa = idLojaPesquisa ? idLojaPesquisa : '';
+      page = page ? page : '';
+      pageSize = pageSize ? pageSize : '';
       try {
-        // ajaxGet('api/financeiro/venda-marca-marckup.xsjs?pageSize=500&idMarca=' + IDMarcaPesqVenda + '&dataPesquisaInicio=' + datapesqinicio + '&dataPesquisaFim=' + datapesqfim + '&idLoja=' + IDLojaPesqVenda + '&idLojasPesq=' + IDLojasPesq)
-        const apiUrl = `${url}/api/financeiro/venda-marca-marckup.xsjs?pageSize=500&idMarca=${idMarca}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idLoja=${idLoja}&idLojasPesq=${idLojaPesquisa}`
+
+        const apiUrl = `${url}/api/financeiro/venda-marca-marckup.xsjs?pageSize=${pageSize}&page=${page}&idMarca=${idMarca}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idLoja=${idLoja}&idLojasPesq=${idLojaPesquisa}`
         const response = await axios.get(apiUrl)
 
         return res.json(response.data);
@@ -346,18 +335,17 @@ class FinanceiroControllers {
   }
 
   async getListaVendasDigital(req, res) {
-    let { idEmpresa, pageNumber, dataPesquisaInicio, dataPesquisaFim } = req.query;
+    let { idEmpresa, page, pageSize, dataPesquisaInicio, dataPesquisaFim } = req.query;
 
     if (!isNaN(idEmpresa)) {
       idEmpresa = Number(idEmpresa);
-      const pageSize = 100;
-      const offset = (pageNumber - 1) * pageSize;
       dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataFormatada(dataPesquisaInicio) : '';
       dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataFormatada(dataPesquisaFim) : '';
-
+      page = page ? page : '';
+      pageSize = pageSize ? pageSize : '';
       try {
 
-        const apiUrl = `${url}/api/financeiro/venda-digital.xsjs?pageSize=1000&idEmpresa=${idEmpresa}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`
+        const apiUrl = `${url}/api/financeiro/venda-digital.xsjs?pageSize=${pageSize}&page=${page}&idEmpresa=${idEmpresa}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`
         const response = await axios.get(apiUrl)
 
         return res.json(response.data);
@@ -369,18 +357,19 @@ class FinanceiroControllers {
   }
 
   async getListaDespesasLoja(req, res) {
-    let { idEmpresa, idCategoria, dataPesquisaInicio, dataPesquisaFim } = req.query;
+    let { idEmpresa, idCategoria, dataPesquisaInicio, dataPesquisaFim, page, pageSize } = req.query;
 
     idEmpresa = Number(idEmpresa) ? Number(idEmpresa) : '';
     idCategoria = idCategoria ? idCategoria : '';
     dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataFormatada(dataPesquisaInicio) : '';
     dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataFormatada(dataPesquisaFim) : '';
+    page = page ? page : '';
+    pageSize = pageSize ? pageSize : '';
 
     try {
 
-      const apiUrl = `${url}/api/financeiro/despesa-loja.xsjs?idCategoria=${idCategoria}&idEmpresa=${idEmpresa}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`
+      const apiUrl = `${url}/api/financeiro/despesa-loja.xsjs?idCategoria=${idCategoria}&idEmpresa=${idEmpresa}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&pageSize=${pageSize}&page=${page}`
       const response = await axios.get(apiUrl)
-      // const response = await getDespesaLoja(idEmpresa, idCategoria, dataPesquisaInicio, dataPesquisaFim)
 
       return res.json(response.data);
     } catch (error) {
@@ -402,7 +391,7 @@ class FinanceiroControllers {
       idLoja = idLoja ? idLoja : '';
       listaEmpresas = listaEmpresas ? listaEmpresas : '';
       try {
-        // ajaxGet('api/financeiro/venda-pix-periodo.xsjs?pageSize=1000&page=' + numPage + '&idMarca=' + IDPesqVendaPix + '&dataPesquisaInicio=' + datapesqinicio + '&dataPesquisaFim=' + datapesqfim + '&lojas=' + IDLojaPesqVenda + '&empresasList=' + listEmpresas)
+    
 
         const apiUrl = `${url}/api/financeiro/venda-pix-periodo.xsjs?pageSize=${pageSize}&page=${page}&idMarca=${idMarca}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&lojas=${idLoja}&empresasList=${listaEmpresas}`
         const response = await axios.get(apiUrl)
@@ -452,7 +441,7 @@ class FinanceiroControllers {
       listaEmpresas = listaEmpresas ? listaEmpresas : '';
 
       try {
-        // ajaxGet('api/financeiro/venda-pix-consolidado.xsjs?pageSize=1000&page=' + numPage + '&idMarca=' + IDPesqVendaPixConsolid + '&dataPesquisaInicio=' + datapesqinicioConsolid + '&dataPesquisaFim=' + datapesqfimConsolid)
+        
         const apiUrl = `${url}/api/financeiro/venda-pix-consolidado.xsjs?pageSize=${pageSize}&page=${page}&idMarca=${idMarca}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&lojas=${idLoja}&empresasList=${listaEmpresas}`
         const response = await axios.get(apiUrl)
 
@@ -501,7 +490,7 @@ class FinanceiroControllers {
 
       const apiUrl = `${url}/api/financeiro/fatura-pix-consolidado-loja.xsjs?page=${page}&pageSize=${pageSize}&idMarca=${idMarca}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&lojas=${idLoja}&empresa=${empresa}`
       const response = await axios.get(apiUrl)
-      // const response = await getFaturaPixConsolidadoLoja(idMarca, dataPesquisaInicio, dataPesquisaFim, idLoja, empresaLista, page, pageSize)
+      
 
       return res.json(response.data);
     } catch (error) {
@@ -571,7 +560,7 @@ class FinanceiroControllers {
     page = page ? page : '';
     pageSize = pageSize ? pageSize : '';
     try {
-      // ajaxGet('api/financeiro/venda-detalhe-recebimento-eletronico.xsjs?idEmpresa=' + IDEmpresaPesqVenda + '&dataPesquisaInicio=' + datapesqinicio +'&dataPesquisaFim=' + datapesqfim +'&nomeTef=' + nomeTef +'&nomeAutorizador=' + nomeAutorizador +'&numeroParcelas=' + numeroParcelas)
+      
       const apiUrl = `${url}/api/financeiro/venda-detalhe-recebimento-eletronico.xsjs?page=${page}&pageSize=${pageSize}&idEmpresa=${idEmpresa}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&nomeTef=${nomeTef}&nomeAutorizador=${nomeAutorizador}&numeroParcelas=${numeroParcelas}`
       const response = await axios.get(apiUrl)
 
@@ -603,7 +592,7 @@ class FinanceiroControllers {
     let { } = req.query;
 
     try {
-      const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/banco.xsjs`
+      const apiUrl = `${url}/api/banco.xsjs`
       const response = await axios.get(apiUrl)
 
       return res.json(response.data);
@@ -622,7 +611,7 @@ class FinanceiroControllers {
     page = page ? page : '';
     pageSize = pageSize ? pageSize : '';
     try {
-      const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/conta-banco.xsjs?id=${idContaBanco}&idBanco=${idBanco}&idEmpresa=${idEmpresa}&dsConta=${dsConta}&page=${page}&pageSize=${pageSize}`
+      const apiUrl = `${url}/api/financeiro/conta-banco.xsjs?id=${idContaBanco}&idBanco=${idBanco}&idEmpresa=${idEmpresa}&dsConta=${dsConta}&page=${page}&pageSize=${pageSize}`
       const response = await axios.get(apiUrl)
 
       return res.json(response.data);
@@ -667,7 +656,7 @@ class FinanceiroControllers {
     }
 
     try {
-      const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/fatura-atualizacao-conferencia.xsjs`
+      const apiUrl = `${url}/api/financeiro/fatura-atualizacao-conferencia.xsjs`
       const response = await axios.put(apiUrl, {
         IDS_FATURAS,
         STCONFERIDO,
@@ -722,7 +711,7 @@ class FinanceiroControllers {
         throw new Error("IDCONTABANCO é obrigatório");
       }
 
-      const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/conta-banco.xsjs`
+      const apiUrl = `${url}/api/financeiro/conta-banco.xsjs`
       const response = await axios.put(apiUrl, {
         IDCONTABANCO,
         IDBANCO,
@@ -781,7 +770,7 @@ class FinanceiroControllers {
         throw new Error("IDBANCO é obrigatório");
       }
 
-      const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/conta-banco.xsjs`
+      const apiUrl = `${url}/api/financeiro/conta-banco.xsjs`
       const response = await axios.post(apiUrl, {
         IDCONTABANCO,
         IDBANCO,
