@@ -1,7 +1,7 @@
 
 import axios from "axios";
 import 'dotenv/config';
-const url = process.env.API_URL|| 'localhost:6001'
+const url = process.env.API_URL;
 
 class FaturasControllers {
   async getListaFaturasPixPeriodo(req, res) {
@@ -61,7 +61,7 @@ class FaturasControllers {
     
     try {
                       
-      // const apiUrl = `${url}/api/detalhe-fatura.xsjs?idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&nuCodigoAutorizacao=${codigoFatura}&id=${idDetalheFatura}&page=${page}&pageSize=${pageSize}`;
+    
       const apiUrl = `${url}/api/detalhe-fatura.xsjs?idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&nuCodigoAutorizacao=${codigoFatura}&id=${idDetalheFatura}&page=${page}&pageSize=${pageSize}`;
       const response = await axios.get(apiUrl);
      
@@ -84,7 +84,7 @@ class FaturasControllers {
 
     try {
                       
-      // const apiUrl = `${url}/api/detalhe-fatura.xsjs?idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&nuCodigoAutorizacao=${codigoFatura}&idDetalheFatura=${idDetalheFatura}&page=${page}&pageSize=${pageSize}`;
+   
       const apiUrl = `${url}/api/financeiro/previa-consolidacao-faturas.xsjs?idEmpresa=${idEmpresa}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&page=${page}&pageSize=${pageSize}`;
       const response = await axios.get(apiUrl);
 
@@ -107,7 +107,7 @@ class FaturasControllers {
 
     try {
                       
-      // const apiUrl = `${url}/api/detalhe-fatura.xsjs?idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&nuCodigoAutorizacao=${codigoFatura}&idDetalheFatura=${idDetalheFatura}&page=${page}&pageSize=${pageSize}`;
+     
       const apiUrl = `${url}/api/financeiro/consolidacao-faturas.xsjs?idEmpresa=${idEmpresa}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&page=${page}&pageSize=${pageSize}`;
       const response = await axios.get(apiUrl);
 
@@ -132,10 +132,10 @@ class FaturasControllers {
     pageSize = pageSize ? pageSize : '';
     
     try {
-                         // api/financeiro/venda-total-fatura-pix-empresa.xsjs?pageSize=1000&page=1&idMarca=1&idEmpresa=0&dataPesquisaInicio=2024-11-04&dataPesquisaFim=2024-11-04
+
       const apiUrl = `${url}/api/financeiro/venda-total-fatura-pix-empresa.xsjs?idMarca=${idMarca}&idEmpresa=${idEmpresa}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&dataCompInicio=${dataCompInicio}&dataCompFim=${dataCompFim}&page=${page}&pageSize=${pageSize}`;
       const response = await axios.get(apiUrl);
-      // const response = await getVendaFaturaPixPeriodo(idMarca, idEmpresa, dataPesquisaInicio, dataPesquisaFim, dataCompInicio, dataCompFim, page, pageSize)
+    
       return res.json(response.data); 
     } catch (error) {
       console.error("Unable to connect to the database:", error);
@@ -155,11 +155,10 @@ class FaturasControllers {
     pageSize = pageSize ? pageSize : '';
     
     try {
-      // http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/venda-total-fatura-pix-empresa-compensada.xsjs?pageSize=1000&dataPesquisaInicio=2024-12-06&dataPesquisaFim=2024-12-06&idMarca=0&idEmpresa=&page=1
+     
       const apiUrl = `${url}/api/financeiro/venda-total-fatura-pix-empresa-compensada.xsjs?idMarca=${idMarca}&idEmpresa=${idEmpresa}&dataPesquisaInicio=${dataCompInicio}&dataPesquisaFim=${dataCompFim}&page=${page}&pageSize=${pageSize}`;
       const response = await axios.get(apiUrl);
       
-      // const response = await getVendaFaturaPixPeriodoCompensada(idMarca, idEmpresa, dataCompInicio, dataCompFim, page, pageSize)
       return res.json(response.data); 
     } catch (error) {
       console.error("Unable to connect to the database:", error);
