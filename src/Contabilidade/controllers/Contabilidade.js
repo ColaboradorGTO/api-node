@@ -1,6 +1,7 @@
 import axios from "axios";
 import { dataFormatada } from "../../utils/dataFormatada.js";
-let url = `http://164.152.245.77:8000/quality/concentrador_homologacao`;
+import 'dotenv/config';
+const url = process.env.API_URL;
 
 class ContabilidadeControllers {
   async getListaVendasContigencia(req, res) {
@@ -114,7 +115,7 @@ class ContabilidadeControllers {
   }
 
   async getListaVendasPeriodoConsolidado(req, res) {
-    let { dataPesquisaInicio, dataPesquisaFim, idGrupoEmpresarial, idEmpresa, produtoPesquisado, ufPesquisa, idFornecedor, idGrupoGrade, idGrade  } = req.query;
+    let { dataPesquisaInicio, dataPesquisaFim, idGrupoEmpresarial, idEmpresa, produtoPesquisado, ufPesquisa, idFornecedor, idGrupoGrade, idGrade, page, pageSize  } = req.query;
 
     dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataPesquisaInicio : '';
     dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataPesquisaFim : '';
@@ -128,7 +129,7 @@ class ContabilidadeControllers {
     try {        
 
      
-      const apiUrl = `${url}/api/contabilidade/venda-produto-consolidado.xsjs?page=&dataInicio=${dataPesquisaInicio}&dataFim=${dataPesquisaFim}&idGrupoEmpresarial=${idGrupoEmpresarial}&idEmpresa=${idEmpresa}&descricaoProduto=${produtoPesquisado}&uf=${ufPesquisa}&idFornecedor=${idFornecedor}&idGrupoGrade=${idGrupoGrade}&idGrade=${idGrade}`
+      const apiUrl = `${url}/api/contabilidade/venda-produto-consolidado.xsjs?page=${page}&pageSize=${pageSize}&dataInicio=${dataPesquisaInicio}&dataFim=${dataPesquisaFim}&idGrupoEmpresarial=${idGrupoEmpresarial}&idEmpresa=${idEmpresa}&descricaoProduto=${produtoPesquisado}&uf=${ufPesquisa}&idFornecedor=${idFornecedor}&idGrupoGrade=${idGrupoGrade}&idGrade=${idGrade}`
       const response = await axios.get(apiUrl)
 
       return res.json(response.data);
