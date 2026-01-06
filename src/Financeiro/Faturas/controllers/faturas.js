@@ -84,9 +84,7 @@ class FaturasControllers {
 
     try {
                       
-   
-      const apiUrl = `${url}/api/financeiro/previa-consolidacao-faturas.xsjs?idEmpresa=${idEmpresa}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&page=${page}&pageSize=${pageSize}`;
-      
+      const apiUrl = `${url}/api/financeiro/previa-consolidacao-faturas.xsjs?idEmpresa=${idEmpresa}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&page=${page}&pageSize=${pageSize}`;  
     
       const response = await axios.get(apiUrl);
 
