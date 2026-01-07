@@ -269,7 +269,6 @@ class AdmBalancoControllers {
                 });
             }
 
-
             const response = await atualizarDetalheBalancoAvulsoService.updateDetalheBalancoAvulso(
                 value.IDEMPRESA,
                 value.NUMEROCOLETOR,
@@ -355,7 +354,7 @@ class AdmBalancoControllers {
                         error: "Campos obrigatórios para INS_BALANCO = 0 não informados."
                     });
                 }
-                
+
                 payload = {
                     IDEMPRESA,
                     INSBALANCO,
