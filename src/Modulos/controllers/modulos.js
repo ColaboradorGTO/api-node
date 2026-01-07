@@ -73,7 +73,7 @@ class ModulosControllers  {
     // }
     
 
-    async getListaMenusFilhosUsuario(req, res) {
+    async getListaMenusFilhosUsuarioPermissao(req, res) {
         let { idMenuFilho, idUsuario } = req.query;
     
         idMenuFilho = idMenuFilho ? idMenuFilho : '';
