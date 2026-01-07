@@ -1,11 +1,9 @@
-
 import axios from "axios";
 import { dataFormatada } from "../../../utils/dataFormatada.js";
 import 'dotenv/config';
 const url = process.env.API_URL;
 
 class FinanceiroVendasControllers {
-
 
   async getListaVendasLojaPeriodo(req, res) {
     try {
@@ -24,7 +22,6 @@ class FinanceiroVendasControllers {
       return res.status(500).json({ message: 'Erro ao buscar Vendas Loja Por Periodo' });
     }
   }
-
 
   async getListaVendasDigital(req, res) {
 
@@ -93,7 +90,7 @@ class FinanceiroVendasControllers {
     pageSize = pageSize ? pageSize : '';
     try {
 
-      const apiUrl =`${url}/api/financeiro/venda-total.xsjs?dataPesquisa=${dataPesquisa}`
+      const apiUrl = `${url}/api/financeiro/venda-total.xsjs?dataPesquisa=${dataPesquisa}`
       const response = await axios.get(apiUrl)
       return res.json(response.data);
     } catch (error) {
