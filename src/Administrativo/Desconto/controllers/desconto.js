@@ -18,8 +18,8 @@ class AdmDescontoControllers {
 
         try {
 
-            const apiUrl = `http://164.152.245.77:8000/quality/concentrador/api/administrativo/desconto-motivo-vendas.xsjs?idMarca=${idGrupo}&idEmpresa=${idEmpresa}&dataInicial=${dataPesquisaInicio}&dataFinal=${dataPesquisaFim}&dsmotdesc=${dsMotivoDesc}`
-            
+            const apiUrl = `http://164.152.245.77:8000/quality/concentrador/api/administrativo/desconto-motivo-vendas.xsjs?idMarca=${idGrupo}&idEmpresa=${idEmpresa}&dataInicial=${dataPesquisaInicio}&dataFinal=${dataPesquisaFim}&dsmotdesc=${dsMotivoDesc}&page=${page}&pageSize=${pageSize}`;
+           
             const response = await axios.get(apiUrl)
 
             return res.json(response.data);
