@@ -22,44 +22,38 @@ const updateDetalheBalancoAvulsoSchema = Joi.object({
          'string.base': 'O campo IDPRODUTO deve ser uma string',
          'any.required': 'O campo IDPRODUTO é obrigatório'
       }),
-   CODIGODEBARRAS: Joi.string().required()
+   CODIGODEBARRAS: Joi.string().allow(null, "")
       .messages({
-         'string.base': 'O campo CODIGODEBARRAS deve ser uma string',
-         'any.required': 'O campo CODIGODEBARRAS é obrigatório'
+         'string.base': 'O campo CODIGODEBARRAS deve ser uma string'
       }),
-   DSPRODUTO: Joi.string().required()
+   DSPRODUTO: Joi.string().allow(null, "")
       .messages({
-         'string.base': 'O campo DSPRODUTO deve ser uma string',
-         'any.required': 'O campo DSPRODUTO é obrigatório'
+         'string.base': 'O campo DSPRODUTO deve ser uma string'
       }),
    TOTALCONTAGEMGERAL: Joi.number().required()
       .messages({
          'number.base': 'O campo TOTALCONTAGEMGERAL deve ser um número',
          'any.required': 'O campo TOTALCONTAGEMGERAL é obrigatório'
       }),
-   PRECOCUSTO: Joi.number().required()
+   PRECOCUSTO: Joi.number().allow(null, "")
       .messages({
-         'number.base': 'O campo PRECOCUSTO deve ser um número',
-         'any.required': 'O campo PRECOCUSTO é obrigatório'
+         'number.base': 'O campo PRECOCUSTO deve ser um número'
       }),
-   PRECOVENDA: Joi.number().required()
+   PRECOVENDA: Joi.number().allow(null, "")
       .messages({
-         'number.base': 'O campo PRECOVENDA deve ser um número',
-         'any.required': 'O campo PRECOVENDA é obrigatório'
+         'number.base': 'O campo PRECOVENDA deve ser um número'
       }),
-   STCANCELADO: Joi.string().required()
+   STCANCELADO: Joi.string().allow(null, "")
       .messages({
-         'string.base': 'O campo STCANCELADO deve ser uma string',
-         'any.required': 'O campo STCANCELADO é obrigatório'
+         'string.base': 'O campo STCANCELADO deve ser uma string'
       }),
-   INSBALANCO: Joi.number().required()
+   INSBALANCO: Joi.number().allow(null, "")
       .messages({
-         'number.base': 'O campo INSBALANCO deve ser um número',
-         'any.required': 'O campo INSBALANCO é obrigatório'
+         'number.base': 'O campo INSBALANCO deve ser um número'
       })
 })
 
-export default updateDetalheBalancoAvulsoSchema;    
+export default updateDetalheBalancoAvulsoSchema;
 
 // [{
 //    "IDEMPRESA":1,
