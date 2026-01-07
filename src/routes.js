@@ -102,12 +102,10 @@ routes.get('/listaEmpresas', EmpresaControllers.getListaEmpresas)
 routes.put('/empresas/:id', EmpresaControllers.putListaEmpresas)
 
 
-
 routes.get('/menus-usuario', ModulosControllers.getListaPerfilUsuario)
 routes.get('/menus-usuario-excecao', ModulosControllers.getListaMenusPorUsuario)
 routes.get('/menus-filho-usuario', ModulosControllers.getListaMenusFilhosUsuario)
 routes.get('/menus', ModulosControllers.getListaSubMenusUsuario)
-routes.get('/menus-filho-usuario', ModulosControllers.getListaMenusFilhosUsuario)
 
 
 routes.put('/perfil-usuario/:id', ModulosControllers.putPerfilUsuarioMenu)

@@ -32,7 +32,7 @@ class ModulosControllers  {
        
             const apiUrl = `${url}/api/perfilUsuario/menus-usuario-exececao.xsjs?idUsuario=${idUsuario}&idMenuFilho=${idMenuFilho}`;
             const response = await axios.get(apiUrl);
-  
+            console.log(apiUrl, 'apiUrl');
             
             return res.json(response.data); // Retorna
         } catch (error) {
