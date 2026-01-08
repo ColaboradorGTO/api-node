@@ -634,8 +634,8 @@ class FinanceiroControllers {
       const response = await axios.put(apiUrl, {
         NUCODAUTORIZACAO,
         VRRECEBIDO,
-        STCANCELADO,
-        STPIX,
+        STCANCELADO: STCANCELADO?.value || STCANCELADO,
+        STPIX: STPIX?.value || STPIX,
         NUAUTORIZACAO,
         IDDETALHEFATURA,
       })
