@@ -7,7 +7,7 @@ import atualizarDevolucaoSchema from "../schema/atualizarDevolucaoSchema.js";
 import { MotivoDevolucaoClient } from "../client/index.js";
 import { MotivoDevolucaoService } from "../services/index.js";
 const devolucaoDevolucaoClient = new MotivoDevolucaoClient(process.env.API_URL);
-const deevolucaoService = new MotivoDevolucaoService(devolucaoDevolucaoClient);
+const devolucaoService = new MotivoDevolucaoService(devolucaoDevolucaoClient);
 
 class DevolucaoControllers {
   async getListaMotivosDevolucao(req, res) {
@@ -47,7 +47,7 @@ class DevolucaoControllers {
         });
       }
 
-      const response = await deevolucaoService.updateMotivoDevolucao(
+      const response = await devolucaoService.updateMotivoDevolucao(
         value.DSMOTIVO,
         value.STATIVO,
         value.IDUSUARIO,
@@ -56,7 +56,7 @@ class DevolucaoControllers {
       return res.json(response);
     } catch (error) {
       console.error("Erro no DevolucaoControllers.putMotivoDevolucao", error);
-      return res.status(500).json({ error: "Internal Server Error" });
+      return res.status(500).json({ error: "Erro no DevolucaoControllers.putMotivoDevolucao", error });
 
     }
   }
@@ -80,7 +80,7 @@ class DevolucaoControllers {
         });
       }
 
-      const response = await deevolucaoService.createMotivo(
+      const response = await devolucaoService.createMotivo(
         value.IDUSUARIO,
         value.DSMOTIVO
       );
