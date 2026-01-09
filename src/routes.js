@@ -483,7 +483,6 @@ routes.post('/inutilizar-nfe', ConsultaStatusNfeController.inutilizarNFE);
 routes.get('/validarConsulta', ConsultaStatusNfeController.validarConsulta);
 routes.post('/consultar-nfe', ConsultaNFeController.consultaNFe);
 
-
 // routes.put('/configuracao-todos/:id', InformaticaControllers.putCaixaLoja)
 // FIM Informática
 
