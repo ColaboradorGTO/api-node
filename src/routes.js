@@ -328,7 +328,7 @@ routes.put('/atualizar-status-fatura-pix', FaturasControllers.putListaFaturaVend
 routes.put('/atualizar-recompra', FaturasControllers.putListaAtualizarRecompra)
 routes.put('/fatura-loja-atualizar', FaturasControllers.putListaAtualizarFatura)
 routes.put('/consolidacao-faturas/:id', FaturasControllers.putConsolidacaoFatura)
-routes.post('/consolidacao-faturas', FaturasControllers.postConsolidacaoFatura)
+routes.post('/criar-consolidacao-faturas', FaturasControllers.postConsolidacaoFatura)
 routes.post('/consolidacao-faturas-integracao', FaturasControllers.postConsolidacaoFaturaSAP)
 
 
