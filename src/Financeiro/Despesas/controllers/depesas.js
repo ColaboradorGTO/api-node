@@ -39,8 +39,8 @@ class DespesasControllers {
       console.error("Unable to connect to the database:", error);
       return res.status(500).json({ error: error.message });
     }
-
   }
+
   async putStatusDespesasLoja(req, res) {
     try {
       let { STCANCELADO, IDDESPESASLOJA } = req.body;
