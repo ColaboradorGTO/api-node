@@ -38,8 +38,8 @@ export class OTClient {
         QTDTOTALITENSAJUSTE,
         dadosdetalheot,
     ) {
-
-        const response = await this.api.post(`api/expedicao/resumo-ordem-transferencia.xsjs`, {
+        //const response = await this.api.post(`api/expedicao/resumo-ordem-transferencia.xsjs`, {
+        const response = await this.api.post(`api/conferencia-cega/resumo-ordem-transferencia.xsjs`, {
             IDRESUMOOT,
             IDEMPRESAORIGEM,
             IDEMPRESADESTINO,
@@ -100,7 +100,8 @@ export class OTClient {
         dadosdetalheot,
     ) {
 
-        const response = await this.api.put(`api/expedicao/resumo-ordem-transferencia.xsjs`, {
+        const response = await this.api.put(`api/conferencia-cega/resumo-ordem-transferencia.xsjs`, {
+            IDSTATUSOT,
             IDRESUMOOT,
             IDEMPRESAORIGEM,
             IDEMPRESADESTINO,
@@ -123,7 +124,6 @@ export class OTClient {
             NUMERONFE,
             STENTRADAINVENTARIO,
             QTDCONFERENCIA,
-            IDSTATUSOT,
             IDUSRAJUSTE,
             DTAJUSTE,
             QTDTOTALITENSAJUSTE,
