@@ -38,7 +38,6 @@ export class OTClient {
         QTDTOTALITENSAJUSTE,
         dadosdetalheot,
     ) {
-        //const response = await this.api.post(`api/expedicao/resumo-ordem-transferencia.xsjs`, {
         const response = await this.api.post(`api/conferencia-cega/resumo-ordem-transferencia.xsjs`, {
             IDRESUMOOT,
             IDEMPRESAORIGEM,
