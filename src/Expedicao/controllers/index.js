@@ -437,7 +437,6 @@ class ExpedicaoControllers {
                     value.QTDTOTALITENSAJUSTE,
                     value.dadosdetalheot,
 
-    
             );
     
             if(!value.IDEMPRESADESTINO) {

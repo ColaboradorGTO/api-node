@@ -140,24 +140,24 @@ class GerenciaControllers {
         try {
             const { IDEMPRESA, DATAMOVIMENTOCAIXA } = req.body;
 
-            if (!IDEMPRESA || !DATAMOVIMENTOCAIXA) {
+            if (!IDEMPRESA) {
                 return res.status(400).json({error: "Parâmetros inválidos. É necessário informar 'IDEMPRESA'."    });
             }  
             const payload = [{
                 ...req.body,
                 IDEMPRESA: req.body.IDEMPRESA,
                 DATAMOVIMENTOCAIXA: req.body.DATAMOVIMENTOCAIXA,
-                VRDINHEIRO: req.body.VRDINHEIRO,
-                VRCARTAO: req.body.VRCARTAO,
-                VRPOS: req.body.VRPOS,
-                VRPIX: req.body.VRPIX,
-                VRCONVENIO: req.body.VRCONVENIO,
-                VRVOUCHER: req.body.VRVOUCHER,
-                VRFATURA: req.body.VRFATURA,
-                VRFATURAPIX: req.body.VRFATURAPIX,
-                VRDESPESA: req.body.VRDESPESA,
-                VRTOTALRECEBIDO: req.body.VRTOTALRECEBIDO,
-                VRDISPONIVEL: req.body.VRDISPONIVEL,
+                VRDINHEIRO: Number(req.body.VRDINHEIRO) || 0 ,
+                VRCARTAO: Number(req.body.VRCARTAO) || 0,
+                VRPOS: Number(req.body.VRPOS) || 0,
+                VRPIX: Number(req.body.VRPIX) || 0,
+                VRCONVENIO:Number(req.body.VRCONVENIO)|| 0,
+                VRVOUCHER: Number(req.body.VRVOUCHER) || 0,
+                VRFATURA: Number(req.body.VRFATURA) || 0,
+                VRFATURAPIX: Number(req.body.VRFATURAPIX) || 0,
+                VRDESPESA: Number(req.body.VRDESPESA) || 0,
+                VRTOTALRECEBIDO: Number(req.body.VRTOTALRECEBIDO) || 0,
+                VRDISPONIVEL: Number(req.body.VRDISPONIVEL) || 0,
                 OBSERVACAOLOJA: req.body.OBSERVACAOLOJA,
                 IDUSERCRIACAO: req.body.IDUSERCRIACAO,
                 IDUSERULTIMAALTERACAO: req.body.IDUSERULTIMAALTERACAO,
