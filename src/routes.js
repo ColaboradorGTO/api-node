@@ -34,7 +34,7 @@ import LinkRelatorioBiController from './Informatica/relatorio/linkRelatorioBI/c
 // import ConsultaNFceController  from './Informatica/ConsultaNFCE/controllers/index.js'
 // import ConsultaNFeController from './Informatica/ConsultaNFCE/controllers/nfe.js'
 // import ConsultaStatusNfeController from './Informatica/ConsultaNFCE/controllers/statusNfce.js'
-
+import ConsultaNfeController from './Informatica/ConsultaNFCE/controllers/consulta.js'
 // Financeiro Início
 import AdiantamentosControllers from './Financeiro/Adiantamentos/controllers/adiantamentos.js'
 import DepositosControllers from './Financeiro/Depositos/controllers/depositos.js'
@@ -474,7 +474,7 @@ routes.post('/criar-funcionarios-loja', InformaticaControllers.postFuncionarioLo
 routes.put('/funcionarios-desconto/:id', InformaticaControllers.putFuncionarioDesconto)
 // routes.post('/consulta-nfec', ConsultaNfeController.consultar)
 // routes.get('/valida-venda-contingencia', ConsultaNfeController.getListaVendasContigenciaValidas);
-// routes.put('/valida-venda-contingencia/:id', ConsultaNfeController.putValidarVendaContigencia);
+routes.put('/valida-venda-contingencia/:id', ConsultaNfeController.putValidarVendaContigencia);
 // routes.get('/status-sefaz', ConsultaStatusNfeController.statusSefaz);
 // routes.post('/consultar-nfce', ConsultaNFceController.consultaNFce);
 // routes.post('/downloadXML', ConsultaStatusNfeController.downloadNFE);
