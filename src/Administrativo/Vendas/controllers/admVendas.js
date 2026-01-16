@@ -217,6 +217,19 @@ class AdmVendasControllers {
     }
 
     
+    async putAlterarVendaRecebimento(req, res) {
+        try {
+            let { IDVENDA,  VRRECDINHEIRO, VRRECCONVENIO, VRRECCARTAO, VRRECPOS, VRRECVOUCHER } = req.body; 
+            const response = await axios.put(`${url}/api/administrativo/atualiza-recebimento-venda.xsjs`, {
+                IDVENDA,  VRRECDINHEIRO, VRRECCONVENIO, VRRECCARTAO, VRRECPOS, VRRECVOUCHER
+            });
+            return res.json(response.data);
+        } catch (error) {
+            console.error("Unable to connect to the database:", error);
+            return res.status(500).json({ error: error.message });
+        }
+    }
+
     async putVendaVendedor(req, res) {
         try {
             let { IDVENDADETALHE, IDVENDEDOR} = req.body; 
@@ -234,27 +247,42 @@ class AdmVendasControllers {
         }
     }
 
-    // async putAlterarVendaRecebimento(req, res) {
-    //     try {
-    //         const dados = Array.isArray(req.body) ? req.body : [req.body]; 
-    //         const response = await  updateAlterarVendaRecebimento(dados);
-    //         return res.json(response);
-    //     } catch (error) {
-    //         console.error("Unable to connect to the database:", error);
-    //         return res.status(500).json({ error: error.message });
-    //     }
-    // }
+    
 
-    // async postAlterarVendasPagamento(req, res) {
-    //     try {
-    //         const vendas = Array.isArray(req.body) ? req.body : [req.body]; 
-    //         const response = await  createAlterarVendaPagamento(vendas);
-    //         return res.json(response);
-    //     } catch (error) {
-    //         console.error("Unable to connect to the database:", error);
-    //         return res.status(500).json({ error: error.message });
-    //     }
-    // }
+    async postAlterarVendasPagamento(req, res) {
+        try {
+            let {
+                DSTIPOPAGAMENTO,
+                DTPROCESSAMENTO,
+                IDFUNCIONARIO,
+                IDVENDA,
+                IDVENDAPAGAMENTO,
+                NITEM,
+                STCANCELADO,
+                TPAG,
+                VALORDEDUZIDO,
+                VALORLIQUIDO,
+                VALORRECEBIDO
+            } = req.body; 
+            const response = await axios.post(`${url}/api/administrativo/altera-venda-pagamento.xsjs`, {
+                DSTIPOPAGAMENTO,
+                DTPROCESSAMENTO,
+                IDFUNCIONARIO,
+                IDVENDA,
+                IDVENDAPAGAMENTO,
+                NITEM,
+                STCANCELADO,
+                TPAG,
+                VALORDEDUZIDO,
+                VALORLIQUIDO,
+                VALORRECEBIDO
+            });
+            return res.json(response.data);
+        } catch (error) {
+            console.error("Unable to connect to the database:", error);
+            return res.status(500).json({ error: error.message });
+        }
+    }
 }
 
 export default new AdmVendasControllers();

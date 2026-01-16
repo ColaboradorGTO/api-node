@@ -188,9 +188,9 @@ routes.get('/venda-total-recebido-periodo-adm', AdmVendasControllers.getListaVen
 routes.put('/alterar-venda-pagamento/:id', AdmVendasControllers.putAlterarVendasPagamento);
 routes.put('/venda-vendedor/:id', AdmVendasControllers.putVendaVendedor);
 
-// routes.put('/atualiza-recebimento-venda/:id', AdmVendasControllers.putAlterarVendaRecebimento);
+routes.put('/atualiza-recebimento-venda/:id', AdmVendasControllers.putAlterarVendaRecebimento);
 // routes.get('/alterar-venda-pagamento', AdmVendasControllers.getListaAlterarVendasPagamento);
-// routes.post('/alterar-venda-pagamento', AdmVendasControllers.postAlterarVendasPagamento);
+routes.post('/alterar-venda-pagamento', AdmVendasControllers.postAlterarVendasPagamento);
 
 // Desconto
 // routes.get('/vendaConvenio', AdministrativoControllers.getVendaConvenio)

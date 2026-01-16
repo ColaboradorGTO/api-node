@@ -6,7 +6,7 @@ const alterarVendaPagamentoSchema = Joi.object({
         'string.base': 'IDVENDA deve ser uma string.',
         'any.required': 'IDVENDA é um campo obrigatório.'
     }),
-    STCANCELADO: Joi.string().valid('True', 'False')
+    STCANCELADO: Joi.string().valid('True', 'False').allow('')
     .messages({
         'string.base': 'STCANCELADO deve ser uma string.',
     }),
@@ -19,11 +19,10 @@ const alterarVendaPagamentoSchema = Joi.object({
         'number.base': 'IDFUNCIONARIOCANCELA deve ser um número inteiro.',
         'any.required': 'IDFUNCIONARIOCANCELA é um campo obrigatório.'
     }),
-    TXTMOTIVOCANCELA: Joi.string().max(255).required()
+    TXTMOTIVOCANCELA: Joi.string().max(255).allow('')
     .messages({
         'string.base': 'TXTMOTIVOCANCELA deve ser uma string.',
         'string.max': 'TXTMOTIVOCANCELA deve ter no máximo 500 caracteres.',
-        'any.required': 'TXTMOTIVOCANCELA é um campo obrigatório.'
     })
 })
 
