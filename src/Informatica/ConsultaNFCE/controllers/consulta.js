@@ -12,6 +12,7 @@ class ConsultaNfeController {
       const response = await axios.put(`http://164.152.245.77:8000/quality/concentrador/api/venda/valida-venda-contingencia.xsjs`, {
         IDVENDA
       })
+      
       return res.json(response.data);
     } catch (error) {
       console.error("Erro no ConsultaNfeController.putValidarVendaContigencia", error);
