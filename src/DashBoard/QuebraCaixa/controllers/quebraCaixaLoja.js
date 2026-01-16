@@ -11,19 +11,19 @@ class QuebraCaixaControllers {
         page = page ? page : '';
         pageSize = pageSize ? pageSize : '';
         dataPesquisa = dataPesquisa ? dataPesquisa : '';
-        
+
         try {
-            
-        
+
+
             const apiUrl = `${url}/api/administrativo/quebra-caixa-loja.xsjs?idEmpresa=${idEmpresa}&dataPesquisa=${dataPesquisa}&page=${page}&pageSize=${pageSize}`;
             const response = await axios.get(apiUrl);
 
-            return res.json(response.data); 
+            return res.json(response.data);
         } catch (error) {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-        
+
     }
 
     async getListaQuebraCaixa(req, res) {
@@ -38,18 +38,18 @@ class QuebraCaixaControllers {
         dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
         page = page ? page : '';
         pageSize = pageSize ? pageSize : '';
-        
+
         try {
-           
+
             const apiUrl = `${url}/api/dashboard/quebra-caixa/lista-quebra-caixa.xsjs?pageSize=${pageSize}&page=${page}&idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idMarca=${idMarca}&cpfquebraop=${cpfOperadorQuebra}&stQuebraPositivaNegativa=${stQuebraPositivaNegativa}&uf=${uf}`;
             const response = await axios.get(apiUrl);
 
-            return res.json(response.data); 
+            return res.json(response.data);
         } catch (error) {
             console.error("Erro no QuebraCaixaControllers.getListaQuebraCaixa:", error);
             throw error;
         }
-        
+
     }
 
     async getQuebraCaixaID(req, res) {
@@ -58,13 +58,13 @@ class QuebraCaixaControllers {
         idQuebraCaixa = idQuebraCaixa ? idQuebraCaixa : '';
         page = page ? page : '';
         pageSize = pageSize ? pageSize : '';
-        
+
         try {
-            
+
             const apiUrl = `${url}/api/dashboard/quebra-caixa/quebra-caixa.xsjs?id=${idQuebraCaixa}`;
             const response = await axios.get(apiUrl);
-            
-            return res.json(response.data); 
+
+            return res.json(response.data);
         } catch (error) {
             console.error("Unable to connect to the database:", error);
             throw error;
@@ -73,9 +73,9 @@ class QuebraCaixaControllers {
 
     async putListaStatusQuebraCaixa(req, res) {
         try {
-            let { IDQUEBRACAIXA, STATIVO } = req.body 
-           
-            if(!IDQUEBRACAIXA || !STATIVO)  {
+            let { IDQUEBRACAIXA, STATIVO } = req.body
+
+            if (!IDQUEBRACAIXA || !STATIVO) {
                 return res.status(400).json({ error: "IDQUEBRACAIXA and STATIVO are required." });
             }
             const response = await axios.put(`${url}/api/dashboard/quebra-caixa/atualizacao-status.xsjs`, { IDQUEBRACAIXA, STATIVO });
@@ -84,44 +84,53 @@ class QuebraCaixaControllers {
             console.error("Unable to connect to the database:", error);
             return res.status(500).json({ error: error.message });
         }
-       
+
     }
 
     async putQuebraCaixa(req, res) {
         try {
-            const quebras = Array.isArray(req.body) ? req.body : [req.body]; 
-            const response = await  axios.post(`${url}/api/dashboard/quebra-caixa/todos.xsjs`, quebras);
-            
+            const quebras = Array.isArray(req.body) ? req.body : [req.body];
+            const response = await axios.post(`${url}/api/dashboard/quebra-caixa/todos.xsjs`, quebras);
+
             return res.json(response.data);
         } catch (error) {
             console.error("Unable to connect to the database:", error);
             return res.status(500).json({ error: error.message });
         }
-       
+
     }
 
     async postQuebraCaixa(req, res) {
 
         try {
-            let {IDCAIXAWEB, IDMOVIMENTOCAIXA, IDGERENTE, IDFUNCIONARIO, DTLANCAMENTO, VRQUEBRASISTEMA, VRQUEBRAEFETIVADO, TXTHISTORICO, STATIVO} = req.body; 
+            let { IDCAIXAWEB,
+                IDMOVIMENTOCAIXA,
+                IDGERENTE,
+                IDFUNCIONARIO,
+                DTLANCAMENTO,
+                VRQUEBRASISTEMA,
+                VRQUEBRAEFETIVADO,
+                TXTHISTORICO,
+                STATIVO
+            } = req.body;
 
-            if(!IDCAIXAWEB) {
+            if (!IDCAIXAWEB) {
                 return res.status(400).json({ error: "IDCAIXAWEB is required." });
             }
 
-            if(!IDMOVIMENTOCAIXA) {
+            if (!IDMOVIMENTOCAIXA) {
                 return res.status(400).json({ error: "IDMOVIMENTOCAIXA is required." });
             }
 
-            if(!IDGERENTE) {
+            if (!IDGERENTE) {
                 return res.status(400).json({ error: "IDGERENTE is required." });
             }
 
-            if(!IDFUNCIONARIO) {
-                return res.status(400).json({ error: "IDFUNCIONARIO is required."});
+            if (!IDFUNCIONARIO) {
+                return res.status(400).json({ error: "IDFUNCIONARIO is required." });
             }
-            
-            const response = await axios.post(`${url}/api/dashboard/quebra-caixa/todos.xsjs`, {
+
+            const response = await axios.post(`${url}/api/dashboard/quebra-caixa/todos.xsjs`, [{
                 IDCAIXAWEB,
                 IDMOVIMENTOCAIXA,
                 IDGERENTE,
@@ -131,13 +140,13 @@ class QuebraCaixaControllers {
                 VRQUEBRAEFETIVADO,
                 TXTHISTORICO,
                 STATIVO
-            });
+            }]);
             return res.json(response.data);
         } catch (error) {
             console.error("Erro no QuebraCaixaControllers.postQuebraCaixa:", error);
             return res.status(500).json({ error: error.message });
         }
-       
+
     }
 }
 
