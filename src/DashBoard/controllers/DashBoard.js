@@ -402,7 +402,7 @@ class DashBoardControllers {
             idEmpresaLogin = Number(idEmpresaLogin);
    
             try {
-                const apiUrl = `${url}/api/relatorio-bi.xsjs?page=1&id=${idEmpresaLogin}&idrelatorio=${idRelatorio}`
+                const apiUrl = `${url}/api/relatorio-bi.xsjs?pageSize=500&page=1&id=${idEmpresaLogin}&idrelatorio=${idRelatorio}`
                 const response = await axios.get(apiUrl)
 
                 return res.json(response.data); // Retorna
