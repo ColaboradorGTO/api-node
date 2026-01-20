@@ -131,6 +131,7 @@ class QuebraCaixaControllers {
             }
 
             const response = await axios.post(`${url}/api/dashboard/quebra-caixa/todos.xsjs`, [{
+                
                 IDCAIXAWEB,
                 IDMOVIMENTOCAIXA,
                 IDGERENTE,
