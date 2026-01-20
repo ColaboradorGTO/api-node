@@ -26,7 +26,7 @@ class AdmBalancoControllers {
         pageSize = pageSize ? Number(pageSize) : '';
 
         try {
-            // http://164.152.245.77:/api/administrativo/balanco-loja.xsjs?page=1&idEmpresa=1&dataInicial=2024-12-07&dataFinal=2024-12-07&DSdesc=
+           
             const apiUrl = `${url}/api/administrativo/balanco-loja.xsjs?idEmpresa=${idEmpresa}&DSdesc=${dsDescricao}&dataInicial=${dataPesquisaInicio}&dataFinal=${dataPesquisaFim}&page=${page}&pageSize=${pageSize}`;
             const response = await axios.get(apiUrl)
 
@@ -67,7 +67,6 @@ class AdmBalancoControllers {
         pageSize = pageSize ? pageSize : '';
         try {
 
-
             const apiUrl = `${url}/api/administrativo/coletor-balanco.xsjs?idresumo=${idResumo}&idempresa=${idEmpresa}&descProduto=${descricaoProduto}&page=${page}&pageSize=${pageSize}`
             const response = await axios.get(apiUrl)
             return res.json(response.data);
@@ -103,7 +102,6 @@ class AdmBalancoControllers {
         page = page ? page : '';
         pageSize = pageSize ? pageSize : '';
         try {
-
 
             const apiUrl = `${url}/api/administrativo/detalhe-balanco.xsjs?idresumo=${idResumo}&coletor=${numeroColetor}&page=${page}&pageSize=${pageSize}`
             const response = await axios.get(apiUrl)
