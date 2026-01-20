@@ -746,8 +746,8 @@ class AdministrativoControllers {
         let { idVenda,  } = req.query;
 
         try {
-            // const apiUrl = `${url}/api/administrativo/recebimento.xsjs?id=${idVenda}`;
-            const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/administrativo/recebimento.xsjs?id=${idVenda}`;
+            const apiUrl = `${url}/api/administrativo/recebimento.xsjs?id=${idVenda}`;
+        
             const response = await axios.get(apiUrl)
         
             return res.json(response.data); // Retorna
