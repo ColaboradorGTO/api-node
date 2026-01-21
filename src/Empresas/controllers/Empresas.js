@@ -45,7 +45,7 @@ class EmpresaControllers {
     async getAllGrupoEmpresarial(req, res,) {
         let { idEmpresa, pageNumber, dataPesquisa } = req.query;
 
-  
+
         try {
             const response = await axios.get(`${url}/api/grupo-empresarial.xsjs`)
 
@@ -78,7 +78,7 @@ class EmpresaControllers {
 
     async putListaEmpresas(req, res) {
         try {
-                
+
 
             const { error, value } = updateEmpresaSchema.validate(req.body, {
                 abortEarly: false,
@@ -94,10 +94,11 @@ class EmpresaControllers {
                     }))
                 });
             }
-             
-            
-            
+
+
+
             const response = await updateEmpresaService.updateEmpresa({
+
                 STGRUPOEMPRESARIAL: value.STGRUPOEMPRESARIAL,
                 IDGRUPOEMPRESARIAL: value.IDGRUPOEMPRESARIAL,
                 IDSUBGRUPOEMPRESARIAL: value.IDSUBGRUPOEMPRESARIAL,
@@ -116,7 +117,15 @@ class EmpresaControllers {
                 NUCEP: value.NUCEP,
                 NUIBGE: value.NUIBGE,
                 EEMAILPRINCIPAL: value.EEMAILPRINCIPAL,
+                EEMAILCOMERCIAL: value.EEMAILCOMERCIAL,
+                EEMAILFINANCEIRO: value.EEMAILFINANCEIRO,
+                EEMAILCONTABILIDADE: value.EEMAILCONTABILIDADE,
+                NUTELPUBLICO: value.NUTELPUBLICO,
+                NUTELCOMERCIAL: value.NUTELCOMERCIAL,
+                NUTELFINANCEIRO: value.NUTELFINANCEIRO,
                 NUTELGERENCIA: value.NUTELGERENCIA,
+                EURL: value.EURL,
+                PATHIMG: value.PATHIMG,
                 NUCNAE: value.NUCNAE,
                 STECOMMERCE: value.STECOMMERCE,
                 DTULTATUALIZACAO: value.DTULTATUALIZACAO,
@@ -124,10 +133,10 @@ class EmpresaControllers {
                 ALIQPIS: value.ALIQPIS,
                 ALIQCOFINS: value.ALIQCOFINS,
                 IDEMPRESA: value.IDEMPRESA
-                
+
             });
-            
-           
+
+
             return res.status(200).json(response);
         } catch (error) {
             console.error("Erro no EmpresaControllers.putListaEmpresas:", error);
