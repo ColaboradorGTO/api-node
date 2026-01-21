@@ -78,14 +78,46 @@ const updateEmpresaSchema = Joi.object({
         .messages({
             "string.base": "EEMAILPRINCIPAL must be a string",
         }),
+
+    EEMAILCOMERCIAL: Joi.string().allow("")
+        .messages({
+            "string.base": "EEMAILCOMERCIAL must be a string",
+        }),
+
+    EEMAILFINANCEIRO: Joi.string().allow("")
+        .messages({
+            "string.base": "EEMAILFINANCEIRO must be a string",
+        }),
+
+    EEMAILCONTABILIDADE: Joi.string().allow("")
+        .messages({
+            "string.base": "EEMAILCONTABILIDADE must be a string",
+        }),
+    NUTELPUBLICO: Joi.string().allow("")
+        .messages({
+            "string.base": "NUTELPUBLICO must be a string",
+        }),
+    NUTELCOMERCIAL: Joi.string().allow("")
+        .messages({
+            "string.base": "NUTELCOMERCIAL must be a string",
+        }),
+    NUTELFINANCEIRO: Joi.string().allow("")
+        .messages({
+            "string.base": "NUTELFINANCEIRO must be a string",
+        }),
     NUTELGERENCIA: Joi.string().allow("")
         .messages({
             "string.base": "NUTELGERENCIA must be a string",
+        }),
+    EURL: Joi.string().allow("")
+        .messages({
+            "string.base": "EURL must be a string",
         }),
     NUCNAE: Joi.string().allow("")
         .messages({
             "string.base": "NUCNAE must be a string",
         }),
+   
     STECOMMERCE: Joi.string().allow("")
         .messages({
             "string.base": "STECOMMERCE must be a string",
@@ -117,4 +149,3 @@ const updateEmpresaSchema = Joi.object({
 });
 
 export default updateEmpresaSchema
-

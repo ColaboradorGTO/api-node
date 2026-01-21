@@ -89,7 +89,7 @@ class DetalheFaturasControllers {
         return res.status(400).json({ error: "NUCODAUTORIZACAO is required" });
       }
 
-      const response = await axios.post(`${url}/api/detalhe-fatura.xsjs`, {
+      const response = await axios.post(`${url}/api/detalhe-fatura.xsjs`, [{
         IDEMPRESA,
         IDFUNCIONARIO,
         IDDETALHEFATURALOCAL,
@@ -107,7 +107,7 @@ class DetalheFaturasControllers {
         DTHRMIGRACAO,
         STCANCELADO,
         IDUSRCACELAMENTO
-      });
+      }]);
       return res.status(201).json({ message: "Detalhe Fatura created successfully" });
     } catch (error) {
       console.error("Erro no DetalheFaturasControllers.postDetalheFatura:", error);
