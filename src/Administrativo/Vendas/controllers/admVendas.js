@@ -247,6 +247,25 @@ class AdmVendasControllers {
         }
     }
 
+    async putVendaCancelamento(req, res) {
+        try {
+            let { IDVENDA, IDUSUARIOCANCELAMENTO, TXTMOTIVOCANCELAMENTO} = req.body; 
+            
+            if(!IDVENDA || !IDUSUARIOCANCELAMENTO) {
+                return res.status(400).json({ error: "IDVENDA and IDUSUARIOCANCELAMENTO are required" });
+            }
+            const response = await  axios.put(`${url}/api/venda/venda-cancelamento.xsjs`, [{
+                IDVENDA,
+                IDUSUARIOCANCELAMENTO,
+                TXTMOTIVOCANCELAMENTO
+            }]);
+            return res.status(200).json(response.data);
+        } catch (error) {
+            console.error("Error no AdmVendasControllers.putVendaCancelamento:", error);
+            return res.status(500).json({ error: error.message });
+        }
+    }
+
     
 
     async postAlterarVendasPagamento(req, res) {
