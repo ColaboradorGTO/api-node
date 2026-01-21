@@ -70,7 +70,7 @@ class ResumoVoucherControllers {
 
             return res.json(response.data); // Retorna
         } catch (error) {
-            console.error("Error in ResumoVoucherControllers.getListaDetalheVoucherDados:", error);
+
             throw error;
         }
     }
@@ -94,7 +94,7 @@ class ResumoVoucherControllers {
             const response = await axios.get(apiUrl)
             return res.json(response.data); // Retorna
         } catch (error) {
-            console.error("erro no ResumoVoucherControllers getListaVouchercOMPLETO:", error);
+
             throw error;
         }
     }
@@ -114,7 +114,7 @@ class ResumoVoucherControllers {
             
             return res.json(response.data); // Retorna
         } catch (error) {
-            console.error("Error in ResumoVoucherControllers.getListaEmpresasVoucher:", error);
+
             throw error;    
         
         }
@@ -134,7 +134,7 @@ class ResumoVoucherControllers {
         
                 return res.json(response.data); // Retorna
             } catch (error) {
-                console.error("Unable to connect to the database:", error)
+
                 throw error;
             }
         }
@@ -154,7 +154,6 @@ class ResumoVoucherControllers {
     
             return res.json(response.data); // Retorna
         } catch (error) {
-            console.error("Unable to connect to the database:", error);
             throw error;
         } 
     
@@ -173,7 +172,6 @@ class ResumoVoucherControllers {
         
                 return res.json(response.data); // Retorna
             } catch (error) {
-                console.error("Unable to connect to the database:", error);
                 throw error;
             }
         }
@@ -195,8 +193,21 @@ class ResumoVoucherControllers {
 
             return res.json(response.data);
         } catch (error) {
-            console.error("erro no ResumoVoucherControllers getListaTodosClientes:", error);
-            throw error;
+            if (error.response) {
+                return res.status(error.response.status).json({
+                    error: error.response.data.error
+                });
+            }
+
+            if (error.request) {
+                return res.status(502).json({
+                    error: 'Falha ao se comunicar com o serviço de voucher'
+                });
+            }
+
+            return res.status(500).json({
+                error: 'Erro interno no servidor'
+            });
         }
     }
 
@@ -212,16 +223,38 @@ class ResumoVoucherControllers {
                 SENHA
             })
 
+            if (!MATRICULA || !SENHA ) {
+                return res.status(400).json({ error: 'Todos os campos são obrigatórios.' });
+            }
+
             return res.status(200).json({message: 'Usuário autorizado com sucesso!'})
         } catch (error) {
-            console.error("Erro Verifique os campos do formulário:", error);
-            throw error;
+            if (error.response) {
+                return res.status(error.response.status).json({
+                    error: error.response.data.error
+                });
+            }
+
+            if (error.request) {
+                return res.status(502).json({
+                    error: 'Falha ao se comunicar com o serviço de voucher'
+                });
+            }
+
+            return res.status(500).json({
+                error: 'Erro interno no servidor'
+            });
         }
     }
 
     async postAuthFuncionarioCreateVoucher(req, res) {
         try {
-             let {MATRICULA, SENHA, IDEMPRESALOGADA, IDGRUPOEMPRESARIAL, IDVENDA, STTIPOTROCA} = req.body;  
+            let {MATRICULA, SENHA, IDEMPRESALOGADA, IDGRUPOEMPRESARIAL, IDVENDA, STTIPOTROCA} = req.body;  
+
+            if (!MATRICULA || !SENHA || !IDEMPRESALOGADA || !IDGRUPOEMPRESARIAL || !IDVENDA) {
+                return res.status(400).json({ error: 'Todos os campos são obrigatórios.' });
+            }
+
             const response = await axios.post(`${url}/api/resumo-voucher/auth-funcionario-create-voucher.xsjs`, {
                 MATRICULA,
                 SENHA,
@@ -233,8 +266,21 @@ class ResumoVoucherControllers {
 
             return res.json(response.data);
         } catch (error) {
-            console.error("Error no ResumoVoucherControllers.postAuthFuncionarioCreateVoucher:", error);
-            throw error;
+            if (error.response) {
+                return res.status(error.response.status).json({
+                    error: error.response.data.error
+                });
+            }
+
+            if (error.request) {
+                return res.status(502).json({
+                    error: 'Falha ao se comunicar com o serviço de voucher'
+                });
+            }
+
+            return res.status(500).json({
+                error: 'Erro interno no servidor'
+            });
         }
     }
 
@@ -256,8 +302,21 @@ class ResumoVoucherControllers {
             
             return res.json(response.data);
         } catch (error) {
-            console.error("Error no ResumoVoucherControllers.postAuthFuncionarioPrintVoucher:", error);
-            throw error;
+            if (error.response) {
+                return res.status(error.response.status).json({
+                    error: error.response.data.error
+                });
+            }
+
+            if (error.request) {
+                return res.status(502).json({
+                    error: 'Falha ao se comunicar com o serviço de voucher'
+                });
+            }
+
+            return res.status(500).json({
+                error: 'Erro interno no servidor'
+            });
         }
     }
 
@@ -276,9 +335,20 @@ class ResumoVoucherControllers {
             });
             return res.json(response.data);
         } catch (error) {
-            console.error("Error no ResumoVoucherControllers.postAuthFuncionarioUpdateVoucher:", error);
-            return res.status(500).json({ 
-                error: error.response?.data || null
+            if (error.response) {
+                return res.status(error.response.status).json({
+                    error: error.response.data.error
+                });
+            }
+
+            if (error.request) {
+                return res.status(502).json({
+                    error: 'Falha ao se comunicar com o serviço de voucher'
+                });
+            }
+
+            return res.status(500).json({
+                error: 'Erro interno no servidor'
             });
         }
     }
@@ -352,7 +422,6 @@ class ResumoVoucherControllers {
             return res.status(200).json({ message: 'Cliente atualizado com sucesso!' });
     
         } catch (error) {
-            console.error("Erro no ResumoVoucherControllers.putCliente:", error);
             return res.status(400).json({ error: error.message });
         }
     }
@@ -417,7 +486,7 @@ class ResumoVoucherControllers {
     
             return res.status(200).json(response.data);
         } catch (error) {
-            console.error("Erro no ResumoVoucherControllers.postCliente:", error);
+
             return res.status(400).json({ error: error.message });
         }
     }
@@ -459,10 +528,9 @@ class ResumoVoucherControllers {
                 detVoucher,
                 produtosVoucher
             });
-            console.log(response.data);
+
             return res.status(200).json(response.data);
         } catch (error) {
-            console.error("Erro no ResumoVoucherControllers.postResumoVoucher:", error);
             return res.status(400).json({ error: error.message });
         }
     }
@@ -485,7 +553,6 @@ class ResumoVoucherControllers {
 
             return res.status(200).json(response.data);
         } catch (error) {
-            console.error("Erro no ResumoVoucherControllers.putResumoVoucher:", error);
             return res.status(400).json({ error: error.message });
         }
     }
