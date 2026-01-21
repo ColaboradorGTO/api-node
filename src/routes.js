@@ -143,7 +143,7 @@ routes.get('/vendaCanceladaWeb', AdministrativoControllers.getVendaCanceladaWeb)
 routes.get('/vendaCanceladaEmitidaPDV', AdministrativoControllers.getVendaCanceladaEmitidaPDV)
 // routes.get('/vendaContigencia', AdministrativoControllers.getListaVendasContigenciaPorEmpresa)
 routes.get('/formaPagamentos', AdministrativoControllers.getListaFormaPagamento)
-// routes.get('/vendaTotalRecebidoPeriodoADM', AdministrativoControllers.getListaVendaTotalRecebido)
+routes.get('/lista-motivo-devolucao', AdministrativoControllers.getMotivoDevolucao)
 // routes.get('/ultimaPosicaoEstoque', AdministrativoControllers.getListaEstoqueUltimaPosicao)
 
 // routes.get('/pesqBalanco', AdministrativoControllers.getPesqBalanco)

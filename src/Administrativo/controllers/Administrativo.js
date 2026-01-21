@@ -850,6 +850,20 @@ class AdministrativoControllers {
         }  
     }
 
+    async getMotivoDevolucao(req, res) {
+        let { } = req.query; 
+        try {
+
+            const apiUrl = `${url}/api/administrativo/motivo-devolucao.xsjs`;
+            const response = await axios.get(apiUrl)
+        
+            return res.json(response.data); // Retorna
+        } catch (error) {
+            console.error("Unable to connect to the database:", error);
+            throw error;
+        }  
+    }
+
     async getListaDetalheVoucherDados(req, res) {
         let { idSubGrupoEmpresa, idEmpresa, idVoucher, dataPesquisaInicio, dataPesquisaFim, dadosVoucher, stStatus, stTipoTroca, page, pageSize} = req.query;
         
