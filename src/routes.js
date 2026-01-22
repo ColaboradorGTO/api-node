@@ -344,7 +344,7 @@ routes.post('/criar-motivo-devolucao', DevolucaoControllers.createMotivoDevoluca
 
 // Despesas
 routes.get('/despesa-loja', DespesasControllers.getListaDespesasLoja)
-routes.put('/editar-despesa', DespesasControllers.putDespesasLoja)
+routes.put('/editar-despesa/:id', DespesasControllers.putDespesasLoja)
 routes.put('/editar-status-despesa/:id', DespesasControllers.putStatusDespesasLoja)
 
 // Desconto

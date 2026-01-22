@@ -651,12 +651,12 @@ class FinanceiroControllers {
     let { IDS_FATURAS, STCONFERIDO, IDFUNCIONARIO } = req.body;
 
     if (!IDS_FATURAS) {
-      console.error("Erro no FinanceiroControllers.putFaturaConferencia: Faltando Parametos obrigatórios");
-      return res.status(400).json({ error: "Faltando Parametos obrigatórios" });
+      return res.status(400).json({ error: "Faltando Parameto IDS_FATURAS obrigatórios" });
     }
-
+    
     try {
       const apiUrl = `${url}/api/financeiro/fatura-atualizacao-conferencia.xsjs`
+    
       const response = await axios.put(apiUrl, {
         IDS_FATURAS,
         STCONFERIDO,
@@ -665,8 +665,22 @@ class FinanceiroControllers {
 
       return res.json(response.data);
     } catch (error) {
-      console.error("Erro no FinanceiroControllers.putFaturaConferencia:", error);
-      throw error;
+      if (error.response) {
+        return res.status(error.response.status).json({
+          error: error.response.data.error
+        });
+      }
+
+      if (error.request) {
+        return res.status(502).json({
+          error: 'Falha ao se comunicar com o serviço de voucher'
+        });
+      }
+
+      return res.status(500).json({
+        error: 'Erro em FinanceiroControllers.putFaturaConferencia'
+      });
+  
     }
   }
 
