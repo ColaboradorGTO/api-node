@@ -634,16 +634,31 @@ class FinanceiroControllers {
       const response = await axios.put(apiUrl, {
         NUCODAUTORIZACAO,
         VRRECEBIDO,
-        STCANCELADO: STCANCELADO?.value || STCANCELADO,
-        STPIX: STPIX?.value || STPIX,
+        STCANCELADO,
+        STPIX,
         NUAUTORIZACAO,
         IDDETALHEFATURA,
       })
 
       return res.json(response.data);
     } catch (error) {
-      console.error("Erro no FinanceiroControllers.putFaturaFinanceiro:", error);
-      throw error;
+      if (error.response) {
+        return res.status(error.response.status).json({
+          error: error.response.data.error
+        });
+      }
+
+      if (error.request) {
+        return res.status(502).json({
+          error: 'Falha ao se comunicar com o serviço de voucher'
+        });
+      }
+
+      return res.status(500).json({
+        error: 'Erro em FinanceiroControllers.putFaturaConferencia'
+      });
+      // console.error("Erro no FinanceiroControllers.putFaturaFinanceiro:", error);
+      // throw error;
     }
   }
 
