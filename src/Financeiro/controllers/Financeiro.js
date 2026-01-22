@@ -563,7 +563,7 @@ class FinanceiroControllers {
       
       const apiUrl = `${url}/api/financeiro/venda-detalhe-recebimento-eletronico.xsjs?page=${page}&pageSize=${pageSize}&idEmpresa=${idEmpresa}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&nomeTef=${nomeTef}&nomeAutorizador=${nomeAutorizador}&numeroParcelas=${numeroParcelas}`
       const response = await axios.get(apiUrl)
-
+      console.log(apiUrl);
       return res.json(response.data);
     } catch (error) {
       console.error("Unable to connect to the database:", error);
