@@ -226,6 +226,7 @@ routes.get('/quebra-caixa-loja', QuebraCaixaControllers.getListaQuebraCaixa)
 routes.get('/quebra-caixa-loja/:id', QuebraCaixaControllers.getQuebraCaixaID)
 routes.put('/atualizar-status-quebra', QuebraCaixaControllers.putListaStatusQuebraCaixa)
 routes.put('/quebra-caixa-todos/:id', QuebraCaixaControllers.putQuebraCaixa)
+routes.put('/quebra-caixa-conferencia/:id', QuebraCaixaControllers.putConferirQuebraCaixa)
 routes.post('/quebra-caixa-todos', QuebraCaixaControllers.postQuebraCaixa)
 
 // Início Financeiro
