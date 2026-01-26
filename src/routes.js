@@ -792,6 +792,7 @@ routes.put('/desativar-status-promocao', PromocaoControllers.putStatusPromocao)
 // routes.post('/criar-mecanica', PromocaoControllers.postMecanicaAtivas)
 
 routes.post('/deposito-integracao', ServiceLayerControllers.postDepositoIntegrarNoSAP)
+routes.post('/adiantamentos-salariais-integracao', ServiceLayerControllers.postIntegrarAdiantamentoSalarial)
 // // Logs
 // routes.get('/log-web', LogsControllers.getListaLogsUsuario)
 routes.post('/log-web', LogsControllers.createLogsUsuario)
