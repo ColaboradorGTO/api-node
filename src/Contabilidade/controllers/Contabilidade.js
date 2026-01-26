@@ -88,6 +88,29 @@ class ContabilidadeControllers {
 
   }
 
+  async getBuscarProdutos(req, res) {
+    let { dataUltAtualizacao, horaUltAtualizacao, idEmpresa, idGrupoEmpresarial, codeBars, descProd } = req.query;
+
+    dataUltAtualizacao = dataFormatada(dataUltAtualizacao) ? dataUltAtualizacao : '';
+    horaUltAtualizacao = dataFormatada(horaUltAtualizacao) ? horaUltAtualizacao : '';
+    idEmpresa = idEmpresa ? idEmpresa : '';
+    idGrupoEmpresarial = idGrupoEmpresarial ? idGrupoEmpresarial : '';
+    codeBars = codeBars ? codeBars : '';
+    descProd = descProd ? descProd : '';
+
+    try {
+
+      const apiUrl = `${url}/api/contabilidade/buscar-produtos.xsjs?dataUltAtualizacao=${dataUltAtualizacao}&horaUltAtualizacao=${horaUltAtualizacao}&idEmpresa=${idEmpresa}&idGrupoEmpresarial=${idGrupoEmpresarial}&codeBars=${codeBars}&descProd=${descProd}`
+      const response = await axios.get(apiUrl)
+
+      return res.json(response.data);
+    } catch (error) {
+      console.error("Unable to connect to the database:", error);
+      throw error;
+    }
+
+  }
+
   async getListaVendasPeriodo(req, res) {
     let { idMarca, idEmpresa, ufPesquisa, idFornecedor, descProduto, idGrupoGrade, idGrade, dataPesquisaInicio, dataPesquisaFim, idGrupoEmpresarial, produtoPesquisado, page, pageSize } = req.query;
 
