@@ -34,12 +34,25 @@ class ServiceLayerControllers {
           
             let { } = req.body;
    
-
             const response = await axios.post(`${url}/api/service-layer/devolucao/devolucao-produtos-voucher-nova/jobs/gerar-devolucao-rotina-completa.xsjs`)
 
             return res.status(200).json(response.data);
         } catch (error) {
-            console.error("Erro no ResumoVoucherControllers.putResumoVoucher:", error);
+            console.error("Erro no ServiceLayerControllers.postVoucher:", error);
+            return res.status(400).json({ error: error.message });
+        }
+    }
+
+    async postIntegrarAdiantamentoSalarial(req, res) {
+        try {
+          
+            let { } = req.body;
+   
+            const response = await axios.post(`${url}/api/service-layer/adiantamento-salarial/jobs/adiantamentos-salariais-integracao.xsjs`)
+
+            return res.status(200).json(response.data);
+        } catch (error) {
+            console.error("Erro no ServiceLayerControllers.postIntegrarAdiantamentoSalarial:", error);
             return res.status(400).json({ error: error.message });
         }
     }
