@@ -46,9 +46,12 @@ class ServiceLayerControllers {
     async postIntegrarAdiantamentoSalarial(req, res) {
         try {
           
-            let { } = req.body;
+            let { IDADIANTAMENTOSALARIO, IDFUNCIONARIO } = req.body;
    
-            const response = await axios.post(`${url}/api/service-layer/adiantamento-salarial/jobs/adiantamentos-salariais-integracao.xsjs`)
+            const response = await axios.post(`${url}/api/service-layer/adiantamento-salarial/jobs/adiantamentos-salariais-integracao.xsjs`, {
+                IDADIANTAMENTOSALARIO,
+                IDFUNCIONARIO,
+            })
 
             return res.status(200).json(response.data);
         } catch (error) {
