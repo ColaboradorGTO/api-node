@@ -72,18 +72,20 @@ class DashBoardAdiantamentoSalarialControllers {
 
 
     async updateAdiantamentoStatus(req, res) {
-        let { STATIVO,IDADIANTAMENTOSALARIO } = req.body;
+        let { IDADIANTAMENTOSALARIO, STATIVO } = req.body;
         
         if (!STATIVO || !IDADIANTAMENTOSALARIO) {
             return res.status(400).json({ error: "STATIVO and IDADIANTAMENTOSALARIO are required." });
         }
+        
         try {
            
-            const response = await axios.put(`${url}/api/financeiro/atualizacao-adiantamento-status.xsjs`, {
+            // const response = await axios.put(`${url}/api/financeiro/atualizacao-adiantamento-status.xsjs`, {
+            const response = await axios.put(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/atualizacao-adiantamento-status.xsjs`, {
                 STATIVO,
                 IDADIANTAMENTOSALARIO
             });
-
+            
             return res.json(response.data);
         } catch (error) {
           console.error("Erro no DashBoardAdiantamentoSalarialControllers.updateAdiantamentoStatus :", error);
