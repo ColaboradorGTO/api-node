@@ -757,6 +757,7 @@ routes.get('/vendasPagamentoContigencia', ContabilidadeControllers.getListaPagam
 routes.get('/vendasEstoqueComercial', ContabilidadeControllers.getListaVendasEstoqueComercial)
 routes.get('/vendasProdutos', ContabilidadeControllers.getListaVendasPeriodo)
 routes.get('/vendasProdutosConsolidado', ContabilidadeControllers.getListaVendasPeriodoConsolidado)
+routes.get('/buscar-produtos', ContabilidadeControllers.getBuscarProdutos)
 
 // Configuração Pix PDV
 routes.get('/configuracao-pix-pdv', ConfiguracaoPixPDVControllers.getListaConfiguracaoPixPDV)
