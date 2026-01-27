@@ -444,8 +444,8 @@ class InformaticaControllers {
             let  {DATAULTIMAALTERACAO,STATIVO,DATA_DEMISSAO,ID} = req.body; 
             const response = await axios.put(`${url}/api/informatica/funcionario-inativa.xsjs`, { 
                 DATAULTIMAALTERACAO,
-                STATIVO,
                 DATA_DEMISSAO,
+                STATIVO,
                 ID
             })
             
