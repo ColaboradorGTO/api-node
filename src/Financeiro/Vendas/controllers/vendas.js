@@ -298,6 +298,7 @@ class FinanceiroVendasControllers {
     try {
       // const apiUrl = `${url}/api/financeiro/venda-total-mes.xsjs?dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisa=${dataPesquisaFim}&horaFinal=${horaFinal}`
       const apiUrl = `http://164.152.245.77:8000/quality/concentrador/api/financeiro/venda-total-mes.xsjs?dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisa=${dataPesquisaFim}&horaFinal=${horaFinal}`
+      console.log('apiUrl', apiUrl)
       const response = await axios.get(apiUrl)
 
       return res.json(response.data);
@@ -356,6 +357,44 @@ class FinanceiroVendasControllers {
     try {
       // const apiUrl = `${url}/api/financeiro/venda-total-to.xsjs?dataPesquisa=${dataPesquisa}&idgrupo=${idGrupo}`
       const apiUrl = `http://164.152.245.77:8000/quality/concentrador/api/financeiro/venda-total-to.xsjs?dataPesquisa=${dataPesquisa}&idgrupo=${idGrupo}`
+      const response = await axios.get(apiUrl)
+
+      return res.json(response.data);
+    } catch (error) {
+      console.error("erro ao buscar vendas totais por hora: no controller Vendas", error);
+      throw error;
+    }
+  }
+
+  async getListaVendasTotalFreecenter(req, res) {
+    let { dataPesquisaFreecenter, idGrupo, page, pageSize } = req.query;
+
+    dataPesquisaFreecenter = dataPesquisaFreecenter ? dataPesquisaFreecenter : '';
+    idGrupo = idGrupo ? idGrupo : '';
+    page = page ? page : '';
+    pageSize = pageSize ? pageSize : '';
+    try {
+      // const apiUrl = `${url}/api/financeiro/venda-total-to.xsjs?dataPesquisa=${dataPesquisa}&idgrupo=${idGrupo}`
+      const apiUrl = `http://164.152.245.77:8000/quality/concentrador/api/financeiro/venda-total-to.xsjs?dataPesquisa=${dataPesquisaFreecenter}&idgrupo=4`
+      const response = await axios.get(apiUrl)
+
+      return res.json(response.data);
+    } catch (error) {
+      console.error("erro ao buscar vendas totais por hora: no controller Vendas", error);
+      throw error;
+    }
+  }
+
+  async getListaVendasTotalMagazine(req, res) {
+    let { dataPesquisaMagazine, idGrupo, page, pageSize } = req.query;
+
+    dataPesquisaMagazine = dataPesquisaMagazine ? dataPesquisaMagazine : '';
+    idGrupo = idGrupo ? idGrupo : '';
+    page = page ? page : '';
+    pageSize = pageSize ? pageSize : '';
+    try {
+      // const apiUrl = `${url}/api/financeiro/venda-total-to.xsjs?dataPesquisa=${dataPesquisa}&idgrupo=${idGrupo}`
+      const apiUrl = `http://164.152.245.77:8000/quality/concentrador/api/financeiro/venda-total-to.xsjs?dataPesquisa=${dataPesquisaMagazine}&idgrupo=2`
       const response = await axios.get(apiUrl)
 
       return res.json(response.data);
