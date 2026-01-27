@@ -236,8 +236,8 @@ class FinanceiroControllers {
       console.error("Unable to connect to the database:", error);
       throw error;
     }
-
   }
+
   async getListaVendasLojaPeriodo(req, res) {
     let { idEmpresa, dataPesquisaInicio, dataPesquisaFim, page, pageSize } = req.query;
     dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
@@ -497,7 +497,6 @@ class FinanceiroControllers {
       console.error("Unable to connect to the database:", error);
       throw error;
     }
-
   }
 
   async getListaVendasConciliar(req, res) {
@@ -519,7 +518,6 @@ class FinanceiroControllers {
       console.error("Unable to connect to the database:", error);
       throw error;
     }
-
   }
 
   async getListaConciliarBancoConsolidado(req, res) {
@@ -544,7 +542,6 @@ class FinanceiroControllers {
       console.error("Unable to connect to the database:", error);
       throw error;
     }
-
   }
 
   async getListaDetalheRecebimentosEletronico(req, res) {
@@ -569,7 +566,6 @@ class FinanceiroControllers {
       console.error("Unable to connect to the database:", error);
       throw error;
     }
-
   }
 
   async getListaSaldoExtratoLoja(req, res) {
@@ -619,6 +615,34 @@ class FinanceiroControllers {
       console.error("Error no FinanceiroControllers.getListaContaBanco:", error);
       throw error;
     }
+  }
+
+  async getListaQuebraCaixaIntegracaoSAP(req, res) {
+    let { idMarca, idEmpresa, cpfOperadorQuebra, uf, stQuebraPositivaNegativa, dataPesquisaInicio, dataPesquisaFim, stAtivo, stConferido, pageSize, page } = req.query;
+
+    idMarca = idMarca ? idMarca : '';
+    idEmpresa = idEmpresa ? idEmpresa : '';
+    cpfOperadorQuebra = cpfOperadorQuebra ? cpfOperadorQuebra : '';
+    uf = uf ? uf : '';
+    stQuebraPositivaNegativa = stQuebraPositivaNegativa ? stQuebraPositivaNegativa : '';
+    dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
+    dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
+    page = page ? page : '';
+    pageSize = pageSize ? pageSize : '';
+    stAtivo = stAtivo ? stAtivo : '';
+    stConferido = stConferido ? stConferido : '';
+    try {
+
+        const apiUrl = `${url}/api/financeiro/quebra-caixa.xsjs?pageSize=${pageSize}&page=${page}&idEmpresa=${idEmpresa}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&idMarca=${idMarca}&cpfOperadorQuebra=${cpfOperadorQuebra}&tpQuebra=${stQuebraPositivaNegativa}&uf=${uf}&stAtivo=${stAtivo}&stConferido=${stConferido}`;
+        // const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/dashboard/quebra-caixa/lista-quebra-caixa.xsjs?pageSize=${pageSize}&page=${page}&idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idMarca=${idMarca}&cpfquebraop=${cpfOperadorQuebra}&stQuebraPositivaNegativa=${stQuebraPositivaNegativa}&uf=${uf}`;
+        const response = await axios.get(apiUrl);
+
+        return res.json(response.data);
+    } catch (error) {
+        console.error("Erro no FinanceiroControllers.getListaQuebraCaixaIntegracaoSAP:", error);
+        throw error;
+    }
+
   }
 
   async putFaturaFinanceiro(req, res) {
