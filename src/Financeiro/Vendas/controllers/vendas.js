@@ -296,7 +296,8 @@ class FinanceiroVendasControllers {
     page = page ? page : '';
     pageSize = pageSize ? pageSize : '';
     try {
-      const apiUrl = `${url}/api/financeiro/venda-total-mes.xsjs?dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisa=${dataPesquisaFim}&horaFinal=${horaFinal}`
+      // const apiUrl = `${url}/api/financeiro/venda-total-mes.xsjs?dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisa=${dataPesquisaFim}&horaFinal=${horaFinal}`
+      const apiUrl = `http://164.152.245.77:8000/quality/concentrador/api/financeiro/venda-total-mes.xsjs?dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisa=${dataPesquisaFim}&horaFinal=${horaFinal}`
       const response = await axios.get(apiUrl)
 
       return res.json(response.data);
@@ -314,7 +315,8 @@ class FinanceiroVendasControllers {
     page = page ? page : '';
     pageSize = pageSize ? pageSize : '';
     try {
-      const apiUrl = `${url}/api/dashboard/venda-total-loja-hora.xsjs?dataPesquisa=${dataPesquisa}&horaFinal=${horaFinal}`
+      // const apiUrl = `${url}/api/dashboard/venda-total-loja-hora.xsjs?dataPesquisa=${dataPesquisa}&horaFinal=${horaFinal}`
+      const apiUrl = `http://164.152.245.77:8000/quality/concentrador/api/dashboard/venda-total-loja-hora.xsjs?dataPesquisa=${dataPesquisa}&horaFinal=${horaFinal}`
       const response = await axios.get(apiUrl)
 
       return res.json(response.data);
@@ -332,7 +334,8 @@ class FinanceiroVendasControllers {
     page = page ? page : '';
     pageSize = pageSize ? pageSize : '';
     try {
-      const apiUrl = `${url}/api/dashboard/venda-total-loja-hora.xsjs?dataPesquisa=${dataPesquisa}&horaFinal=${horaFinal}`
+      // const apiUrl = `${url}/api/dashboard/venda-total-loja-hora.xsjs?dataPesquisa=${dataPesquisa}&horaFinal=${horaFinal}`
+      const apiUrl = `http://164.152.245.77:8000/quality/concentrador/api/dashboard/venda-total-loja-hora.xsjs?dataPesquisa=${dataPesquisa}&horaFinal=${horaFinal}`
       const response = await axios.get(apiUrl)
 
 
@@ -351,7 +354,8 @@ class FinanceiroVendasControllers {
     page = page ? page : '';
     pageSize = pageSize ? pageSize : '';
     try {
-      const apiUrl = `${url}/api/financeiro/venda-total-to.xsjs?dataPesquisa=${dataPesquisa}&idgrupo=${idGrupo}`
+      // const apiUrl = `${url}/api/financeiro/venda-total-to.xsjs?dataPesquisa=${dataPesquisa}&idgrupo=${idGrupo}`
+      const apiUrl = `http://164.152.245.77:8000/quality/concentrador/api/financeiro/venda-total-to.xsjs?dataPesquisa=${dataPesquisa}&idgrupo=${idGrupo}`
       const response = await axios.get(apiUrl)
 
       return res.json(response.data);
