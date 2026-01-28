@@ -48,8 +48,8 @@ class ServiceLayerControllers {
           
             let { IDADIANTAMENTOSALARIO, IDFUNCIONARIO } = req.body;
    
-            // const response = await axios.post(`${url}/api/service-layer/adiantamento-salarial/jobs/adiantamentos-salariais-integracao.xsjs`, {
-            const response = await axios.post(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/service-layer/adiantamento-salarial/jobs/adiantamentos-salariais-integracao.xsjs`, [{
+          
+            const response = await axios.post(`${url}/api/service-layer/adiantamento-salarial/jobs/adiantamentos-salariais-integracao.xsjs`, [{
                 IDADIANTAMENTOSALARIO,
                 IDFUNCIONARIO,
             }])
@@ -66,8 +66,7 @@ class ServiceLayerControllers {
           
             let { IDQUEBRACAIXA, IDFUNCIONARIO } = req.body;
    
-            // const response = await axios.post(`${url}/api/service-layer/adiantamento-salarial/jobs/adiantamentos-salariais-integracao.xsjs`, {
-            const response = await axios.post(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/service-layer/quebra-caixa/jobs/quebras-de-caixas-integracao.xsjs`, [{
+            const response = await axios.post(`${url}/api/service-layer/quebra-caixa/jobs/quebras-de-caixas-integracao.xsjs`, [{
                 IDQUEBRACAIXA,
                 IDFUNCIONARIO,
             }])
