@@ -503,15 +503,15 @@ class InformaticaControllers {
                 return res.status(400).json({ error: "ID do usuário que está alterando é obrigatório." });
             }
 
-            const response = await axios.put(`${url}/api/informatica/funcionario-desconto.xsjs`, {
+            const response = await axios.put(`${url}/api/informatica/funcionario-desconto.xsjs`, [{
                 DTINICIODESC,
                 DTFIMDESC,
                 PERCDESCUSUAUTORIZADO,
                 TXTMOTIVODESCONTO,
                 IDFUNCALTERACAO,
                 ID
-            })
-
+            }])
+            
             return res.json(response.data);
         } catch (error) {
             console.error("Erro em InformaticaControllers.putFuncionarioDesconto:", error);
