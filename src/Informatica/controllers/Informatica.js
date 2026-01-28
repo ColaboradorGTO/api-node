@@ -526,8 +526,52 @@ class InformaticaControllers {
     }
     async postFuncionarioLoja(req, res) {
         try {
-            const dados = Array.isArray(req.body) ? req.body : [req.body];   
-            const response = await axios.post(`${url}/api/informatica/funcionario-loja.xsjs`, dados)
+            let {
+                ID,
+                DATA_ADMISSAO,
+                IDFUNCIONARIOULTALTERACAO,
+                NOFUNCIONARIO,
+                NUCPF,
+                NOLOGIN,
+                PWSENHA,
+                IDEMPRESA,
+                IDSUBGRUPOEMPRESARIAL,
+                DSFUNCAO,
+                IDFUNCIONARIO,
+                DSTIPO,
+                PERC,
+                VALORSALARIO,
+                VALORDISPONIVEL,
+                IDPERFIL,
+                STCONVENIO,
+                STDESCONTOFOLHA,
+                STLOJA,
+                STATIVO
+              
+            } = req.body;   
+            const response = await axios.post(`${url}/api/informatica/funcionario-loja.xsjs`, {
+                ID,
+                DATA_ADMISSAO,
+                IDFUNCIONARIOULTALTERACAO,
+                NOFUNCIONARIO,
+                NUCPF,
+                NOLOGIN,
+                PWSENHA,
+                IDEMPRESA,
+                IDSUBGRUPOEMPRESARIAL,
+                IDFUNCIONARIO,
+                DSTIPO,
+                PERC,
+                VALORSALARIO,
+                VALORDISPONIVEL,
+                IDPERFIL,
+                DSFUNCAO,
+                STCONVENIO,
+                STDESCONTOFOLHA,
+                STLOJA,
+                STATIVO
+                
+            })
         
             return res.json(response.data);
         } catch (error) {
