@@ -494,12 +494,27 @@ class InformaticaControllers {
 
     async putFuncionarioDesconto(req, res) {
         try {
-            const dados = Array.isArray(req.body) ? req.body : [req.body];   
-            const response = await axios.put(`${url}/api/informatica/funcionario-desconto.xsjs`, dados)
+            let { DTINICIODESC, DTFIMDESC, PERCDESCUSUAUTORIZADO, TXTMOTIVODESCONTO, IDFUNCALTERACAO, ID } = req.body;   
+            if (!ID)  {
+                return res.status(400).json({ error: "ID do funcionário é obrigatório." });
+            }
+
+            if (!IDFUNCALTERACAO)  {
+                return res.status(400).json({ error: "ID do usuário que está alterando é obrigatório." });
+            }
+
+            const response = await axios.put(`${url}/api/informatica/funcionario-desconto.xsjs`, {
+                DTINICIODESC,
+                DTFIMDESC,
+                PERCDESCUSUAUTORIZADO,
+                TXTMOTIVODESCONTO,
+                IDFUNCALTERACAO,
+                ID
+            })
 
             return res.json(response.data);
         } catch (error) {
-            console.error("Unable to connect to the database:", error);
+            console.error("Erro em InformaticaControllers.putFuncionarioDesconto:", error);
             throw error;
         }
     }
