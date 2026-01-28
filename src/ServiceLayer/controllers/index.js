@@ -60,6 +60,24 @@ class ServiceLayerControllers {
             return res.status(400).json({ error: error.message });
         }
     }
+
+    async postIntegrarQuebraCaixaSAP(req, res) {
+        try {
+          
+            let { IDQUEBRACAIXA, IDFUNCIONARIO } = req.body;
+   
+            // const response = await axios.post(`${url}/api/service-layer/adiantamento-salarial/jobs/adiantamentos-salariais-integracao.xsjs`, {
+            const response = await axios.post(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/service-layer/quebra-caixa/jobs/quebras-de-caixas-integracao.xsjs`, [{
+                IDQUEBRACAIXA,
+                IDFUNCIONARIO,
+            }])
+
+            return res.status(200).json(response.data);
+        } catch (error) {
+            console.error("Erro no ServiceLayerControllers.postIntegrarQuebraCaixaSAP:", error);
+            return res.status(400).json({ error: error.message });
+        }
+    }
 }
 
 export default new ServiceLayerControllers();

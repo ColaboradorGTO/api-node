@@ -118,8 +118,8 @@ class QuebraCaixaControllers {
                 return res.status(400).json({ error: "IDFUNCIONARIO is required." });
             }
 
-            // const response = await axios.put(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/quebra-caixa-conferencia.xsjs`, {
-            const response = await axios.put(`${url}/api/financeiro/quebra-caixa-conferencia.xsjs`, {
+            // const response = await axios.put(`${url}/api/financeiro/quebra-caixa-conferencia.xsjs`, {
+            const response = await axios.put(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/quebra-caixa-conferencia.xsjs`, {
                 IDQUEBRACAIXA,
                 STCONFERIDO,
                 IDFUNCIONARIO
