@@ -528,48 +528,44 @@ class InformaticaControllers {
         try {
             let {
                 ID,
-                DATA_ADMISSAO,
-                IDFUNCIONARIOULTALTERACAO,
+                IDFUNCIONARIO,
+                IDSUBGRUPOEMPRESARIAL,
+                IDEMPRESA,
                 NOFUNCIONARIO,
                 NUCPF,
                 NOLOGIN,
                 PWSENHA,
-                IDEMPRESA,
-                IDSUBGRUPOEMPRESARIAL,
                 DSFUNCAO,
-                IDFUNCIONARIO,
-                DSTIPO,
-                PERC,
                 VALORSALARIO,
+                PERC,
+                STATIVO,
+                DSTIPO,
                 VALORDISPONIVEL,
-                IDPERFIL,
                 STCONVENIO,
                 STDESCONTOFOLHA,
                 STLOJA,
-                STATIVO
+                DATA_ADMISSAO
               
             } = req.body;   
             const response = await axios.post(`${url}/api/informatica/funcionario-loja.xsjs`, {
                 ID,
-                DATA_ADMISSAO,
-                IDFUNCIONARIOULTALTERACAO,
+                IDFUNCIONARIO,
+                IDSUBGRUPOEMPRESARIAL,
+                IDEMPRESA,
                 NOFUNCIONARIO,
                 NUCPF,
                 NOLOGIN,
                 PWSENHA,
-                IDEMPRESA,
-                IDSUBGRUPOEMPRESARIAL,
-                IDFUNCIONARIO,
-                DSTIPO,
-                PERC,
-                VALORSALARIO,
-                VALORDISPONIVEL,
-                IDPERFIL,
                 DSFUNCAO,
+                VALORSALARIO,
+                PERC,
+                STATIVO,
+                DSTIPO,
+                VALORDISPONIVEL,
                 STCONVENIO,
                 STDESCONTOFOLHA,
                 STLOJA,
-                STATIVO
+                DATA_ADMISSAO
                 
             })
         
@@ -609,3 +605,4 @@ class InformaticaControllers {
 }
 
 export default new InformaticaControllers();
+
