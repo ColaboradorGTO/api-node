@@ -470,8 +470,52 @@ class InformaticaControllers {
 
     async putFuncionarioLoja(req, res) {
         try {
-            const dados = Array.isArray(req.body) ? req.body : [req.body];   
-            const response = await axios.put(`${url}/api/informatica/funcionario-loja.xsjs`, dados)
+            let {
+                DATA_ADMISSAO,
+                NOFUNCIONARIO,
+                NUCPF,
+                NOLOGIN,
+                PWSENHA,
+                IDEMPRESA,
+                IDSUBGRUPOEMPRESARIAL,
+                IDFUNCIONARIO,
+                DSTIPO,
+                PERC,
+                VALORSALARIO,
+                VALORDISPONIVEL,
+                IDPERFIL,
+                DSFUNCAO,
+                STCONVENIO,
+                STDESCONTOFOLHA,
+                STLOJA,
+                STATIVO,
+                IDFUNCALTERACAO,
+                MOTIVODESC,
+                ID
+            } = req.body;   
+            const response = await axios.put(`${url}/api/informatica/funcionario-loja.xsjs`, {
+                DATA_ADMISSAO,
+                NOFUNCIONARIO,
+                NUCPF,
+                NOLOGIN,
+                PWSENHA,
+                IDEMPRESA,
+                IDSUBGRUPOEMPRESARIAL,
+                IDFUNCIONARIO,
+                DSTIPO,
+                PERC,
+                VALORSALARIO,
+                VALORDISPONIVEL,
+                IDPERFIL,
+                DSFUNCAO,
+                STCONVENIO,
+                STDESCONTOFOLHA,
+                STLOJA,
+                STATIVO,
+                IDFUNCALTERACAO,
+                MOTIVODESC,
+                ID
+            })
     
         
             return res.json(response.data);

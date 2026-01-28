@@ -256,6 +256,7 @@ class FinanceiroVendasControllers {
 
     try {
       const apiUrl = `${url}/api/financeiro/venda-total-recebido-periodo.xsjs?pageSize=${pageSize}&page=${page}&idEmpresa=${idEmpresa}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`
+      
       const response = await axios.get(apiUrl)
 
       return res.json(response.data);
