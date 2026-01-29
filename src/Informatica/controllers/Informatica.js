@@ -491,7 +491,9 @@ class InformaticaControllers {
                 STATIVO,
                 IDFUNCALTERACAO,
                 MOTIVODESC,
-                ID
+                ID,
+                TELEFONE,
+                DEPARTAMENTO
             } = req.body;   
             const response = await axios.put(`${url}/api/informatica/funcionario-loja.xsjs`, {
                 DATA_ADMISSAO,
@@ -514,7 +516,9 @@ class InformaticaControllers {
                 STATIVO,
                 IDFUNCALTERACAO,
                 MOTIVODESC,
-                ID
+                ID,
+                TELEFONE,
+                DEPARTAMENTO
             })
     
         
@@ -544,8 +548,9 @@ class InformaticaControllers {
                 STCONVENIO,
                 STDESCONTOFOLHA,
                 STLOJA,
-                DATA_ADMISSAO
-              
+                DATA_ADMISSAO,  
+                TELEFONE,
+                DEPARTAMENTO
             } = req.body;   
             const response = await axios.post(`${url}/api/informatica/funcionario-loja.xsjs`, {
                 ID,
@@ -565,7 +570,9 @@ class InformaticaControllers {
                 STCONVENIO,
                 STDESCONTOFOLHA,
                 STLOJA,
-                DATA_ADMISSAO
+                DATA_ADMISSAO,
+                TELEFONE,
+                DEPARTAMENTO
                 
             })
         
