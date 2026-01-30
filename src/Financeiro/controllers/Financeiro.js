@@ -647,20 +647,18 @@ class FinanceiroControllers {
   }
 
   async  getDetalheFaturaFinanceiro(req, res) {
-    let { idEmpresa, idDetalheFatura, dataPesquisaInicio, dataPesquisaFim, codigoFatura,  page, pageSize} = req.query;
+    let { idEmpresa, idDetalheFatura, dataPesquisaInicio, dataPesquisaFim,  page, pageSize} = req.query;
     
     idEmpresa = idEmpresa ? idEmpresa : '';
-    idDetalheFatura = idDetalheFatura ? idDetalheFatura : '';
     dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
     dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
-    codigoFatura = codigoFatura ? codigoFatura : '';
     page = page ? page : '';
     pageSize = pageSize ? pageSize : '';
 
     
     try {
       
-      const apiUrl = `${url}/api/detalhe-fatura.xsjs?idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&nuCodigoAutorizacao=${codigoFatura}&id=${idDetalheFatura}&page=${page}&pageSize=${pageSize}`;
+      const apiUrl = `${url}/api/financeiro/detalhe-fatura.xsjs?idEmpresa=${idEmpresa}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&page=${page}&pageSize=${pageSize}`;
       const response = await axios.get(apiUrl);
       console.log(apiUrl)
       return res.json(response.data); 
@@ -810,6 +808,41 @@ class FinanceiroControllers {
     } catch (error) {
       console.error("error no FinanceiroControllers.putContaBanco:", error);
       throw error;
+    }
+  }
+
+  async putAlterarDataMovimentoDeposito(req, res) {
+    let { IDDEPOSITOLOJA, DTMOVIMENTOCAIXA } = req.body;
+
+    if (!IDDEPOSITOLOJA) {
+      return res.status(400).json({ error: "Faltando Parameto IDDEPOSITOLOJA obrigatórios" });
+    }
+    
+    try {
+      const apiUrl = `${url}/api/financeiro/deposito-alteracao-data-movimento.xsjs`
+    
+      const response = await axios.put(apiUrl, {
+        IDDEPOSITOLOJA, DTMOVIMENTOCAIXA
+      })
+
+      return res.json(response.data);
+    } catch (error) {
+      if (error.response) {
+        return res.status(error.response.status).json({
+          error: error.response.data.error
+        });
+      }
+
+      if (error.request) {
+        return res.status(502).json({
+          error: 'Falha ao se comunicar com o serviço de voucher'
+        });
+      }
+
+      return res.status(500).json({
+        error: 'Erro em FinanceiroControllers.putFaturaConferencia'
+      });
+  
     }
   }
 

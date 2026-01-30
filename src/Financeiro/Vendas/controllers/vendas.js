@@ -249,9 +249,9 @@ class FinanceiroVendasControllers {
     let { idEmpresa, dataPesquisaInicio, dataPesquisaFim, pageSize, page } = req.query;
 
     idEmpresa = idEmpresa ? idEmpresa : '';
-    dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataFormatada(dataPesquisaInicio) : '';
-    dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataFormatada(dataPesquisaFim) : '';
-    page = page ? page : '';;
+    dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
+    dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
+    page = page ? page : '';
     pageSize = pageSize ? pageSize : '';
 
     try {

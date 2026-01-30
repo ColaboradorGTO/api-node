@@ -252,6 +252,7 @@ routes.get('/vendaDigitalFinanceiro', FinanceiroControllers.getListaVendasDigita
 routes.get('/vendaPixPeriodo', FinanceiroControllers.getListaVendasPixPeriodo)
 routes.get('/vendaPixConsolidadoLoja', FinanceiroControllers.getListaVendasPixConsolidadoLojas)
 routes.get('/vendaPixConsolidado', FinanceiroControllers.getListaVendasPixConsolidado)
+routes.get('/detalhe-fatura-financeiro', FinanceiroControllers.getDetalheFaturaFinanceiro)
 
 // routes.get('/faturaPixPeriodoConsolidado', FinanceiroControllers.getListaFaturasPixConsolidado)
 routes.get('/faturaPixConsolidadoLoja', FinanceiroControllers.getListaFaturaPixConsolidadoLoja)
@@ -277,6 +278,7 @@ routes.get('/resumo-voucher', VoucherControllers.getListaResumoVoucherFinanceiro
 // routes.put('/atualizacaoAdiantamentoStatus', FinanceiroControllers.updateAdiantamentoStatus)
 routes.put('/atualizarFatura/:id', FinanceiroControllers.putFaturaFinanceiro)
 routes.put('/conferencia-fatura/:id', FinanceiroControllers.putFaturaConferencia)
+routes.put('/deposito-alteracao-data-movimento/:id', FinanceiroControllers.putAlterarDataMovimentoDeposito)
 
 
 // Início Vendas 
