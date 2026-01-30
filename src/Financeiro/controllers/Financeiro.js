@@ -819,11 +819,12 @@ class FinanceiroControllers {
     }
     
     try {
-      const apiUrl = `${url}/api/financeiro/deposito-alteracao-data-movimento.xsjs`
+      // const apiUrl = `${url}/api/financeiro/deposito-alteracao-data-movimento.xsjs`
+      const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/deposito-alteracao-data-movimento.xsjs`
     
-      const response = await axios.put(apiUrl, {
+      const response = await axios.put(apiUrl, [{
         IDDEPOSITOLOJA, DTMOVIMENTOCAIXA
-      })
+      }])
 
       return res.json(response.data);
     } catch (error) {

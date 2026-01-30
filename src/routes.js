@@ -259,7 +259,7 @@ routes.get('/faturaPixConsolidadoLoja', FinanceiroControllers.getListaFaturaPixC
 // routes.get('/vendaConciliar', FinanceiroControllers.getListaVendasConciliar)
 routes.get('/venda-detalhe-recebimento-eletronico', FinanceiroControllers.getListaDetalheRecebimentosEletronico)
 // routes.get('/vendaDetalheRecebimentoEletronico', FinanceiroControllers.getListaDetalheRecebimentosEletronico)
-// routes.get('/deposito-loja', FinanceiroControllers.getListaConciliarBanco)
+// routes.get('/deposito-loja-conciliacao', FinanceiroControllers.getListaConciliarBanco)
 routes.get('/deposito-loja-consolidado', FinanceiroControllers.getListaConciliarBancoConsolidado)
 // routes.get('/saldoLojaPorGrupo', FinanceiroControllers.getListaSaldoExtratoLoja)
 routes.post('/motivoDevolucao', FinanceiroControllers.createMotivoDevolucao)
@@ -364,6 +364,7 @@ routes.put('/fechar-caixas-zerados', CaixasControllers.updateFecharCaixaZerado)
 // Depositos
 routes.put('/atualizar-deposito-loja/:id', DepositosControllers.updateDepositoLoja)
 routes.get('/deposito-loja', DepositosControllers.getListaDepositosLoja)
+routes.get('/deposito-loja-conciliacao', DepositosControllers.getListaConciliarBanco)
 
 
 
