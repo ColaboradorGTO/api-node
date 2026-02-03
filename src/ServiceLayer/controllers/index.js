@@ -77,6 +77,22 @@ class ServiceLayerControllers {
             return res.status(400).json({ error: error.message });
         }
     }
+
+    async postIntegrarPagamentoPixSAP(req, res) {
+        try {
+          
+            let { IDVENDAPAGAMENTO } = req.body;
+   
+            const response = await axios.post(`${url}/api/service-layer/pagamentos/jobs/pix-integracao.xsjs`, [{
+                IDVENDAPAGAMENTO,
+            }])
+
+            return res.status(200).json(response.data);
+        } catch (error) {
+            console.error("Erro no ServiceLayerControllers.postIntegrarPagamentoPixSAP:", error);
+            return res.status(400).json({ error: error.message });
+        }
+    }
 }
 
 export default new ServiceLayerControllers();

@@ -168,7 +168,7 @@ class FinanceiroVendasControllers {
       page = page ? page : '';
       pageSize = pageSize ? pageSize : '';
 
-      const apiUrl = `${url}/api/financeiro/venda-pix-consolidado-loja.xsjs?pageSize=${pageSize}&idMarca=${idMarca}&idLoja=${idLoja}&empresasList=${empresaLista}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&page=${page}`
+      const apiUrl = `${url}/api/financeiro/venda-pix-consolidado-loja.xsjs?pageSize=${pageSize}&idMarca=${idMarca}&lojas=${idLoja}&empresasList=${empresaLista}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&page=${page}`
       const response = await axios.get(apiUrl)
 
       return res.json(response.data);
@@ -195,7 +195,8 @@ class FinanceiroVendasControllers {
       pageSize = pageSize ? pageSize : '';
 
 
-      const apiUrl = `${url}/api/financeiro/venda-pix-periodo.xsjs?pageSize=${pageSize}&idMarca=${idMarca}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&lojas=${idLoja}&empresasList=${empresaLista}&page=${page}`
+      // const apiUrl = `${url}/api/financeiro/venda-pix-periodo.xsjs?idMarca=${idMarca}&dataCompInicio=${dataPesquisaInicio}&dataCompFim=${dataPesquisaFim}&lojas=${idLoja}&empresasList=${empresaLista}&page=${page}&pageSize=${pageSize}`
+      const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/venda-pix-periodo.xsjs?idMarca=${idMarca}&dataCompInicio=${dataPesquisaInicio}&dataCompFim=${dataPesquisaFim}&lojas=${idLoja}&empresasList=${empresaLista}&page=${page}&pageSize=${pageSize}`
       const response = await axios.get(apiUrl)
 
       return res.json(response.data);
