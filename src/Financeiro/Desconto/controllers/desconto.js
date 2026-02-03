@@ -16,7 +16,7 @@ class DescontoControllers {
     dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
     dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
     try {
-      const apiUrl = `${url}/api/financeiro/desconto-vendas.xsjs?page=${page}&idMarca=${idMarca}&idEmpresa=${idEmpresa}&dataInicial=${dataPesquisaInicio}&dataFinal=${dataPesquisaFim}`
+      const apiUrl = `http://164.152.245.77:8000/quality/concentrador/api/financeiro/desconto-vendas.xsjs?page=${page}&idMarca=${idMarca}&idEmpresa=${idEmpresa}&dataInicial=${dataPesquisaInicio}&dataFinal=${dataPesquisaFim}`
       const response = await axios.get(apiUrl)
 
       return res.json(response.data);
