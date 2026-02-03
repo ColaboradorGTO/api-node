@@ -195,8 +195,8 @@ class FinanceiroVendasControllers {
       pageSize = pageSize ? pageSize : '';
 
 
-      // const apiUrl = `${url}/api/financeiro/venda-pix-periodo.xsjs?idMarca=${idMarca}&dataCompInicio=${dataPesquisaInicio}&dataCompFim=${dataPesquisaFim}&lojas=${idLoja}&empresasList=${empresaLista}&page=${page}&pageSize=${pageSize}`
-      const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/venda-pix-periodo.xsjs?idMarca=${idMarca}&dataCompInicio=${dataPesquisaInicio}&dataCompFim=${dataPesquisaFim}&lojas=${idLoja}&empresasList=${empresaLista}&page=${page}&pageSize=${pageSize}`
+      const apiUrl = `${url}/api/financeiro/venda-pix-periodo.xsjs?idMarca=${idMarca}&dataCompInicio=${dataPesquisaInicio}&dataCompFim=${dataPesquisaFim}&lojas=${idLoja}&empresasList=${empresaLista}&page=${page}&pageSize=${pageSize}`
+ 
       const response = await axios.get(apiUrl)
 
       return res.json(response.data);

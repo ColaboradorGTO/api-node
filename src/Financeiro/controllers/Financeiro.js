@@ -54,7 +54,7 @@ class FinanceiroControllers {
     try {
 
       const apiUrl = `${url}/api/financeiro/malotes-por-loja.xsjs?idGrupoEmpresarial=${idMarca}&idEmpresa=${idEmpresa}&statusMalote=${statusMalote}&idMalote=${idMalote}&idPendenciaMalote=${pendenciaMalote}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&dataConferenciaInicio=${dataConferenciaInicio}&dataConferenciaFim=${dataConferenciaFim}&page=${page}&pageSize=${pageSize}`
-      
+
       const response = await axios.get(apiUrl)
       return res.json(response.data);
     } catch (error) {
@@ -560,7 +560,7 @@ class FinanceiroControllers {
       
       const apiUrl = `${url}/api/financeiro/venda-detalhe-recebimento-eletronico.xsjs?page=${page}&pageSize=${pageSize}&idEmpresa=${idEmpresa}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&nomeTef=${nomeTef}&nomeAutorizador=${nomeAutorizador}&numeroParcelas=${numeroParcelas}`
       const response = await axios.get(apiUrl)
-      console.log(apiUrl);
+      
       return res.json(response.data);
     } catch (error) {
       console.error("Unable to connect to the database:", error);
@@ -635,7 +635,7 @@ class FinanceiroControllers {
 
         // const apiUrl = `${url}/api/financeiro/quebra-caixa.xsjs?pageSize=${pageSize}&page=${page}&idEmpresa=${idEmpresa}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&idMarca=${idMarca}&cpfOperadorQuebra=${cpfOperadorQuebra}&tpQuebra=${stQuebraPositivaNegativa}&uf=${uf}&stAtivo=${stAtivo}&stConferido=${stConferido}`;
         const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/quebra-caixa.xsjs?pageSize=${pageSize}&page=${page}&idEmpresa=${idEmpresa}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&idMarca=${idMarca}&cpfOperadorQuebra=${cpfOperadorQuebra}&tpQuebra=${stQuebraPositivaNegativa}&uf=${uf}&stAtivo=${stAtivo}&stConferido=${stConferido}`;
-       
+
         const response = await axios.get(apiUrl);
 
         return res.json(response.data);
@@ -660,7 +660,7 @@ class FinanceiroControllers {
       
       const apiUrl = `${url}/api/financeiro/detalhe-fatura.xsjs?idEmpresa=${idEmpresa}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&page=${page}&pageSize=${pageSize}`;
       const response = await axios.get(apiUrl);
-      console.log(apiUrl)
+  
       return res.json(response.data); 
     } catch (error) {
       console.error("Erro no FaturasController.getDetalheFaturaFinanceiro:", error);
@@ -819,9 +819,8 @@ class FinanceiroControllers {
     }
     
     try {
-      // const apiUrl = `${url}/api/financeiro/deposito-alteracao-data-movimento.xsjs`
-      const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/deposito-alteracao-data-movimento.xsjs`
-    
+      const apiUrl = `${url}/api/financeiro/deposito-alteracao-data-movimento.xsjs`
+
       const response = await axios.put(apiUrl, [{
         IDDEPOSITOLOJA, DTMOVIMENTOCAIXA
       }])
