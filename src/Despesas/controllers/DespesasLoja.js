@@ -3,46 +3,46 @@ import { dataFormatada } from "../../utils/dataFormatada.js";
 import 'dotenv/config';
 const url = process.env.API_URL;
 
-class DespesasLojaControllers  {
+class DespesasLojaControllers {
 
-    async getListaDespesasLojaEmpresa(req,res) {
-        let { idEmpresa, dataPesquisaInicio, dataPesquisaFim,  pageSize, page } = req.query;
-            idEmpresa = idEmpresa ? idEmpresa : ''; 
-            dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
-            dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
-            pageSize = pageSize ? pageSize : '';
-            page = page ? page : '';
-      
+    async getListaDespesasLojaEmpresa(req, res) {
+        let { idEmpresa, dataPesquisaInicio, dataPesquisaFim, pageSize, page } = req.query;
+        idEmpresa = idEmpresa ? idEmpresa : '';
+        dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
+        dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
+        pageSize = pageSize ? pageSize : '';
+        page = page ? page : '';
+
         try {
-                              
+
             const apiUrl = `${url}/api/despesa-loja/empresa.xsjs?idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`;
             const response = await axios.get(apiUrl)
-            
+
             return res.json(response.data); // Retorna
-        } catch(error) {
+        } catch (error) {
             console.error("Erro no DespesasLojaControllers.getListaDespesasLojaEmpresa:", error);
             throw error;
         }
-        
+
     }
 
-    async getListaDespesasEmpresaGerencia(req,res) {
-        let {idEmpresa, dataPesquisa,  } = req.query;
-        idEmpresa = idEmpresa ? idEmpresa : ''; 
+    async getListaDespesasEmpresaGerencia(req, res) {
+        let { idEmpresa, dataPesquisa, } = req.query;
+        idEmpresa = idEmpresa ? idEmpresa : '';
         dataPesquisa = dataPesquisa ? dataPesquisa : '';
-        
+
         try {
             const apiUrl = `${url}/api/despesa-loja/empresa.xsjs?idEmpresa=${idEmpresa}&dataPesquisa=${dataPesquisa}`;
             const response = await axios.get(apiUrl)
             return res.json(response.data); // Retorna
-        } catch(error) {
+        } catch (error) {
             console.error("Unable to connect to the database:", error);
             throw error;
         }
-        
+
     }
 
-    async getListaTodasDespesasLojas(req,res) {
+    async getListaTodasDespesasLojas(req, res) {
         let { idDespesas, pageSize, page } = req.query;
 
         try {
@@ -52,48 +52,48 @@ class DespesasLojaControllers  {
 
             const apiUrl = `${url}/api/despesa-loja/todos.xsjs?id=${idDespesas}`;
             const response = await axios.get(apiUrl)
-            
+
             return res.json(response.data);
-        } catch(error) {
-            console.error("Erro no DespesasLojaControllers.getListaTodasDespesasLojas:", error);    
-                throw error;
+        } catch (error) {
+            console.error("Erro no DespesasLojaControllers.getListaTodasDespesasLojas:", error);
+            throw error;
         }
-        
+
     }
 
     async getListaDespesasLojaDashBoard(req, res) {
         let { idDespesaLoja, idEmpresa, dataPesquisa, page, pageSize } = req.query;
-    
+
         idDespesaLoja = Number(idDespesaLoja) ? Number(idDespesaLoja) : '';
         idEmpresa = Number(idEmpresa) ? Number(idEmpresa) : '';
         dataPesquisa = dataFormatada(dataPesquisa) ? dataFormatada(dataPesquisa) : '';
         page = Number(page) ? Number(page) : '';
         pageSize = Number(pageSize) ? Number(pageSize) : '';
-    
+
         try {
-   
+
             const apiUrl = `${url}/api/dashboard/despesa-loja.xsjs?idDespesaLoja=${idDespesaLoja}&idEmpresa=${idEmpresa}&dataPesquisa=${dataPesquisa}&page=${page}&pageSize=${pageSize}`;
             const response = await axios.get(apiUrl)
-          
+
             return res.json(response.data);
         } catch (error) {
-          console.error("Unable to connect to the database:", error);
-          throw error;
+            console.error("Unable to connect to the database:", error);
+            throw error;
         }
-    
+
     }
 
     async putDespesasLoja(req, res) {
         try {
-            const despesas = Array.isArray(req.body) ? req.body : [req.body]; 
-        
-            const response = await  axios.post(`${url}/api/despesa-loja/todos.xsjs`, despesas)
+            const despesas = Array.isArray(req.body) ? req.body : [req.body];
+
+            const response = await axios.post(`${url}/api/despesa-loja/todos.xsjs`, despesas)
             return res.json(response.data);
         } catch (error) {
             console.error("Unable to connect to the database:", error);
             return res.status(500).json({ error: error.message });
         }
-       
+
     }
 
     async postCadastrarDespesasLoja(req, res) {
@@ -104,37 +104,38 @@ class DespesasLojaControllers  {
             IDCATEGORIARECEITADESPESA,
             DSHISTORIO,
             DSPAGOA,
+            IDFUNCIONARIO,
             TPNOTA,
             NUNOTAFISCAL,
             VRDESPESA,
             STATIVO,
             STCANCELADO,
-            
+
         } = req.body;
 
-        
+
 
         try {
 
-            if(!IDEMPRESA) {
-                return res.status(400).json({message: 'IDEMPRESA é obrigatório!'});
+            if (!IDEMPRESA) {
+                return res.status(400).json({ message: 'IDEMPRESA é obrigatório!' });
             }
 
-            if(!IDUSR) {
-                return res.status(400).json({message: 'IDUSR é obrigatório!'});
+            if (!IDUSR) {
+                return res.status(400).json({ message: 'IDUSR é obrigatório!' });
             }
 
-            if(!DTDESPESA) {
-                return res.status(400).json({message: 'DTDESPESA é obrigatório!'});
+            if (!DTDESPESA) {
+                return res.status(400).json({ message: 'DTDESPESA é obrigatório!' });
             }
 
-            if(!IDCATEGORIARECEITADESPESA) {
-                return res.status(400).json({message: 'IDCATEGORIARECEITADESPESA é obrigatório!'});
+            if (!IDCATEGORIARECEITADESPESA) {
+                return res.status(400).json({ message: 'IDCATEGORIARECEITADESPESA é obrigatório!' });
             }
 
-            if(!DSHISTORIO) {
-                return res.status(400).json({message: 'DSHISTORIO é obrigatório!'});
-            }   
+            if (!DSHISTORIO) {
+                return res.status(400).json({ message: 'DSHISTORIO é obrigatório!' });
+            }
             const response = await axios.post(`${url}/api/despesa-loja/todos.xsjs`, {
                 IDEMPRESA,
                 IDUSR,
@@ -142,14 +143,15 @@ class DespesasLojaControllers  {
                 IDCATEGORIARECEITADESPESA,
                 DSHISTORIO,
                 DSPAGOA,
+                IDFUNCIONARIO,
                 TPNOTA,
                 NUNOTAFISCAL,
                 VRDESPESA,
                 STATIVO,
-                STCANCELADO   
+                STCANCELADO
             })
 
-            return res.status(200).json({message: 'Despesa cadastrada com sucesso!'})
+            return res.status(200).json({ message: 'Despesa cadastrada com sucesso!' })
         } catch (error) {
             console.error("Erro Verifique os campos do formulário:", error);
             throw error;
