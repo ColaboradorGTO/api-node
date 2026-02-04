@@ -393,7 +393,7 @@ class ResumoVoucherControllers {
                 return res.status(400).json({ error: 'NUCPFCNPJ é obrigatório.' });
             }
 
-            const response = await axios.put(`${url}/api/gerencia/cliente.xsjs`, {
+            const response = await axios.put(`${url}/api/gerencia/cliente.xsjs`, [{
                 IDCLIENTE,
                 IDEMPRESA,
                 DSNOMERAZAOSOCIAL,
@@ -417,11 +417,12 @@ class ResumoVoucherControllers {
                 IDINDICACAOIE,
                 DSINDICACAOIE,
                 IDFUNCIONARIO 
-            });
-    
-            return res.status(200).json({ message: 'Cliente atualizado com sucesso!' });
+            }]);
+            // console.log(response.data, 'response.data putCliente')
+            return res.status(200).json(response.data);
     
         } catch (error) {
+            console.log(error, 'error putCliente')
             return res.status(400).json({ error: error.message });
         }
     }
@@ -539,7 +540,7 @@ class ResumoVoucherControllers {
           
             let { STATIVO, STCANCELADO, DSMOTIVOTROCASTATUS, IDFUNCIONARIO, STSTATUS, STTIPOTROCA, IDVOUCHER, IDEMPRESALOGADA, IDGRUPOEMPRESARIAL } = req.body;
 
-            const response = await axios.put(`${url}/api/resumo-voucher/todos-web.xsjs`, {
+            const response = await axios.put(`${url}/api/resumo-voucher/todos-web.xsjs`, [{
                 STATIVO,
                 STCANCELADO,
                 DSMOTIVOTROCASTATUS,
@@ -549,7 +550,7 @@ class ResumoVoucherControllers {
                 IDVOUCHER,
                 IDEMPRESALOGADA,
                 IDGRUPOEMPRESARIAL
-            })
+            }])
 
             return res.status(200).json(response.data);
         } catch (error) {
