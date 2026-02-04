@@ -418,7 +418,7 @@ class ResumoVoucherControllers {
                 DSINDICACAOIE,
                 IDFUNCIONARIO 
             }]);
-            // console.log(response.data, 'response.data putCliente')
+         
             return res.status(200).json(response.data);
     
         } catch (error) {
