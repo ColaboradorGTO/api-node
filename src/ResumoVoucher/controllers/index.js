@@ -513,7 +513,7 @@ class ResumoVoucherControllers {
             } = req.body;
 
       
-            const response = await axios.post(`${url}/api/resumo-voucher/todos-web.xsjs`, {
+            const response = await axios.post(`${url}/api/resumo-voucher/todos-web.xsjs`, [{
                 IDGRUPOEMPRESARIAL,
                 IDEMPRESAORIGEM,
                 IDCAIXAORIGEM,
@@ -529,7 +529,7 @@ class ResumoVoucherControllers {
                 IDUSRLIBERACAOCRIACAO,
                 detVoucher,
                 produtosVoucher
-            });
+            }]);
 
             return res.status(200).json(response.data);
         } catch (error) {
