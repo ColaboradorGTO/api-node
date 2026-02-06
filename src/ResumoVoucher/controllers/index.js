@@ -461,7 +461,7 @@ class ResumoVoucherControllers {
                 return res.status(400).json({ error: 'NUCPFCNPJ é obrigatório.' });
             }
 
-            const response = await axios.post(`${url}/api/gerencia/cliente.xsjs`, {
+            const response = await axios.post(`${url}/api/gerencia/cliente.xsjs`, [{
                 IDEMPRESA,
                 DSNOMERAZAOSOCIAL,
                 DSAPELIDONOMEFANTASIA,
@@ -484,7 +484,7 @@ class ResumoVoucherControllers {
                 IDINDICACAOIE,
                 DSINDICACAOIE,
                 IDFUNCIONARIO 
-            });
+            }]);
     
             return res.status(200).json(response.data);
         } catch (error) {
