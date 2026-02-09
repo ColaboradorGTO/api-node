@@ -13,13 +13,13 @@ export class MaloteClient {
     
     async atualizarMalote(IDMALOTE, STATUS, OBSERVACAOADMINISTRATIVO, PENDENCIAS, IDUSERULTIMAALTERACAO) {
 
-        const response = await this.api.put(`${url}/api/financeiro/malotes-por-loja.xsjs`, {
+        const response = await this.api.put(`${url}/api/financeiro/malotes-por-loja.xsjs`, [{
           IDMALOTE,
           STATUS,
           OBSERVACAOADMINISTRATIVO,
           PENDENCIAS,
           IDUSERULTIMAALTERACAO
-        });
+        }]);
      
         return response.data;
     }
