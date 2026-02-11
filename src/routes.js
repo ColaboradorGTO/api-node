@@ -538,8 +538,9 @@ routes.post('/criar-cliente', ResumoVoucherControllers.postCliente)
 
 routes.post('/auth-funcionario-status', ResumoVoucherControllers.autorizacaoEditarStatusVoucher)
 routes.post('/auth-funcionario-create-voucher', ResumoVoucherControllers.postAuthFuncionarioCreateVoucher)
-routes.post('/auth-funcionario-print-voucher', ResumoVoucherControllers.postAuthFuncionarioPrintVoucher)
+routes.post('/auth-funcionario-create-voucher', ResumoVoucherControllers.postAuthFuncionarioCreateVoucher)
 routes.post('/auth-funcionario-update-voucher', ResumoVoucherControllers.postAuthFuncionarioUpdateVoucher)
+routes.post('/auth-autorizar-excecao-venda', ResumoVoucherControllers.postAuthAutorizarExecaoVenda)
 
 // Comercial
 routes.get('/listaProdutoSap', ComercialControllers.getListaProdutoSap)
