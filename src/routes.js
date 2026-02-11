@@ -178,7 +178,6 @@ routes.get('/inventariomovimento', EstoqueControllers.getListaEstoqueAtual)
 
 routes.get('/recebimento-resumo', AdministrativoControllers.getRetornoListaPagamentoVenda)
 routes.get('/lista-venda-cliente', AdmVendasControllers.getListaVendaCliente);
-routes.get('/vendas-prazo-excedido', AdmVendasControllers.getListaVendasPrazoExcedido);
 routes.get('/lista-venda', AdmVendasControllers.getListaVendasById)
 routes.get('/venda-ativa', AdmVendasControllers.getListaVendaAtiva);
 routes.get('/venda-vendedor-adm', AdmVendasControllers.getVendaVendedorAction);
@@ -519,6 +518,7 @@ routes.get('/rotatividadeVendas', VendasControllers.getListaRotatividade)
 routes.get('/listaDetalheVendaCliente', VendasControllers.getListaDetalheVendaCliente)
 routes.get('/venda-xml', VendasControllers.getListaVendaXML)
 routes.get('/venda-cliente', VendasControllers.getListaVendaClienteGerencia)
+routes.get('/vendas-prazo-excedido', VendasControllers.getListaVendasPrazoExcedido);
 
 // Vouchers
 routes.get('/detalheVoucherDados', ResumoVoucherControllers.getListaDetalheVoucherDados)
