@@ -185,7 +185,8 @@ class VendasControllers {
                 VRPRODUTO,
                 VRTOTALLIQUIDO
             } = req.body; 
-            const response = await axios.post(`${url}/api/venda/vendas-prazo-excedido-troca.xsjs`, {
+            // const response = await axios.post(`${url}/api/venda/vendas-prazo-excedido-troca.xsjs`, {
+            const response = await axios.post(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/venda/vendas-prazo-excedido-troca.xsjs`, [{
                 DIASAPOSCOMPRAR,
                 IDPRODUTO,
                 IDVENDA,
@@ -196,7 +197,7 @@ class VendasControllers {
                 USERAUTORIZADOR,
                 VRPRODUTO,
                 VRTOTALLIQUIDO
-            });
+            }]);
             return res.json(response.data);
         } catch (error) {
             console.error("Unable to connect to the database:", error);
