@@ -174,30 +174,28 @@ class VendasControllers {
       async postAlterarVendasPrazoExcedido(req, res) {
         try {
             let {
-                DSTIPOPAGAMENTO,
-                DTPROCESSAMENTO,
-                IDFUNCIONARIO,
+                DIASAPOSCOMPRAR,
+                IDPRODUTO,
                 IDVENDA,
-                IDVENDAPAGAMENTO,
-                NITEM,
-                STCANCELADO,
-                TPAG,
-                VALORDEDUZIDO,
-                VALORLIQUIDO,
-                VALORRECEBIDO
+                IDVENDADETALHE,
+                MOTIVOEXCECAO,
+                QTD,
+                TIPOTROCA,
+                USERAUTORIZADOR,
+                VRPRODUTO,
+                VRTOTALLIQUIDO
             } = req.body; 
             const response = await axios.post(`${url}/api/venda/vendas-prazo-excedido-troca.xsjs`, {
-                DSTIPOPAGAMENTO,
-                DTPROCESSAMENTO,
-                IDFUNCIONARIO,
+                DIASAPOSCOMPRAR,
+                IDPRODUTO,
                 IDVENDA,
-                IDVENDAPAGAMENTO,
-                NITEM,
-                STCANCELADO,
-                TPAG,
-                VALORDEDUZIDO,
-                VALORLIQUIDO,
-                VALORRECEBIDO
+                IDVENDADETALHE,
+                MOTIVOEXCECAO,
+                QTD,
+                TIPOTROCA,
+                USERAUTORIZADOR,
+                VRPRODUTO,
+                VRTOTALLIQUIDO
             });
             return res.json(response.data);
         } catch (error) {
