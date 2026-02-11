@@ -178,11 +178,37 @@ class AdmVendasControllers {
             const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/venda/lista-venda-cliente.xsjs?id=${idVenda}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&idSubgrupoEmpresarial=${idSubGrupoEmpresarial}&idEmpresa=${idEmpresa}&cpfouIdVenda=${cpfOUidVenda}&nnf=${nnf}&serie=${serie}&pageSize=${pageSize}&page=${page}`;
             const response = await axios.get(apiUrl)
 
-            // http://164.152.245.77:8000/quality/concentrador_homologacao/api/venda/lista-venda-cliente.xsjs?dtInicio=2026-01-01&dtFim=2026-02-05&idSubgrupoEmpresarial=1&idEmpresa=1&cpfouIdVenda=&nnf=&serie=&pageSize=500&page=1
-            // http://164.152.245.77:8000/quality/concentrador_homologacao/api/venda/lista-venda-cliente.xsjs?id=&dtInicio=2026-01-01&dtFim=2026-02-05&idSubgrupoEmpresarial=&idEmpresa=&cpfouIdVenda=&nnf=&serie=&pageSize=&page=1
             return res.json(response.data); 
         } catch (error) {
             console.error("Error no AdmVendasControllers.getListaVendaCliente:", error);
+            throw error;
+        }
+        
+    }
+
+    async getListaVendasPrazoExcedido(req, res) {
+        let {nnf, serie, idEmpresa, idVenda, idSubGrupoEmpresarial, cpfOUidVenda, dataPesquisaInicio, dataPesquisaFim, page, pageSize } = req.query;
+        nnf = nnf ? nnf : '';
+        serie = serie ? serie : '';
+        idEmpresa = idEmpresa ? idEmpresa : '';
+        idVenda = idVenda ? idVenda : '';
+        idSubGrupoEmpresarial = idSubGrupoEmpresarial ? idSubGrupoEmpresarial : '';
+        cpfOUidVenda = cpfOUidVenda ? cpfOUidVenda : '';
+        dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
+        dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
+        page = page ? page : '';
+        pageSize = pageSize ? pageSize : '';
+                
+        try {
+
+            // const apiUrl = `${url}/api/venda/vendas-prazo-excedido-troca.xsjs?idEmpresa=${idEmpresa}&cpfouIdVenda=${cpfOUidVenda}&nnf=${nnf}&serie=${serie}&idGrupoEmpresarial=${idSubGrupoEmpresarial}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&pageSize=${pageSize}&page=${page}`;
+            const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/venda/vendas-prazo-excedido-troca.xsjs?id=${idVenda}&idEmpresa=${idEmpresa}&cpfouIdVenda=${cpfOUidVenda}&nnf=${nnf}&serie=${serie}&idGrupoEmpresarial=${idSubGrupoEmpresarial}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&pageSize=${pageSize}&page=${page}`;
+           
+            const response = await axios.get(apiUrl)
+
+            return res.json(response.data); 
+        } catch (error) {
+            console.error("Error no AdmVendasControllers.getListaVendasPrazoExcedido:", error);
             throw error;
         }
         

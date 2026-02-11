@@ -354,6 +354,36 @@ class ResumoVoucherControllers {
         }
     }
 
+    async postAuthAutorizarExecaoVenda(req, res) {
+        try {
+            let { MATRICULA, SENHA } = req.body;
+            if (!MATRICULA || !SENHA) {
+                return res.status(400).json({ error: 'Todos os campos são obrigatórios.' });
+            }
+            const response = await axios.post(`${url}/api/resumo-voucher/autFuncionarioExcecaoVenda.xsjs`, {
+                MATRICULA,
+                SENHA,
+            });
+            return res.json(response.data);
+        } catch (error) {
+            if (error.response) {
+                return res.status(error.response.status).json({
+                    error: error.response.data.error
+                });
+            }
+
+            if (error.request) {
+                return res.status(502).json({
+                    error: 'Falha ao se comunicar com o serviço de vendas'
+                });
+            }
+
+            return res.status(500).json({
+                error: 'Erro interno no servidor'
+            });
+        }
+    }
+
     async putCliente(req, res) {
         try {
             let { 

@@ -178,6 +178,7 @@ routes.get('/inventariomovimento', EstoqueControllers.getListaEstoqueAtual)
 
 routes.get('/recebimento-resumo', AdministrativoControllers.getRetornoListaPagamentoVenda)
 routes.get('/lista-venda-cliente', AdmVendasControllers.getListaVendaCliente);
+routes.get('/vendas-prazo-excedido', AdmVendasControllers.getListaVendasPrazoExcedido);
 routes.get('/lista-venda', AdmVendasControllers.getListaVendasById)
 routes.get('/venda-ativa', AdmVendasControllers.getListaVendaAtiva);
 routes.get('/venda-vendedor-adm', AdmVendasControllers.getVendaVendedorAction);
