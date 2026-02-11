@@ -171,7 +171,7 @@ class VendasControllers {
         }
     }
 
-      async postAlterarVendasPrazoExcedido(req, res) {
+    async postAlterarVendasPrazoExcedido(req, res) {
         try {
             let {
                 DIASAPOSCOMPRAR,
