@@ -26,7 +26,7 @@ class ModulosControllers  {
 
     async getListaMenusPorUsuario(req, res) {
         let { idUsuario, idMenuFilho } = req.query;
-    
+      
         idUsuario = idUsuario ? idUsuario : '';
         idMenuFilho = idMenuFilho ? idMenuFilho : '';
         try {
@@ -43,12 +43,12 @@ class ModulosControllers  {
     }
 
     async getListaMenusFilhosUsuario(req, res) {
-        let { idMenuFilho, idUsuario } = req.query;
-    
+        let { idMenuFilho, idUsuario, idPerfil } = req.query;
+        idPerfil = idPerfil ? idPerfil : '';
         idMenuFilho = idMenuFilho ? idMenuFilho : '';
         idUsuario = idUsuario ? idUsuario : '';
         try {   
-            const response = await axios.get(`${url}/api/perfilUsuario/perfilUsuarioMenuFilho.xsjs?idUsuario=${idUsuario}&idMenuFilho=${idMenuFilho}`)
+            const response = await axios.get(`${url}/api/perfilUsuario/perfilUsuarioMenuFilho.xsjs?idUsuario=${idUsuario}&idMenuFilho=${idMenuFilho}&idPerfil=${idPerfil}` )
 
             return res.json(response.data); // Retorna
         } catch(error) {

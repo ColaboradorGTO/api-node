@@ -74,7 +74,7 @@ class DespesasLojaControllers {
 
             const apiUrl = `${url}/api/dashboard/despesa-loja.xsjs?idDespesaLoja=${idDespesaLoja}&idEmpresa=${idEmpresa}&dataPesquisa=${dataPesquisa}&page=${page}&pageSize=${pageSize}`;
             const response = await axios.get(apiUrl)
-
+    
             return res.json(response.data);
         } catch (error) {
             console.error("Unable to connect to the database:", error);
