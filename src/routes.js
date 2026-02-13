@@ -757,6 +757,12 @@ routes.get('/vendasProdutos', ContabilidadeControllers.getListaVendasPeriodo)
 routes.get('/vendasProdutosConsolidado', ContabilidadeControllers.getListaVendasPeriodoConsolidado)
 routes.get('/buscar-produtos', ContabilidadeControllers.getBuscarProdutos)
 
+/// ALVARA EMPRESA ///
+routes.get('/todas-empresas', ContabilidadeControllers.getTodasEmpresas)
+routes.get('/alvaras', ContabilidadeControllers.getAlvaras)
+routes.get('/alvaras-empresa', ContabilidadeControllers.getAlvaraEmpresas)
+routes.get('/alvaras-empresa-detalhe', ContabilidadeControllers.getEmpresaAlvara)
+
 // Configuração Pix PDV
 routes.get('/configuracao-pix-pdv', ConfiguracaoPixPDVControllers.getListaConfiguracaoPixPDV)
 // routes.put('/configuracao-pix-pdv', ConfiguracaoPixPDVControllers.updateConfiguracaoPixPDV)

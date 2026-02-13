@@ -5,7 +5,7 @@ const url = process.env.API_URL;
 
 class ContabilidadeControllers {
   async getListaVendasContigencia(req, res) {
-    let { idMarca, idEmpresa, idVenda, dataPesquisaInicio, dataPesquisaFim,idGrupo, page, pageSize } = req.query;
+    let { idMarca, idEmpresa, idVenda, dataPesquisaInicio, dataPesquisaFim, idGrupo, page, pageSize } = req.query;
     idMarca = idMarca ? idMarca : '';
     idEmpresa = idEmpresa ? idEmpresa : '';
     idVenda = idVenda ? idVenda : '';
@@ -165,6 +165,83 @@ class ContabilidadeControllers {
       throw error;
     }
 
+  }
+
+  ////ALVARA EMPRESAS///
+
+  async getTodasEmpresas(req, res) {
+    let { idEmpresa, idSubGrupoEmpresa, page, pageSize, uf, nuCnpj, stAtivo } = req.query;
+    idEmpresa = idEmpresa ? idEmpresa : '';
+    idSubGrupoEmpresa = idSubGrupoEmpresa ? idSubGrupoEmpresa : '';
+    uf = uf ? uf : '';
+    nuCnpj = nuCnpj ? nuCnpj : '';
+    stAtivo = stAtivo ? stAtivo : '';
+    page = page ? page : '';
+    pageSize = pageSize ? pageSize : '';
+
+    try {
+      const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/empresa.xsjs?id=${idEmpresa}&idSubGrupoEmpresa=${idSubGrupoEmpresa}&uf=${uf}&nuCnpj=${nuCnpj}&stAtivo=${stAtivo}&page=${page}&pageSize=${pageSize}`)
+
+      return res.json(response.data);
+    } catch (error) {
+      console.error("Erro no ContabilidadeControllers.getAllEmpresas:", error);
+      throw error;
+    }
+  }
+
+  async getAlvaras(req, res) {
+    let { id, stAtivo, page, pageSize } = req.query;
+    id = id ? id : '';
+    stAtivo = stAtivo ? stAtivo : '';
+    page = page ? page : '';
+    pageSize = pageSize ? pageSize : '';
+
+    try {
+      const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/alvaras.xsjs?&id=${id}&stAtivo=${stAtivo}&page=${page}&pageSize=${pageSize}`)
+
+      return res.json(response.data);
+    } catch (error) {
+      console.error("Erro no ContabilidadeControllers.getAlvaras:", error);
+      throw error;
+    }
+  }
+
+  async getAlvaraEmpresas(req, res) {
+    let { idFilial, idSubGrupoEmpresa, stAtivo, ufFiliais, nuCnpj, page, pageSize } = req.query;
+    idFilial = idFilial ? idFilial : '';
+    idSubGrupoEmpresa = idSubGrupoEmpresa ? idSubGrupoEmpresa : '';
+    stAtivo = stAtivo ? stAtivo : '';
+    ufFiliais = ufFiliais ? ufFiliais : '';
+    nuCnpj = nuCnpj ? nuCnpj : '';
+
+    page = page ? page : '';
+    pageSize = pageSize ? pageSize : '';
+
+    try {
+      const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/empresa.xsjs?uf=${ufFiliais}&idSubGrupoEmpresa=${idSubGrupoEmpresa}&id=${idFilial}&stAtivo=${stAtivo}&page=${page}&pageSize=${pageSize}`)
+
+      return res.json(response.data);
+    } catch (error) {
+      console.error("Erro no ContabilidadeControllers.getAlvaraEmpresas:", error);
+      throw error;
+    }
+  }
+
+
+  async getEmpresaAlvara(req, res) {
+    let { idFilial, page, pageSize } = req.query;
+    idFilial = idFilial ? idFilial : '';
+    page = page ? page : '';
+    pageSize = pageSize ? pageSize : '';
+    
+    try {
+      const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/alvaras-empresa.xsjs?id=${idFilial}&page=${page}&pageSize=${pageSize}`)
+
+      return res.json(response.data);
+    } catch (error) {
+      console.error("Erro no ContabilidadeControllers.getEmpresaAlvara:", error);
+      throw error;
+    }
   }
 
 }
