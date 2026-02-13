@@ -233,7 +233,7 @@ class ContabilidadeControllers {
     idFilial = idFilial ? idFilial : '';
     page = page ? page : '';
     pageSize = pageSize ? pageSize : '';
-    
+
     try {
       const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/alvaras-empresa.xsjs?id=${idFilial}&page=${page}&pageSize=${pageSize}`)
 
@@ -243,6 +243,48 @@ class ContabilidadeControllers {
       throw error;
     }
   }
+
+  async getVinculoAlvaraEmpresa(req, res) {
+    let { idFilial, page, pageSize } = req.query;
+    idFilial = idFilial ? idFilial : '';
+    page = page ? page : '';
+    pageSize = pageSize ? pageSize : '';
+
+    try {
+      const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/vinculo-alvaras-empresa.xsjs?id=${idFilial}&page=${page}&pageSize=${pageSize}`)
+
+      return res.json(response.data);
+    } catch (error) {
+      console.error("Erro no ContabilidadeControllers.getEmpresaAlvara:", error);
+      throw error;
+    }
+  }
+
+async getVisualizarAnexoAlvara(req, res) {
+  let { idArquivoAlvara } = req.query;
+
+  try {
+    const response = await axios.get(
+      `http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/arquivos-anexos-alvaras-empresa.xsjs?id=${idArquivoAlvara}`,
+      {
+        responseType: "arraybuffer"
+      }
+    );
+
+    res.setHeader("Content-Type", response.headers["content-type"]);
+    res.setHeader(
+      "Content-Disposition",
+      response.headers["content-disposition"] || "inline"
+    );
+
+    return res.send(response.data);
+
+  } catch (error) {
+    console.error("Erro no getVisualizarAnexoAlvara:", error);
+    return res.status(500).json({ error: "Erro ao visualizar arquivo" });
+  }
+}
+
 
 }
 
