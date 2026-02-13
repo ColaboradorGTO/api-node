@@ -365,8 +365,8 @@ class DashBoardControllers {
             try {
                 const apiUrl = `${url}/api/dashboard/extrato-loja-periodo.xsjs?pageSize=${pageSize}&page=${page}&idEmpresa=${idEmpresa}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`
                 const response = await axios.get(apiUrl)
-                console.log(apiUrl, 'apiUrl')
-                
+           
+
                 return res.json(response.data); // Retorna
             } catch (error) {
                 console.error("Unable to connect to the database:", error);
