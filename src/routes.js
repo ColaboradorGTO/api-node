@@ -513,7 +513,7 @@ routes.post('/criar-resumo-ordem-transferencia', ExpedicaoControllers.postResumo
 // routes.get('/listaVendas', FinanceiroVendasControllers.getListaVendas)
 
 // routes.get('/listaVendaCliente', Vendas.getListaVendaCliente)
-routes.get('/movimentacaoSaldo', VendasControllers.getListaVendasSaldo)
+routes.get('/movimentacao-saldo', VendasControllers.getListaVendasSaldo)
 routes.get('/rotatividadeVendas', VendasControllers.getListaRotatividade)
 routes.get('/listaDetalheVendaCliente', VendasControllers.getListaDetalheVendaCliente)
 routes.get('/venda-xml', VendasControllers.getListaVendaXML)
@@ -548,7 +548,7 @@ routes.post('/auth-autorizar-excecao-venda', ResumoVoucherControllers.postAuthAu
 routes.get('/listaProdutoSap', ComercialControllers.getListaProdutoSap)
 routes.get('/listaEmpresaComercial', ComercialControllers.getListaEmpresaComercial)
 // routes.get('/listaVendasPorProduto', ComercialControllers.getListaVendasEstruturaProdutos)
-routes.get('/vendaMarcaPeriodoFinanceiro', ComercialControllers.getListaVendasMarcaPorPeriodoComercial)
+routes.get('/venda-marca-periodo-comercial', ComercialControllers.getListaVendasMarcaPorPeriodoComercial)
 routes.get('/vendasEstoqueGrupoSubGrupo', ComercialControllers.getListaVendasEstoqueGrupoSubGrupoComercial)
 routes.get('/produtosPrecosEstoquesLojas', ComercialControllers.getListaProdutosEstoquePrecoLoja)
 routes.get('/vendasEstoqueProduto', ComercialControllers.getListaVendasPosicionamentoEstoquePeriodos)
@@ -689,6 +689,7 @@ routes.put('/atualizacao-status', MovimentoCaixaControllers.putListaAtualizacaoS
 routes.put('/ajuste-recebimento', MovimentoCaixaControllers.putListaAjusteRecebimento)
 
 // Produtos 
+routes.get('/parceiro-negocio', ProdutoControllers.getListaParceiroNegocio)
 routes.get('/produtoQuality', ProdutoControllers.getListaProdutosLojaQuality)
 routes.get('/produtoSap', ProdutoControllers.getListaProdutosLojaSap)
 routes.get('/produto-preco', ProdutoControllers.getListaProdutosPrecoInformatica)

@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import 'dotenv/config';
-const url = 'http://164.152.245.77:8000/quality/concentrador_homologacao'
+const url = 'http://164.152.245.77:8000/quality/concentrador_homologacao';
 
 
 class ResumoVoucherControllers {

@@ -30,6 +30,24 @@ class ProdutoControllers  {
         
     }
 
+    async getListaParceiroNegocio(req, res) {
+        let { page, pageSize } = req.query;
+    
+        page = page ? page : '';
+        pageSize = pageSize ? pageSize : '';
+
+        try {   
+
+            const apiUrl = `${url}/api/produto-sap/parceiro-negocio.xsjs`;
+            const response = await axios.get(apiUrl)
+
+            return res.json(response.data); // Retorna
+        } catch(error) {
+            console.error("Unable to connect to the database:", error);
+            throw error;
+        } 
+    }
+
     async getListaProdutosLojaQuality(req, res) {
         let { descricaoProduto, idEmpresa, idListaLoja, codBarrasOuNome, page, pageSize } = req.query;
     
@@ -51,6 +69,7 @@ class ProdutoControllers  {
             throw error;
         } 
     }
+
     async getListaProdutosPrecoInformatica(req, res) {
         let { idEmpresa, dsProduto, page, pageSize } = req.query;
     

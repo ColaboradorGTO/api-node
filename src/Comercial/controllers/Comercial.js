@@ -1,7 +1,8 @@
 import axios from "axios";
 import { dataFormatada } from "../../utils/dataFormatada.js";
 import 'dotenv/config';
-const url = process.env.API_URL;
+// const url = process.env.API_URL;
+const url = 'http://164.152.245.77:8000/quality/concentrador'
 
 class CormercialControllers {
 
@@ -135,16 +136,16 @@ class CormercialControllers {
     }
 
     async getListaVendasMarcaPorPeriodoComercial(req, res) {
-        let { idMarcaPesqVenda, page, pageSize, dataPesqInicio, dataPesqFim } = req.query;
+        let { idMarca, page, pageSize, dataPesquisaInicio, dataPesquisaFim } = req.query;
     
-            idMarcaPesqVenda = idMarcaPesqVenda ? idMarcaPesqVenda : '';
-            dataPesqInicio = dataFormatada(dataPesqInicio) ? dataFormatada(dataPesqInicio) : ''
-            dataPesqFim = dataFormatada(dataPesqFim) ? dataFormatada(dataPesqFim) : ''
+            idMarca = idMarca ? idMarca : '';
+            dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : ''
+            dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : ''
             pageSize = pageSize ? pageSize : '';
-            pageSize = pageSize ? pageSize : '';
+            page = page ? page : '';
 
           try {
-            const apiUrl = `${url}/api/comercial/venda-marca-periodo.xsjs?pageSize=${pageSize}&idMarca=${idMarcaPesqVenda}&dataInicio=${dataPesqInicio}&dataFim=${dataPesqFim}`
+            const apiUrl = `${url}/api/comercial/venda-marca-periodo.xsjs?page=${page}&pageSize=${pageSize}&idMarca=${idMarca}&dataInicio=${dataPesquisaInicio}&dataFim=${dataPesquisaFim}`
             const response = await axios.get(apiUrl)
     
             return res.json(response.data); // Retorna

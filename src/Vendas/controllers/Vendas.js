@@ -74,7 +74,7 @@ class VendasControllers {
     }
 
     async getListaVendasSaldo(req, res) {
-        let { dataPesquisaInicio, dataPesquisaFim, idGrupoEmpresarial, idEmpresa, produtoPesquisado, ufPesquisa, idFornecedor, idGrupoGrade, idGrade  } = req.query;
+        let { dataPesquisaInicio, dataPesquisaFim, idGrupoEmpresarial, idEmpresa, produtoPesquisado, ufPesquisa, idFornecedor, idGrupoGrade, idGrade, page, pageSize  } = req.query;
 
         dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataPesquisaInicio : '';
         dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataPesquisaFim : '';
@@ -83,9 +83,12 @@ class VendasControllers {
         idFornecedor = idFornecedor ? idFornecedor : '';
         idGrupoGrade = idGrupoGrade ? idGrupoGrade : '';
         idGrade = idGrade ? idGrade : '';
+        ufPesquisa = ufPesquisa ? ufPesquisa : '';
+        page = page ? page : '';
+        pageSize = pageSize ? pageSize : '';
         try {
        
-            const apiUrl = `${url}/api/venda/movimentacao-saldo.xsjs?page=&dataInicio=${dataPesquisaInicio}&dataFim=${dataPesquisaFim}&idGrupoEmpresarial=${idGrupoEmpresarial}&idEmpresa=${idEmpresa}&descricaoProduto=${produtoPesquisado}&uf=${ufPesquisa}&idFornecedor=${idFornecedor}&idGrupoGrade=${idGrupoGrade}&idGrade=${idGrade}`
+            const apiUrl = `${url}/api/venda/movimentacao-saldo.xsjs?dataInicio=${dataPesquisaInicio}&dataFim=${dataPesquisaFim}&idGrupoEmpresarial=${idGrupoEmpresarial}&idEmpresa=${idEmpresa}&descricaoProduto=${produtoPesquisado}&uf=${ufPesquisa}&idFornecedor=${idFornecedor}&idGrupoGrade=${idGrupoGrade}&idGrade=${idGrade}&page=${page}&pageSize=${pageSize}`
 
             const response = await axios.get(apiUrl)
     
