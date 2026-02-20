@@ -2,7 +2,8 @@
 import axios from "axios";
 import { dataFormatada } from "../../../utils/dataFormatada.js";
 import 'dotenv/config';
-const url = process.env.API_URL;
+// const url = process.env.API_URL;
+const url = 'http://164.152.245.77:8000/quality/concentrador';
 
 
 class ComercialProdutoControllers {
@@ -95,23 +96,23 @@ class ComercialProdutoControllers {
   }
 
   async getListaVendasVendedorEstrutura(req, res) {
-    let { idEmpresa, idGrupoEmpresarial, idGrupo, idSubGrupo, idMarca, idFornecedor, descricaoProduto, uf, dataPesquisaInicio, dataPesquisaFim, page, pageSize } = req.query;
+    let { idEmpresa, idGrupoEmpresarial, idGrupoGrade, idGrade, idMarcaProduto, idFornecedor, descricaoProduto, uf, dataPesquisaInicio, dataPesquisaFim, page, pageSize } = req.query;
 
     idEmpresa = idEmpresa ? idEmpresa : '';
     idGrupoEmpresarial = idGrupoEmpresarial ? idGrupoEmpresarial : '';
     descricaoProduto = descricaoProduto ? descricaoProduto : '';
     uf = uf ? uf : '';
     idFornecedor = idFornecedor ? idFornecedor : '';
-    idGrupo = idGrupo ? idGrupo : '';
-    idSubGrupo = idSubGrupo ? idSubGrupo : '';
-    idMarca = idMarca ? idMarca : '';
+    idGrupoGrade = idGrupoGrade ? idGrupoGrade : '';
+    idGrade = idGrade ? idGrade : '';
+    idMarcaProduto = idMarcaProduto ? idMarcaProduto : '';
     dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataFormatada(dataPesquisaInicio) : '';
     dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataFormatada(dataPesquisaFim) : '';
     page = page ? page : '';
     pageSize = pageSize ? pageSize : '';
     try {
-     
-      const apiUrl = `${url}/api/comercial/vendas-vendedor-estrutura.xsjs?dataInicio=${dataPesquisaInicio}&dataFim=${dataPesquisaFim}&idGrupoEmpresarial=${idGrupoEmpresarial}&idEmpresa=${idEmpresa}&descricaoProduto=${descricaoProduto}&uf=${uf}&idFornecedor=${idFornecedor}&idGrupoGrade=${idGrupo}&idGrade=${idSubGrupo}&idMarcaProduto=${idMarca}&uf=${uf}&page=${page}&pageSize=${pageSize}`;
+    
+      const apiUrl = `${url}/api/comercial/vendas-vendedor-estrutura.xsjs?dataInicio=${dataPesquisaInicio}&dataFim=${dataPesquisaFim}&idGrupoEmpresarial=${idGrupoEmpresarial}&idEmpresa=${idEmpresa}&descricaoProduto=${descricaoProduto}&uf=${uf}&idFornecedor=${idFornecedor}&idGrupoGrade=${idGrupoGrade}&idGrade=${idGrade}&idMarcaProduto=${idMarcaProduto}&page=${page}&pageSize=${pageSize}`;
       const response = await axios.get(apiUrl)
 
       return res.json(response.data); // Retorna
@@ -132,16 +133,16 @@ class ComercialProdutoControllers {
     idGrupo = idGrupo ? idGrupo : '';
     idSubGrupo = idSubGrupo ? idSubGrupo : '';
     idMarca = idMarca ? idMarca : '';
-    dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataFormatada(dataPesquisaInicio) : '';
-    dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataFormatada(dataPesquisaFim) : '';
+    dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
+    dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
     page = page ? page : '';
     pageSize = pageSize ? pageSize : '';
 
     try {
-      
-      const apiUrl = `${url}/api/comercial/produtos-mais-vendidos.xsjs?dataInicio=${dataPesquisaInicio}&dataFim=${dataPesquisaFim}&idEmpresa=${idEmpresa}&descricaoProduto=${descricaoProduto}&idFornecedor=${idFornecedor}&idGrupoGrade=${idGrupo}&idGrade=${idSubGrupo}&idMarcaProduto=${idMarca}&uf=${uf}&page=${page}&pageSize=${pageSize}`;
+       
+      const apiUrl = `${url}/api/comercial/produtos-mais-vendidos.xsjs?dataInicio=${dataPesquisaInicio}&dataFim=${dataPesquisaFim}&idGrupoEmpresarial=${idGrupoEmpresarial}&idEmpresa=${idEmpresa}&descricaoProduto=${descricaoProduto}&idFornecedor=${idFornecedor}&idGrupoGrade=${idGrupo}&idGrade=${idSubGrupo}&idMarcaProduto=${idMarca}&uf=${uf}&page=${page}&pageSize=${pageSize}`;
       const response = await axios.get(apiUrl)
-
+      
       return res.json(response.data); // Retorna
     } catch (error) {
       console.error("Unable to connect to the database:", error);
@@ -176,6 +177,37 @@ class ComercialProdutoControllers {
       throw error;
     }
 
+  }
+
+  async putFuncionarios(req, res) {
+    let {
+      ID,
+      IDFUNCIONARIO,
+      IDEMPRESA,
+      IDSUBGRUPOEMPRESARIAL,
+      IDFUNCIONARIOULTALTERACAO,
+      NOLOGIN,
+      PWSENHA
+    } = req.body;
+
+    try {
+      const apiUrl = `${url}/api/comercial/funcionario-loja.xsjs`
+
+      const response = await axios.put(apiUrl, [{
+        ID,
+        IDFUNCIONARIO,
+        IDEMPRESA,
+        IDSUBGRUPOEMPRESARIAL,
+        IDFUNCIONARIOULTALTERACAO,
+        NOLOGIN,
+        PWSENHA
+      }]);
+
+      return res.json(response.data);
+    } catch (error) {
+        console.error("erro no controller ComercialProdutoControllers.putFuncionarios:", error);
+        throw error;
+    }
   }
 
 }

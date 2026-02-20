@@ -235,9 +235,8 @@ class CormercialControllers {
     }
 
     async getListaVendasCustoLojas(req, res) {
-        let { idEmpresaLogin, dataPesquisaInicio, dataPesquisaFim, idGrupoEmpresarial, idEmpresa, descricaoProduto, ufPesquisa, idFornecedor, idGrupo, idGrade, idMarcaProduto } = req.query;
+        let { dataPesquisaInicio, dataPesquisaFim, idGrupoEmpresarial, idEmpresa, descricaoProduto, ufPesquisa, idFornecedor, idGrupo, idGrade, idMarcaProduto } = req.query;
 
-        idEmpresaLogin = idEmpresaLogin ? idEmpresaLogin : '';
         idGrupoEmpresarial = idGrupoEmpresarial ? idGrupoEmpresarial : '';
         idEmpresa = idEmpresa ? idEmpresa : '';
         descricaoProduto = descricaoProduto ? descricaoProduto : '';
@@ -246,13 +245,13 @@ class CormercialControllers {
         idGrupo = idGrupo ? idGrupo : '';
         idGrade = idGrade ? idGrade : '';
         idMarcaProduto = idMarcaProduto ? idMarcaProduto : '';
-        dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataFormatada(dataPesquisaInicio) : '';
-        dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataFormatada(dataPesquisaFim) : '';
+        dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
+        dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
         try {
 
             const apiUrl = `${url}/api/comercial/custo-por-loja.xsjs?page=&dataInicio=${dataPesquisaInicio}&dataFim=${dataPesquisaFim}&idGrupoEmpresarial=${idGrupoEmpresarial}&idEmpresa=${idEmpresa}&descricaoProduto=${descricaoProduto}&uf=${ufPesquisa}&idFornecedor=${idFornecedor}&idGrupoGrade=${idGrupo}&idGrade=${idGrade}&idMarcaProduto=${idMarcaProduto}`;
             const response = await axios.get(apiUrl)
-
+            console.log(apiUrl, 'apiUrl')
             return res.json(response.data); // Retorna
         } catch (error) {
             console.error("Unable to connect to the database:", error);

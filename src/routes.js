@@ -570,6 +570,7 @@ routes.get('/vendas-por-produtos', ComercialProdutoControllers.getListaVendasPor
 routes.get('/vendas-vendedor-estrutura', ComercialProdutoControllers.getListaVendasVendedorEstrutura)
 routes.get('/produtos-mais-vendidos', ComercialProdutoControllers.getListaProdutosMaisVendidosEstrutura)
 routes.get('/vendas-por-estrutura', ComercialProdutoControllers.getListaVendasIndicadoresEstrutura)
+routes.put('/funcionario-loja-comercial/:id', ComercialProdutoControllers.putFuncionarios)
 
 // Compras
 routes.get('/lista-pedidos', ComprasControllers.getListaPedidos)
