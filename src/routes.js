@@ -794,6 +794,7 @@ routes.put('/desativar-produto-promocao-destino', PromocaoControllers.putProduto
 routes.put('/desativar-produto-promocao-origem', PromocaoControllers.putProdutoOrigemPromocao)
 routes.put('/desativar-empresa-promocao', PromocaoControllers.putEmpresaPromocao)
 routes.put('/desativar-status-promocao', PromocaoControllers.putStatusPromocao)
+routes.post('/criar-produto-promocao-ativa', PromocaoControllers.postListaProdutosPromocoesAtiva)
 // routes.post('/criar-mecanica', PromocaoControllers.postMecanicaAtivas)
 
 routes.post('/deposito-integracao', ServiceLayerControllers.postDepositoIntegrarNoSAP)
