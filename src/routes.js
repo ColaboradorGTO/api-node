@@ -764,7 +764,12 @@ routes.get('/alvaras-empresa', ContabilidadeControllers.getAlvaraEmpresas)
 routes.get('/alvaras-empresa-detalhe', ContabilidadeControllers.getEmpresaAlvara)
 routes.get('/vinculo-alvaras-empresa', ContabilidadeControllers.getVinculoAlvaraEmpresa)
 routes.get('/visualizar-anexo-alvara', ContabilidadeControllers.getVisualizarAnexoAlvara)
+routes.get('/status-alvara', ContabilidadeControllers.getStatusAlvara)
 
+routes.put('/vinculoAlvarasEmpresa/:id', ContabilidadeControllers.putVinculoAlvarasEmpresas)
+routes.put('/arquivosAnexosAlvara/:id', ContabilidadeControllers.putArquivosAnexosAlvara)
+routes.post('/arquivosAnexosAlvara', ContabilidadeControllers.postArquivosAnexosAlvara)
+routes.post('/vinculoAlvarasEmpresa', ContabilidadeControllers.postVinculoAlvarasEmpresas)
 
 // Configuração Pix PDV
 routes.get('/configuracao-pix-pdv', ConfiguracaoPixPDVControllers.getListaConfiguracaoPixPDV)
