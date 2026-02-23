@@ -50,7 +50,6 @@ import FinanceiroVendasControllers from './Financeiro/Vendas/controllers/vendas.
 import VoucherControllers from './Financeiro/Voucher/controllers/voucher.js'
 import ExtratosControllers from './Financeiro/Extrato/controllers/extrato.js'
 
-
 import QuebraCaixaControllers from './DashBoard/QuebraCaixa/controllers/quebraCaixaLoja.js'
 import ADMCaixasControllers from './Administrativo/Caixa/controllers/admCaixas.js'
 import AdmVendasControllers from './Administrativo/Vendas/controllers/admVendas.js'
