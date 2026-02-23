@@ -18,8 +18,8 @@ class DashBoardAdiantamentoSalarialControllers {
 
         try {
             
-            // const apiUrl = `${url}/api/dashboard/adiantamento-salarial/adiantamentolojas.xsjs?idEmpresa=${idEmpresa}&dataPesquisaIni=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idMarca=${idMarca}&pageSize=${pageSize}&page=${page}`;
-            const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/dashboard/adiantamento-salarial/adiantamentolojas.xsjs?idEmpresa=${idEmpresa}&dataPesquisaIni=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idMarca=${idMarca}&pageSize=${pageSize}&page=${page}`;
+            const apiUrl = `${url}/api/dashboard/adiantamento-salarial/adiantamentolojas.xsjs?idEmpresa=${idEmpresa}&dataPesquisaIni=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idMarca=${idMarca}&pageSize=${pageSize}&page=${page}`;
+          
             const response = await axios.get(apiUrl);
        
             return res.json(response.data); // Retorna
@@ -80,8 +80,7 @@ class DashBoardAdiantamentoSalarialControllers {
         
         try {
            
-            // const response = await axios.put(`${url}/api/financeiro/atualizacao-adiantamento-status.xsjs`, {
-            const response = await axios.put(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/atualizacao-adiantamento-status.xsjs`, {
+            const response = await axios.put(`${url}/api/financeiro/atualizacao-adiantamento-status.xsjs`, {
                 STATIVO,
                 IDADIANTAMENTOSALARIO
             });

@@ -42,7 +42,7 @@ class QuebraCaixaControllers {
         try {
 
             const apiUrl = `${url}/api/dashboard/quebra-caixa/lista-quebra-caixa.xsjs?pageSize=${pageSize}&page=${page}&idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idMarca=${idMarca}&cpfquebraop=${cpfOperadorQuebra}&stQuebraPositivaNegativa=${stQuebraPositivaNegativa}&uf=${uf}`;
-            // const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/dashboard/quebra-caixa/lista-quebra-caixa.xsjs?pageSize=${pageSize}&page=${page}&idEmpresa=${idEmpresa}&dataPesquisaInic=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&idMarca=${idMarca}&cpfquebraop=${cpfOperadorQuebra}&stQuebraPositivaNegativa=${stQuebraPositivaNegativa}&uf=${uf}`;
+         
             const response = await axios.get(apiUrl);
 
             return res.json(response.data);
@@ -118,8 +118,8 @@ class QuebraCaixaControllers {
                 return res.status(400).json({ error: "IDFUNCIONARIO is required." });
             }
 
-            // const response = await axios.put(`${url}/api/financeiro/quebra-caixa-conferencia.xsjs`, {
-            const response = await axios.put(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/quebra-caixa-conferencia.xsjs`, {
+            
+            const response = await axios.put(`${url}/api/financeiro/quebra-caixa-conferencia.xsjs`, {
                 IDQUEBRACAIXA,
                 STCONFERIDO,
                 IDFUNCIONARIO

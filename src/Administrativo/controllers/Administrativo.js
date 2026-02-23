@@ -701,7 +701,7 @@ class AdministrativoControllers {
             coletor = coletor ? coletor : '';
             
         try {
-            const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/administrativo/detalhe-balanco-avulso.xsjs?page=1&idfilial=${idFilial}&coletor=${coletor}`
+            const apiUrl = `${url}/api/administrativo/detalhe-balanco-avulso.xsjs?page=1&idfilial=${idFilial}&coletor=${coletor}`
             const response = await axios.get(apiUrl)
 
             return res.json(response.data); // Retorna

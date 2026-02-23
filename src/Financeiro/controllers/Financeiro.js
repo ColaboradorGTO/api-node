@@ -633,9 +633,8 @@ class FinanceiroControllers {
     stConferido = stConferido ? stConferido : '';
     try {
 
-        // const apiUrl = `${url}/api/financeiro/quebra-caixa.xsjs?pageSize=${pageSize}&page=${page}&idEmpresa=${idEmpresa}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&idMarca=${idMarca}&cpfOperadorQuebra=${cpfOperadorQuebra}&tpQuebra=${stQuebraPositivaNegativa}&uf=${uf}&stAtivo=${stAtivo}&stConferido=${stConferido}`;
-        const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/financeiro/quebra-caixa.xsjs?pageSize=${pageSize}&page=${page}&idEmpresa=${idEmpresa}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&idMarca=${idMarca}&cpfOperadorQuebra=${cpfOperadorQuebra}&tpQuebra=${stQuebraPositivaNegativa}&uf=${uf}&stAtivo=${stAtivo}&stConferido=${stConferido}`;
-
+        const apiUrl = `${url}/api/financeiro/quebra-caixa.xsjs?pageSize=${pageSize}&page=${page}&idEmpresa=${idEmpresa}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&idMarca=${idMarca}&cpfOperadorQuebra=${cpfOperadorQuebra}&tpQuebra=${stQuebraPositivaNegativa}&uf=${uf}&stAtivo=${stAtivo}&stConferido=${stConferido}`;
+      
         const response = await axios.get(apiUrl);
 
         return res.json(response.data);

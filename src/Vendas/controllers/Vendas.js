@@ -166,8 +166,7 @@ class VendasControllers {
                 
         try {
 
-            // const apiUrl = `${url}/api/venda/vendas-prazo-excedido-troca.xsjs?idEmpresa=${idEmpresa}&cpfouIdVenda=${cpfOUidVenda}&nnf=${nnf}&serie=${serie}&idGrupoEmpresarial=${idSubGrupoEmpresarial}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&pageSize=${pageSize}&page=${page}`;
-            const apiUrl = `http://164.152.245.77:8000/quality/concentrador_homologacao/api/venda/vendas-prazo-excedido-troca.xsjs?id=${idVenda}&idEmpresa=${idEmpresa}&cpfouIdVenda=${cpfOUidVenda}&nnf=${nnf}&serie=${serie}&idGrupoEmpresarial=${idSubGrupoEmpresarial}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&pageSize=${pageSize}&page=${page}`;
+            const apiUrl = `${url}/api/venda/vendas-prazo-excedido-troca.xsjs?idEmpresa=${idEmpresa}&cpfouIdVenda=${cpfOUidVenda}&nnf=${nnf}&serie=${serie}&idGrupoEmpresarial=${idSubGrupoEmpresarial}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&pageSize=${pageSize}&page=${page}`;
            
             const response = await axios.get(apiUrl)
 
@@ -192,8 +191,7 @@ class VendasControllers {
                 VRPRODUTO,
                 VRTOTALLIQUIDO
             } = req.body; 
-            // const response = await axios.post(`${url}/api/venda/vendas-prazo-excedido-troca.xsjs`, {
-            const response = await axios.post(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/venda/vendas-prazo-excedido-troca.xsjs`, [{
+            const response = await axios.post(`${url}/api/venda/vendas-prazo-excedido-troca.xsjs`, [{
                 DIASAPOSCOMPRAR,
                 IDPRODUTO,
                 IDVENDA,
