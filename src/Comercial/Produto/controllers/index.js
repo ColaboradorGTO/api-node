@@ -5,7 +5,6 @@ import 'dotenv/config';
 const url = process.env.API_URL;
 
 
-
 class ComercialProdutoControllers {
   async getListaGrupoProduto(req, res) {
     let { nome, page, pageSize } = req.query;
