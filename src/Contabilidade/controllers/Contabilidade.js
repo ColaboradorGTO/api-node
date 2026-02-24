@@ -136,7 +136,7 @@ class ContabilidadeControllers {
 
       return res.json(response.data);
     } catch (error) {
-      console.error("Unable to connect to the database:", error);
+      console.error("Erro no ContabilidadeControllers.getListaVendasPeriodo:", error);
       throw error;
     }
 
@@ -164,7 +164,7 @@ class ContabilidadeControllers {
 
       return res.json(response.data);
     } catch (error) {
-      console.error("Unable to connect to the database:", error);
+      console.error("Erro no ContabilidadeControllers.getListaVendasPeriodoConsolidado:", error);
       throw error;
     }
 

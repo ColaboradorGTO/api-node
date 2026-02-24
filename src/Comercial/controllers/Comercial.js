@@ -1,8 +1,8 @@
 import axios from "axios";
 import { dataFormatada } from "../../utils/dataFormatada.js";
 import 'dotenv/config';
-// const url = process.env.API_URL;
-const url = 'http://164.152.245.77:8000/quality/concentrador'
+const url = process.env.API_URL;
+
 
 class CormercialControllers {
 
@@ -118,8 +118,8 @@ class CormercialControllers {
         idGrade = idGrade ? idGrade : '';
         idMarca = idMarca ? idMarca : '';
         idMarcaProduto = idMarcaProduto ? idMarcaProduto : '';
-        dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataFormatada(dataPesquisaInicio) : '';
-        dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataFormatada(dataPesquisaFim) : '';
+        dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
+        dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
         vlPrecoProduto = vlPrecoProduto ? vlPrecoProduto : '';
 
         try {
@@ -150,23 +150,28 @@ class CormercialControllers {
     
             return res.json(response.data); // Retorna
           } catch (error) {
-            console.error("Unable to connect to the database:", error);
+            console.error("Erro no ComercialControllers.getListaVendasMarcaPorPeriodoComercial:", error);
             throw error;
           }
         
     }
 
     async getListaVendasEstoqueGrupoSubGrupoComercial(req, res) {
-        let { idMarca, dataInicio, dataFim, idGrupo, idGrade } = req.query;
+        let { idMarca, dataInicio, dataFim, idGrupo, idGrade, page, pageSize } = req.query;
     
         if (!isNaN(idMarca)) {
-          idMarca = idMarca ? idMarca : '';
-          dataInicio = dataFormatada(dataInicio) ? dataInicio : ''
-          dataFim = dataFormatada(dataFim) ? dataFim : '' 
+            idMarca = idMarca ? idMarca : '';
+            dataInicio = dataInicio ? dataInicio : ''
+            dataFim = dataFim ? dataFim : '' 
+            idGrupo = idGrupo ? idGrupo : '';
+            idGrade = idGrade ? idGrade : '';
+            pageSize = pageSize ? pageSize : '';
+            page = page ? page : '';
     
           try {
            
-            const apiUrl = `${url}/api/comercial/vendas-estoque-grupo-subgrupo.xsjs?pageSize=${pageSize}&dataPesquisaInicio=${dataInicio}&dataPesquisaFim=${dataFim}&idMarca=${idMarca}&idGrupoGrade=${idGrupo}&idGrade=${idGrade}`
+            const apiUrl = `${url}/api/comercial/vendas-estoque-grupo-subgrupo.xsjs?page=${page}&pageSize=${pageSize}&dataPesquisaInicio=${dataInicio}&dataPesquisaFim=${dataFim}&idMarca=${idMarca}&idGrupoGrade=${idGrupo}&idGrade=${idGrade}`
+        
             const response = await axios.get(apiUrl)
     
             return res.json(response.data); // Retorna
