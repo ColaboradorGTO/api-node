@@ -554,7 +554,7 @@ class InformaticaControllers {
                 TELEFONE,
                 DEPARTAMENTO
             } = req.body;   
-            const response = await axios.post(`${url}/api/informatica/funcionario-loja.xsjs`, [{
+            const response = await axios.post(`${url}/api/informatica/funcionario-loja.xsjs`, {
                 ID,
                 IDFUNCIONARIO,
                 IDSUBGRUPOEMPRESARIAL,
@@ -576,7 +576,7 @@ class InformaticaControllers {
                 TELEFONE,
                 DEPARTAMENTO
                 
-            }])
+            })
         
             return res.json(response.data);
         } catch (error) {
