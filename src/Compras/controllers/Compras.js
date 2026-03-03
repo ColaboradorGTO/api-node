@@ -1061,14 +1061,14 @@ class ComprasControllers {
 
         try {
             const apiUrl = `${url}/api/compras/tipotecidos.xsjs`
-            const response = await axios.put(apiUrl, {
+            const response = await axios.put(apiUrl, [{
                 IDTPTECIDO: parseInt(IDTPTECIDO),
                 DSTIPOTECIDO,
                 STATIVO
-            });
+            }]);
             return res.json(response.data);
         } catch (error) {
-            console.error("erro nos campos do banco:", error);
+            console.error("error no ComprasController.updateTipoTecidos:", error);
             throw error;
         }
     }
@@ -1614,13 +1614,13 @@ class ComprasControllers {
 
         try {
             const apiUrl = `${url}/api/compras/tipotecidos.xsjs`
-            const response = await axios.post(apiUrl, {
+            const response = await axios.post(apiUrl, [{
                 DSTIPOTECIDO,
                 STATIVO
-            });
+            }]);
             return res.json(response.data);
         } catch (error) {
-            console.error("erro nos campos do banco:", error);
+            console.error("error ComprasController.createTipoTecidos:", error);
             throw error;
         }
     }
