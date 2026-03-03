@@ -981,7 +981,7 @@ class ComprasControllers {
         }
     }
 
-    async updateUnidadeMedida(req, res) {
+    async putUnidadeMedida(req, res) {
         let {
             IDUNIDADEMEDIDA,
             DSUNIDADE,
@@ -993,22 +993,22 @@ class ComprasControllers {
 
         try {
             const apiUrl = `${url}/api/compras/unidadesdemedidas.xsjs`
-            const response = await axios.put(apiUrl, {
+            const response = await axios.put(apiUrl, [{
                 IDUNIDADEMEDIDA,
                 DSUNIDADE,
                 DSSIGLA,
                 DTCADASTRO,
                 DTULTATUALIZACAO,
                 STATIVO
-            });
+            }]);
             return res.status(200).json({message: 'Atualizado com sucesso'});
         } catch (error) {
-            console.error("erro nos campos do banco:", error);
+            console.error("error no ComprasController.putUnidadeMedida:", error);
             throw error;
         }
     }
 
-    async updateCores(req, res) {
+    async putCores(req, res) {
         let {
             IDCOR,
             IDGRUPOCOR,
@@ -1018,16 +1018,16 @@ class ComprasControllers {
 
         try {
             const apiUrl = `${url}/api/compras/cores.xsjs`
-            const response = await axios.put(apiUrl, {
+            const response = await axios.put(apiUrl, [{
                 IDCOR,
                 IDGRUPOCOR,
                 DSCOR,
                 STATIVO
-            });
+            }]);
 
             return res.json(response.data);
         } catch (error) {
-            console.error("erro nos campos do banco:", error);
+            console.error("erro no ComprasController.putCores:", error);
             throw error;
         }
     }
@@ -1538,7 +1538,7 @@ class ComprasControllers {
         }
     }
 
-    async createUnidadeMedida(req, res) {
+    async postUnidadeMedida(req, res) {
         let {
             DSUNIDADE,
             DSSIGLA,
@@ -1549,21 +1549,21 @@ class ComprasControllers {
 
         try {
             const apiUrl = `${url}/api/compras/unidadesdemedidas.xsjs`
-            const response = await axios.post(apiUrl, {
+            const response = await axios.post(apiUrl, [{
                 DSUNIDADE,
                 DSSIGLA,
                 DTCADASTRO,
                 DTULTATUALIZACAO,
                 STATIVO
-            });
+            }]);
             return res.json(response.data);
         } catch (error) {
-            console.error("erro nos campos do banco:", error);
+            console.error("error no ComprasController.postUnidadeMedida:", error);
             throw error;
         }
     }
 
-    async createCores(req, res) {
+    async postCores(req, res) {
         let  {
             IDGRUPOCOR,
             DSCOR,
@@ -1572,14 +1572,14 @@ class ComprasControllers {
 
         try {
             const apiUrl = `${url}/api/compras/cores.xsjs`
-            const response = await axios.post(apiUrl, {
+            const response = await axios.post(apiUrl, [{
                 IDGRUPOCOR,
                 DSCOR,
                 STATIVO
-            });
+            }]);
             return res.json(response.data);
         } catch (error) {
-            console.error("erro ComprasController.createCores:", error);
+            console.error("erro ComprasController.postCores:", error);
             throw error;
         }
     }
