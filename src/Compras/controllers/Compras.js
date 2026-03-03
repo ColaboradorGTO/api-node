@@ -1036,14 +1036,14 @@ class ComprasControllers {
         try {
             let { IDVINCESTILOSESTRUTURA, IDGRUPOESTRUTURAANTIGA, IDESTILO, DSESTILO, IDGRUPOESTRUTURA, STATIVO } = req.body;
             const apiUrl = `${url}/api/compras/estilos.xsjs`
-            const response = await axios.put(apiUrl, {
+            const response = await axios.put(apiUrl, [{
                 IDVINCESTILOSESTRUTURA,
                 IDGRUPOESTRUTURAANTIGA,
                 IDESTILO,
                 DSESTILO,
                 IDGRUPOESTRUTURA,
                 STATIVO,
-            })
+            }]);
             
             return res.json(response.data);
         } catch (error) {
@@ -1589,18 +1589,18 @@ class ComprasControllers {
             let { DSESTILO, IDGRUPOESTRUTURA, STATIVO, IDESTILO, IDGRUPOESTRUTURAANTIGA, IDVINCESTILOSESTRUTURA } = req.body;
             const apiUrl = `${url}/api/compras/estilos.xsjs`
 
-            const response = await axios.post(apiUrl, {
+            const response = await axios.post(apiUrl, [{
                 IDGRUPOESTRUTURAANTIGA: parseInt(null),
                 IDVINCESTILOSESTRUTURA: parseInt(null),
                 IDESTILO: parseInt(null),
                 DSESTILO,
                 IDGRUPOESTRUTURA,
                 STATIVO,
-            });
+            }]);
          
             return res.json(response.data);
         } catch (error) {
-            console.error("Unable to connect to the database:", error);
+            console.error("Erro no ComprasController.postEstilos:", error);
             return res.status(500).json({ error: error.message });
         }
     }
