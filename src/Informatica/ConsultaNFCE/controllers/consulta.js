@@ -8,8 +8,7 @@ class ConsultaNfeController {
       let { IDVENDA, page, pageSize } = req.body;
       page = page ? page : ''
       pageSize = pageSize ? pageSize : ''
-      //   const response = await axios.put(`${url}/api/venda/valida-venda-contingencia.xsjs?page=${page}&pageSize=${pageSize}`, {
-      const response = await axios.put(`http://164.152.245.77:8000/quality/concentrador/api/venda/valida-venda-contingencia.xsjs`, {
+      const response = await axios.put(`${url}/api/venda/valida-venda-contingencia.xsjs`, {
         IDVENDA
       })
       
