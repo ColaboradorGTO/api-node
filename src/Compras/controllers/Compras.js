@@ -1083,12 +1083,12 @@ class ComprasControllers {
 
         try {
             const apiUrl = `${url}/api/compras/categoriapedidos.xsjs`
-            const response = await axios.put(apiUrl, {
+            const response = await axios.put(apiUrl, [{
                 IDCATEGORIAPEDIDO,
                 DSCATEGORIAPEDIDO,
                 TIPOPEDIDO,
                 STATIVO
-            });
+            }]);
             return res.json(response.data);
         } catch (error) {
             console.error("error no ComprasControllers.putCategoriaPedidos:", error);
@@ -1625,7 +1625,7 @@ class ComprasControllers {
         }
     }
 
-    async createCategoriaPedidos(req, res) {
+    async postCategoriaPedidos(req, res) {
         let {
             IDCATEGORIAPEDIDO,
             DSCATEGORIAPEDIDO,
@@ -1635,15 +1635,15 @@ class ComprasControllers {
 
         try {
             const apiUrl = `${url}/api/compras/categoriapedidos.xsjs`
-            const response = await axios.post(apiUrl, {
+            const response = await axios.post(apiUrl, [{
                 IDCATEGORIAPEDIDO,
                 DSCATEGORIAPEDIDO,
                 TIPOPEDIDO,
                 STATIVO
-            });
+            }]);
             return res.json(response.data);
         } catch (error) {
-            console.error("error ComprasController.createCategoriaPedidos:", error);
+            console.error("error ComprasController.postCategoriaPedidos:", error);
             throw error;
         }
     }
