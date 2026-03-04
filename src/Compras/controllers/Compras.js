@@ -928,7 +928,7 @@ class ComprasControllers {
         }
     }
 
-    async updateSubGrupoEstrutura(req, res) {
+    async putSubGrupoEstrutura(req, res) {
         let {
             IDGRUPOESTRUTURAANTIGA,
             IDGRUPOESTRUTURA,
@@ -941,8 +941,8 @@ class ComprasControllers {
 
         try {
             const apiUrl = `${url}/api/compras/subgrupoestrutura.xsjs`
-            // return console.log(req.body, 'request.body');
-            const response = await axios.put(apiUrl, {
+         
+            const response = await axios.put(apiUrl, [{
                 IDGRUPOESTRUTURAANTIGA,
                 IDGRUPOESTRUTURA,
                 DSSUBGRUPOESTRUTURA,
@@ -950,10 +950,10 @@ class ComprasControllers {
                 CODSUBGRUPOESTRUTURA,
                 IDSUBGRUPOESTRUTURA,
                 STATIVO
-            });
+            }]);
             return res.json(response.data);
         } catch (error) {
-            console.error("erro nos campos do banco:", error);
+            console.error("error no ComprasControllers.putSubGrupoEstrutura:", error);
             throw error;
         }
     }
@@ -1428,7 +1428,7 @@ class ComprasControllers {
     }
 
     // CREATE
-    async createSubGrupoEstrutura(req, res) {
+    async postSubGrupoEstrutura(req, res) {
         let {
             IDGRUPOESTRUTURAANTIGA,
             IDGRUPOESTRUTURA,
@@ -1441,7 +1441,7 @@ class ComprasControllers {
 
         try {
             const apiUrl = `${url}/api/compras/subgrupoestrutura.xsjs`
-            const response = await axios.post(apiUrl, {
+            const response = await axios.post(apiUrl, [{
                 IDGRUPOESTRUTURAANTIGA,
                 IDGRUPOESTRUTURA,
                 DSSUBGRUPOESTRUTURA,
@@ -1449,7 +1449,7 @@ class ComprasControllers {
                 CODSUBGRUPOESTRUTURA,
                 IDSUBGRUPOESTRUTURA,
                 STATIVO
-            });
+            }]);
             return res.json(response.data);
         } catch (error) {
             console.error("error no ComprasController.postGrupoEstrutura:", error);
