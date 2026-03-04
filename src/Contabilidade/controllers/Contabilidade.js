@@ -1,12 +1,12 @@
 import axios from "axios";
 import { dataFormatada } from "../../utils/dataFormatada.js";
 import 'dotenv/config';
-// const url = process.env.API_URL;
-const url = "http://164.152.245.77:8000/quality/concentrador";
+const url = process.env.API_URL;
+
 
 class ContabilidadeControllers {
   async getListaVendasContigencia(req, res) {
-    let { idMarca, idEmpresa, idVenda, dataPesquisaInicio, dataPesquisaFim, idGrupo, page, pageSize } = req.query;
+    let { idMarca, idEmpresa, idVenda, dataPesquisaInicio, dataPesquisaFim,idGrupo, page, pageSize } = req.query;
     idMarca = idMarca ? idMarca : '';
     idEmpresa = idEmpresa ? idEmpresa : '';
     idVenda = idVenda ? idVenda : '';
@@ -132,6 +132,7 @@ class ContabilidadeControllers {
     try {
 
       const apiUrl = `${url}/api/contabilidade/venda-produto.xsjs?dataInicio=${dataPesquisaInicio}&dataFim=${dataPesquisaFim}&idGrupoEmpresarial=${idGrupoEmpresarial}&idEmpresa=${idEmpresa}&descricaoProduto=${produtoPesquisado}&uf=${ufPesquisa}&idFornecedor=${idFornecedor}&idGrupoGrade=${idGrupoGrade}&idGrade=${idGrade}&page=${page}&pageSize=${pageSize}`
+     
       const response = await axios.get(apiUrl)
 
       return res.json(response.data);
@@ -183,7 +184,7 @@ class ContabilidadeControllers {
     pageSize = pageSize ? pageSize : '';
 
     try {
-      const response = await axios.get(`${url}/api/empresa.xsjs?id=${idEmpresa}&idSubGrupoEmpresa=${idSubGrupoEmpresa}&uf=${uf}&nuCnpj=${nuCnpj}&stAtivo=${stAtivo}&page=${page}&pageSize=${pageSize}`)
+      const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/empresa.xsjs?id=${idEmpresa}&idSubGrupoEmpresa=${idSubGrupoEmpresa}&uf=${uf}&nuCnpj=${nuCnpj}&stAtivo=${stAtivo}&page=${page}&pageSize=${pageSize}`)
 
       return res.json(response.data);
     } catch (error) {
@@ -200,7 +201,7 @@ class ContabilidadeControllers {
     pageSize = pageSize ? pageSize : '';
 
     try {
-      const response = await axios.get(`${url}/api/contabilidade/alvaras.xsjs?&id=${id}&stAtivo=${stAtivo}&page=${page}&pageSize=${pageSize}`)
+      const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/alvaras.xsjs?&id=${id}&stAtivo=${stAtivo}&page=${page}&pageSize=${pageSize}`)
 
       return res.json(response.data);
     } catch (error) {
@@ -221,7 +222,7 @@ class ContabilidadeControllers {
     pageSize = pageSize ? pageSize : '';
 
     try {
-      const response = await axios.get(`${url}/api/contabilidade/empresa.xsjs?uf=${ufFiliais}&idSubGrupoEmpresa=${idSubGrupoEmpresa}&id=${idFilial}&stAtivo=${stAtivo}&page=${page}&pageSize=${pageSize}`)
+      const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/empresa.xsjs?uf=${ufFiliais}&idSubGrupoEmpresa=${idSubGrupoEmpresa}&id=${idFilial}&stAtivo=${stAtivo}&page=${page}&pageSize=${pageSize}`)
 
       return res.json(response.data);
     } catch (error) {
@@ -238,7 +239,7 @@ class ContabilidadeControllers {
     pageSize = pageSize ? pageSize : '';
 
     try {
-      const response = await axios.get(`${url}/api/contabilidade/alvaras-empresa.xsjs?id=${idFilial}&page=${page}&pageSize=${pageSize}`)
+      const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/alvaras-empresa.xsjs?id=${idFilial}&page=${page}&pageSize=${pageSize}`)
 
       return res.json(response.data);
     } catch (error) {
@@ -254,7 +255,7 @@ class ContabilidadeControllers {
     pageSize = pageSize ? pageSize : '';
 
     try {
-      const response = await axios.get(`${url}/api/contabilidade/vinculo-alvaras-empresa.xsjs?id=${idFilial}&page=${page}&pageSize=${pageSize}`)
+      const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/vinculo-alvaras-empresa.xsjs?id=${idFilial}&page=${page}&pageSize=${pageSize}`)
 
       return res.json(response.data);
     } catch (error) {
@@ -266,9 +267,11 @@ class ContabilidadeControllers {
   async getVisualizarAnexoAlvara(req, res) {
     let { idArquivoAlvara } = req.query;
 
+    idArquivoAlvara = idArquivoAlvara ? idArquivoAlvara : '';
+    
     try {
       const response = await axios.get(
-        `${url}/api/contabilidade/arquivos-anexos-alvaras-empresa.xsjs?id=${idArquivoAlvara}`,
+        `http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/arquivos-anexos-alvaras-empresa.xsjs?id=${idArquivoAlvara}`,
         {
           responseType: "arraybuffer"
         }
@@ -295,7 +298,7 @@ class ContabilidadeControllers {
     pageSize = pageSize ? pageSize : '';
 
     try {
-      const response = await axios.get(`${url}/api/contabilidade/status-alvara.xsjs?&page=${page}&pageSize=${pageSize}`)
+      const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/status-alvara.xsjs?&page=${page}&pageSize=${pageSize}`)
 
       return res.json(response.data);
     } catch (error) {
@@ -304,14 +307,12 @@ class ContabilidadeControllers {
     }
   }
 
-
-
   async putVinculoAlvarasEmpresas(req, res) {
     try {
 
       const dados = Array.isArray(req.body) ? req.body : [req.body];
 
-      const response = await axios.put(`${url}/api/contabilidade/vinculo-alvaras-empresa.xsjs`, dados)
+      const response = await axios.put(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/vinculo-alvaras-empresa.xsjs`, dados)
 
       return res.json(response.data);
     } catch (error) {
@@ -325,7 +326,7 @@ class ContabilidadeControllers {
 
       const dados = Array.isArray(req.body) ? req.body : [req.body];
 
-      const response = await axios.put(`${url}/api/contabilidade/vinculo-alvaras-empresa.xsjs`, dados)
+      const response = await axios.post(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/vinculo-alvaras-empresa.xsjs`, dados)
 
       return res.json(response.data);
     } catch (error) {
@@ -340,7 +341,7 @@ class ContabilidadeControllers {
       cancelar = cancelar ? cancelar : 'false';
       const dados = Array.isArray(req.body) ? req.body : [req.body];
 
-      const response = await axios.put(`${url}/api/contabilidade/arquivos-anexos-alvaras-empresa.xsjs?cancelar=${cancelar}`, dados)
+      const response = await axios.put(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/arquivos-anexos-alvaras-empresa.xsjs?cancelar=${cancelar}`, dados)
 
       return res.json(response.data);
     } catch (error) {
@@ -358,7 +359,7 @@ class ContabilidadeControllers {
       const dados = Array.isArray(req.body) ? req.body : [req.body];
 
       const response = await axios.post(
-        "${url}/api/contabilidade/arquivos-anexos-alvaras-empresa.xsjs",
+        "http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/arquivos-anexos-alvaras-empresa.xsjs",
         dados,
         {
           maxBodyLength: Infinity, 
@@ -377,8 +378,6 @@ class ContabilidadeControllers {
       });
     }
   }
-
 }
-
 
 export default new ContabilidadeControllers();
