@@ -193,13 +193,14 @@ class ComprasControllers {
         pageSize = pageSize ? pageSize : '';
 
         try {
+            
             const apiUrl = `${url}/api/compras/fornecedor.xsjs?id=${idFornecedor}&descFornecedor=${descFornecedor}&CNPJFornecedor=${CNPJFornecedor}&descFornOrCnpj=${descFornecedorOuCNPJ}&page=${page}&pageSize=${pageSize}`
-          
+    
             const response = await axios.get(apiUrl)
             
             return res.json(response.data);
         } catch (error) {
-            console.error("Unable to connect to the database:", error);
+            console.error("Error no ComprasController.getListaFornecedores:", error);
             throw error;
         }
 
@@ -236,21 +237,24 @@ class ComprasControllers {
             throw error;
         }
     }
-    
+
     async getListaFabricantes(req, res) {
-        let { idFabricante } = req.query;
+        let { idFabricante, page, pageSize } = req.query;
         idFabricante = idFabricante ? idFabricante : '';
+        page = page ? page : '';
+        pageSize = pageSize ? pageSize : '';
         try {
-            const apiUrl = `${url}/api/compras/fabricante.xsjs?idFab=${idFabricante}`
+            const apiUrl = `${url}/api/compras/fabricante.xsjs?idFab=${idFabricante}&page=${page}&pageSize=${pageSize}`
             const response = await axios.get(apiUrl)
 
             return res.json(response.data); // Retorna
         } catch (error) {
-            console.error("Unable to connect to the database:", error);
+            console.error("Error no ComprasControllers.getListaFabricantes:", error);
             throw error;
         }
 
     }
+
     async getListaCompradores(req, res) {
         let { } = req.query;
 
@@ -806,12 +810,12 @@ class ComprasControllers {
         }
     }
 
-    async putCadastroTransportador(req, res) {
+        async putCadastroTransportador(req, res) {
         let {
             IDTRANSPORTADORA,
             IDGRUPOEMPRESARIAL,
             IDSUBGRUPOEMPRESARIAL,
-            NORAZAOSOCIA,
+            NORAZAOSOCIAL,
             NOFANTASIA,
             NUCNPJ,
             NUINSCESTADUAL,
@@ -834,13 +838,17 @@ class ComprasControllers {
             STATIVO
         } = req.body;
 
+        if(!IDTRANSPORTADORA) {
+            return res.status(400).json({ error: "IDTRANSPORTADORA is required" });
+        }
+
         try {
             const apiUrl = `${url}/api/compras/transportador.xsjs`
-            const response = await axios.put(apiUrl, {
+            const response = await axios.put(apiUrl, [{
                 IDTRANSPORTADORA,
                 IDGRUPOEMPRESARIAL,
                 IDSUBGRUPOEMPRESARIAL,
-                NORAZAOSOCIA,
+                NORAZAOSOCIAL,
                 NOFANTASIA,
                 NUCNPJ,
                 NUINSCESTADUAL,
@@ -861,10 +869,11 @@ class ComprasControllers {
                 DTCADASTRO,
                 DTULTATUALIZACAO,
                 STATIVO
-            });
+            }]);
+           
             return res.json(response.data);
         } catch (error) {
-            console.error("erro nos campos do banco:", error);
+            console.error("Error no ComprasControllers.putCadastroTransportador:", error);
             throw error;
         }
     }
@@ -1176,7 +1185,7 @@ class ComprasControllers {
         }
     }
 
-    async putFornecedorFabricante(req, res) {
+      async putFornecedorFabricante(req, res) {
         let {
             IDFABRICANTEFORN,
             IDFABRICANTE,
@@ -1184,14 +1193,18 @@ class ComprasControllers {
             STATIVO,
         } = req.body;
 
+        if(!IDFABRICANTEFORN) {
+            return res.status(400).json({ error: "IDFABRICANTEFORN is required" });
+        }
+
         try {
             const apiUrl = `${url}/api/compras/fornecedor-fabricante.xsjs`
-            const response = await axios.put(apiUrl, {
+            const response = await axios.put(apiUrl, [{
                 IDFABRICANTEFORN,
                 IDFABRICANTE,
                 IDFORNECEDOR,
                 STATIVO,
-            });
+            }]);
             return res.json(response.data);
         } catch (error) {
             console.error("error no ComprasControllers.putFornecedorFabricante:", error);
@@ -1697,12 +1710,12 @@ class ComprasControllers {
         }
     }
 
-    async postCadastroTransportador(req, res) {
+     async postCadastroTransportador(req, res) {
         let {
             IDTRANSPORTADORA,
             IDGRUPOEMPRESARIAL,
             IDSUBGRUPOEMPRESARIAL,
-            NORAZAOSOCIA,
+            NORAZAOSOCIAL,
             NOFANTASIA,
             NUCNPJ,
             NUINSCESTADUAL,
@@ -1725,13 +1738,16 @@ class ComprasControllers {
             STATIVO
         } = req.body;
 
+        if(!NUCNPJ) {
+            return res.status(400).json({ error: "O campo 'NUCNPJ' é obrigatório e não pode estar vazio." });
+        }
         try {
             const apiUrl = `${url}/api/compras/transportador.xsjs`
-            const response = await axios.post(apiUrl, {
+            const response = await axios.post(apiUrl, [{
                 IDTRANSPORTADORA,
                 IDGRUPOEMPRESARIAL,
                 IDSUBGRUPOEMPRESARIAL,
-                NORAZAOSOCIA,
+                NORAZAOSOCIAL,
                 NOFANTASIA,
                 NUCNPJ,
                 NUINSCESTADUAL,
@@ -1752,10 +1768,10 @@ class ComprasControllers {
                 DTCADASTRO,
                 DTULTATUALIZACAO,
                 STATIVO
-            });
+            }]);
             return res.json(response.data);
         } catch (error) {
-            console.error("erro nos campos do banco:", error);
+            console.error("Error no ComprasCOntrollers.postCadastroTransportador:", error);
             throw error;
         }
     }
@@ -1769,15 +1785,19 @@ class ComprasControllers {
             STATIVO,
         } = req.body;
 
+        if(!DSFABRICANTE) {
+            return res.status(400).json({ error: "O campo 'DSFABRICANTE' é obrigatório e não pode estar vazio." });
+        }
+
         try {
             const apiUrl = `${url}/api/compras/fabricante.xsjs`
-            const response = await axios.post(apiUrl, {
+            const response = await axios.post(apiUrl, [{
                 IDFABRICANTE,
                 DSFABRICANTE,
                 DTCADASTRO,
                 DTULTATUALIZACAO,
                 STATIVO
-            });
+            }]);
             return res.json(response.data);
         } catch (error) {
             console.error("error no ComprasControllers.postFabricanteFornecedor:", error);
