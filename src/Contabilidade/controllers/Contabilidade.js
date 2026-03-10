@@ -179,8 +179,6 @@ class ContabilidadeControllers {
 
   }
 
-  ////ALVARA EMPRESAS///
-
   async getTodasEmpresas(req, res) {
     let { idEmpresa, idSubGrupoEmpresa, page, pageSize, uf, nuCnpj, stAtivo } = req.query;
     idEmpresa = idEmpresa ? idEmpresa : '';
@@ -313,19 +311,6 @@ class ContabilidadeControllers {
     }
   }
 
-  /*   async putVinculoAlvarasEmpresas(req, res) {
-      try {
-  
-        const dados = Array.isArray(req.body) ? req.body : [req.body];
-  
-        const response = await axios.put(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/vinculo-alvaras-empresa.xsjs`, dados)
-  
-        return res.json(response.data);
-      } catch (error) {
-        console.error("Unable to connect to the database:", error);
-        throw error;
-      }
-    } */
 
   async putVinculoAlvarasEmpresas(req, res) {
     try {
@@ -368,19 +353,6 @@ class ContabilidadeControllers {
     }
   }
 
-  /*   async postVinculoAlvarasEmpresas(req, res) {
-      try {
-  
-        const dados = Array.isArray(req.body) ? req.body : [req.body];
-  
-        const response = await axios.post(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/vinculo-alvaras-empresa.xsjs`, dados)
-  
-        return res.json(response.data);
-      } catch (error) {
-        console.error("Unable to connect to the database:", error);
-        throw error;
-      }
-    } */
 
   async postVinculoAlvarasEmpresas(req, res) {
     try {
@@ -424,21 +396,6 @@ class ContabilidadeControllers {
   }
 
 
-  /*   async putArquivosAnexosAlvara(req, res) {
-      let { cancelar } = req.query;
-      try {
-        cancelar = cancelar ? cancelar : 'false';
-        const dados = Array.isArray(req.body) ? req.body : [req.body];
-  
-        const response = await axios.put(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/arquivos-anexos-alvaras-empresa.xsjs?cancelar=${cancelar}`, dados)
-  
-        return res.json(response.data);
-      } catch (error) {
-        console.error("Unable to connect to the database:", error);
-        throw error;
-      }
-    } */
-
   async putArquivosAnexosAlvara(req, res) {
 
     try {
@@ -476,34 +433,6 @@ class ContabilidadeControllers {
     }
   }
 
-  /*   async postArquivosAnexosAlvara(req, res) {
-      try {
-        if (!req.body) {
-          return res.status(400).json({ error: "Body não enviado." });
-        }
-  
-        const dados = Array.isArray(req.body) ? req.body : [req.body];
-  
-        const response = await axios.post(
-          "http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/arquivos-anexos-alvaras-empresa.xsjs",
-          dados,
-          {
-            maxBodyLength: Infinity,
-            maxContentLength: Infinity,
-          }
-        );
-  
-        return res.status(200).json(response.data);
-  
-      } catch (error) {
-        console.error("Erro ao enviar arquivo para SAP:", error.message);
-  
-        return res.status(500).json({
-          error: "Erro ao processar upload do arquivo.",
-          details: error.message
-        });
-      }
-    } */
 
   async postArquivosAnexosAlvara(req, res) {
     try {
