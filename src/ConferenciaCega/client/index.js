@@ -12,15 +12,6 @@ export class CoferenciaCegaClient {
     }
 
     async atualizarOT(
-        /* IDEMPRESAORIGEM,
-        IDPRODUTO,
-        IDSTDIVERGENCIA,
-        OBSDIVERGENCIA,
-        IDUSRAJUSTE,
-        IDSTATUSOT,
-        IDRESUMOOT,
-        IDUSRCANCELAMENTO,
-        dadosdetalheot */
 
         IDRESUMOOT,
         IDPRODUTO,
@@ -82,64 +73,6 @@ export class CoferenciaCegaClient {
             QTDTOTALITENSAJUSTE,
             dadosdetalheot
         }]);
-        return response.data;
-    }
-
-    async criarOT(
-        IDEMPRESAORIGEM,
-        IDEMPRESADESTINO,
-        IDOPERADOREXPEDICAO,
-        NUTOTALITENS,
-        QTDTOTALITENS,
-        QTDTOTALITENSRECEPCIONADO,
-        QTDTOTALITENSDIVERGENCIA,
-        NUTOTALVOLUMES,
-        TPVOLUME,
-        VRTOTALCUSTO,
-        VRTOTALVENDA,
-        DTRECEPCAO,
-        IDOPERADORRECEPTOR,
-        DSOBSERVACAO,
-        IDUSRCANCELAMENTO,
-        IDSTDIVERGENCIA,
-        OBSDIVERGENCIA,
-        STEMISSAONFE,
-        NUMERONFE,
-        STENTRADAINVENTARIO,
-        QTDCONFERENCIA,
-        IDSTATUSOT,
-        IDUSRAJUSTE,
-        DTAJUSTE,
-        QTDTOTALITENSAJUSTE,
-    ) {
-
-        const response = await this.api.post(`${url}/api/conferencia-cega/status-divergencia.xsjs`, [{
-            IDEMPRESAORIGEM,
-            IDEMPRESADESTINO,
-            IDOPERADOREXPEDICAO,
-            NUTOTALITENS,
-            QTDTOTALITENS,
-            QTDTOTALITENSRECEPCIONADO,
-            QTDTOTALITENSDIVERGENCIA,
-            NUTOTALVOLUMES,
-            TPVOLUME,
-            VRTOTALCUSTO,
-            VRTOTALVENDA,
-            DTRECEPCAO,
-            IDOPERADORRECEPTOR,
-            DSOBSERVACAO,
-            IDSTDIVERGENCIA,
-            OBSDIVERGENCIA,
-            STEMISSAONFE,
-            NUMERONFE,
-            STENTRADAINVENTARIO,
-            QTDCONFERENCIA,
-            IDSTATUSOT,
-            IDUSRCANCELAMENTO,
-            IDUSRAJUSTE,
-            DTAJUSTE,
-            QTDTOTALITENSAJUSTE,
-        }])
         return response.data;
     }
 
