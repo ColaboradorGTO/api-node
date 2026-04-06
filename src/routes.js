@@ -33,7 +33,9 @@ import RelatorioBIController from './Informatica/relatorio/ralatoriaBI/controlle
 import LinkRelatorioBiController from './Informatica/relatorio/linkRelatorioBI/controllers/controllersLinkRelatorioBi.js'
 // import ConsultaNFceController  from './Informatica/ConsultaNFCE/controllers/index.js'
 // import ConsultaNFeController from './Informatica/ConsultaNFCE/controllers/nfe.js'
-// import ConsultaStatusNfeController from './Informatica/ConsultaNFCE/controllers/statusNfce.js'
+
+
+import ConsultaStatusNfeController from './Informatica/ConsultaNFCE/controllers/statusNfce.js'
 import ConsultaNfeController from './Informatica/ConsultaNFCE/controllers/consulta.js'
 // Financeiro Início
 import AdiantamentosControllers from './Financeiro/Adiantamentos/controllers/adiantamentos.js'
@@ -49,6 +51,7 @@ import SaldosControllers from './Financeiro/Saldos/controllers/saldos.js'
 import FinanceiroVendasControllers from './Financeiro/Vendas/controllers/vendas.js'
 import VoucherControllers from './Financeiro/Voucher/controllers/voucher.js'
 import ExtratosControllers from './Financeiro/Extrato/controllers/extrato.js'
+
 
 import QuebraCaixaControllers from './DashBoard/QuebraCaixa/controllers/quebraCaixaLoja.js'
 import ADMCaixasControllers from './Administrativo/Caixa/controllers/admCaixas.js'
@@ -311,6 +314,7 @@ routes.post('/criar-movimento-saldo-bonificacao', SaldosControllers.createMovime
 
 //  Pedidos
 routes.get('/pedido-compras', PedidosControllers.getListaPedidosCompras)
+routes.get('/financeiro-lista-pedidos', PedidosControllers.getListaPedidosFinanceiro)
 
 
 // Faturas
@@ -475,7 +479,7 @@ routes.put('/funcionarios-desconto/:id', InformaticaControllers.putFuncionarioDe
 // routes.post('/consulta-nfec', ConsultaNfeController.consultar)
 // routes.get('/valida-venda-contingencia', ConsultaNfeController.getListaVendasContigenciaValidas);
 routes.put('/valida-venda-contingencia/:id', ConsultaNfeController.putValidarVendaContigencia);
-// routes.get('/status-sefaz', ConsultaStatusNfeController.statusSefaz);
+routes.get('/gerar-pfx', ConsultaStatusNfeController.gerarPFX);
 // routes.post('/consultar-nfce', ConsultaNFceController.consultaNFce);
 // routes.post('/downloadXML', ConsultaStatusNfeController.downloadNFE);
 // routes.post('/cancelar-nfe', ConsultaStatusNfeController.cancelarNFE);
@@ -603,7 +607,7 @@ routes.get('/listaCores', ComprasControllers.getListaCores)
 routes.get('/grupoCores', ComprasControllers.getListaGrupoCores)
 routes.get('/listaEstilos', ComprasControllers.getListaEstilos)
 routes.get('/tipoTecidos', ComprasControllers.getListaTipoTecidos)
-routes.get('/tipo-tecido', ComprasControllers.getListaTipoTecidoSelect)
+routes.get('/tipo-tecido', ComprasControllers.getListaTipoTecido)
 routes.get('/categoriaPedidos', ComprasControllers.getListaCategoriaPedidos)
 routes.get('/categoria-pedido', ComprasControllers.getListaCategoriaPedido)
 routes.get('/tamanhosPedidos', ComprasControllers.getListaTamanhosPedidos)
@@ -615,9 +619,10 @@ routes.get('/unidadeMedida', ComprasControllers.getListaUnidadeMedida)
 routes.get('/unidades-de-Medidas', ComprasControllers.getListaUnidadesMedidas)
 
 routes.get('/localExposicao', ComprasControllers.getListaLocalExposicao)
-routes.get('/distribuicaoComprasHistorico', ComprasControllers.getListaDistribuicaoHistorico)
-routes.get('/detalheDistribuicaoCompras', ComprasControllers.getListaDetalheDistribuicao)
-routes.get('/distribuicaoSugestoesHistorico', ComprasControllers.getListaDistribuicaoSugestoesHistorico)
+routes.get('/distribuicao-compras-historico', ComprasControllers.getListaDistribuicaoHistorico)
+routes.get('/vinculo-estilo-grupo', ComprasControllers.getListaVinculoEstiloGrupo)
+routes.get('/detalhe-distribuicao-compras', ComprasControllers.getListaDetalheDistribuicao)
+routes.get('/distribuicao-compras-sugestoes-historico', ComprasControllers.getListaDistribuicaoSugestoesHistorico)
 routes.get('/produtos-entre-filiais', ComprasControllers.getListaProdutosEntreFiliais)
 routes.get('/produtos-por-pedido', ComprasControllers.getListaProdutosPorPedido)
 routes.get('/consulta-fornecedor-sap', ComprasControllers.getListaFornecedorSap)
@@ -628,6 +633,7 @@ routes.get('/consulta-fornecedor-sap', ComprasControllers.getListaFornecedorSap)
 routes.put('/condicaoPagamento/:id', ComprasControllers.putCondicaoPagamento)
 routes.put('/transportador/:id', ComprasControllers.putCadastroTransportador)
 routes.put('/atualizarProdutoImagem', ComprasControllers.updateProdutoImagem)
+routes.put('/atualiza-imagem/:id', ComprasControllers.putImagem)
 routes.put('/sub-grupo-estrutura/:id', ComprasControllers.putSubGrupoEstrutura)
 routes.put('/grupo-estrutura/:id', ComprasControllers.putGrupoEstrutura)
 routes.put('/unidadeMedida/:id', ComprasControllers.putUnidadeMedida)
@@ -640,11 +646,17 @@ routes.put('/fabricante/:id', ComprasControllers.putFabricante)
 routes.put('/fabricante-fornecedor/:id', ComprasControllers.putFabricanteFornecedor)
 routes.put('/fornecedor-fabricante/:id', ComprasControllers.putFornecedorFabricante)
 routes.put('/excluir-vinculo-fornecedor', ComprasControllers.putExcluirVinculoFornecedorFabricante)
+routes.put('/migrar-fornecedor-sap', ComprasControllers.putMigrarFornecedorSAP)
 
 routes.put('/deletar-vinculo-tamanho-categoria', ComprasControllers.updateVinculoTamanhoCategoria)
 routes.put('/fornecedor/:id', ComprasControllers.putFornecedor)
+routes.put('/reativar-pedido/:id', ComprasControllers.putReativarPedido)
+routes.put('/cancelar-pedido/:id', ComprasControllers.putCancelarPedido)
 routes.put('/finalizar-pedido/:id', ComprasControllers.putFinalizarPedido)
 routes.put('/atualizar-pedido/:id', ComprasControllers.putPedido)
+routes.put('/atualizacao-status-pedido/:id', ComprasControllers.putAtualizarStatusPedido)
+routes.put('/atualizacao-status-produto-pedido/:id', ComprasControllers.putAtualizarStatusProdutoPedido)
+routes.put('/distribuicao-compras-historico/:id', ComprasControllers.putDistribuicaoComprasHistorico)
 
 // POST
 routes.post('/cadastrarCondicaoPagamento', ComprasControllers.postCondicaoPagamento)
@@ -659,6 +671,7 @@ routes.post('/cadastro-vinculo-tamanho-categoria', ComprasControllers.postVincul
 routes.post('/cadastrar-transportador', ComprasControllers.postCadastroTransportador)
 routes.post('/cadastrar-fabricante', ComprasControllers.postFabricante)
 routes.post('/cadastrar-fabricante-fornecedor', ComprasControllers.postFabricanteFornecedor)
+routes.post('/cadastrar-fornecedor-fabricante', ComprasControllers.postFornecedorFabricante)
 routes.post('/migrar-fabricante', ComprasControllers.postMigrarFabricanteSap)
 routes.post('/cadastrar-fornecedor', ComprasControllers.postFornecedor)
 routes.post('/cadastrar-imagem-produto', ComprasControllers.postImagemProduto)
@@ -667,8 +680,8 @@ routes.post('/pedido', ComprasControllers.postPedido)
 
 
 // Cadastro
-routes.get('/listaProdutoCriadoPedidoCompra', CadastroControllers.getListaProdutoCriadoPedidoCompra)
-routes.get('/categoriasProdutos', CadastroControllers.getListaCategoriasProduto)
+routes.get('/cadastrar-produto-Pedido', CadastroControllers.getListaProdutoCriadoPedidoCompra)
+routes.get('/categoriasProdutos', CadastroControllers.getListaCategorias)
 routes.get('/tipoProduto', CadastroControllers.getListaTipoProdutos)
 routes.get('/tipoFiscalProduto', CadastroControllers.getListaTipoFiscalProdutos)
 routes.get('/consultaProdutos', CadastroControllers.getConsultaProdutos)
@@ -792,7 +805,7 @@ routes.put('/status-divergencia/:id', ConferenciaCegaControllers.putStatusDiverg
 routes.post('/inserir-status-divergencia', ConferenciaCegaControllers.postStatusDivergencia)
 
 // Lista de Preço
-routes.get('/listaPreco', ListaPrecoControllers.getListaPrecoPorMarca)
+routes.get('/lista-de-preco', ListaPrecoControllers.getListaPrecoPorMarca)
 
 
 routes.get('/promocoes-ativas', PromocaoControllers.getListaPromocoesAtivas)
@@ -810,6 +823,7 @@ routes.put('/desativar-produto-promocao-destino', PromocaoControllers.putProduto
 routes.put('/desativar-produto-promocao-origem', PromocaoControllers.putProdutoOrigemPromocao)
 routes.put('/desativar-empresa-promocao', PromocaoControllers.putEmpresaPromocao)
 routes.put('/desativar-status-promocao', PromocaoControllers.putStatusPromocao)
+routes.put('/promocoes-ativas-subGrupo/:id', PromocaoControllers.putPromocaoSubGrupo)
 routes.post('/criar-produto-promocao-ativa', PromocaoControllers.postListaProdutosPromocoesAtiva)
 // routes.post('/criar-mecanica', PromocaoControllers.postMecanicaAtivas)
 
@@ -824,4 +838,3 @@ routes.post('/pix-integracao', ServiceLayerControllers.postIntegrarPagamentoPixS
 routes.post('/log-web', LogsControllers.createLogsUsuario)
 
 export default routes;
-
