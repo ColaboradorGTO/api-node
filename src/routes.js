@@ -767,6 +767,7 @@ routes.post('/cadastrar-campanha-cliente', MarketingControllers.postCampanhaClie
 routes.post('/cadastra-campanha', MarketingControllers.postCampanhaEmpresa)
 routes.post('/cadastrar-produto-promocao', MarketingControllers.postProdutoPromocao)
 
+
 // Contabilidade
 routes.get('/listaVendasContigencia', ContabilidadeControllers.getListaVendasContigencia)
 routes.get('/vendasDetalheContigencia', ContabilidadeControllers.getListaDetalheVendasContigencia)
