@@ -183,7 +183,7 @@ class ContabilidadeControllers {
     pageSize = pageSize ? pageSize : '';
 
     try {
-      const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/empresa.xsjs?id=${idEmpresa}&idSubGrupoEmpresa=${idSubGrupoEmpresa}&uf=${uf}&nuCnpj=${nuCnpj}&stAtivo=${stAtivo}&page=${page}&pageSize=${pageSize}`)
+      const response = await axios.get(`${url}/api/empresa.xsjs?id=${idEmpresa}&idSubGrupoEmpresa=${idSubGrupoEmpresa}&uf=${uf}&nuCnpj=${nuCnpj}&stAtivo=${stAtivo}&page=${page}&pageSize=${pageSize}`)
 
       return res.json(response.data);
     } catch (error) {
@@ -200,7 +200,7 @@ class ContabilidadeControllers {
     pageSize = pageSize ? pageSize : '';
 
     try {
-      const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/alvaras.xsjs?&id=${id}&stAtivo=${stAtivo}&page=${page}&pageSize=${pageSize}`)
+      const response = await axios.get(`${url}/api/contabilidade/alvaras.xsjs?&id=${id}&stAtivo=${stAtivo}&page=${page}&pageSize=${pageSize}`)
 
       return res.json(response.data);
     } catch (error) {
@@ -221,7 +221,7 @@ class ContabilidadeControllers {
     pageSize = pageSize ? pageSize : '';
 
     try {
-      const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/empresa.xsjs?uf=${ufFiliais}&idSubGrupoEmpresa=${idSubGrupoEmpresa}&id=${idFilial}&stAtivo=${stAtivo}&page=${page}&pageSize=${pageSize}`)
+      const response = await axios.get(`${url}/api/contabilidade/empresa.xsjs?uf=${ufFiliais}&idSubGrupoEmpresa=${idSubGrupoEmpresa}&id=${idFilial}&stAtivo=${stAtivo}&page=${page}&pageSize=${pageSize}`)
 
       return res.json(response.data);
     } catch (error) {
@@ -238,7 +238,7 @@ class ContabilidadeControllers {
     pageSize = pageSize ? pageSize : '';
 
     try {
-      const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/alvaras-empresa.xsjs?id=${idFilial}&page=${page}&pageSize=${pageSize}`)
+      const response = await axios.get(`${url}/api/contabilidade/alvaras-empresa.xsjs?id=${idFilial}&page=${page}&pageSize=${pageSize}`)
 
       return res.json(response.data);
     } catch (error) {
@@ -254,7 +254,7 @@ class ContabilidadeControllers {
     pageSize = pageSize ? pageSize : '';
 
     try {
-      const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/vinculo-alvaras-empresa.xsjs?id=${idFilial}&page=${page}&pageSize=${pageSize}`)
+      const response = await axios.get(`${url}/api/contabilidade/vinculo-alvaras-empresa.xsjs?id=${idFilial}&page=${page}&pageSize=${pageSize}`)
 
       return res.json(response.data);
     } catch (error) {
@@ -268,7 +268,7 @@ class ContabilidadeControllers {
 
     try {
       const response = await axios.get(
-        `http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/arquivos-anexos-alvaras-empresa.xsjs?id=${idArquivoAlvara}`,
+        `${url}/api/contabilidade/arquivos-anexos-alvaras-empresa.xsjs?id=${idArquivoAlvara}`,
         {
           responseType: "arraybuffer"
         }
@@ -294,7 +294,7 @@ class ContabilidadeControllers {
     pageSize = pageSize ? pageSize : '';
 
     try {
-      const response = await axios.get(`http://164.152.245.77:8000/quality/concentrador_homologacao/api/contabilidade/status-alvara.xsjs?&page=${page}&pageSize=${pageSize}`)
+      const response = await axios.get(`${url}/api/contabilidade/status-alvara.xsjs?&page=${page}&pageSize=${pageSize}`)
 
       return res.json(response.data);
     } catch (error) {
