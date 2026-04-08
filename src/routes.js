@@ -215,6 +215,7 @@ routes.get('/malotes-por-loja', GerenciaControllers.getListaMalortesPorLoja)
 routes.get('/detalhe-malotes-por-loja', GerenciaControllers.getListaDetalhesMalortesPorLoja)
 routes.post('/criar-malotes-por-loja', GerenciaControllers.postMalotesPorLoja)
 routes.put('/malotes-por-loja/:id', GerenciaControllers.putMalotesPorLoja)
+routes.get('/vendas-digitais', GerenciaControllers.getVendasDigitais)
 
 routes.get('/alteracaoPreco', GERAlteracaoPrecoControllers.getListaAlteracaoPreco)
 
