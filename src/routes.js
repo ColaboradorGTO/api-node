@@ -229,7 +229,7 @@ routes.post('/criar-malotes-por-loja', MaloteControllers.postMalotesPorLoja)
 //routes.put('/malotes-por-loja/:id', GerenciaControllers.putMalotesPorLoja)
 routes.put('/malotes-por-loja/:id', MaloteControllers.putMalotesPorLoja)
 
-routes.get('/vendas-digitais', GerenciaControllers.getVendasDigitais)
+routes.get('/vendas-digitais', GERAlteracaoPrecoControllers.getVendasDigitais)
 
 routes.get('/alteracaoPreco', GERAlteracaoPrecoControllers.getListaAlteracaoPreco)
 
