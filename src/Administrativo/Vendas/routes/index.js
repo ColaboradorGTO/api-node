@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import AdmVendasControllers from '../controllers/admVendas.js';
 
-
 const admVendasRoutes = new Router();
 
 admVendasRoutes.get('/lista-venda-cliente', AdmVendasControllers.getListaVendaCliente);

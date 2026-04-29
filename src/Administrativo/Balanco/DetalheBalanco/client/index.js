@@ -11,7 +11,6 @@ export class DetalheBalancoClient {
     }
 
  
-
     async atualizarDetalheBalancoAvulso(
         IDEMPRESA,
         NUMEROCOLETOR,
