@@ -16,6 +16,7 @@ import AdministrativoRecebimentos from '../Administrativo/Recebimentos/routes/in
 import admVendasRoutes from '../Administrativo/Vendas/routes/index.js';
 import admVouchersRoutes from '../Administrativo/Vouchers/routes/routes.js';
 import AdministrativoDesconto from '../Administrativo/Desconto/routes/descontoRoutes.js';
+import PermissaoClientes from '../Permissao/routes/index.js';
 
 const routes = Router();
 
@@ -40,4 +41,7 @@ routes.use(AdministrativoPagamentos)
 routes.use(AdministrativoRecebimentos)
 routes.use(admVendasRoutes)
 routes.use(admVouchersRoutes)
+
+//Permissao
+routes.use(PermissaoClientes)
 
