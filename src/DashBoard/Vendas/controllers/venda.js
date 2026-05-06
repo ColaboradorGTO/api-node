@@ -72,7 +72,7 @@ class DashBoardVendasControllers {
             page = page ? page : '';
             pageSize = pageSize ? pageSize : '';
         try {
-            const apiUrl = `${url}/api/dashboard/venda/resumo-venda-convenio-desconto.xsjs?page=${page}&pagesize=${pageSize}&status=${statusCancelado}&idEmpresa=${idEmpresa}&dataInicio=${dataFechamento}&dataFechamento=${dataFechamento}`
+            const apiUrl = `${url}/api/dashboard/venda/resumo-venda-convenio.xsjs?page=${page}&pagesize=${pageSize}&status=${statusCancelado}&idEmpresa=${idEmpresa}&dataInicio=${dataFechamento}&dataFechamento=${dataFechamento}`
 
             const response = await axios.get(apiUrl)
 
@@ -175,7 +175,7 @@ class DashBoardVendasControllers {
                         
             const apiUrl = `${url}/api/dashboard/venda/resumo-venda-caixa.xsjs?idVenda=${idVenda}&status=${status}&idEmpresa=${idEmpresa}&dataFechamento=${dataFechamento}&page=${page}&pageSize=${pageSize}`
             const response = await axios.get(apiUrl)
-            console.log(apiUrl, 'apiUrl')
+           
             return res.json(response.data); // Retorna
         } catch (error) {
             console.error("erro no  DashBoardVendasControllers.getListaResumoVendasCaixas")
