@@ -103,5 +103,3 @@ export class ContabilidadeClient {
         return response.data;
     }
 }
-
-

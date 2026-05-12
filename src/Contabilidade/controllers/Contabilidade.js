@@ -10,20 +10,21 @@ import createArquivosAlvaraSchema from "../schema/createArquivoAlvara.js";
 const url = process.env.API_URL;
 
 
+
 const contabilidadeClient = new ContabilidadeClient(url)
 const contabilidadeService = new ContabilidadeServices(contabilidadeClient);
 
 class ContabilidadeControllers {
   async getListaVendasContigencia(req, res) {
     let { idMarca, idEmpresa, idVenda, dataPesquisaInicio, dataPesquisaFim, idGrupo, page, pageSize } = req.query;
-    idMarca = idMarca ? idMarca : '';
-    idEmpresa = idEmpresa ? idEmpresa : '';
-    idVenda = idVenda ? idVenda : '';
-    dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
-    dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
-    idGrupo = idGrupo ? idGrupo : '';
-    page = page ? page : '';
-    pageSize = pageSize ? pageSize : '';
+      idMarca = idMarca ? idMarca : '';
+      idEmpresa = idEmpresa ? idEmpresa : '';
+      idVenda = idVenda ? idVenda : '';
+      dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
+      dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
+      idGrupo = idGrupo ? idGrupo : '';
+      page = page ? page : '';
+      pageSize = pageSize ? pageSize : '';
     try {
       const apiUrl = `${url}/api/contabilidade/lista-venda-contingencia.xsjs?idGrupoEmpresarial=${idGrupo}&idEmpresa=${idEmpresa}&dataInicio=${dataPesquisaInicio}&dataFim=${dataPesquisaFim}`
       const response = await axios.get(apiUrl)
@@ -38,10 +39,10 @@ class ContabilidadeControllers {
   async getListaDetalheVendasContigencia(req, res) {
     let { idVenda, idVendaDetalhe, page, pageSize } = req.query;
 
-    idVenda = idVenda ? idVenda : '';
-    idVendaDetalhe = idVendaDetalhe ? idVendaDetalhe : '';
-    page = page ? page : '';
-    pageSize = pageSize ? pageSize : '';
+      idVenda = idVenda ? idVenda : '';
+      idVendaDetalhe = idVendaDetalhe ? idVendaDetalhe : '';
+      page = page ? page : '';
+      pageSize = pageSize ? pageSize : '';
     try {
       const apiUrl = `${url}/api/contabilidade/venda-detalhe.xsjs?idVenda=${idVenda}`
       const response = await axios.get(apiUrl)
@@ -57,9 +58,9 @@ class ContabilidadeControllers {
   async getListaPagamentoVendasContigencia(req, res) {
     let { idVenda, page, pageSize } = req.query;
 
-    idVenda = idVenda ? idVenda : '';
-    page = page ? page : '';
-    pageSize = pageSize ? pageSize : '';
+      idVenda = idVenda ? idVenda : '';
+      page = page ? page : '';
+      pageSize = pageSize ? pageSize : '';
     try {
       const apiUrl = `${url}/api/contabilidade/venda-pagamento.xsjs?idVenda=${idVenda}`
       const response = await axios.get(apiUrl)
@@ -74,14 +75,14 @@ class ContabilidadeControllers {
   async getListaVendasEstoqueComercial(req, res) {
     let { dataPesquisaInicio, dataPesquisaFim, idGrupoEmpresarial, produtoPesquisado, idFornecedor, idGrupoGrade, idGrade, uf } = req.query;
 
-    dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
-    dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
-    idGrupoEmpresarial = idGrupoEmpresarial ? idGrupoEmpresarial : '';
-    produtoPesquisado = produtoPesquisado ? produtoPesquisado : '';
-    idFornecedor = idFornecedor ? idFornecedor : '';
-    idGrupoGrade = idGrupoGrade ? idGrupoGrade : '';
-    idGrade = idGrade ? idGrade : '';
-    uf = uf ? uf : '';
+      dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
+      dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
+      idGrupoEmpresarial = idGrupoEmpresarial ? idGrupoEmpresarial : '';
+      produtoPesquisado = produtoPesquisado ? produtoPesquisado : '';
+      idFornecedor = idFornecedor ? idFornecedor : '';
+      idGrupoGrade = idGrupoGrade ? idGrupoGrade : '';
+      idGrade = idGrade ? idGrade : '';
+      uf = uf ? uf : '';
     try {
 
       const apiUrl = `${url}/api/contabilidade/venda-estoque-produto.xsjs?dataInicio=${dataPesquisaInicio}&dataFim=${dataPesquisaFim}&idGrupoEmpresarial=${idGrupoEmpresarial}&descricaoProduto=${produtoPesquisado}&idFornecedor=${idFornecedor}&idGrupoGrade=${idGrupoGrade}&idGrade=${idGrade}&uf=${uf}`
@@ -97,12 +98,12 @@ class ContabilidadeControllers {
   async getBuscarProdutos(req, res) {
     let { dataUltAtualizacao, horaUltAtualizacao, idEmpresa, idGrupoEmpresarial, codeBars, descProd } = req.query;
 
-    dataUltAtualizacao = dataFormatada(dataUltAtualizacao) ? dataUltAtualizacao : '';
-    horaUltAtualizacao = dataFormatada(horaUltAtualizacao) ? horaUltAtualizacao : '';
-    idEmpresa = idEmpresa ? idEmpresa : '';
-    idGrupoEmpresarial = idGrupoEmpresarial ? idGrupoEmpresarial : '';
-    codeBars = codeBars ? codeBars : '';
-    descProd = descProd ? descProd : '';
+      dataUltAtualizacao = dataUltAtualizacao ? dataUltAtualizacao : '';
+      horaUltAtualizacao = horaUltAtualizacao ? horaUltAtualizacao : '';
+      idEmpresa = idEmpresa ? idEmpresa : '';
+      idGrupoEmpresarial = idGrupoEmpresarial ? idGrupoEmpresarial : '';
+      codeBars = codeBars ? codeBars : '';
+      descProd = descProd ? descProd : '';
 
     try {
 
@@ -119,24 +120,24 @@ class ContabilidadeControllers {
   async getListaVendasPeriodo(req, res) {
     let { idMarca, idEmpresa, ufPesquisa, idFornecedor, descProduto, idGrupoGrade, idGrade, dataPesquisaInicio, dataPesquisaFim, idGrupoEmpresarial, produtoPesquisado, page, pageSize } = req.query;
 
-    idMarca = idMarca ? idMarca : '';
-    idEmpresa = idEmpresa ? idEmpresa : '';
-    idFornecedor = idFornecedor ? idFornecedor : '';
-    descProduto = descProduto ? descProduto : '';
-    idGrupoGrade = idGrupoGrade ? idGrupoGrade : '';
-    idGrade = idGrade ? idGrade : '';
-    dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
-    dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
-    idGrupoEmpresarial = idGrupoEmpresarial ? idGrupoEmpresarial : '';
-    produtoPesquisado = produtoPesquisado ? produtoPesquisado : '';
-    ufPesquisa = ufPesquisa ? ufPesquisa : '';
-    page = page ? page : '';
-    pageSize = pageSize ? pageSize : '';
+      idMarca = idMarca ? idMarca : '';
+      idEmpresa = idEmpresa ? idEmpresa : '';
+      idFornecedor = idFornecedor ? idFornecedor : '';
+      descProduto = descProduto ? descProduto : '';
+      idGrupoGrade = idGrupoGrade ? idGrupoGrade : '';
+      idGrade = idGrade ? idGrade : '';
+      dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
+      dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
+      idGrupoEmpresarial = idGrupoEmpresarial ? idGrupoEmpresarial : '';
+      produtoPesquisado = produtoPesquisado ? produtoPesquisado : '';
+      ufPesquisa = ufPesquisa ? ufPesquisa : '';
+      page = page ? page : '';
+      pageSize = pageSize ? pageSize : '';
 
     try {
       
       const apiUrl = `${url}/api/contabilidade/venda-produto.xsjs?dataInicio=${dataPesquisaInicio}&dataFim=${dataPesquisaFim}&idGrupoEmpresarial=${idGrupoEmpresarial}&idEmpresa=${idEmpresa}&descricaoProduto=${produtoPesquisado}&uf=${ufPesquisa}&idFornecedor=${idFornecedor}&idGrupoGrade=${idGrupoGrade}&idGrade=${idGrade}&page=${page}&pageSize=${pageSize}`
-
+     
       const response = await axios.get(apiUrl)
 
       return res.json(response.data);
@@ -149,16 +150,16 @@ class ContabilidadeControllers {
   async getListaVendasPeriodoConsolidado(req, res) {
     let { dataPesquisaInicio, dataPesquisaFim, idGrupoEmpresarial, idEmpresa, produtoPesquisado, ufPesquisa, idFornecedor, idGrupoGrade, idGrade, page, pageSize } = req.query;
 
-    dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
-    dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
-    idGrupoEmpresarial = idGrupoEmpresarial ? idGrupoEmpresarial : '';
-    produtoPesquisado = produtoPesquisado ? produtoPesquisado : '';
-    idFornecedor = idFornecedor ? idFornecedor : '';
-    idGrupoGrade = idGrupoGrade ? idGrupoGrade : '';
-    idGrade = idGrade ? idGrade : '';
-    ufPesquisa = ufPesquisa ? ufPesquisa : '';
-    page = page ? page : '';
-    pageSize = pageSize ? pageSize : '';
+      dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
+      dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
+      idGrupoEmpresarial = idGrupoEmpresarial ? idGrupoEmpresarial : '';
+      produtoPesquisado = produtoPesquisado ? produtoPesquisado : '';
+      idFornecedor = idFornecedor ? idFornecedor : '';
+      idGrupoGrade = idGrupoGrade ? idGrupoGrade : '';
+      idGrade = idGrade ? idGrade : '';
+      ufPesquisa = ufPesquisa ? ufPesquisa : '';
+      page = page ? page : '';
+      pageSize = pageSize ? pageSize : '';
 
     try {
 
@@ -174,13 +175,13 @@ class ContabilidadeControllers {
 
   async getTodasEmpresas(req, res) {
     let { idEmpresa, idSubGrupoEmpresa, page, pageSize, uf, nuCnpj, stAtivo } = req.query;
-    idEmpresa = idEmpresa ? idEmpresa : '';
-    idSubGrupoEmpresa = idSubGrupoEmpresa ? idSubGrupoEmpresa : '';
-    uf = uf ? uf : '';
-    nuCnpj = nuCnpj ? nuCnpj : '';
-    stAtivo = stAtivo ? stAtivo : '';
-    page = page ? page : '';
-    pageSize = pageSize ? pageSize : '';
+      idEmpresa = idEmpresa ? idEmpresa : '';
+      idSubGrupoEmpresa = idSubGrupoEmpresa ? idSubGrupoEmpresa : '';
+      uf = uf ? uf : '';
+      nuCnpj = nuCnpj ? nuCnpj : '';
+      stAtivo = stAtivo ? stAtivo : '';
+      page = page ? page : '';
+      pageSize = pageSize ? pageSize : '';
 
     try {
       const response = await axios.get(`${url}/api/empresa.xsjs?id=${idEmpresa}&idSubGrupoEmpresa=${idSubGrupoEmpresa}&uf=${uf}&nuCnpj=${nuCnpj}&stAtivo=${stAtivo}&page=${page}&pageSize=${pageSize}`)
@@ -194,10 +195,10 @@ class ContabilidadeControllers {
 
   async getAlvaras(req, res) {
     let { id, stAtivo, page, pageSize } = req.query;
-    id = id ? id : '';
-    stAtivo = stAtivo ? stAtivo : '';
-    page = page ? page : '';
-    pageSize = pageSize ? pageSize : '';
+      id = id ? id : '';
+      stAtivo = stAtivo ? stAtivo : '';
+      page = page ? page : '';
+      pageSize = pageSize ? pageSize : '';
 
     try {
       const response = await axios.get(`${url}/api/contabilidade/alvaras.xsjs?&id=${id}&stAtivo=${stAtivo}&page=${page}&pageSize=${pageSize}`)
@@ -211,14 +212,14 @@ class ContabilidadeControllers {
 
   async getAlvaraEmpresas(req, res) {
     let { idFilial, idSubGrupoEmpresa, stAtivo, ufFiliais, nuCnpj, page, pageSize } = req.query;
-    idFilial = idFilial ? idFilial : '';
-    idSubGrupoEmpresa = idSubGrupoEmpresa ? idSubGrupoEmpresa : '';
-    stAtivo = stAtivo ? stAtivo : '';
-    ufFiliais = ufFiliais ? ufFiliais : '';
-    nuCnpj = nuCnpj ? nuCnpj : '';
+      idFilial = idFilial ? idFilial : '';
+      idSubGrupoEmpresa = idSubGrupoEmpresa ? idSubGrupoEmpresa : '';
+      stAtivo = stAtivo ? stAtivo : '';
+      ufFiliais = ufFiliais ? ufFiliais : '';
+      nuCnpj = nuCnpj ? nuCnpj : '';
 
-    page = page ? page : '';
-    pageSize = pageSize ? pageSize : '';
+      page = page ? page : '';
+      pageSize = pageSize ? pageSize : '';
 
     try {
       const response = await axios.get(`${url}/api/contabilidade/empresa.xsjs?uf=${ufFiliais}&idSubGrupoEmpresa=${idSubGrupoEmpresa}&id=${idFilial}&stAtivo=${stAtivo}&page=${page}&pageSize=${pageSize}`)
@@ -233,9 +234,9 @@ class ContabilidadeControllers {
 
   async getEmpresaAlvara(req, res) {
     let { idFilial, page, pageSize } = req.query;
-    idFilial = idFilial ? idFilial : '';
-    page = page ? page : '';
-    pageSize = pageSize ? pageSize : '';
+      idFilial = idFilial ? idFilial : '';
+      page = page ? page : '';
+      pageSize = pageSize ? pageSize : '';
 
     try {
       const response = await axios.get(`${url}/api/contabilidade/alvaras-empresa.xsjs?id=${idFilial}&page=${page}&pageSize=${pageSize}`)
@@ -249,16 +250,16 @@ class ContabilidadeControllers {
 
   async getVinculoAlvaraEmpresa(req, res) {
     let { idFilial, page, pageSize } = req.query;
-    idFilial = idFilial ? idFilial : '';
-    page = page ? page : '';
-    pageSize = pageSize ? pageSize : '';
+      idFilial = idFilial ? idFilial : '';
+      page = page ? page : '';
+      pageSize = pageSize ? pageSize : '';
 
     try {
       const response = await axios.get(`${url}/api/contabilidade/vinculo-alvaras-empresa.xsjs?id=${idFilial}&page=${page}&pageSize=${pageSize}`)
 
       return res.json(response.data);
     } catch (error) {
-      console.error("Erro no ContabilidadeControllers.getEmpresaAlvara:", error);
+      console.error("Erro no ContabilidadeControllers.getVinculoAlvaraEmpresa:", error);
       throw error;
     }
   }
@@ -267,11 +268,8 @@ class ContabilidadeControllers {
     let { idArquivoAlvara } = req.query;
 
     try {
-      const response = await axios.get(
-        `${url}/api/contabilidade/arquivos-anexos-alvaras-empresa.xsjs?id=${idArquivoAlvara}`,
-        {
-          responseType: "arraybuffer"
-        }
+      const response = await axios.get(`${url}/api/contabilidade/arquivos-anexos-alvaras-empresa.xsjs?id=${idArquivoAlvara}`,
+        { responseType: "arraybuffer"  }
       );
 
       res.set({
@@ -290,8 +288,8 @@ class ContabilidadeControllers {
 
   async getStatusAlvara(req, res) {
     let { page, pageSize } = req.query;
-    page = page ? page : '';
-    pageSize = pageSize ? pageSize : '';
+      page = page ? page : '';
+      pageSize = pageSize ? pageSize : '';
 
     try {
       const response = await axios.get(`${url}/api/contabilidade/status-alvara.xsjs?&page=${page}&pageSize=${pageSize}`)
