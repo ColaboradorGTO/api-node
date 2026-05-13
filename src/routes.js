@@ -127,9 +127,9 @@ routes.post('/criar-perfil-usuario', ModulosControllers.postPerfilUsuarioMenu)
 
 // routes.get('/listaCaixasMovimento', AdministrativoControllers.getListaCaixasMovimento);
 //Início Administrativo
-routes.get('/listaCaixasMovimento', AdministrativoControllers.retornoListaCaixasMovimento);
+routes.get('/listaCaixasMovimento', ADMCaixasControllers.getRetornoListaCaixasMovimento);
 
-routes.get('/listaCaixasMovimento', ADMCaixasControllers.getListaCaixasMovimento);
+//routes.get('/listaCaixasMovimento', ADMCaixasControllers.getListaCaixasMovimento);
 
 
 routes.get('/listaCaixasFechados', AdministrativoControllers.retornoListaCaixasFechados);

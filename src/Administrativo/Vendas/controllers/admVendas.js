@@ -215,15 +215,15 @@ class AdmVendasControllers {
 
     async getResumoVendaConvenio(req, res) {
 
-        let { idEmpresa, pageNumber, datapesq } = req.query;
+        let { idEmpresa, pageNumber, datapesq, statusCancelado } = req.query;
         if (!isNaN(idEmpresa)) {
 
             idEmpresa = Number(idEmpresa);
             const pageSize = 100;
             const offset = (pageNumber - 1) * pageSize;
-            datapesq = dataFormatada(datapesq)
-            try {
-                const apiUrl = `${url}/api/dashboard/venda/resumo-venda-convenio.xsjs?pagesize=${pageSize}&idEmpresa=${idEmpresa}&offset=${offset}dataFechamento=${datapesq}`
+            datapesq = datapesq ? datapesq : '';
+            statusCancelado = statusCancelado ? statusCancelado : ''; try {
+                const apiUrl = `${url}/api/dashboard/venda/resumo-venda-convenio.xsjs?pagesize=${pageSize}&status=${statusCancelado}&idEmpresa=${idEmpresa}&dataFechamento=${datapesq}`
                 const response = await axios.get(apiUrl)
 
                 return res.json(response.data); // Retorna
@@ -519,7 +519,7 @@ class AdmVendasControllers {
 
         try {
 
-            const apiUrl = `${url}/api/venda/lista-venda-cliente.xsjs?id=${idVenda}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&idSubgrupoEmpresarial=${idSubGrupoEmpresarial}&idEmpresa=${idEmpresa}&cpfouIdVenda=${cpfOUidVenda}&nnf=${nnf}&serie=${serie}&pageSize=${pageSize}&page=${page}`;
+             const apiUrl = `${url}/api/venda/lista-venda-cliente.xsjs?id=${idVenda}&dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&idSubgrupoEmpresarial=${idSubGrupoEmpresarial}&idEmpresa=${idEmpresa}&cpfouIdVenda=${cpfOUidVenda}&nnf=${nnf}&serie=${serie}&pageSize=${pageSize}&page=${page}`;
             const response = await axios.get(apiUrl)
 
             return res.json(response.data);
