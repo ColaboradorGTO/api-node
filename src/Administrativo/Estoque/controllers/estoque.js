@@ -47,10 +47,9 @@ class EstoqueControllers {
 
         try {
 
-            const apiUrl = `${url}/api/administrativo/ultima-posicao-estoque.xsjs?&idEmpresa=${idEmpresa}&idgrupo=${idGrupo}&idsubgrupo=${idSubGrupo}&idmarca=${idMarca}&idfornecedor=${idFornecedor}&descproduto=${descricaoProduto}&dtinicial=${dataPesquisaInicio}&stativo=True`;
+            const apiUrl = `${url}/api/administrativo/ultima-posicao-estoque.xsjs?&idEmpresa=${idEmpresa}&idgrupo=${idGrupo}&idsubgrupo=${idSubGrupo}&idmarca=${idMarca}&idfornecedor=${idFornecedor}&descproduto=${descricaoProduto}&dtinicial=${dataPesquisaInicio}&stativo=${STAtivo}&page=${page}&pageSize=${pageSize}`;
             const response = await axios.get(apiUrl)
             // const response = await getUltimaPosicaoEstoque(idEmpresa, idGrupo, idSubGrupo, idMarca, idFornecedor, descricaoProduto, STAtivo, dataPesquisaInicio, dataPesquisaFim, page, pageSize);
-
             return res.json(response.data);
         } catch (error) {
             console.error("Unable to connect to the database:", error);

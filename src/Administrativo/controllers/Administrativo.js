@@ -672,18 +672,20 @@ class AdministrativoControllers {
     // }
 
     async getListaPreviaBalanco(req, res) {
-        let { idEmpresa, idResumo, processa, diferenca } = req.query;
+        let { idEmpresa, idResumo, processa, diferenca, page, pageSize } = req.query;
         
         idEmpresa = idEmpresa ? idEmpresa : '';
         idResumo = idResumo ? idResumo : '';
         processa = processa ? processa : '';
         diferenca = diferenca ? diferenca : '';
+        page = page ? page : '';
+        pageSize = pageSize ? pageSize : '';
         const numPage = 100;
         
         try {
             // ajaxGet('api/administrativo/novo-previa-balanco.xsjs?page=' + numPage + '&id=' + idresumoPreviaBalanco + '&idempresa=' + idempresaPreviaBalanco + '&processa=' + processaPreviaBalanco + '&diferenca=' + diferencaPreviaBalanco)
 
-            const apiUrl = `${url}/api/administrativo/novo-previa-balanco.xsjs?id=${idResumo}&idempresa=${idEmpresa}&processa=&${processa}&diferenca=${diferenca}`
+            const apiUrl = `${url}/api/administrativo/novo-previa-balanco.xsjs?id=${idResumo}&idempresa=${idEmpresa}&processa=&${processa}&diferenca=${diferenca}&page=${page}&pageSize=${pageSize}`
             const response = await axios.get(apiUrl)
 
             return res.json(response.data); // Retorna
