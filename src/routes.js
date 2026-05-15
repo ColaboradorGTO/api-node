@@ -75,6 +75,7 @@ import ClienteControllers from './Gerencia/cliente/controller/clienteController.
 import ContaControllers from './Administrativo/Conta/controller/contaController.js'
 import DespesasControllersADM from './Administrativo/Despesa/controller/despesaController.js'
 
+import PermissaoControllers from './Permissao/controller/index.js';
 
 
 
@@ -114,16 +115,23 @@ routes.get('/subGrupoEmpresarial', EmpresaControllers.getSelectLojaVouchers);
 routes.get('/listaEmpresas', EmpresaControllers.getListaEmpresas)
 routes.put('/empresas/:id', EmpresaControllers.putListaEmpresas)
 
+routes.get('/menu-pai', PermissaoControllers.getMenuPai)
 
 routes.get('/menus-usuario', ModulosControllers.getListaPerfilUsuario)
 routes.get('/menus-usuario-excecao', ModulosControllers.getListaMenusPorUsuario)
 routes.get('/menus-filho-usuario', ModulosControllers.getListaMenusFilhosUsuario)
 routes.get('/menus', ModulosControllers.getListaSubMenusUsuario)
 
+routes.get('/listaMenusFilhos', PermissaoControllers.getListaMenusFilhos)
 
-routes.put('/perfil-usuario/:id', ModulosControllers.putPerfilUsuarioMenu)
-routes.put('/funcionario-departamento/:id', ModulosControllers.putFuncionarioDepartamento)
-routes.post('/criar-perfil-usuario', ModulosControllers.postPerfilUsuarioMenu)
+routes.put('/perfil-usuario/:id', PermissaoControllers.putPerfilUsuarioMenu)
+//routes.put('/perfil-usuario/:id', ModulosControllers.putPerfilUsuarioMenu)
+routes.put('/funcionario-departamento/:id', PermissaoControllers.putFuncionarioDepartamento)
+//routes.put('/funcionario-departamento/:id', ModulosControllers.putFuncionarioDepartamento)
+routes.post('/criar-perfil-usuario', PermissaoControllers.postPerfilUsuarioMenu)
+//routes.post('/criar-perfil-usuario', ModulosControllers.postPerfilUsuarioMenu)
+routes.post('/criar-menu-filho', PermissaoControllers.postCriarMenuFilho)
+
 
 // routes.get('/listaCaixasMovimento', AdministrativoControllers.getListaCaixasMovimento);
 //Início Administrativo
