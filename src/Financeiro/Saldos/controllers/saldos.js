@@ -1,9 +1,9 @@
-
 import axios from "axios";
 import { SaldosClient } from "../client/index.js";
 import { SaldoService } from "../services/index.js";
 import criarMovimentoBonificaoSchema from '../schema/criarMovimentoSaldoSchema.js';
 import 'dotenv/config';
+
 const url = process.env.API_URL;
 const saldoClient = new SaldosClient(process.env.API_URL);
 const saldoService = new SaldoService(saldoClient);
