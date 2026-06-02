@@ -6,7 +6,7 @@ const url = process.env.API_URL;
 
 class ComercialControllers {
 
-    async getListaFornecedorProduto(req, res) {
+ /*    async getListaFornecedorProduto(req, res) {
         let { idMarca } = req.query;
         idMarca = idMarca ? idMarca : '';
         try {
@@ -481,7 +481,7 @@ class ComercialControllers {
             console.error("erro no ComercialControllers.postCadastrarPremiacoes:", error);
             throw error;
         }
-    }
+    } */
 }
 
 export default new ComercialControllers();
