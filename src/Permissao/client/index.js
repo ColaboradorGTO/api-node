@@ -13,10 +13,6 @@ export class PermissaoClient {
         IDUSUARIO,
         CRIAR,
         ALTERAR,
-        STATIVO,
-        DATAULTIMAALTERACAO,
-        DATA_CRIACAO,
-        IDMODULO,
         IDMODULOADMINISTRATIVO,
         IDMODULOCOMERCIAL,
         IDMODULOCONTABILIDADE,
@@ -36,7 +32,6 @@ export class PermissaoClient {
         IDUSERULTIMAALTERACAO,
         IDPERMISSAO,
         IDMODULORESUMOVENDAS,
-        IDMODULOPROMOCAO,
         ADMINISTRADOR,
         N4,
         N3,
@@ -44,16 +39,13 @@ export class PermissaoClient {
         N1,
         IDMENU,
         IDMENUFILHO,
+        IDMODULOPROMOCAO,
     ) {
 
-        const response = await this.api.post(`${url}/api/perfilUsuario/perfilUsuarioMenu.xsjs`, {
+        const response = await this.api.post(`${url}/api/perfilUsuario/perfilUsuarioMenu.xsjs`, [{
             IDUSUARIO,
             CRIAR,
             ALTERAR,
-            STATIVO,
-            DATAULTIMAALTERACAO,
-            DATA_CRIACAO,
-            IDMODULO,
             IDMODULOADMINISTRATIVO,
             IDMODULOCOMERCIAL,
             IDMODULOCONTABILIDADE,
@@ -73,7 +65,6 @@ export class PermissaoClient {
             IDUSERULTIMAALTERACAO,
             IDPERMISSAO,
             IDMODULORESUMOVENDAS,
-            IDMODULOPROMOCAO,
             ADMINISTRADOR,
             N4,
             N3,
@@ -81,7 +72,8 @@ export class PermissaoClient {
             N1,
             IDMENU,
             IDMENUFILHO,
-        });
+            IDMODULOPROMOCAO,
+        }]);
         return response.data;
     }
 
@@ -161,7 +153,7 @@ export class PermissaoClient {
     }
 
 
-/*     async atualizarPerfilUsuarioMenu(
+    async atualizarPerfilUsuarioMenu(
         IDUSUARIO,
         CRIAR,
         ALTERAR,
@@ -234,7 +226,7 @@ export class PermissaoClient {
             IDMENUFILHO,
         }])
         return response.data;
-    } */
+    }
 
     async atualizarFuncionarioDepartamento(
         ID,
@@ -258,4 +250,20 @@ export class PermissaoClient {
             URL
         }])
     }
+
+        async atualizarMenuFilho(
+        ID,
+        DSNOME,
+        IDMENUPAI,
+        URL,
+    ) {
+        const response = await this.api.put(`${url}/api/perfilUsuario/menuPai.xsjs`,[{
+            ID,
+            DSNOME,
+            IDMENUPAI,
+            URL
+        }])
+    }
+
+    
 }

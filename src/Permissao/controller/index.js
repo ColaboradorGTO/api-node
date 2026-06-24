@@ -6,6 +6,7 @@ import atualizarPerfilUsuarioMenuSchema from "../schema/atualizarPerfilUsuarioMe
 import atualizarFuncionarioDepartamentoSchema from "../schema/atualizarFuncionarioDepartamentoSchema.js";
 import criarPerfilUsuarioMenuSchema from "../schema/criarPerfilUsuarioMenuSchema.js";
 import criarMenuFilhoSchema from "../schema/criarMenuFilhoSchema.js";
+import atualizarMenuFilhoSchema from "../schema/atualizarMenuFilhoSchema.js";
 
 const url = process.env.API_URL;
 const permissaoClient = new PermissaoClient(url);
@@ -32,12 +33,11 @@ class PermissaoControllers {
     }
 
     async getListaMenusFilhos(req, res) {
-        let { idMenuFilho, idUsuario, idPerfil } = req.query;
-        idPerfil = idPerfil ? idPerfil : '';
+        let { idMenuFilho, idMenuPai } = req.query;
         idMenuFilho = idMenuFilho ? idMenuFilho : '';
-        idUsuario = idUsuario ? idUsuario : '';
+        idMenuPai = idMenuPai ? idMenuPai : '';
         try {
-            const response = await axios.get(`${url}/api/perfilUsuario/menuFilhos.xsjs`)
+            const response = await axios.get(`${url}/api/perfilUsuario/menuFilhos.xsjs?id=${idMenuFilho}&idMenuPai=${idMenuPai}`)
 
             return res.json(response.data); // Retorna
         } catch (error) {
@@ -71,7 +71,6 @@ class PermissaoControllers {
                 value.STATIVO,
                 value.DATAULTIMAALTERACAO,
                 value.DATA_CRIACAO,
-                String(value.IDMODULO),
                 String(value.IDMODULOADMINISTRATIVO),
                 String(value.IDMODULOCOMERCIAL),
                 String(value.IDMODULOCONTABILIDADE),
@@ -159,10 +158,6 @@ class PermissaoControllers {
                 value.IDUSUARIO,
                 value.CRIAR,
                 value.ALTERAR,
-                value.STATIVO,
-                value.DATAULTIMAALTERACAO,
-                value.DATA_CRIACAO,
-                String(value.IDMODULO),
                 String(value.IDMODULOADMINISTRATIVO),
                 String(value.IDMODULOCOMERCIAL),
                 String(value.IDMODULOCONTABILIDADE),
@@ -182,7 +177,6 @@ class PermissaoControllers {
                 String(value.IDUSERULTIMAALTERACAO),
                 String(value.IDPERMISSAO),
                 String(value.IDMODULORESUMOVENDAS),
-                String(value.IDMODULOPROMOCAO),
                 String(value.ADMINISTRADOR),
                 value.N4,
                 value.N3,
@@ -190,6 +184,7 @@ class PermissaoControllers {
                 value.N1,
                 value.IDMENU,
                 value.IDMENUFILHO,
+                String(value.IDMODULOPROMOCAO)
             );
 
             return res.status(200).json(response);
@@ -228,6 +223,38 @@ class PermissaoControllers {
         } catch (error) {
             console.log('Erro no PermissaoControllers.postCriarMenuFilho:', error);
             return res.status(500).json({ message: 'Erro no PermissaoControllers.postCriarMenuFilho' });
+
+        }
+    }
+
+    async putAtualizarMenuFilho(req, res) {
+        try {
+            const { error, value } = atualizarMenuFilhoSchema.validate(req.body, {
+                abortEarly: false,
+                stripUnknown: true
+            });
+
+            if (error) {
+                return res.status(400).json({
+                    message: 'Dados inválidos',
+                    errors: error.details.map(detail => ({
+                        field: detail.path.join('.'),
+                        message: detail.message
+                    }))
+                });
+            }
+
+            const response = await permissaoService.updateMenuFilho(
+                value.ID,
+                value.DSNOME,
+                value.IDMENUPAI,
+                value.URL,
+            );
+
+            return res.status(200).json(response);
+        } catch (error) {
+            console.log('Erro no PermissaoControllers.putAtualizarMenuFilho:', error);
+            return res.status(500).json({ message: 'Erro no PermissaoControllers.putAtualizarMenuFilho' });
 
         }
     }
