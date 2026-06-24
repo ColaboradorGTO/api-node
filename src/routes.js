@@ -8,7 +8,7 @@ import AdministrativoControllers from './Administrativo/controllers/Administrati
 import FinanceiroControllers from './Financeiro/controllers/Financeiro.js';
 import InformaticaControllers from './Informatica/controllers/Informatica.js';
 import ExpedicaoControllers from './Expedicao/controllers/index.js';
-import DashBoardControllers from './DashBoard/controllers/DashBoard.js';
+//import DashBoardControllers from './DashBoard/controllers/DashBoard.js';
 import VendasControllers from './Vendas/controllers/Vendas.js';
 import ResumoVoucherControllers from './ResumoVoucher/controllers/index.js';
 //import ComercialControllers from './Comercial/controllers/Comercial.js';
@@ -90,6 +90,12 @@ import PremiacaoControllers from './Comercial/premiacao/controller/ControllerPer
 
 import ModulosControllers from './Modulos/controllers/modulos.js';
 import DanfeControllers from './Danfe/controllers/danfe.js';
+
+// DashBoard
+import DashBoardAdiantamentoControllers from './DashBoard/AdiantamentoSalarial/controllers/index.js';
+import DashBoardExtratoControllers from './DashBoard/Extrato/controller/index.js';
+import DashBoardRelatorioControllers from './DashBoard/relatorio/controller/index.js';
+
 
 const routes = new Router();
 // routes.use(authMiddleware)
@@ -299,7 +305,7 @@ routes.get('/alteracaoPreco', GERAlteracaoPrecoControllers.getListaAlteracaoPrec
 // FIM GERENCIA
 
 // Início Quebra Caixa 
-routes.get('/quebra-caixa-loja-resumo', ADMCaixasControllers.getListaQuebraCaixaResumoADM)
+routes.get('/quebra-caixa-loja-resumo', QuebraCaixaControllers.getListaQuebraCaixaResumoADM)
 routes.get('/quebra-caixa-loja', QuebraCaixaControllers.getListaQuebraCaixa)
 routes.get('/quebra-caixa-loja/:id', QuebraCaixaControllers.getQuebraCaixaID)
 routes.put('/atualizar-status-quebra', QuebraCaixaControllers.putListaStatusQuebraCaixa)
@@ -474,41 +480,42 @@ routes.get('/deposito-loja-conciliacao', DepositosControllers.getListaConciliarB
 
 // Dashboard
 
-routes.get('/lista-quebra-caixa', DashBoardControllers.getListaQuebraCaixa)
-routes.get('/listaDeQuebraDeCaixaPositiva', DashBoardControllers.getListaQuebraCaixaPositiva)
-routes.get('/listaDeQuebraDeCaixaNegativa', DashBoardControllers.getListaQuebraCaixaNegativa)
-routes.get('/quebra-caixa', DashBoardControllers.getRetornoTableImprimeQuebra)
-routes.get('/resumoVendaConvenioDesc', DashBoardControllers.getRetornoListaVendasConvenioDesconto)
-routes.get('/resumoVendaGerencia', DashBoardControllers.getResumoVendaGerencia)
+routes.get('/lista-quebra-caixa', QuebraCaixaControllers.getListaQuebraCaixa)
+routes.get('/listaDeQuebraDeCaixaPositiva', QuebraCaixaControllers.getListaQuebraCaixaPositiva)
+routes.get('/listaDeQuebraDeCaixaNegativa', QuebraCaixaControllers.getListaQuebraCaixaNegativa)
+routes.get('/quebra-caixa', QuebraCaixaControllers.getRetornoTableImprimeQuebra)
+routes.get('/resumoVendaConvenioDesc', DashBoardVendasControllers.getRetornoListaVendasConvenioDesconto)
+routes.get('/resumoVendaGerencia', DashBoardVendasControllers.getResumoVendaGerencia)
 // routes.get('/listaCaixaMovimentoGerencia', DashBoardControllers.retornoListaCaixasMovimentoGerencia)
-routes.get('/vendedor', DashBoardControllers.getListaVendasVendedorGerencia)
-// routes.get('/vendasAtivasResumoGerencia', DashBoardControllers.getListaResumoVendasAtivaGerencia)
-routes.get('/vendasCanceladasResumoGerencia', DashBoardControllers.getListaResumoVendasCanceladasGerencia)
-routes.get('/adiantamentoSalarialFuncionarios', DashBoardControllers.getListAdiantamentoLoja)
-routes.get('/adiantamento-salarial-gerencia', DashBoardControllers.getAdiantamentoSalarialFuncionario)
+routes.get('/vendedor', DashBoardVendasControllers.getListaVendasVendedorGerencia)
+ routes.get('/vendasAtivasResumoGerencia', DashBoardVendasControllers.getListaResumoVendasAtivaGerencia)
+routes.get('/vendasCanceladasResumoGerencia', DashBoardVendasControllers.getListaResumoVendasCanceladasGerencia)
+routes.get('/adiantamentoSalarialFuncionarios', DashBoardAdiantamentoControllers.getListAdiantamentoLoja)
+routes.get('/adiantamento-salarial-gerencia', DashBoardAdiantamentoControllers.getAdiantamentoSalarialFuncionario)
 // routes.get('/vendasResumoLojaGerencia', DashBoardControllers.getListaVendasLojaResumidoGerencia)
-// routes.get('/vendasVendedorPeriodoLojaGerencia', DashBoardControllers.getListaVendasVendedorPeriodoGerencia)
-routes.get('/extrato-loja-periodo', DashBoardControllers.getListaExtratoDaLojaPeriodo)
-routes.get('/relatorioBI', DashBoardControllers.getListaRelatorioBIGerencia)
-// routes.get('/listaVendasGerencia', DashBoardControllers.getListaVendasGerencia)
+ routes.get('/vendasVendedorPeriodoLojaGerencia', DashBoardVendasControllers.getListaVendasVendedorPeriodoGerencia)
+routes.get('/extrato-loja-periodo', DashBoardExtratoControllers.getListaExtratoDaLojaPeriodo)
+routes.get('/extrato-loja-periodo-adm', DashBoardExtratoControllers.getListaExtratoDaLojaPeriodoADM)
+routes.get('/relatorioBI', DashBoardRelatorioControllers.getListaRelatorioBIGerencia)
+ routes.get('/listaVendasGerencia', DashBoardVendasControllers.getListaVendasGerencia)
 // routes.get('/extratoLojaPeriodo', DashBoardControllers.getListaExtratoDaLojaPeriodo)
-routes.get('/adiantamentoSalarialData', DashBoardControllers.getListAdiantamentoSalarialData)
-// routes.get('/detalheVenda', DashBoardControllers.getRetornoListaVendasAtivasDetalheProduto)
-// routes.get('/resumoVendaCaixaDetalhado', DashBoardControllers.getRetornoListaVendaDetalhe)
+routes.get('/adiantamentoSalarialData', DashBoardAdiantamentoControllers.getListAdiantamentoSalarialData)
+ routes.get('/detalheVenda', DashBoardVendasControllers.getRetornoListaVendasAtivasDetalheProduto)
+ routes.get('/resumoVendaCaixaDetalhado', DashBoardVendasControllers.getRetornoListaVendaDetalhe)
 
 
 // routes.get('/listaFuncionarioVendasDesconto', DashBoardControllers.getListaFuncionario)
 routes.get('/funcionarios', DashBoardFuncionariosControllers.getListaFuncionarios)
 
-routes.get('/adiantamento-loja', DashBoardAdiantamentoSalarialControllers.getListaAdiantamentoSalarialLoja)
-routes.get('/adiantamento-funcionarios', DashBoardAdiantamentoSalarialControllers.getListaAdiantamentosFuncionarios)
-routes.get('/adiantamentos-salarial', DashBoardAdiantamentoSalarialControllers.getListaAdiantamentosSalarialDashBoard)
+routes.get('/adiantamento-loja', DashBoardAdiantamentoControllers.getListaAdiantamentoSalarialLoja)
+routes.get('/adiantamento-funcionarios', DashBoardAdiantamentoControllers.getListaAdiantamentosFuncionarios)
+routes.get('/adiantamentos-salarial', DashBoardAdiantamentoControllers.getListaAdiantamentosSalarialDashBoard)
 
-routes.put('/atualizacao-adiantamento-status', DashBoardAdiantamentoSalarialControllers.updateAdiantamentoStatus)
-routes.post('/cadastrar-adiantamento-salarial', DashBoardAdiantamentoSalarialControllers.postAdiantamentoSalarial)
-routes.put('/adiantamento-salarial/:id', DashBoardAdiantamentoSalarialControllers.putAdiantamentoSalarial)
+routes.post('/cadastrar-adiantamento-salarial', DashBoardAdiantamentoControllers.postAdiantamentoSalarial)
+routes.put('/atualizacao-adiantamento-status', DashBoardAdiantamentoControllers.putAdiantamentoStatus)
+routes.put('/adiantamento-salarial/:id', DashBoardAdiantamentoControllers.putAdiantamentoSalarial)
 
-// routes.get('/resumoVendaConvenioDescontoFN', DashBoardControllers.getRetornoListaVendasConvenioDescontoFuncionario)
+ routes.get('/resumoVendaConvenioDescontoFN', DashBoardVendasControllers.getRetornoListaVendasConvenioDescontoFuncionario)
 routes.get('/resumo-venda-convenio-desconto', DashBoardVendasControllers.getVendasConvenioDescontoFuncionario)
 routes.get('/resumo-venda-convenio', DashBoardVendasControllers.getListaResumoVendasConvenio)
 routes.get('/detalhe-venda', DashBoardVendasControllers.getRetornoVendasAtivasDetalheProduto)
