@@ -101,6 +101,7 @@ export class FaturaClient {
             VRTOTALRECEBIDO,
             IDFUNCIONARIO
         }]);
+        
         return response.data;
     }
 
