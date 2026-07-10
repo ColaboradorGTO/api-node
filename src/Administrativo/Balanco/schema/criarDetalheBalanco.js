@@ -18,6 +18,7 @@ const detItemSchema = Joi.object({
             'any.required': 'IDPRODUTO é obrigatório'
         }),
 
+
     CODIGODEBARRAS: Joi.string().required()
         .messages({
             'string.base': 'CODIGODEBARRAS deve ser uma string',

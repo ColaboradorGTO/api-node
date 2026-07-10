@@ -50,6 +50,7 @@ export class VendasClient {
     async atualizarVendaVendedor(
         IDVENDADETALHE,
         IDVENDEDOR
+        
     ) {
         const response = await this.api.put(`${url}/api/administrativo/venda-vendedor.xsjs`, [{
             IDVENDADETALHE,
