@@ -335,25 +335,25 @@ class FinanceiroControllers {
   }
 
   async getListaVendasDigital(req, res) {
-    let { idEmpresa, page, pageSize, dataPesquisaInicio, dataPesquisaFim } = req.query;
-
-    if (!isNaN(idEmpresa)) {
-      idEmpresa = Number(idEmpresa);
-      dataPesquisaInicio = dataFormatada(dataPesquisaInicio) ? dataFormatada(dataPesquisaInicio) : '';
-      dataPesquisaFim = dataFormatada(dataPesquisaFim) ? dataFormatada(dataPesquisaFim) : '';
+    
+    try {
+      let { idEmpresa, page, pageSize, dataPesquisaInicio, dataPesquisaFim } = req.query;
+      idEmpresa = idEmpresa ? idEmpresa : '';
+      dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : '';
+      dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
       page = page ? page : '';
       pageSize = pageSize ? pageSize : '';
-      try {
 
-        const apiUrl = `${url}/api/financeiro/venda-digital.xsjs?pageSize=${pageSize}&page=${page}&idEmpresa=${idEmpresa}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}`
-        const response = await axios.get(apiUrl)
+      const apiUrl = `${url}/api/financeiro/venda-digital.xsjs?idEmpresa=${idEmpresa}&dataPesquisaInicio=${dataPesquisaInicio}&dataPesquisaFim=${dataPesquisaFim}&page=${page}&pageSize=${pageSize}`
+      const response = await axios.get(apiUrl)
+     
+      return res.json(response.data);
 
-        return res.json(response.data);
       } catch (error) {
         console.error("Unable to connect to the database:", error);
         throw error;
       }
-    }
+    
   }
 
   async getListaDespesasLoja(req, res) {
