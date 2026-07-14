@@ -5,8 +5,8 @@ import { ClienteClient } from "../client/clienteClient.js";
 import { ClienteService } from "../service/clienteService.js";
 import atualizarClienteSchema from "../schema/atualizarClienteSchema.js";
 
-//const url = process.env.API_URL;
-const url = 'http://164.152.245.77:8000/quality/concentrador_node';
+const url = process.env.API_URL;
+//const url = 'http://164.152.245.77:8000/quality/concentrador_node';
 const despesasClient = new ClienteClient(url);
 const despesasServices = new ClienteService(despesasClient);
 
@@ -122,7 +122,7 @@ class ClienteControllers {
                 value.NUIBGE,
                 value.EENDERECO,
                 value.NUENDERECO,
-                value.ECOMPLEMENTO,
+               String(value.ECOMPLEMENTO),
                 value.EBAIRRO,
                 value.ECIDADE,
                 value.SGUF,
