@@ -1,3 +1,6 @@
+import axios from "axios";
+import 'dotenv/config';
+import { dataFormatada } from "../../../utils/dataFormatada.js";
 import { CaixaClient } from "../client/index.js";
 import { caixaPutSchema } from "../schema/caixaPutSchema.js";
 import { empresaDiarioSchema } from "../schema/empresaDiario.js";
@@ -5,10 +8,67 @@ import { caixaSchema } from "../schema/index.js";
 import { todosCaixasSchema } from "../schema/todosCaixas.js";
 import { caixaServices as CaixaServices } from "../services/index.js";
 
-const caixaClient = new CaixaClient(process.env.API_URL);
+const url = process.env.API_URL;
+const caixaClient = new CaixaClient(url);
 const caixaServices = new CaixaServices(caixaClient);
 
 class CaixaControllers {
+
+    async getUf(req, res,) {
+
+        try {
+            const apiUrl = `${url}/api/informatica/uf-empresa.xsjs`
+            const response = await axios.get(apiUrl);
+
+            return res.json(response.data);
+        } catch (error) {
+            console.error("Unable to connect to the database:", error);
+            throw error;
+        }
+    }
+
+    async getListaCaixas(req, res) {
+        let { idEmpresa, idCaixaWeb, dataUltimaAtualizacao, page, pageSize, byId } = req.query;
+
+        try {
+            idEmpresa = idEmpresa ? idEmpresa : '';
+            idCaixaWeb = idCaixaWeb ? idCaixaWeb : '';
+            dataUltimaAtualizacao = dataUltimaAtualizacao ? dataFormatada(dataUltimaAtualizacao) : '';
+            page = page ? page : '';
+            pageSize = pageSize ? pageSize : '';
+            byId = byId ? byId : '';
+
+            const apiUrl = `${url}/api/informatica/caixa.xsjs?idEmpresa=${idEmpresa}&id=${idCaixaWeb}&page=${page}&pageSize=${pageSize}&byId=${byId}`
+            const response = await axios.get(apiUrl)
+
+
+            return res.json(response.data);
+
+        } catch (error) {
+            console.error("Unable to connect to the database:", error);
+            throw error;
+        }
+
+    }
+
+    async getListaCaixasID(req, res) {
+        let { idCaixa } = req.query;
+        if (!isNaN(idCaixa)) {
+            try {
+                const apiUrl = `${url}/api/informatica/caixa.xsjs?id=${idCaixa}`
+                const response = await axios.get(apiUrl)
+                if (response.status === 200) {
+                    return res.json(response.data);
+                } else {
+                    return res.status(500).json({ message: "Erro ao buscar caixas." });
+                }
+            } catch (error) {
+                console.error("Unable to connect to the database:", error);
+                throw error;
+            }
+        }
+    }
+
     async postCaixaLojas(req, res) {
 
         try {
