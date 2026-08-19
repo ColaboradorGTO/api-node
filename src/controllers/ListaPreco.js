@@ -3,13 +3,14 @@ import { dataFormatada } from "../utils/dataFormatada.js";
 import 'dotenv/config';
 const url = process.env.API_URL;
 
+
 class ListaPrecoControllers {
 
     async getListaPrecoPorMarca(req, res) {
         let { idLoja, idLista, nomeLista, dataPesquisaInicio, dataPesquisaFim, page, pageSize} = req.query;
     
-        dataPesquisaInicio = dataPesquisaInicio ? dataFormatada(dataPesquisaInicio) : ''; 
-        dataPesquisaFim = dataPesquisaFim ? dataFormatada(dataPesquisaFim) : '';
+        dataPesquisaInicio = dataPesquisaInicio ? dataPesquisaInicio : ''; 
+        dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
         idLoja = idLoja ? idLoja : '';
         idLista = idLista ? idLista : '';
         nomeLista = nomeLista ? nomeLista : '';
@@ -19,9 +20,59 @@ class ListaPrecoControllers {
         try {
             const apiUrl = `${url}/api/listas-de-precos.xsjs?dtInicio=${dataPesquisaInicio}&dtFim=${dataPesquisaFim}&idLoja=${idLoja}&idLista=${idLista}&nomeLista=${nomeLista}&page=${page}&pageSize=${pageSize}`;
             const response = await axios.get(apiUrl)
+            
             return res.json(response.data); 
         } catch(error) {
             console.error("Unable to connect to the database:", error);
+            throw error;
+        } 
+    }
+
+    async putListasDePrecos(req, res) {   
+        try {   
+            let { IDRESUMOLISTAPRECO, IDUSERALTERACAO, IDUSERCRIACAO, NOMELISTA, STATIVO, lojas } = req.body; 
+   
+            if(!IDRESUMOLISTAPRECO) {
+                return res.status(400).json({ error: "Todos os parâmetros IDRESUMOLISTAPRECO são obrigatórios." });
+            }
+
+            const response = await axios.put(`${url}/api/listas-de-precos.xsjs`, [{
+                IDRESUMOLISTAPRECO, 
+                IDUSERALTERACAO,
+                IDUSERCRIACAO,
+                NOMELISTA,
+                STATIVO,
+                lojas
+            }])
+            
+            return res.json(response.data);
+        } catch(error) {
+            console.error("erro no ListaPrecoControllers  putListasDePrecos:", error);
+            throw error;
+        } 
+    }
+
+    async postListasDePrecos(req, res) {
+       
+        try {   
+            let { IDRESUMOLISTAPRECO, IDUSERALTERACAO, IDUSERCRIACAO, NOMELISTA, STATIVO, lojas } = req.body; 
+           
+            if(!IDUSERCRIACAO) {
+                return res.status(400).json({ error: "Todos os parâmetros IDUSERCRIACAO são obrigatórios." });
+            }
+
+            const response = await axios.post(`${url}/api/listas-de-precos.xsjs`, [{
+                IDRESUMOLISTAPRECO, 
+                IDUSERALTERACAO,
+                IDUSERCRIACAO,
+                NOMELISTA,
+                STATIVO,
+                lojas
+            }])
+            
+            return res.json(response.data);
+        } catch(error) {
+            console.error("erro no ListaPrecoControllers  postListasDePrecos:", error);
             throw error;
         } 
     }

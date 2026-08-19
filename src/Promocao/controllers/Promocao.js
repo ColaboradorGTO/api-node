@@ -1,6 +1,8 @@
 import axios from "axios";
 import 'dotenv/config';
 const url = process.env.API_URL;
+
+
 class PromocaoControllers  {
 
 
@@ -40,9 +42,11 @@ class PromocaoControllers  {
             throw error;
         } 
     }
+    
     async getListaDetalhesPromocoesAtivas(req, res) {
         let { idResumoPromocao, dataPesquisaInicio, dataPesquisaFim, page, pageSize} = req.query; 
             idResumoPromocao = idResumoPromocao ? idResumoPromocao : '';    
+            dataPesquisaFim = dataPesquisaFim ? dataPesquisaFim : '';
             page = page ? page : '';
             pageSize = pageSize ? pageSize : '';
         try {   
@@ -132,6 +136,25 @@ class PromocaoControllers  {
         } catch(error) {
             console.error("Erro no PromoçãoControllers getListaEmpresasPromocoesAtiva:", error);
             return res.status(500).json({ error: "Erro no servidor ao buscar empresas." });
+        } 
+    }
+
+    async getListaProdutoSubGrupo(req, res) {
+        let { idSubGrupo, dsProduto, codBarras, page, pageSize  } = req.query; 
+        idSubGrupo = idSubGrupo ? idSubGrupo : '';
+        dsProduto = dsProduto ? dsProduto : '';
+        codBarras = codBarras ? codBarras : '';
+        page = page ? page : '';
+        pageSize = pageSize ? pageSize : '';
+    
+        try {   
+            const apiUrl = `${url}/api/promocoes-ativas/produto-subGrupo.xsjs?idSubGrupo=${idSubGrupo}&dsProduto=${dsProduto}&codBarra=${codBarras}&page=${page}&pageSize=${pageSize}`;
+            const response = await axios.get(apiUrl)
+   
+            return res.json(response.data); // Retorna
+        } catch(error) {
+            console.error("Erro no PromoçãoControllers getListaProdutoSubGrupo:", error);
+            return res.status(500).json({ error: "Erro no servidor ao buscar produtos por subgrupo." });
         } 
     }
 
@@ -338,7 +361,7 @@ class PromocaoControllers  {
         }
     }
 
-     async putPromocaoSubGrupo(req, res) {
+    async putPromocaoSubGrupo(req, res) {
         let  {
             IDRESUMOPROMOCAOMARKETING,
             IDMECANICARESUMOPROMOCAOMARKETING,
@@ -365,7 +388,7 @@ class PromocaoControllers  {
         } = req.body;
 
         if(!IDRESUMOPROMOCAOMARKETING) {
-            return res.status(400).json({ error: "IDSUBGRUPOEMDESTINO e IDSUBGRUPOEMORIGEM são obrigatórios." });
+            return res.status(400).json({ error: "IDRESUMOPROMOCAOMARKETING é obrigatório." });
         }
 
         try {
@@ -402,14 +425,83 @@ class PromocaoControllers  {
             throw error;
         }
     }
-    
+
+    async putPromocaoProdutoSubGrupo(req, res) {
+        let  {
+            IDRESUMOPROMOCAOMARKETING,
+            DSPROMOCAOMARKETING,
+            DTHORAINICIO,
+            DTHORAFIM,
+            TPAPLICADOA,
+            APARTIRDEQTD,
+            APARTIRDOVLR,
+            TPFATORPROMO,
+            FATORPROMOVLR,
+            FATORPROMOPERC,
+            TPAPARTIRDE,
+            VLPRECOPRODUTO,
+            STEMPRESAPROMO,
+            STDETPROMOORIGEM,
+            STDETPROMODESTINO,
+            STATIVO,
+            STPRODUTO,
+            STESTRUTURA,
+            STESTRUTURAPRODUTO,
+            IDEMPRESA,
+            IDPRODUTO,
+            detalhesDestino,
+            detalhesOrigem
+        } = req.body;
+
+        if(!IDRESUMOPROMOCAOMARKETING) {
+            return res.status(400).json({ error: "IDRESUMOPROMOCAOMARKETING é obrigatório." });
+        }
+
+        try {
+                  
+            const response = await axios.put(`${url}/api/promocoes-ativas/promocao-ativa-subgrupo-produto.xsjs`, {
+                IDRESUMOPROMOCAOMARKETING,
+                DSPROMOCAOMARKETING,
+                DTHORAINICIO,
+                DTHORAFIM,
+                TPAPLICADOA,
+                APARTIRDEQTD,
+                APARTIRDOVLR,
+                TPFATORPROMO,
+                FATORPROMOVLR,
+                FATORPROMOPERC,
+                TPAPARTIRDE,
+                VLPRECOPRODUTO,
+                STEMPRESAPROMO,
+                STDETPROMOORIGEM,
+                STDETPROMODESTINO,
+                STATIVO,
+                STPRODUTO,
+                STESTRUTURA,
+                STESTRUTURAPRODUTO,
+                IDEMPRESA,
+                IDPRODUTO,
+                detalhesDestino,
+                detalhesOrigem
+            });
+            
+            return res.status(200).json({
+                message: "Promoção(s) criada(s) com sucesso",
+                data: response.data
+            });
+        } catch (error) {
+            console.error("Erro no PromocaoControllers putPromocaoProdutoSubGrupo:", error);
+            throw error;
+        }
+    }
+
     async postListaProdutosPromocoesAtiva(req, res) {
     
         try {   
             const dados = Array.isArray(req.body) ? req.body : [req.body];
             const response = await axios.post(`${url}/api/promocoes-ativas/produto-promocao-ativa.xsjs`, dados);
            
-          
+            
             return res.status(200).json({
                 message: "Promoção(s) criada(s) com sucesso",
                 data: response.data
@@ -436,7 +528,7 @@ class PromocaoControllers  {
         }
     }
 
-       async postPromocaoSubGrupo(req, res) {
+    async postPromocaoSubGrupo(req, res) {
         let  {
             TPAPARTIRDE,
             TPAPLICADOA,
@@ -470,7 +562,7 @@ class PromocaoControllers  {
         if(!IDSUBGRUPOEMDESTINO || !IDSUBGRUPOEMORIGEM) {
             return res.status(400).json({ error: "IDSUBGRUPOEMDESTINO e IDSUBGRUPOEMORIGEM são obrigatórios." });
         }
-        
+
         try {
                   
             const response = await axios.post(`${url}/api/promocoes-ativas/promocao-ativa-subgrupo.xsjs`, [{
@@ -508,10 +600,79 @@ class PromocaoControllers  {
                 data: response.data
             });
         } catch (error) {
-            console.error("Erro no PromoçãoControllers postPromocaoSubGrupo:", error);
+            console.error("Erro no PromocaoControllers postPromocaoSubGrupo:", error);
             throw error;
         }
     }
+
+    async postPromocaoProdutoSubGrupo(req, res) {
+        let  {
+            DSPROMOCAOMARKETING,
+            DTHORAINICIO,
+            DTHORAFIM,
+            TPAPLICADOA,
+            APARTIRDEQTD,
+            APARTIRDOVLR,
+            TPFATORPROMO,
+            FATORPROMOVLR,
+            FATORPROMOPERC,
+            TPAPARTIRDE,
+            VLPRECOPRODUTO,
+            STEMPRESAPROMO,
+            STDETPROMOORIGEM,
+            STDETPROMODESTINO,
+            STATIVO,
+            STPRODUTO,
+            STESTRUTURA,
+            STESTRUTURAPRODUTO,
+            IDEMPRESA,
+            IDPRODUTO,
+            detalhesDestino,
+            detalhesOrigem
+        } = req.body;
+
+        // if(!IDSUBGRUPOEMDESTINO || !IDSUBGRUPOEMORIGEM) {
+        //     return res.status(400).json({ error: "IDSUBGRUPOEMDESTINO e IDSUBGRUPOEMORIGEM são obrigatórios." });
+        // }
+
+        try {
+                  
+            const response = await axios.post(`${url}/api/promocoes-ativas/promocao-ativa-subgrupo-produto.xsjs`, {
+                DSPROMOCAOMARKETING,
+                DTHORAINICIO,
+                DTHORAFIM,
+                TPAPLICADOA,
+                APARTIRDEQTD,
+                APARTIRDOVLR,
+                TPFATORPROMO,
+                FATORPROMOVLR,
+                FATORPROMOPERC,
+                TPAPARTIRDE,
+                VLPRECOPRODUTO,
+                STEMPRESAPROMO,
+                STDETPROMOORIGEM,
+                STDETPROMODESTINO,
+                STATIVO,
+                STPRODUTO,
+                STESTRUTURA,
+                STESTRUTURAPRODUTO,
+                IDEMPRESA,
+                IDPRODUTO,
+                detalhesDestino,
+                detalhesOrigem
+            });
+            
+            return res.status(200).json({
+                message: "Promoção(s) criada(s) com sucesso",
+                data: response.data
+            });
+        } catch (error) {
+            console.error("Erro no PromocaoControllers postPromocaoProdutoSubGrupo:", error);
+            throw error;
+        }
+    }
+
+   
 
     async postMecanicaAtivas(req, res) {
        
