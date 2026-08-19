@@ -35,6 +35,7 @@ import LinkRelatorioBiController from './Informatica/relatorio/linkRelatorioBI/c
 // import ConsultaNFceController  from './Informatica/ConsultaNFCE/controllers/index.js'
 // import ConsultaNFeController from './Informatica/ConsultaNFCE/controllers/nfe.js'
 
+import EmpresasInformaticaControllers from './Informatica/Empresas/controller/index.js'
 
 import ConsultaStatusNfeController from './Informatica/ConsultaNFCE/controllers/statusNfce.js'
 import ConsultaNfeController from './Informatica/ConsultaNFCE/controllers/consulta.js'
@@ -55,6 +56,8 @@ import VoucherControllers from './Financeiro/Voucher/controllers/voucher.js'
 import ExtratosControllers from './Financeiro/Extrato/controllers/extrato.js'
 import FaturaControllers from './Administrativo/Fatura/controller/faturaController.js'
 import MaloteFinanceiroController from './Financeiro/Malotes/controllers/index.js'
+import CredSystemInformaticaControllers from './Informatica/CredSystem/controller/index.js'
+
 
 import QuebraCaixaControllers from './DashBoard/QuebraCaixa/controllers/quebraCaixaLoja.js'
 import ADMCaixasControllers from './Administrativo/Caixa/controllers/admCaixas.js'
@@ -70,6 +73,8 @@ import DashBoardAdiantamentoSalarialControllers from './DashBoard/AdiantamentoSa
 import GerenciaControllers from './Gerencia/controllers/index.js';
 import ServiceLayerControllers from './ServiceLayer/controllers/index.js'
 import RecursosHumanosControllers from './RecursosHumanos/controller/ControllerRecursosHumanos.js'
+import clientesInformaticaController from './Informatica/Clientes/controller/index.js'
+
 
 import MaloteControllers from './Gerencia//Malote/controller/maloteController.js';
 
@@ -80,6 +85,7 @@ import DespesasControllersADM from './Administrativo/Despesa/controller/despesaC
 import PermissaoControllers from './Permissao/controller/index.js';
 
 
+import ProdutosInformaticaControllers from './Informatica/Produtos/controllers/index.js'
 
 import GERAlteracaoPrecoControllers from './Gerencia/AlteracaoPreco/controllers/index.js'
 //  Comercial
@@ -95,6 +101,11 @@ import DanfeControllers from './Danfe/controllers/danfe.js';
 import DashBoardAdiantamentoControllers from './DashBoard/AdiantamentoSalarial/controllers/index.js';
 import DashBoardExtratoControllers from './DashBoard/Extrato/controller/index.js';
 import DashBoardRelatorioControllers from './DashBoard/relatorio/controller/index.js';
+
+import FuncionarioController from './Informatica/Funcionarios/controller/index.js';
+import RelatorioBiController from './Informatica/RelatorioBI/controller/index.js'
+
+
 
 
 const routes = new Router();
@@ -134,6 +145,8 @@ routes.get('/menus-filho-usuario', ModulosControllers.getListaMenusFilhosUsuario
 routes.get('/menus', ModulosControllers.getListaSubMenusUsuario)
 
 routes.get('/listaMenusFilhos', PermissaoControllers.getListaMenusFilhos)
+routes.put('/menu-filho/:id', PermissaoControllers.putAtualizarMenuFilho)
+
 
 routes.put('/perfil-usuario/:id', PermissaoControllers.putPerfilUsuarioMenu)
 //routes.put('/perfil-usuario/:id', ModulosControllers.putPerfilUsuarioMenu)
@@ -209,9 +222,9 @@ routes.get('/formaPagamentos', AdministrativoControllers.getListaFormaPagamento)
 routes.get('/lista-motivo-devolucao', AdministrativoControllers.getMotivoDevolucao)
 // routes.get('/ultimaPosicaoEstoque', AdministrativoControllers.getListaEstoqueUltimaPosicao)
 
- routes.get('/pesqBalanco', AdministrativoControllers.getPesqBalanco)
+routes.get('/pesqBalanco', AdministrativoControllers.getPesqBalanco)
 // routes.get('/coletorBalanco', AdministrativoControllers.getListaColetorBalanco)
- routes.get('/detalheBalancoAvulso', AdministrativoControllers.getDetalheBalancoAvulso)
+routes.get('/detalheBalancoAvulso', AdministrativoControllers.getDetalheBalancoAvulso)
 routes.get('/detalheBalancoAvulso', AdmBalancoControllers.getListaDetalheBalancoAvulso)
 routes.get('/coletor-balanco', AdmBalancoControllers.getListaColetorBalanco)
 routes.get('/balanco-loja', AdmBalancoControllers.getListaBalancoLoja)
@@ -424,7 +437,7 @@ routes.get('/fatura-pix-periodo', FaturasControllers.getListaFaturasPixPeriodo)
 routes.get('/detalhe-faturas', FaturasControllers.getDetalheFaturaFinanceiro)
 routes.get('/previa-consolidacao-faturas', FaturasControllers.getPreviaFaturasConsolidadas)
 routes.get('/consolidacao-faturas', FaturasControllers.getConsolidacaoFaturas)
- //routes.get('/faturaPixPeriodo', FaturasControllers.getListaVendaFaturaPixPeriodo)
+//routes.get('/faturaPixPeriodo', FaturasControllers.getListaVendaFaturaPixPeriodo)
 routes.get('/venda-total-fatura-pix-empresa', FaturasControllers.getListaVendaFaturaPixPeriodo)
 routes.get('/venda-total-fatura-pix-empresa-compensada', FaturasControllers.getListaVendaFaturaPixPeriodoCompensacao)
 
@@ -489,20 +502,20 @@ routes.get('/resumoVendaConvenioDesc', DashBoardVendasControllers.getRetornoList
 routes.get('/resumoVendaGerencia', DashBoardVendasControllers.getResumoVendaGerencia)
 // routes.get('/listaCaixaMovimentoGerencia', DashBoardControllers.retornoListaCaixasMovimentoGerencia)
 routes.get('/vendedor', DashBoardVendasControllers.getListaVendasVendedorGerencia)
- routes.get('/vendasAtivasResumoGerencia', DashBoardVendasControllers.getListaResumoVendasAtivaGerencia)
+routes.get('/vendasAtivasResumoGerencia', DashBoardVendasControllers.getListaResumoVendasAtivaGerencia)
 routes.get('/vendasCanceladasResumoGerencia', DashBoardVendasControllers.getListaResumoVendasCanceladasGerencia)
 routes.get('/adiantamentoSalarialFuncionarios', DashBoardAdiantamentoControllers.getListAdiantamentoLoja)
 routes.get('/adiantamento-salarial-gerencia', DashBoardAdiantamentoControllers.getAdiantamentoSalarialFuncionario)
 // routes.get('/vendasResumoLojaGerencia', DashBoardControllers.getListaVendasLojaResumidoGerencia)
- routes.get('/vendasVendedorPeriodoLojaGerencia', DashBoardVendasControllers.getListaVendasVendedorPeriodoGerencia)
+routes.get('/vendasVendedorPeriodoLojaGerencia', DashBoardVendasControllers.getListaVendasVendedorPeriodoGerencia)
 routes.get('/extrato-loja-periodo', DashBoardExtratoControllers.getListaExtratoDaLojaPeriodo)
 routes.get('/extrato-loja-periodo-adm', DashBoardExtratoControllers.getListaExtratoDaLojaPeriodoADM)
 routes.get('/relatorioBI', DashBoardRelatorioControllers.getListaRelatorioBIGerencia)
- routes.get('/listaVendasGerencia', DashBoardVendasControllers.getListaVendasGerencia)
+routes.get('/listaVendasGerencia', DashBoardVendasControllers.getListaVendasGerencia)
 // routes.get('/extratoLojaPeriodo', DashBoardControllers.getListaExtratoDaLojaPeriodo)
 routes.get('/adiantamentoSalarialData', DashBoardAdiantamentoControllers.getListAdiantamentoSalarialData)
- routes.get('/detalheVenda', DashBoardVendasControllers.getRetornoListaVendasAtivasDetalheProduto)
- routes.get('/resumoVendaCaixaDetalhado', DashBoardVendasControllers.getRetornoListaVendaDetalhe)
+routes.get('/detalheVenda', DashBoardVendasControllers.getRetornoListaVendasAtivasDetalheProduto)
+routes.get('/resumoVendaCaixaDetalhado', DashBoardVendasControllers.getRetornoListaVendaDetalhe)
 
 
 // routes.get('/listaFuncionarioVendasDesconto', DashBoardControllers.getListaFuncionario)
@@ -516,7 +529,7 @@ routes.post('/cadastrar-adiantamento-salarial', DashBoardAdiantamentoControllers
 routes.put('/atualizacao-adiantamento-status', DashBoardAdiantamentoControllers.putAdiantamentoStatus)
 routes.put('/adiantamento-salarial/:id', DashBoardAdiantamentoControllers.putAdiantamentoSalarial)
 
- routes.get('/resumoVendaConvenioDescontoFN', DashBoardVendasControllers.getRetornoListaVendasConvenioDescontoFuncionario)
+routes.get('/resumoVendaConvenioDescontoFN', DashBoardVendasControllers.getRetornoListaVendasConvenioDescontoFuncionario)
 routes.get('/resumo-venda-convenio-desconto', DashBoardVendasControllers.getVendasConvenioDescontoFuncionario)
 routes.get('/resumo-venda-convenio', DashBoardVendasControllers.getListaResumoVendasConvenio)
 routes.get('/detalhe-venda', DashBoardVendasControllers.getRetornoVendasAtivasDetalheProduto)
@@ -532,30 +545,61 @@ routes.get('/lista-caixas-fechados-nao-conferido', DashBoardVendasControllers.ge
 
 
 // Início Informática GET
-routes.get('/marcasLista', InformaticaControllers.getListaMarcas)
-routes.get('/listaGrupoEmpresas', InformaticaControllers.getListaGrupoEmpresas)
+routes.get('/marcasLista', EmpresasInformaticaControllers.getListaMarcas)
+//routes.get('/marcasLista', InformaticaControllers.getListaMarcas)
+routes.get('/listaGrupoEmpresas', EmpresasInformaticaControllers.getListaGrupoEmpresas)
+//routes.get('/listaGrupoEmpresas', InformaticaControllers.getListaGrupoEmpresas)
 routes.get('/listaEmpresasControleTransferencia', InformaticaControllers.getListaEmpresas);
-routes.get('/listaEmpresasIformatica', InformaticaControllers.getListaEmpresasInformatica);
-routes.get('/listaProdutoPreco', InformaticaControllers.getListaProdutoPreco)
-routes.get('/lista-caixas', InformaticaControllers.getListaCaixas)
+routes.get('/listaEmpresasIformatica', EmpresasInformaticaControllers.getListaEmpresasInformatica);
+//routes.get('/listaEmpresasIformatica', InformaticaControllers.getListaEmpresasInformatica);
+routes.get('/listaProdutoPreco', ProdutosInformaticaControllers.getListaProdutoPreco)
+routes.get('/listaProdutoPrecoInformatica', ProdutosInformaticaControllers.getListaProdutoPrecoInformatica)
+
+
+//routes.get('/listaProdutoPreco', InformaticaControllers.getListaProdutoPreco)
+//routes.get('/lista-caixas', InformaticaControllers.getListaCaixas)
+routes.get('/lista-caixas', CaixaControllers.getListaCaixas)
+routes.get('/uf-empresa', CaixaControllers.getUf)
+
 // routes.get('/listaCaixasID', InformaticaControllers.getListaCaixasID)
-routes.get('/atualiza-empresa-diario', InformaticaControllers.getListaAtualizaEmpresaDiario)
-routes.get('/vendas-loja-informatica', InformaticaControllers.getListaVendasLojaInformatica)
-routes.get('/funcionarios-loja', InformaticaControllers.getListaFuncionariosLoja)
-routes.get('/funcionarios-loja-ativos', InformaticaControllers.getListaFuncionariosLoja)
-routes.get('/atualizarFuncionario', InformaticaControllers.getListaAtualizarFuncionario)
+routes.get('/listaCaixasID', CaixaControllers.getListaCaixasID)
+
+//routes.get('/atualiza-empresa-diario', InformaticaControllers.getListaAtualizaEmpresaDiario)
+routes.get('/atualiza-empresa-diario', EmpresasInformaticaControllers.getListaAtualizaEmpresaDiario)
+
+//routes.get('/vendas-loja-informatica', InformaticaControllers.getListaVendasLojaInformatica)
+routes.get('/vendas-loja-informatica', EmpresasInformaticaControllers.getListaVendasLojaInformatica)
+
+//routes.get('/funcionarios-loja', InformaticaControllers.getListaFuncionariosLoja)
+//routes.get('/funcionarios-loja-ativos', InformaticaControllers.getListaFuncionariosLoja)
+routes.get('/funcionarios-loja', FuncionarioController.getListaFuncionariosLoja)
+routes.get('/funcionarios-loja-ativos', FuncionarioController.getListaFuncionariosLoja)
+//routes.get('/atualizarFuncionario', InformaticaControllers.getListaAtualizarFuncionario)
+routes.get('/atualizarFuncionario', FuncionarioController.getListaAtualizarFuncionario)
+
 // routes.get('/pagamento-tef-informatica', InformaticaControllers.getListaPagamentoTEFInformatica)
 // routes.get('/pagamento-pos-informatica', InformaticaControllers.getListaPagamentoPOSInformatica)
+routes.get('/vendas-alloc', EmpresasInformaticaControllers.getListaVendasAlloc)
+//routes.get('/vendas-alloc', InformaticaControllers.getListaVendasAlloc)
+//routes.get('/vendas-contigencia', InformaticaControllers.getListaVendasContigenciaIformatica)
+routes.get('/vendas-contigencia', FuncionarioController.getListaVendasContigenciaIformatica)
 
-routes.get('/vendas-alloc', InformaticaControllers.getListaVendasAlloc)
-routes.get('/vendas-contigencia', InformaticaControllers.getListaVendasContigenciaIformatica)
-routes.get('/lista-cliente', InformaticaControllers.getListaClienteIformatica)
+//routes.get('/lista-cliente', InformaticaControllers.getListaClienteIformatica)
+routes.get('/lista-cliente', clientesInformaticaController.getListaClienteIformatica)
+
 // routes.get('/listaClienteID', InformaticaControllers.getListaCliente)
-routes.get('/linkRelatorioBI', InformaticaControllers.getListaLinkRelatorioBI)
-routes.get('/relatorioInformaticaBI', InformaticaControllers.getListaRelatorioBI)
-routes.get('/lista-cliente-credsystem', InformaticaControllers.getListaCadastroClienteCredSystem)
-routes.get('/lista-meio-pagamento-credsystem', InformaticaControllers.getListaMeioPagamentoCredSystem)
-routes.get('/lista-parceria-credsystem', InformaticaControllers.getListaParceriaCredSystem)
+//routes.get('/linkRelatorioBI', InformaticaControllers.getListaLinkRelatorioBI)
+routes.get('/linkRelatorioBI', RelatorioBiController.getListaLinkRelatorioBI)
+routes.get('/relatorioInformaticaBI', RelatorioBiController.getListaRelatorioBI)
+//routes.get('/lista-cliente-credsystem', InformaticaControllers.getListaCadastroClienteCredSystem)
+//routes.get('/lista-meio-pagamento-credsystem', InformaticaControllers.getListaMeioPagamentoCredSystem)
+//routes.get('/lista-parceria-credsystem', InformaticaControllers.getListaParceriaCredSystem)
+
+routes.get('/lista-cliente-credsystem', CredSystemInformaticaControllers.getListaCadastroClienteCredSystem)
+routes.get('/lista-meio-pagamento-credsystem', CredSystemInformaticaControllers.getListaMeioPagamentoCredSystem)
+
+routes.get('/lista-parceria-credsystem', CredSystemInformaticaControllers.getListaParceriaCredSystem)
+
 
 // POST
 routes.post('/createRelatorioInformaticaBI', RelatorioBIController.postRelatorioBi)
@@ -568,10 +612,13 @@ routes.post('/criarlinkRelatorioBI', LinkRelatorioBiController.postLinkRelatorio
 routes.post('/criar-caixas', CaixaControllers.postCaixaLojas)
 
 // PUT
-routes.put('/inativar-funcionario', InformaticaControllers.putInativarFuncionario)
+//routes.put('/inativar-funcionario', InformaticaControllers.putInativarFuncionario)
+routes.put('/inativar-funcionario', FuncionarioController.putInativarFuncionario)
+
 //routes.put('/relatorioInformaticaBI/:id', InformaticaControllers.putRelatorioBI)
 routes.put('/linkRelatorioBI/:id', LinkRelatorioBiController.putLinkRelatorioBi)
-routes.put('/relatorioInformaticaBI/:id', RelatorioBIController.putRelatorioBi)
+routes.put('/relatorioInformaticaBI/:id', RelatorioBiController.putRelatorioBi)
+
 //routes.put('/linkRelatorioBI/:id', InformaticaControllers.putLinkRelatorioBI)
 //routes.put('/atualiza-empresa-diario/:id', InformaticaControllers.putAtualizaEmpresaDiario)
 //routes.put('/atualizar-todos-caixa', InformaticaControllers.putAtualizarTodosCaixas)
@@ -579,10 +626,10 @@ routes.put('/atualiza-empresa-diario/:id', CaixaControllers.putAtualizaEmpresaDi
 routes.put('/atualizar-todos-caixa', CaixaControllers.putAtualizarTodosCaixas)
 routes.put('/lista-caixas/:id', CaixaControllers.putCaixaLoja)
 // routes.put('/atualizaStatusCaixa', InformaticaControllers.updateAtualizaSTCaixasInformatica)
-routes.put('/funcionarios-loja/:id', InformaticaControllers.putFuncionarioLoja)
-routes.post('/criar-funcionarios-loja', InformaticaControllers.postFuncionarioLoja)
+routes.put('/funcionarios-loja/:id', FuncionarioController.putFuncionarioLoja)
+routes.post('/criar-funcionarios-loja', FuncionarioController.postFuncionarioLoja)
 // routes.put('/lista-caixas/:id', InformaticaControllers.putCaixaLoja)
-routes.put('/funcionarios-desconto/:id', InformaticaControllers.putFuncionarioDesconto)
+routes.put('/funcionarios-desconto/:id', FuncionarioController.putFuncionarioDesconto)
 // routes.post('/consulta-nfec', ConsultaNfeController.consultar)
 // routes.get('/valida-venda-contingencia', ConsultaNfeController.getListaVendasContigenciaValidas);
 routes.put('/valida-venda-contingencia/:id', ConsultaNfeController.putValidarVendaContigencia);
@@ -591,7 +638,7 @@ routes.get('/gerar-pfx', ConsultaStatusNfeController.gerarPFX);
 // routes.post('/downloadXML', ConsultaStatusNfeController.downloadNFE);
 // routes.post('/cancelar-nfe', ConsultaStatusNfeController.cancelarNFE);
 // routes.post('/inutilizar-nfe', ConsultaStatusNfeController.inutilizarNFE);
-// routes.get('/validarConsulta', ConsultaStatusNfeController.validarConsulta);
+routes.get('/validarConsulta', ConsultaStatusNfeController.validarConsulta);
 // routes.post('/consultar-nfe', ConsultaNFeController.consultaNFe);
 
 // routes.put('/configuracao-todos/:id', InformaticaControllers.putCaixaLoja)
@@ -630,7 +677,7 @@ routes.post('/consulta-nfe-saida-tranferencia-varias', ExpedicaoControllers.post
 // Vendas
 // routes.get('/listaVendas', FinanceiroVendasControllers.getListaVendas)
 
- //routes.get('/listaVendaCliente', Vendas.getListaVendaCliente)
+//routes.get('/listaVendaCliente', Vendas.getListaVendaCliente)
 routes.get('/movimentacao-saldo', VendasControllers.getListaVendasSaldo)
 routes.get('/lista-venda-cliente', AdmVendasControllers.getListaVendaCliente);
 routes.get('/rotatividadeVendas', VendasControllers.getListaRotatividade)
