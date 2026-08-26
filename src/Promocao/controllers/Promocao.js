@@ -543,6 +543,9 @@ class PromocaoControllers  {
             DSPROMOCAOMARKETING,
             IDEMPRESA,
             STATIVO,
+            STESTRUTURA,
+            ESTRPRODUTO,
+            STESTRUTURAPRODUTO,
             STEMPRESAPROMO,
             STDETPROMOORIGEM,
             STDETPROMODESTINO,
@@ -565,7 +568,7 @@ class PromocaoControllers  {
 
         try {
                   
-            const response = await axios.post(`${url}/api/promocoes-ativas/promocao-ativa-subgrupo.xsjs`, [{
+            const response = await axios.post(`${url}/api/promocoes-ativas/promocao-ativa-subgrupo.xsjs`, [{      
                 TPAPARTIRDE,
                 TPAPLICADOA,
                 TPFATORPROMO,
@@ -579,6 +582,9 @@ class PromocaoControllers  {
                 DSPROMOCAOMARKETING,
                 IDEMPRESA,
                 STATIVO,
+                STESTRUTURA,
+                ESTRPRODUTO,
+                STESTRUTURAPRODUTO,
                 STEMPRESAPROMO,
                 STDETPROMOORIGEM,
                 STDETPROMODESTINO,
