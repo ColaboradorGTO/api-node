@@ -20,6 +20,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@vercel/blob": "^2.8.0",
     "archiver": "^7.0.1",
     "axios": "^1.6.5",
     "bcrypt": "^5.1.1",

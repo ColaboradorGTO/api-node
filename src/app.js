@@ -6,9 +6,6 @@ import routes from './routes.js'
 import bodyParser from 'body-parser';
 import 'dotenv/config';
 
-import path from 'path';
-const __dirname = new URL('.', import.meta.url).pathname;
-
 class App {
     constructor() {
         this.server = express();
@@ -37,13 +34,13 @@ class App {
             credentials: true,
             preflightContinue: true,
         }));
+
         this.server.use(express.json({ limit: '100mb' }));
         this.server.use(express.urlencoded({ limit: '100mb', extended: true }));
         this.server.use(express.json());
         this.server.use(corsMiddleware);
         this.server.use(bodyParser.json({ limit: '100mb', extended: true }));
         this.server.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
-        this.server.use('/files', express.static(path.resolve(__dirname, '..', 'uploads'))); 
     }
 
     routes() {
@@ -52,4 +49,3 @@ class App {
 }
 
 export default new App().server;
-

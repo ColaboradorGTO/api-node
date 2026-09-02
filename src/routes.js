@@ -41,6 +41,7 @@ import ConsultaStatusNfeController from './Informatica/ConsultaNFCE/controllers/
 import ConsultaNfeController from './Informatica/ConsultaNFCE/controllers/consulta.js'
 // Financeiro Início
 import AdiantamentosControllers from './Financeiro/Adiantamentos/controllers/adiantamentos.js'
+import { uploadAnexo } from './middlewares/uploadAnexo.js'
 import BancoControllers from './Financeiro/Banco/controller/controller.js'
 import DepositosControllers from './Financeiro/Depositos/controllers/depositos.js'
 import CaixasControllers from './Financeiro/Caixas/controllers/caixas.js'
@@ -473,6 +474,16 @@ routes.get('/desconto-motivo-vendas', DescontoControllers.getListaDescontoMotivo
 
 //  Adiantamentos 
 routes.get('/adiantamento-salarial', AdiantamentosControllers.getListaAdiantamentoSalarialFinanceiro)
+routes.get('/listaCaixasMovimentoFinanceiro', AdiantamentosControllers.getListaCaixasMovmentoFinanceiro)
+routes.get('/lista-adiantamento-departamento', AdiantamentosControllers.getListaAdiantamentoDepartamentos)
+routes.get('/download-anexo-adiantamento', AdiantamentosControllers.getDownloadAnexoAdiantamento)
+routes.get('/pagamento-adiantamento', AdiantamentosControllers.getListaPagamentoAdiantamento)
+routes.put('/adiantamento-departamento/:id', AdiantamentosControllers.putAdiantamentoDepartamento)
+routes.put('/pagamento-departamento/:id', AdiantamentosControllers.putPagamentoDepartamento)
+routes.post('/adiantamento-departamento', AdiantamentosControllers.postAdiantamentoDepartamento)
+routes.post('/upload-anexo-adiantamento', uploadAnexo.single('arquivo'), AdiantamentosControllers.postUploadAnexoAdiantamento)
+routes.post('/pagamento-departamento', AdiantamentosControllers.postPagamentoDepartamento)
+
 
 // Caixas
 routes.get('/lista-caixas-movimento', CaixasControllers.getListaCaixasMovmentoFinanceiro)
